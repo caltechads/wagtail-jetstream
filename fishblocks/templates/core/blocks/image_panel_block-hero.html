@@ -1,0 +1,32 @@
+{% load wagtailimages_tags util_tags component_tags %}
+
+{# This markup is loosely based on https://bootsnipp.com/snippets/featured/bootstrap-4-card #}
+
+{% image self.image original as img_data %}
+<div class="hero {{ extra_classes }}" style="background: url('{{ img_data.url }}') no-repeat center center scroll;
+  {% if parent_width and not self.fixed_dimensions.use %}
+    height: {{ parent_height }}px; width: 100%;
+  {% else %}
+    height: {{ self.fixed_dimensions.height }}px; width: {{ self.fixed_dimensions.width }}px;
+  {% endif %}
+">
+  {% if self.title or self.desc %}
+    <div class="hero-body">
+      {% if self.title %}
+        <h1 class="hero-title">
+        {% link_exists self.link as exists %}
+        {% if exists %}
+          <a href="{{ self.link }}">
+        {% endif %}
+        {{ self.title }}
+        {% if self.link %}
+          </a>
+        {% endif %}
+        </h1>
+      {% endif %}
+      {% if self.desc %}
+        <h2 class="hero-subtitle">{{ self.desc }}</h2>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

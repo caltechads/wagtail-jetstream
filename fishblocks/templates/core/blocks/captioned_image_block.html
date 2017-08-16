@@ -1,0 +1,19 @@
+{% load wagtailimages_tags util_tags %}
+
+<div class="captioned-image">
+    {% if self.fixed_dimensions.use %}
+      {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+    {% elif parent_width %}
+      {% if parent_height %}
+        {% arbitrary_image self.image 'fill' parent_width parent_height %}
+      {% else %}
+        {% arbitrary_image self.image 'fill' parent_width parent_width %}
+      {% endif %}
+    {% else %}
+      {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+    {% endif %}
+  <div class='image-details'>
+    <div class='image-caption'>{{ self.image.caption }}</div>
+    <div class='image-credit'>{{ self.image.photo_credit }}</div>
+  </div>
+</div>

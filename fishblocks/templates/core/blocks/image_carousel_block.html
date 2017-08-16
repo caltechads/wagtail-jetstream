@@ -1,0 +1,65 @@
+{% load util_tags wagtailimages_tags wagtailcore_tags component_tags bleach_tags %}
+
+{% object_identifier self.slides as obj_id %}
+
+<div id="{{ obj_id }}-carousel" class="carousel fade image-carousel" data-ride="carousel"
+  data-interval="{{ self.cycle_timeout }}" {% if parent_height %}style="height: {{ parent_height }}px;"{% endif %}
+>
+  {% if self.header %}
+    <div class="image-carousel-header-banner">
+      <div class="image-carousel-header">{{ self.header }}</div>
+    </div>
+  {% endif %}
+
+  {% if self.slides|length > 1 %}
+    <ol class="carousel-indicators">
+      {% for slide in self.slides %}
+        {% if forloop.counter0 == 0 %}
+          <li data-target="#{{ obj_id }}-carousel" data-slide-to="0" class="active"></li>
+        {% else %}
+          <li data-target="#{{ obj_id }}-carousel" data-slide-to="{{ forloop.counter0 }}"></li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+  <div class="carousel-inner" role="listbox">
+    {% for slide in self.slides %}
+      <div class="item {% if forloop.counter == 1 %}active{% endif %}">
+        {% if slide.real_url %}
+          <a class="image-link" href="{{ slide.real_url }}"><span></span></a>
+        {% endif %}
+
+        {% if parent_width and parent_height %}
+          {% arbitrary_image slide.image 'fill' parent_width parent_height %}
+        {% else %}
+          {% image slide.image %}
+        {% endif %}
+        {% if slide.text %}
+          <div class="carousel-caption">
+            <div class="image-carousel-caption-text">
+              {% link_exists slide.link as exists %}
+              {% if slide.link %}
+                <a href="{{ slide.link }}">{{ slide.text | bleach }}<span class="glyphicon glyphicon-chevron-right"
+                  aria-hidden="true"></span>
+                </a>
+              {% else %}
+                {{ slide.text | bleach }}
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- These must be here for the carousel to cycle correctly. We can set them to hidden in CSS -->
+  <a class="left carousel-control" href="#{{ obj_id }}-carousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#{{ obj_id }}-carousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

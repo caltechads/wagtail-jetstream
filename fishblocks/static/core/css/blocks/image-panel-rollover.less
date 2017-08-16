@@ -1,0 +1,107 @@
+.block-ImageLinkBlock {
+  overflow: hidden;
+}
+
+//TODO: Rename appropriately following image panel implementation
+.image-block-link {
+  @teaser_margin: 10px / @responsive_grid_w * 100%;
+  position: relative;
+  .clearfix();
+
+  .entry {
+    float: left;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .image-link {
+    display: block;
+
+    a {
+      span {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 11;
+        cursor: pointer;
+      }
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+
+
+  .text {
+    width: 100%;
+    line-height: 14px;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.65);
+    color: #FFFFFF;
+    // NOTE: If this top property changes, the javascript also has to change!
+    top: 70%;
+    display: block;
+  }
+
+  .title {
+    position: relative;
+    margin: 0;
+    height: 30%;
+    font-family: @font_kievit;
+    font-weight: normal;
+    font-size: unit(16px / @font_size_base, em);
+    display: block;
+  }
+
+  .vertically-centered {
+    padding: 0 12px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+  }
+
+  .blurb {
+    // These start hidden, and appear in a slide-up animation when the user hovers.
+    padding: 0 15px;
+    font-size: unit(13px / @font_size_base, em);
+    display: block;
+  }
+
+  .read-more-link {
+    // This isn't an actual <a>, since you can't legally put an <a> inside another <a>. So it's a span
+    // that CSS makes behave like an <a>.
+    padding: 0 15px;
+    font-size: unit(13px / @font_size_base, em);
+    cursor: pointer;
+    &:hover {
+      color: @orange;
+    }
+  }
+}
+
+/*** Responsive Rules ***/
+
+@media (min-width: @small_viewport) {
+  .image-block-link {
+    .entry {
+      // On landscape phones and larger mobile devices, fit the images 3-per-line.
+      //width: 32%;
+    }
+  }
+}
+
+@media (min-width: @desktop_viewport) {
+  .image-block-link {
+    .entry {
+      //width: 192px / @responsive_grid_w * 100%;
+    }
+  }
+}

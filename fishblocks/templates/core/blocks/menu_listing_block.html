@@ -1,0 +1,27 @@
+{% load core_tags %}
+
+{% if self.title %}
+    <h4 class="section-title">{{ self.title }}</h4>
+{% endif %}
+
+<div class="menu-listing-widget
+     {% if self.text_color %} text-color-{{ self.text_color }}{% endif %}
+     {% if self.background_color and not self.background_image %} bg-color bg-color-{{ self.background_color }}{% endif %}
+     {% if self.fixed_dimensions %} fixed{% endif %}
+"
+     {% if self.fixed_dimensions %}
+     style="height: {{ self.height }}px; width: {{ self.width }}px"
+     {% endif %}
+>
+    {% if self.show == 'children' %}
+        {% page_descendants page as pages %}
+    {% else %}
+        {% page_siblings page as pages %}
+        <span class="page-listing non-interactive">{{ page.title }}</span>
+    {% endif %}
+    {% for p in pages %}
+        {% with subpage=p %}
+            {% include 'caltech_sites/blocks/_page_listing.html' %}
+        {% endwith %}
+    {% endfor %}
+</div>

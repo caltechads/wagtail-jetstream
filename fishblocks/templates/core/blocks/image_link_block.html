@@ -1,0 +1,34 @@
+{% load wagtailimages_tags util_tags component_tags %}
+
+<div class="plain-image-block-link clearfix">
+  {% link_exists self.link as exists %}
+  {% if exists %}
+    <a class="image-link" href="{{ self.link }}"><span></span></a>
+  {% endif %}
+  <div class="image">
+    {% if self.fixed_dimensions.use %}
+      {% responsive_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+    {% else %}
+      {% if parent_width %}
+        {% if parent_height %}
+          {% responsive_image self.image 'fill' parent_width parent_height %}
+        {% else %}
+          {# This really should be just scaling up to parent width but keeping the same aspect ratio. #}
+          {% responsive_image self.image 'fill' parent_width parent_width %}
+        {% endif %}
+      {% else %}
+        {% responsive_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+      {% endif %}
+    {% endif %}
+    {% if self.title %}
+    <div class="text-gradient">
+      <div class="image-link-caption">
+        {{ self.title }}
+        {% if exists %}
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        {% endif %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>

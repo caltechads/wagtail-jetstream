@@ -1,0 +1,53 @@
+{% load util_tags wagtailcore_tags bleach_tags component_tags %}
+
+{% object_identifier self.slides as obj_id %}
+
+<div id="{{ obj_id }}-carousel" data-ride="carousel" data-interval="{{ self.cycle_timeout }}"
+  class="carousel {{ self.cycle_effect }} hero-image-carousel"
+>
+  {% if self.slides|length > 1 %}
+    <ol class="carousel-indicators">
+      {% for slide in self.slides %}
+        {% if forloop.counter0 == 0 %}
+          <li data-target="#{{ obj_id }}-carousel" data-slide-to="0" class="active"></li>
+        {% else %}
+          <li data-target="#{{ obj_id }}-carousel" data-slide-to="{{ forloop.counter0 }}"></li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+  <div class="carousel-inner" role="listbox">
+    {% for slide in self.slides %}
+      <div class="item {% if forloop.counter == 1 %}active{% endif %}">
+        {% link_exists slide.link as exists %}
+        {% if exists %}
+          <a class="image-link" href="{{ slide.link }}"><span></span></a>
+        {% endif %}
+        {% arbitrary_image slide.image 'fill' self.width self.height %}
+        <div class="text-gradient">
+          <div class="carousel-caption">
+            <div class="hero-image-caption-title">
+              {% if exists %}
+                <a class="title-link" href="{{ slide.link }}">{{ slide.title | bleach }}</a>
+              {% else %}
+                {{ slide.title | bleach }}
+              {% endif %}
+            </div>
+            <div class="hero-image-caption-text">{{ slide.text | bleach }}</div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- These must be here for the carousel to cycle correctly. We hide them in the CSS. -->
+  <a class="left carousel-control" href="#{{ obj_id }}-carousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#{{ obj_id }}-carousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>

@@ -1,0 +1,41 @@
+{% load wagtailcore_tags wagtailimages_tags core_tags util_tags %}
+
+<div class="row gutter-{{ self.gutter_width }}px">
+  {% subtract_from_twelve self.left_column_width as fill_width %}
+  <div class="two_col_elem col-md-{{ self.left_column_width }} grid-elem">
+    {% for block in self.left_column %}
+      {% if block.block_type == 'heading' %}
+        <h1>{{ block.value }}</h1>
+      {% else %}
+        <section class="block-{{ block.block_type }}">
+          {% if parent_width %}
+            {% width_from_arbitrary_parent parent_width self.left_column_width as my_width %}
+            {% include_block block with parent_width=my_width parent_height=self.fixed_height %}
+          {% else %}
+            {% width_from_arbitrary_parent 1000 self.left_column_width as my_width %}
+            {% include_block block with parent_width=my_width parent_height=self.fixed_height %}
+          {% endif %}
+        </section>
+      {% endif %}
+   {% endfor %}
+  </div>
+  <div class="two_col_elem col-md-{{ fill_width }} grid-elem">
+    {% for block in self.right_column %}
+      {% if block.block_type == 'heading' %}
+        <h1>{{ block.value }}</h1>
+      {% else %}
+        <section class="block-{{ block.block_type }}">
+          {% if parent_width %}
+            {% width_from_arbitrary_parent parent_width fill_width as my_width %}
+            {% include_block block with parent_width=my_width parent_height=self.fixed_height %}
+          {% else %}
+            {% width_from_arbitrary_parent 1000 fill_width as my_width %}
+            {% include_block block with parent_width=my_width parent_height=self.fixed_height %}
+          {% endif %}
+        </section>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="clearall"></div>

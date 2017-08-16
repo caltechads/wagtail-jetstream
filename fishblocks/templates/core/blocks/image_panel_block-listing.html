@@ -1,0 +1,29 @@
+{% load util_tags component_tags %}
+
+<div class="media">
+{% if extra_classes == "left" %}
+  <div class="media-left">
+    <a href="{% if self.page %}{{ self.page.full_url }}{% elif self.link %}{{ self.link }}{% else %}#{% endif %}">
+      {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+    </a>
+  </div>
+{% endif %}
+  <div class="media-body">
+    <h4 class="media-heading">
+      {% link_exists self.link as exists %}
+      {% if exists %}
+        <a href="{{ self.link }}">{{ self.title }}</a>
+      {% else %}
+        {{ self.title }}
+      {% endif %}
+    </h4>
+    {{ self.desc }}
+  </div>
+{% if extra_classes == "right" %}
+  <div class="media-right">
+    <a href="{% if self.page %}{{ self.page.full_url }}{% elif self.link %}{{ self.link }}{% else %}#{% endif %}">
+      {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+    </a>
+  </div>
+{% endif %}
+</div>

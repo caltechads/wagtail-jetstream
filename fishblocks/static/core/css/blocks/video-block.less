@@ -1,0 +1,41 @@
+.video-block {
+  position: relative;
+
+  iframe {
+    display: block;
+  }
+}
+
+// This overlay sits on top of the video, so that when a user clicks, the title can be removed via javascript.
+.video-block-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+  cursor: pointer;
+}
+
+.video-block-title-background {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.video-block-title {
+  color: white;
+  font-family: @font_kievit_regular;
+  font-size: 18px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  padding: 0 50px;
+  width: 100%;
+  text-align: center;
+}
