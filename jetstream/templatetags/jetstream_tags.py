@@ -123,12 +123,6 @@ class ArbitraryImageNode(ImageNode):
 
 
 @register.simple_tag()
-def object_identifier(obj):
-    return id(obj)
-
-
-
-@register.simple_tag()
 def subtract_from_twelve(*numbers):
     """
     Math tag for calculating the width in Bootstrap's column delineations because we can't do arithmetic
