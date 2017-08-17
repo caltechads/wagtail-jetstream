@@ -1,8 +1,6 @@
-{% load util_tags wagtailimages_tags wagtailcore_tags component_tags bleach_tags %}
+{% load jetstream_tags wagtailimages_tags wagtailcore_tags bleach_tags %}
 
-{% object_identifier self.slides as obj_id %}
-
-<div id="{{ obj_id }}-carousel" class="carousel fade image-carousel" data-ride="carousel"
+<div id="{{ block_id }}-carousel" class="carousel fade image-carousel" data-ride="carousel"
   data-interval="{{ self.cycle_timeout }}" {% if parent_height %}style="height: {{ parent_height }}px;"{% endif %}
 >
   {% if self.header %}
@@ -15,9 +13,9 @@
     <ol class="carousel-indicators">
       {% for slide in self.slides %}
         {% if forloop.counter0 == 0 %}
-          <li data-target="#{{ obj_id }}-carousel" data-slide-to="0" class="active"></li>
+          <li data-target="#{{ block_id }}-carousel" data-slide-to="0" class="active"></li>
         {% else %}
-          <li data-target="#{{ obj_id }}-carousel" data-slide-to="{{ forloop.counter0 }}"></li>
+          <li data-target="#{{ block_id }}-carousel" data-slide-to="{{ forloop.counter0 }}"></li>
         {% endif %}
       {% endfor %}
     </ol>
@@ -39,7 +37,7 @@
           <div class="carousel-caption">
             <div class="image-carousel-caption-text">
               {% link_exists slide.link as exists %}
-              {% if slide.link %}
+              {% if exists %}
                 <a href="{{ slide.link }}">{{ slide.text | bleach }}<span class="glyphicon glyphicon-chevron-right"
                   aria-hidden="true"></span>
                 </a>
@@ -54,11 +52,11 @@
   </div>
 
   <!-- These must be here for the carousel to cycle correctly. We can set them to hidden in CSS -->
-  <a class="left carousel-control" href="#{{ obj_id }}-carousel" role="button" data-slide="prev">
+  <a class="left carousel-control" href="#{{ block_id }}-carousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" href="#{{ obj_id }}-carousel" role="button" data-slide="next">
+  <a class="right carousel-control" href="#{{ block_id }}-carousel" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>

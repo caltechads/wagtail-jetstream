@@ -1,3 +1,5 @@
+{# Does this need to be in jetstream? #}
+
 {% load static core_tags wagtailcore_tags wagtailimages_tags bleach_tags %}
 
 <div class="news-listing-block

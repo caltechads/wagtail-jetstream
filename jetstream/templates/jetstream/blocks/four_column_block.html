@@ -1,4 +1,4 @@
-{% load wagtailcore_tags wagtailimages_tags core_tags util_tags %}
+{% load wagtailcore_tags wagtailimages_tags jetstream_tags %}
 
 <div class="row gutter-{{ self.gutter_width }}px">
   {% subtract_from_twelve self.column_one_width self.column_two_width self.column_three_width as fill_width %}
@@ -10,10 +10,10 @@
         <section class="block-{{ block.block_type }}">
           {% if parent_width %}
             {% width_from_arbitrary_parent parent_width self.column_one_width as my_width %}
-            {% include_block block with parent_width=my_width %}
+            {% include_block block with parent_width=my_width block_id=block.id %}
           {% else %}
             {% width_from_arbitrary_parent 1000 self.column_one_width as my_width %}
-            {% include_block block with parent_width=my_width %}
+            {% include_block block with parent_width=my_width block_id=block.id %}
           {% endif %}
         </section>
       {% endif %}
@@ -27,10 +27,10 @@
         <section class="block-{{ block.block_type }}">
           {% if parent_width %}
             {% width_from_arbitrary_parent parent_width self.column_two_width as my_width %}
-            {% include_block block with parent_width=my_width %}
+            {% include_block block with parent_width=my_width block_id=block.id %}
           {% else %}
             {% width_from_arbitrary_parent 1000 self.column_two_width as my_width %}
-            {% include_block block with parent_width=my_width %}
+            {% include_block block with parent_width=my_width block_id=block.id %}
           {% endif %}
         </section>
       {% endif %}
@@ -44,10 +44,10 @@
         <section class="block-{{ block.block_type }}">
           {% if parent_width %}
             {% width_from_arbitrary_parent parent_width self.column_three_width as my_width %}
-            {% include_block block with parent_width=my_width %}
+            {% include_block block with parent_width=my_width block_id=block.id %}
           {% else %}
             {% width_from_arbitrary_parent 1000 self.column_three_width as my_width %}
-            {% include_block block with parent_width=my_width %}
+            {% include_block block with parent_width=my_width block_id=block.id %}
           {% endif %}
         </section>
       {% endif %}
@@ -61,10 +61,10 @@
         <section class="block-{{ block.block_type }}">
           {% if parent_width %}
             {% width_from_arbitrary_parent parent_width fill_width as my_width %}
-            {% include_block block with parent_width=my_width %}
+            {% include_block block with parent_width=my_width block_id=block.id %}
           {% else %}
             {% width_from_arbitrary_parent 1000 fill_width as my_width %}
-            {% include_block block with parent_width=my_width %}
+            {% include_block block with parent_width=my_width block_id=block.id %}
           {% endif %}
         </section>
       {% endif %}
