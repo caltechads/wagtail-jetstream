@@ -1,3 +1,6 @@
+from django import forms
+from django.template.loader import render_to_string
+from django.utils.safestring import mark_safe
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
@@ -395,28 +398,6 @@ class MenuListingBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'list-ul'
 
 
-class NewsListingBlock(blocks.StructBlock, BlockTupleMixin):
-
-    title = blocks.CharBlock(
-        required=False,
-        help_text="If supplied, display this at the top of the news listing"
-    )
-    show = blocks.ChoiceBlock(
-        choices=SHOW_CHOICES,
-        blank=False,
-        default=(5, 5),
-        label="Number of News items to list"
-    )
-    color = ColorOptionsBlock()
-    fixed_dimensions = DimensionsOptionsBlock()
-
-    class Meta:
-        template = 'core/blocks/news_listing_block.tpl'
-        form_classname = 'news-listing struct-block'
-        label = 'News Listing'
-        icon = 'wagtail'
-
-
 class FancyRichTextBlock(blocks.StructBlock, BlockTupleMixin):
 
     text = blocks.RichTextBlock(
@@ -449,7 +430,6 @@ COLUMN_PERMITTED_BLOCKS = [
     get_block_tuple(VideoBlock()),
     get_block_tuple(SectionTitleBlock()),
     get_block_tuple(MenuListingBlock()),
-    get_block_tuple(NewsListingBlock()),
     get_block_tuple(SpacerBlock()),
 ]
 
