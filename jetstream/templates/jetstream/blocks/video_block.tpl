@@ -1,6 +1,4 @@
-{% load static jetstream_tags %}
-
-<script defer src="{% static 'jetstream/js/video-block.js' %}"></script>
+{% load jetstream_tags %}
 
 <div class="video-block"
   {% if not parent_height or self.fixed_dimensions.use %}
