@@ -3,6 +3,7 @@ import re
 from django import template
 from django.utils.safestring import mark_safe
 from wagtail.wagtailembeds.exceptions import EmbedException
+from wagtail.wagtailcore.models import Page
 from wagtail.wagtailembeds import embeds
 
 register = template.Library()
@@ -147,3 +148,13 @@ def link_exists(block):
     component always exists, even if both fields are emtpy.
     """
     return block['page'] or block['url']
+
+@register.simple_tag()
+def page_descendants(page):
+    return Page.objects.child_of(page)
+
+
+@register.simple_tag()
+def page_siblings(page):
+    # Results don't include itself, so need to add a non-hyperlink dummy listing
+    return page.get_siblings(inclusive=False)

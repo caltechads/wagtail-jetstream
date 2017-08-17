@@ -1,5 +1,3 @@
-{# TODO: Decouple from caltech_sites and make agnostic of the page implementation #}
-
 {% load core_tags %}
 
 {% if self.title %}
@@ -23,7 +21,7 @@
     {% endif %}
     {% for p in pages %}
         {% with subpage=p %}
-            {% include 'caltech_sites/blocks/_page_listing.html' %}
+            {% include 'jetstream/blocks/_page_listing.html' %}
         {% endwith %}
     {% endfor %}
 </div>

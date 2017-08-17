@@ -1,0 +1,21 @@
+{% load jetstream_tags %}
+
+{% page_descendants subpage as subpages %}
+
+<a href="{{ subpage.full_url }}" class="page-listing" id="{{ subpage.slug }}-page-title">{{ subpage.title }}</a>
+
+
+
+{% if subpages %}
+    <a class="drop-down-button" role="button" data-toggle="collapse" href="#{{ subpage.slug }}-subpages-collapse" aria-expanded="false" aria-controls="{{ subpage.slug }}-subpages-collapse">
+        <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+    </a>
+    <div class="collapse subpage-listing" id="{{ subpage.slug }}-subpages-collapse">
+        {% for p in subpages %}
+            {% with subpage=p %}
+                {% include 'jetstream/blocks/_page_listing.html' %}<br>
+            {% endwith %}
+        {% endfor %}
+    </div>
+
+{% endif %}
