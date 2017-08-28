@@ -5,7 +5,7 @@ from wagtail.wagtailcore import blocks
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 
-from .utils import SHOW_CHOICES, BACKGROUND_COLORS, FOREGROUND_COLORS, get_block_tuple, BlockTupleMixin
+from .utils import BACKGROUND_COLORS, FOREGROUND_COLORS, get_block_tuple, BlockTupleMixin
 
 # =======
 # Globals
@@ -100,7 +100,7 @@ class DimensionsOptionsBlock(blocks.StructBlock):
     @property
     def media(self):
         return forms.Media(
-            js=['core/js/admin/dimensions-options.js']
+            js=['jetstream/js/admin/dimensions-options.js']
         )
 
     def js_initializer(self):
@@ -143,7 +143,7 @@ class CaptionedImageBlock(blocks.StructBlock, BlockTupleMixin):
 
     class Meta:
         label = 'Captioned Image'
-        template = 'core/blocks/captioned_image_block.html'
+        template = 'jetstream/blocks/captioned_image_block.html'
         form_classname = 'captioned-image struct-block'
         icon = 'image'
 
@@ -158,21 +158,21 @@ class ImageLinkBlock(blocks.StructBlock, BlockTupleMixin):
 
     class Meta:
         label = 'Image Link'
-        template = 'core/blocks/image_link_block.html'
+        template = 'jetstream/blocks/image_link_block.html'
         form_classname = 'image-link struct-block'
         icon = 'image'
 
 
 class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = (
-        ('rollover', 'Image Link w/ Rollover Text', 'core/blocks/image_panel_block-rollover.html', []),
-        ('separate_text', 'Image Card (Equal Heights)', 'core/blocks/image_panel_block-image_card.html', ['equal']),
-        ('separate_text_natural', 'Image Card (Natural Heights)', 'core/blocks/image_panel_block-image_card.html',
+        ('rollover', 'Image Link w/ Rollover Text', 'jetstream/blocks/image_panel_block-rollover.html', []),
+        ('separate_text', 'Image Card (Equal Heights)', 'jetstream/blocks/image_panel_block-image_card.html', ['equal']),
+        ('separate_text_natural', 'Image Card (Natural Heights)', 'jetstream/blocks/image_panel_block-image_card.html',
             ['natural']
          ),
-        ('image_listing_left', 'Listing (Image Left)', 'core/blocks/image_panel_block-listing.html', ['left']),
-        ('image_listing_right', 'Listing (Image Right)', 'core/blocks/image_panel_block-listing.html', ['right']),
-        ('hero', 'Hero Image', 'core/blocks/image_panel_block-hero.html', []),
+        ('image_listing_left', 'Listing (Image Left)', 'jetstream/blocks/image_panel_block-listing.html', ['left']),
+        ('image_listing_right', 'Listing (Image Right)', 'jetstream/blocks/image_panel_block-listing.html', ['right']),
+        ('hero', 'Hero Image', 'jetstream/blocks/image_panel_block-hero.html', []),
     )
     STYLE_TO_TEMPLATE_MAP = {style[0]: (style[2], style[3]) for style in STYLES}
     image_panel_wh_help_text = (
@@ -244,7 +244,7 @@ class HeroImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
-        template = 'core/blocks/hero_image_carousel_block.html'
+        template = 'jetstream/blocks/hero_image_carousel_block.html'
         form_classname = 'image-carousel struct-block'
         label = 'Hero Image Slider'
         icon = 'image'
@@ -268,7 +268,7 @@ class ImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
-        template = 'core/blocks/image_carousel_block.html'
+        template = 'jetstream/blocks/image_carousel_block.html'
         label = 'Image Carousel'
         icon = 'image'
 
@@ -280,7 +280,7 @@ class CaptionedImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
     ])
 
     class Meta:
-        template = 'core/blocks/captioned_image_carousel_block.html'
+        template = 'jetstream/blocks/captioned_image_carousel_block.html'
         form_classname = 'captioned-slider struct-block'
         label = 'Captioned Image Slider'
         icon = 'image'
@@ -297,7 +297,7 @@ class SpacerBlock(blocks.StructBlock):
 
     class Meta:
         label = 'Spacer'
-        template = 'core/blocks/spacer_block.html'
+        template = 'jetstream/blocks/spacer_block.html'
         form_classname = 'spacer struct-block'
         icon = 'arrows-up-down'
 
@@ -322,7 +322,7 @@ class RelatedLinksBlock(blocks.StructBlock, BlockTupleMixin):
 
     class Meta:
         label = 'Related Links'
-        template = 'core/blocks/related_links_block.html'
+        template = 'jetstream/blocks/related_links_block.html'
         form_classname = 'related-links struct-block'
         icon = 'list-ul'
 
@@ -340,13 +340,13 @@ class VideoBlock(blocks.StructBlock, BlockTupleMixin):
 
     class Meta:
         label = 'Video w/ Title'
-        template = 'core/blocks/video_block.tpl'
+        template = 'jetstream/blocks/video_block.tpl'
         form_classname = 'video-block struct-block'
         icon = 'media'
 
 
-STYLE_MAP = {'section_divider': 'core/blocks/heading-section_divider.html',
-             'block_header': 'core/blocks/heading-block_header.html'}
+STYLE_MAP = {'section_divider': 'jetstream/blocks/heading-section_divider.html',
+             'block_header': 'jetstream/blocks/heading-block_header.html'}
 
 
 class SectionTitleBlock(blocks.StructBlock, BlockTupleMixin):
@@ -368,7 +368,7 @@ class SectionTitleBlock(blocks.StructBlock, BlockTupleMixin):
         return super(SectionTitleBlock, self).render(value, context)
 
     class Meta:
-        template = 'core/blocks/heading-section_divider.html'
+        template = 'jetstream/blocks/heading-section_divider.html'
         form_classname = 'section-title struct-block'
         label = 'Section Title'
         icon = 'form'
@@ -392,7 +392,7 @@ class MenuListingBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
-        template = 'core/blocks/menu_listing_block.html'
+        template = 'jetstream/blocks/menu_listing_block.html'
         form_classname = 'menu-listing struct-block'
         label = 'Menu Section'
         icon = 'list-ul'
@@ -408,7 +408,7 @@ class FancyRichTextBlock(blocks.StructBlock, BlockTupleMixin):
     fixed_dimensions = DimensionsOptionsBlock()
 
     class Meta:
-        template = 'core/blocks/fancy_rich_text_block.html'
+        template = 'jetstream/blocks/fancy_rich_text_block.html'
         form_classname = 'fancy-richtext struct-block'
         label = 'Rich Text'
         icon = 'doc-full'
@@ -464,7 +464,7 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     right_column = blocks.StreamBlock(COLUMN_PERMITTED_BLOCKS, icon='arrow-right', label='Right column content')
 
     class Meta:
-        template = 'core/blocks/two_column_block.html'
+        template = 'jetstream/blocks/two_column_block.html'
         form_classname = 'layout-two-column-sub struct-block'
         label = 'Two Columns'
 
@@ -494,7 +494,7 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
-        template = 'core/blocks/two_column_block.html'
+        template = 'jetstream/blocks/two_column_block.html'
         form_classname = 'layout-two-column struct-block'
         label = 'Two Columns'
 
@@ -528,7 +528,7 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     right_column = blocks.StreamBlock(COLUMN_PERMITTED_BLOCKS, icon='arrow-right', label='Right column content')
 
     class Meta:
-        template = 'core/blocks/three_column_block.html'
+        template = 'jetstream/blocks/three_column_block.html'
         form_classname = 'layout-three-column-sub struct-block'
         label = 'Three Columns'
 
@@ -557,7 +557,7 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
-        template = 'core/blocks/three_column_block.html'
+        template = 'jetstream/blocks/three_column_block.html'
         form_classname = 'layout-three-column struct-block'
         label = 'Three Columns'
 
@@ -587,7 +587,7 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
-        template = 'core/blocks/four_column_block.html'
+        template = 'jetstream/blocks/four_column_block.html'
         form_classname = 'layout-four-column struct-block'
         label = 'Four Columns'
 
@@ -613,6 +613,6 @@ class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
-        template = 'core/blocks/sidebar_layout_block.html'
+        template = 'jetstream/blocks/sidebar_layout_block.html'
         form_classname = 'layout-sidebar struct-block'
         label = 'Sidebar Layout'
