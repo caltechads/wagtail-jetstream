@@ -132,6 +132,18 @@ class ColorOptionsBlock(blocks.StructBlock):
                   "light and dark backgrounds."
     )
 
+    @property
+    def media(self):
+        return forms.Media(
+            js=['jetstream/js/admin/color-options.js']
+        )
+
+    def js_initializer(self):
+        return "color_options"
+
+    class Meta:
+        form_classname = 'color-options struct-block'
+
 # ======================================================================================================
 # ====================================== MEDIA BLOCKS ==================================================
 # ======================================================================================================
