@@ -454,7 +454,7 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
                   "height unless specifically overridden on the block."
     )
     gutter_width = blocks.ChoiceBlock(
-        choices=[(12, 12), (20, 20), (30, 30), (40, 40)],
+        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
         default=(12, 12),
         label="Column Gutter Width (pixels)",
@@ -486,7 +486,7 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
         help_text=fixed_height_helptext
     )
     gutter_width = blocks.ChoiceBlock(
-        choices=[(12, 12), (20, 20), (30, 30), (40, 40)],
+        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
         default=(12, 12),
         label="Column Gutter Width (pixels)",
@@ -517,7 +517,7 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         help_text=fixed_height_helptext
     )
     gutter_width = blocks.ChoiceBlock(
-        choices=[(12, 12), (20, 20), (30, 30), (40, 40)],
+        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
         default=(12, 12),
         label="Column Gutter Width (pixels)",
@@ -549,7 +549,7 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
         help_text=fixed_height_helptext
     )
     gutter_width = blocks.ChoiceBlock(
-        choices=[(12, 12), (20, 20), (30, 30), (40, 40)],
+        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
         default=(12, 12),
         label="Column Gutter Width (pixels)",
@@ -579,7 +579,7 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
         help_text=fixed_height_helptext
     )
     gutter_width = blocks.ChoiceBlock(
-        choices=[(12, 12), (20, 20), (30, 30), (40, 40)],
+        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
         default=(12, 12),
         label="Column Gutter Width (pixels)",
