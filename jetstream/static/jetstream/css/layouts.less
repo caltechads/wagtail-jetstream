@@ -1,4 +1,48 @@
-@import "../../../../theme/static/theme/css/globals.less";
+@white:      #ffffff;
+@orange:     #ff6e1e;
+@ltgray:     #c8c8c8;
+@gray:       #aaa99f;
+@medgray:    #76777b;
+@midgray:    #afafaf;
+@dkgray:     #616265;
+@darkergray: #696b73;
+@ltbrngray:  #e9e7e4;
+@crimson:    #731936;
+@black:      #000000;
+@black-text: #333333;
+@goldenrod:  #ecaa00;
+@maroon:     #7a303f;
+@olivegreen: #a9b734;
+@purple:     #95348d;
+@darkteal:   #005e5c;
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// Media Query Breakpoints
+@small_viewport: 500px;
+@medium_viewport: 768px;
+@desktop_viewport: 1000px;
+
+// To pixel-bitch the width for something, use width: <intended>px / @responsive_grid_w * 100%;
+@responsive_grid_w: 1000px;
+
+// Fonts
+@font_size_base: 14px;
+@line_height_base: 24px;
+@font_kievit: KievitSlabMedium, Times, serif;
+@font_kievit_regular: KievitSlabRegular, Times, serif;
+@font_vaud: Vaud, sans-serif;
+// We call it Vaud Medium, but the style guide calls it Vaud Display Extra Bold. The style guide is right.
+@font_vaud_medium: VaudMedium, sans-serif;
 
 /*************** Column Layouts ******************/
 
@@ -43,14 +87,9 @@
 
 @import "blocks/fancy-rich-text.less";
 
-/**************** Event Listing Page ***************/
-
-@import "pages/event-listing.less";
-
 /**************** Video Block ***************/
 
 @import "blocks/video-block.less";
-
 
 
 /*************** Related Links Block ******************/
