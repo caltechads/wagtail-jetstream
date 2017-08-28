@@ -1,11 +1,9 @@
 import os
 from setuptools import setup
 
-from jetstream import __version__
-
 setup(
     name='wagtail-jetstream',
-    version=__version__,
+    version='0.0.1',
     description='A set of complex layout blocks for use in Wagtail Streamfields',
     url='https://github.com/caltechads/wagtail-jetstream',
     author='Caltech ADS',
