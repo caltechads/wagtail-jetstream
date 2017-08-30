@@ -21,9 +21,9 @@
           {% if self.desc %}
             <span class="blurb">{{ self.desc }}</span>
           {% endif %}
-          {% link_exists self.link as exists %}
-          {% if exists %}
-            <span href="{{ self.link }}" class="read-more-link">Read more...</span>
+          {% link_value self.link as link %}
+          {% if link %}
+            <span href="{{ link }}" class="read-more-link">Read more...</span>
           {% endif %}
         </span>
       {% endif %}

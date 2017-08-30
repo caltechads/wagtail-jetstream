@@ -36,9 +36,9 @@
         {% if slide.text %}
           <div class="carousel-caption">
             <div class="image-carousel-caption-text">
-              {% link_exists slide.link as exists %}
-              {% if exists %}
-                <a href="{{ slide.link }}">{{ slide.text | bleach }}<span class="glyphicon glyphicon-chevron-right"
+              {% link_value slide.link as link %}
+              {% if link %}
+                <a href="{{ link }}">{{ slide.text | bleach }}<span class="glyphicon glyphicon-chevron-right"
                   aria-hidden="true"></span>
                 </a>
               {% else %}
