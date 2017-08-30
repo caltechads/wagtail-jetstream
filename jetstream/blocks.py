@@ -402,6 +402,8 @@ class MenuListingBlock(blocks.StructBlock, BlockTupleMixin):
         help_text='"Page Siblings" lists all pages at the same level of the site page heirarchy as this page; '
                   '"Page Children" lists all pages that are directly below this page in the page heirarchy.'
     )
+    color = ColorOptionsBlock()
+    fixed_dimensions = DimensionsOptionsBlock()
 
     class Meta:
         template = 'jetstream/blocks/menu_listing_block.html'
