@@ -38,11 +38,6 @@ header .search-form li {
 div.hallotoolbar {
   margin-top: 3.5em;
 }
-.modal-dialog label,
-.stream-field label {
-  width: auto;
-  clear: both;
-}
 .stream-field li.sequence-member .struct-block .sequence-container {
   width: 100%;
   padding-left: 1.5%;
