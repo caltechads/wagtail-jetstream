@@ -930,7 +930,7 @@
     float: none;
   }
 }
-@media (min-width: 500px) {
+@media (max-width: 500px) {
   .block-ImagePanelBlock .image-block-link .entry {
     float: none;
   }
