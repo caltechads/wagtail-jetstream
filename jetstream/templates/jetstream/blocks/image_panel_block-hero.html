@@ -14,9 +14,9 @@
     <div class="hero-body">
       {% if self.title %}
         <h1 class="hero-title">
-        {% link_exists self.link as exists %}
-        {% if exists %}
-          <a href="{{ self.link }}">
+        {% link_value self.link as link %}
+        {% if link %}
+          <a href="{{ link }}">
         {% endif %}
         {{ self.title }}
         {% if self.link %}

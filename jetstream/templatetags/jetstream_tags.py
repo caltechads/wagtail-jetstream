@@ -164,14 +164,16 @@ def width_from_arbitrary_parent(parent_px, units):
     return int(parent_px) / 12 * int(units)
 
 
-@register.simple_tag(name='link_exists')
-def link_exists(block):
+@register.simple_tag(name='link_value')
+def link_value(block):
     """
-    Accessory tag to our LinkBlock sub component that emulates a basic if-check because simply
-    checking for the existence of {{ self.link }} will always return true because the link
-    component always exists, even if both fields are emtpy.
+    Accessory tag to our LinkBlock sub component that returns the linked page if it exists, or the linked
+    URL. If neither are specified, returns None.
     """
-    return block['page'] or block['url']
+    if block['page']:
+        return block['page'].full_url
+    else:
+        return block['url']
 
 
 @register.simple_tag()
