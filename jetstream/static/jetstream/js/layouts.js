@@ -1,4 +1,7 @@
 (function ($, window, document, undefined) {
+
+  /* This is the bit that enables raising and lowering of the description on
+   * the image-panel-rollover.tpl */
   function set_up_image_animations() {
     $('.image-block-link .entry').each(function(ndx,entry) {
 
