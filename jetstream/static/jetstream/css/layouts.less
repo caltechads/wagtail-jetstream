@@ -32,6 +32,9 @@
 @medium_viewport: 768px;
 @desktop_viewport: 1000px;
 
+@screen-phone: 480px;
+@screen-tablet: 768px;
+
 // To pixel-bitch the width for something, use width: <intended>px / @responsive_grid_w * 100%;
 @responsive_grid_w: 1000px;
 
@@ -54,19 +57,45 @@
 
 @import "blocks/spacer.less";
 
+/**************** Captioned Image Blocks ***************/
+
+@import "blocks/captioned-image.less";
+
+/**************** Captioned Image Carousel Blocks ***************/
+
+@import "blocks/captioned-image-carousel.less";
+
+/**************** Image Carousel Blocks ***************/
+
+@import "blocks/image-carousel.less";
+@import "blocks/hero-image-carousel.less";
+
 /*************** Image Link Blocks ******************/
 
-
-@import "blocks/image-panel-rollover.less";
 @import "blocks/image-links.less";
 
 /**************** Image Panel Blocks ***************/
 
+@import "blocks/image-panel.less";
 @import "blocks/image-panel-cards.less";
 @import "blocks/image-panel-hero.less";
+@import "blocks/image-panel-rollover.less";
 
+/**************** Menu Listing Blocks ***************/
+
+@import "blocks/menu-listing.less";
 
 /**************** Text block general settings ***************/
+
+// Background image for all listing types
+.listing-background-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: auto;
+  width: 100%;
+  z-index: -100;
+}
 
 .bg-color-white { background-color: @white; }
 .bg-color-black { background-color: @black; }
@@ -83,6 +112,10 @@
 .text-color-dkgray { color: @dkgray; }
 .text-color-black { color: @black; }
 
+/**************** Section Title Blocks ***************/
+
+@import "blocks/section-title.less";
+
 /**************** Fancy Rich Text ***************/
 
 @import "blocks/fancy-rich-text.less";
@@ -96,4 +129,17 @@
 
 @import "blocks/related-links.less";
 
+@media (max-width: @small_viewport) {
+  .richtext-image {
+    &.Small {
+      width:100%;
+    }
+    &.Medium {
+      width:100%;
+    }
+    &.Large {
+      width:100%;
+    }
+  }
+}
 

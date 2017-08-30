@@ -53,3 +53,40 @@
       font-family: @font_kievit;
     }
 }
+
+// For landscape-mode phones:
+@media (min-device-width: @screen-phone) 
+        and (max-device-width: @screen-tablet) {
+
+  .block-ImagePanelBlock {
+    .card img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: @small_viewport) {
+  .block-ImagePanelBlock {
+    .media-body {
+      width: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-bottom: 2em;
+    }
+    .media-right,
+    .media-left
+    {
+      display: block;
+      padding: 0;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .media-left {
+      margin-bottom: 1.5em;
+    }
+  }
+}

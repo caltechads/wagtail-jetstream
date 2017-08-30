@@ -8,3 +8,33 @@
       width: 800px;
   }
 }
+
+// For landscape-mode phones:
+@media (min-device-width: @screen-phone) 
+        and (max-device-width: @screen-tablet) {
+  .sidebar-layout > .rich-text {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 2em;
+    width: 100%;
+  }
+}
+
+@media (max-width: @small_viewport) {
+  .sidebar-layout > .rich-text {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 100%;
+  }
+}
+
+@media (min-width: @medium_viewport) {
+  .sidebar-layout > .rich-text {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 2em;
+    width: 100%;
+  }
+}

@@ -1,0 +1,102 @@
+.image-carousel {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+
+  .item {
+    transition: opacity ease-out .7s;
+    left: 0;
+    opacity: 0;
+    top: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+
+    &:first-child {
+      top: auto;
+      opacity: 1;
+      position: relative;
+    }
+
+    &.active {
+      opacity:1;
+    }
+  }
+
+  &:hover {
+    .carousel-control {
+      display: block;
+    }
+  }
+
+  .carousel-inner {
+    height: 100%;
+
+    .item > img {
+      height: inherit;
+    }
+  }
+
+  .carousel-caption {
+    left: auto;
+    width: auto;
+    margin-right: 20px;
+    right: 3%;
+    bottom: 3%;
+    top: auto; //Override from above
+    font-family: @font_vaud_medium;
+    font-size: 16px;
+  }
+
+  .carousel-indicators {
+    display: none;
+  }
+
+  .image-carousel-header-banner {
+    position: absolute;
+    top: 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 5;
+    width: 100%;
+    height: 42px;
+  }
+
+  .image-carousel-header {
+    position: absolute;
+    margin: 10px 0 10px 25px;
+    font-family: @font_vaud;
+    color: @white;
+    font-weight: normal;
+    font-size: 1.17em;
+  }
+
+  .image-carousel-caption-text {
+    a, a:visited {
+      color: inherit;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+// For landscape-mode phones:
+@media (min-device-width: @screen-phone) 
+        and (max-device-width: @screen-tablet) {
+  .block-ImageCarouselBlock {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: @small_viewport) {
+  .block-ImageCarouselBlock {
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

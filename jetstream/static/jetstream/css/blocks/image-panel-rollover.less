@@ -89,11 +89,41 @@
 
 /*** Responsive Rules ***/
 
+// For landscape-mode phones:
+@media (min-device-width: @screen-phone) 
+        and (max-device-width: @screen-tablet) {
+  .block-ImagePanelBlock {
+    .image-block-link .entry {
+      float: none;
+    }
+  }
+}
+
 @media (min-width: @small_viewport) {
-  .image-block-link {
-    .entry {
-      // On landscape phones and larger mobile devices, fit the images 3-per-line.
-      //width: 32%;
+  .block-ImagePanelBlock {
+    .image-block-link .entry {
+      float: none;
+      .text {
+        padding-top: 1.5em;
+        padding-bottom: 1.5em;
+        position: static;
+        line-height: 24px;
+        color: black;
+        background-color: transparent;
+        height: auto;
+        .title {
+          font-size: 1.4em;
+          line-height: 30px;
+          position: static;
+          height: auto;
+          display: inline;
+          .vertically-centered {
+            position: static;
+            transform: none;
+            -webkit-transform: none;
+          }
+        }
+      }
     }
   }
 }

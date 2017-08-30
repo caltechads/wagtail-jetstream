@@ -10,3 +10,18 @@
 .spacer-8 { height: 8 * @spacer_increment; }
 .spacer-9 { height: 9 * @spacer_increment; }
 .spacer-10 { height: 10 * @spacer_increment; }
+
+@media (max-width: @small_viewport) {
+  .spacer-1,
+  .spacer-2,
+  .spacer-3,
+  .spacer-4,
+  .spacer-5,
+  .spacer-6,
+  .spacer-7,
+  .spacer-8,
+  .spacer-9,
+  .spacer-10 {
+    height: 0px;
+  }
+}

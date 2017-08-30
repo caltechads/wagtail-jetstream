@@ -1,0 +1,25 @@
+.menu-listing-widget {
+  line-height: 200%;
+  padding-left: 15px;
+}
+.menu-listing-widget .section-title {
+  float: left;
+  clear: both;
+}
+.menu-listing-widget .subpage-listing {
+  float: left;
+  clear: left;
+  padding-left: 10px;
+}
+.menu-listing-widget a.drop-down-button {
+  float: left;
+  padding-left: 5px;
+}
+.menu-listing-widget .page-listing {
+  float: left;
+  clear: left;
+}
+.menu-listing-widget .page-listing.non-interactive {
+  font-size: 120%;
+}
+/*# sourceMappingURL=menu-listing.css.map */

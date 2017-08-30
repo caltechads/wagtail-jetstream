@@ -1,0 +1,96 @@
+// These rules overrides several bootstrap components.
+.hero-image-carousel {
+  overflow: hidden;
+  position: relative;
+
+  // Overrides
+  .carousel-inner {
+    height: 100%;
+
+    .item {
+      height: 100%;
+    }
+    img {
+      width: 100%;
+    }
+  }
+
+  .carousel-inner > .item > img {
+    height: inherit;
+  }
+
+  .carousel-caption {
+    position: static;
+    text-align: left;
+    padding: 0 10px;
+    text-shadow: none;
+  }
+
+  .carousel-indicators {
+    left: auto;
+    width: auto;
+    right: 3%;
+    bottom: 3%;
+  }
+
+  .carousel-control {
+    display: none;
+  }
+
+  .hero-image-caption-title {
+    font-size: unit(24px / @font_size_base, em);;
+    font-weight: bold;
+    color: @goldenrod;
+    line-height: normal;
+
+    a, a:visited {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  .hero-image-caption-text {
+    font-family: Vaud, sans-serif;
+    color: @black-text;
+  }
+}
+
+@media (min-width: @medium_viewport) {
+  .hero-image-carousel {
+    .carousel-caption {
+      position: absolute;
+      left: 30%;
+      right: auto;
+      bottom: auto;
+      top: 25%;
+    }
+
+    .text-gradient {
+      background-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,0.6) 30%, rgba(0,0,0,0.6));
+      width: 75%;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+
+    .hero-image-caption-title {
+      font-size: 2.5em;
+      font-weight: bold;
+      color: @goldenrod;
+      line-height: normal;
+
+      a, a:visited {
+        color: inherit;
+        text-decoration: none;
+      }
+    }
+
+    .hero-image-caption-text {
+      font-family: Vaud, sans-serif;
+      font-weight: bold;
+      padding-right: 3em;
+      color: white;
+    }
+  }
+}

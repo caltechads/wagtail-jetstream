@@ -1,3 +1,22 @@
+.fancy-rich-text {
+  position: relative;
+
+  .background-image-container {
+      overflow: hidden;
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      z-index: -100;
+    }
+
+    .background-image {
+      width: 100%;
+      height: auto;
+    }
+}
+
 .bg-color .rich-text {
     padding: 25px;
 }
@@ -15,4 +34,34 @@
 
 .fancy-rich-text > .rich-text {
     padding-right: 25px;
+}
+//
+// For landscape-mode phones:
+@media (min-device-width: @screen-phone) 
+        and (max-device-width: @screen-tablet) {
+  .fancy-rich-text > .rich-text {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 2em;
+    width: 100%;
+  }
+}
+
+@media (max-width: @small_viewport) {
+  .fancy-rich-text > .rich-text {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    width: 100%;
+  }
+}
+
+@media (min-width: @medium_viewport) {
+  .fancy-rich-text > .rich-text {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 2em;
+    width: 100%;
+  }
 }
