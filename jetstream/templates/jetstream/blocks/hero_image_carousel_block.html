@@ -20,7 +20,7 @@
       <div class="item {% if forloop.counter == 1 %}active{% endif %}">
         {% link_value slide.link as link %}
         {% if link %}
-          <a class="image-link" href="{{ slide.link }}"><span></span></a>
+          <a class="image-link" href="{{ link }}"><span></span></a>
         {% endif %}
         {% arbitrary_image slide.image 'fill' self.width self.height %}
         <div class="text-gradient">

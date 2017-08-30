@@ -3,10 +3,9 @@
 <div class="image-block-link">
     <div class="entry">
       <div class="image-link">
-      {% if self.page %}
-        <a class="image-link" href="{{ self.page.full_url }}"><span></span></a>
-      {% elif self.link %}
-        <a class="image-link" href="{{ self.link }}"><span></span></a>
+      {% if self.link %}
+        {% link_value self.link as link %}
+        <a class="image-link" href="{{ link }}"><span></span></a>
       {% endif %}
       {% if parent_width and not self.fixed_dimensions.use %}
         {% arbitrary_image self.image 'fill' parent_width parent_width %}
