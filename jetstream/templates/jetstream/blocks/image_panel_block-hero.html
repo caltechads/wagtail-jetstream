@@ -16,11 +16,9 @@
         <h1 class="hero-title">
         {% link_value self.link as link %}
         {% if link %}
-          <a href="{{ link }}">
-        {% endif %}
-        {{ self.title }}
-        {% if self.link %}
-          </a>
+          <a href="{{ link }}">{{ self.title }}</a>
+        {% else %}
+          {{ self.title }}
         {% endif %}
         </h1>
       {% endif %}

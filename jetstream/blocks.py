@@ -52,7 +52,8 @@ class LinkBlock(blocks.StructBlock):
     url = blocks.CharBlock(
         required=False,
         help_text="Link to the given URL. This can be a relative URL to a location your own site (e.g. /example-page) "
-                  "or an absolute URL to a page on another site (e.g. http://www.caltech.edu)."
+                  "or an absolute URL to a page on another site (e.g. http://www.caltech.edu). Note: absolute URLs "
+                  "must include the http:// otherwise they will not work."
     )
 
     def render_basic(self, value, context=None):

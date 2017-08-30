@@ -3,8 +3,8 @@
 <div class="image-block-link">
     <div class="entry">
       <div class="image-link">
-      {% if self.link %}
-        {% link_value self.link as link %}
+      {% link_value self.link as link %}
+      {% if link %}
         <a class="image-link" href="{{ link }}"><span></span></a>
       {% endif %}
       {% if parent_width and not self.fixed_dimensions.use %}
@@ -20,7 +20,6 @@
           {% if self.desc %}
             <span class="blurb">{{ self.desc }}</span>
           {% endif %}
-          {% link_value self.link as link %}
           {% if link %}
             <span href="{{ link }}" class="read-more-link">Read more...</span>
           {% endif %}
