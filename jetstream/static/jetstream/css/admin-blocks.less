@@ -1,14 +1,21 @@
 /**** Fixed dimensions block ****/
 div.dimensions-options {
-    clear: both;
-    padding: 0 1%;
-
     li {
-        float:left;
-        width: 32%;
+        float: left;
+        width: 30%;
+        height: 100%;
 
         &:before {
             display: none;
+        }
+
+        label { width: auto; }
+
+
+        .boolean_field div.input { 
+          display: table-cell;
+          vertical-align: middle;
+          height: 4em;
         }
     }
 }

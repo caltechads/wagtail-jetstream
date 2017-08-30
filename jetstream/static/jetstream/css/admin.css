@@ -1,46 +1,22 @@
 /**** Fixed dimensions block ****/
-div.dimensions-options {
-  clear: both;
-  padding: 0 1%;
-}
 div.dimensions-options li {
   float: left;
-  width: 32%;
+  width: 30%;
+  height: 100%;
 }
 div.dimensions-options li:before {
   display: none;
 }
+div.dimensions-options li label {
+  width: auto;
+}
+div.dimensions-options li .boolean_field div.input {
+  display: table-cell;
+  vertical-align: middle;
+  height: 4em;
+}
 /**** Link Block ****/
 div.link-block ul li:first-child label {
   display: none;
-}
-.summary ul.stats li.quarter-width {
-  width: 25%;
-}
-header .search-form li {
-  margin: 0.6em 0;
-}
-.listing .index .actions {
-  visibility: hidden;
-}
-.listing thead .index .actions {
-  visibility: visible;
-}
-.site-settings .content-wrapper {
-  margin-bottom: 4em;
-}
-.site-settings .content > header {
-  margin-bottom: 0;
-}
-.site-settings .analytics label {
-  width: auto;
-}
-div.hallotoolbar {
-  margin-top: 3.5em;
-}
-.stream-field li.sequence-member .struct-block .sequence-container {
-  width: 100%;
-  padding-left: 1.5%;
-  padding-right: 1.5%;
 }
 /*# sourceMappingURL=admin.css.map */
