@@ -13,18 +13,18 @@
 {% if self.title %}
   <h2>{{ self.title }}</h2>
 {% endif %}
-  <ul class="list-group related-links-group">
+  <div class="list-group">
     {% for link in self.links %}
       {% link_url link.value.link as link_url %}
       {% if link_url %}
         <a class="related-link list-group-item" href="{{ link_url }}">{{ link.value.text }}</a>
       {% endif %}
     {% endfor %}
-    {% if self.color.background_image %}
-      <div class="background-image-container">
-        {% image self.color.background_image original as imgdata %}
-        <img class="background-image" src="{{ imgdata.url }}" alt="{{ img_data.alt }}"/>
-      </div>
-    {% endif %}
-  </ul>
+  {% if self.color.background_image %}
+    <div class="background-image-container">
+      {% image self.color.background_image original as imgdata %}
+      <img class="background-image" src="{{ imgdata.url }}" alt="{{ img_data.alt }}"/>
+    </div>
+  {% endif %}
+  </div>
 </div>

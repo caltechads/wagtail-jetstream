@@ -1,27 +1,37 @@
-{% load jetstream_tags %}
+{% load wagtailimages_tags jetstream_tags %}
 
-{% if self.title %}
-    <h4 class="section-title">{{ self.title }}</h4>
-{% endif %}
-
-<div class="menu-listing-widget
-     {% if self.text_color %} text-color-{{ self.text_color }}{% endif %}
-     {% if self.background_color and not self.background_image %} bg-color bg-color-{{ self.background_color }}{% endif %}
-     {% if self.fixed_dimensions %} fixed{% endif %}
+<div class="menu-listing
+  {% if self.color.text_color %}text-color-{{ self.color.text_color }}{% endif %}
+  {% if self.color.background_color and not self.color.background_image %}bg-color bg-color-{{ self.color.background_color }}{% endif %}
+  {% if self.fixed_dimensions.use %}fixed{% endif %}
+  {% if self.color.background_image %}bgimage{% endif %}
 "
-     {% if self.fixed_dimensions %}
-     style="height: {{ self.height }}px; width: {{ self.width }}px"
-     {% endif %}
+  {% if self.fixed_dimensions %}
+    style="height: {{ self.fixed_dimensions.height }}px; width: {{ self.fixed_dimensions.width }}px"
+  {% endif %}
 >
-    {% if self.show == 'children' %}
-        {% page_descendants page as pages %}
-    {% else %}
-        {% page_siblings page as pages %}
-        <span class="page-listing non-interactive">{{ page.title }}</span>
-    {% endif %}
+{% if self.title %}
+  <h2>{{ self.title }}</h2>
+{% endif %}
+  {% if self.show == 'children' %}
+      {% page_descendants page as pages %}
+  {% else %}
+      {% page_siblings page as pages %}
+  {% endif %}
+  <div class="list-group">
     {% for p in pages %}
-        {% with subpage=p %}
-            {% include 'jetstream/blocks/_page_listing.html' %}
-        {% endwith %}
+      <a href="{{ p.full_url }}" class="page-listing list-group-item
+      {% if page.full_url == p.full_url %}
+      active
+      {% endif %}
+          ">
+          {{ p.title }}</a>
     {% endfor %}
+  {% if self.color.background_image %}
+    <div class="background-image-container">
+      {% image self.color.background_image original as imgdata %}
+      <img class="background-image" src="{{ imgdata.url }}" alt="{{ img_data.alt }}"/>
+    </div>
+  {% endif %}
+  </div>
 </div>

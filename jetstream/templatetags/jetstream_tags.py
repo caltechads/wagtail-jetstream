@@ -201,7 +201,7 @@ def page_descendants(page):
 @register.simple_tag()
 def page_siblings(page):
     # Results don't include itself, so need to add a non-hyperlink dummy listing
-    return page.get_siblings(inclusive=False)
+    return page.get_siblings(inclusive=True)
 
 
 # ---------------

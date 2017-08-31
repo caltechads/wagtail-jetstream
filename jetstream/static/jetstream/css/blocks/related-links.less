@@ -1,67 +1,37 @@
-//Bootstrap override
 .list-group-item {
   background-color: transparent;
   border: 0;
-}
-
-//noinspection LessUnresolvedVariable
-.linksbglight(@color) {
-  @classname: ~"bg-color-@{color}";
-  .related-links.@{classname} {
-    box-shadow: none;
-    border: none;
-    background-color: @@color;
-    h2 {
-      color: darken(@@color, 20%);
-      background-color: lighten(@@color, 10%);
-    }
-    .list-group-item {
-      border-bottom: 1px solid lighten(@@color, 5%);
-      &:hover {
-        background-color: lighten(@@color, 10%);
-      }
+  &.active {
+    background-color: transparent;
+    color: black;
+    &:hover {
+      background-color: transparent;
+      color: black;
     }
   }
 }
 
-//noinspection LessUnresolvedVariable
-.linksbgdark(@color) {
-  @classname: ~"bg-color-@{color}";
-  .related-links.@{classname} {
-    box-shadow: none;
-    border: none;
-    background-color: @@color;
-    h2 {
-      color: lighten(@@color, 20%);
-      background-color: darken(@@color, 10%);
-    }
-    .list-group-item {
-      border-bottom: 1px solid lighten(@@color, 5%);
-      &:hover {
-        background-color: darken(@@color, 10%);
-      }
-    }
-  }
-}
-
-.linksbgdark("white");
+// related links
+.linksbgdark(related-links, "white");
 .related-links.bg-color-white h2 {
   color: @black;
 }
-.linksbglight("black");
-.linksbglight("orange");
-.linksbgdark("ltgray");
-.linksbgdark("midgray");
-.linksbglight("darkergray");
-.linksbglight("dkgray");
-.linksbgdark("olivegreen");
-.linksbglight("purple");
+.linksbglight(related-links, "black");
+.linksbglight(related-links, "orange");
+.linksbgdark(related-links, "ltgray");
+.linksbgdark(related-links, "midgray");
+.linksbglight(related-links, "darkergray");
+.linksbglight(related-links, "dkgray");
+.linksbgdark(related-links, "olivegreen");
+.linksbglight(related-links, "purple");
 .related-links.bg-color-purple h2 {
   color: @white;
 }
-.linksbglight("darkteal");
+.linksbglight(related-links, "darkteal");
 
-.related-links {
+.related-links,
+.menu-listing
+{
   box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
   border-bottom: 1px solid rgba(34, 36, 38, .1);
   h2 {
@@ -126,7 +96,7 @@
 
   overflow: hidden;
   position: relative;
-  .related-links-group {
+  .list-group {
     .list-group-item {
       padding: 5px 25px;
       border-bottom: 1px solid darken(@white, 5%);
