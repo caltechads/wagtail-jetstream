@@ -623,8 +623,11 @@ class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):
 
     fixed_height = blocks.IntegerBlock(
         default=250,
-        label="Suggested height for contained widgets",
-        help_text=fixed_height_helptext
+        label="Suggested height for child widgets",
+        help_text=(
+            "Child blocks containing images will set themsevles to this height unless specifically overridden on the "
+            "block. Set this to 0 to not enforce a height."
+        )
     )
 
     class Meta:

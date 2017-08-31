@@ -7,7 +7,7 @@
       {% if parent_height %}
         {% arbitrary_image self.image 'fill' parent_width parent_height %}
       {% else %}
-        {% arbitrary_image self.image 'fill' parent_width parent_width %}
+        {% arbitrary_image self.image 'width' parent_width %}
       {% endif %}
     {% else %}
       {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
