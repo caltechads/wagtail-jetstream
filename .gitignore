@@ -105,3 +105,6 @@ ENV/
 
 # codekit
 *.codekit3
+
+# PyCharm
+.idea
