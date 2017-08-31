@@ -1,20 +1,19 @@
 def get_block_tuple(block_inst):
     """
     Returns the canned block tuple for use in StreamField and StreamBlock definitions (but NOT in StructBlocks!).
-    We use this everywhere so that we can always be sure that the same machine name (the string in the tuple) is used
-    everywhere a particular Block is used in a stream.
+    We use this everywhere so that our code consistently generates the same tuple at every organiziational level.
     """
-    # IF the block instance has a get_block_tuple() method, call it. Otherwise, build the tuple like the default.
-    if hasattr(block_inst, 'get_block_tuple'):
+    try:
         return block_inst.get_block_tuple()
-    else:
+    except AttributeError:
+        # If the block instance hasn't got a get_block_tuple() method, build the default tuple.
         return (block_inst.__class__.__name__, block_inst)
 
 
 class BlockTupleMixin(object):
     """
     All our custom block classes need to mixin this class so that our code consistently generates the same tuple at
-    every organiziational level (e.g. at the FlexPage.body level and the TwoColumnBlock level.
+    every organiziational level (e.g. the Page.body level and the TwoColumnBlock level).
 
     Classes that need to use a custom string for their block tuple (e.g. TwoColumnBlock and BaseTwoColumnSubblock, which
     both need the same tuple) can override get_block_tuple().
