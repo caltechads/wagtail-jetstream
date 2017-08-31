@@ -1,8 +1,4 @@
 .captioned-image {
-  img {
-
-  }
-
   .image-details {
     line-height: 1.5;
     margin-top: 10px;
@@ -18,3 +14,24 @@
   }
 }
 
+@media (min-device-width: @screen-phone) 
+        and (max-device-width: @screen-tablet) {
+  .captioned-image {
+    .image-caption,
+    .image-credit {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
+
+@media (max-width: @small_viewport) {
+  .captioned-image {
+    margin-bottom: 2em;
+    .image-caption,
+    .image-credit {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
