@@ -1,9 +1,9 @@
 {% load wagtailimages_tags jetstream_tags %}
 
 <div class="plain-image-block-link clearfix">
-  {% link_value self.link as link %}
-  {% if link %}
-    <a class="image-link" href="{{ link }}"><span></span></a>
+  {% link_url self.link as link_url %}
+  {% if link_url %}
+    <a class="image-link" href="{{ link_url }}"><span></span></a>
   {% endif %}
   <div class="image">
     {% if self.fixed_dimensions.use %}
@@ -24,7 +24,7 @@
     <div class="text-gradient">
       <div class="image-link-caption">
         {{ self.title }}
-        {% if link %}
+        {% if link_url %}
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         {% endif %}
       </div>

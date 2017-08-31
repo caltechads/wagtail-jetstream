@@ -12,9 +12,9 @@
       <div class="card-block">
         {% if self.title %}
           <h4 class="card-title">
-            {% link_value self.link as link %}
-            {% if link %}
-             <a href="{{ link }}">{{ self.title }}</a>
+            {% link_url self.link as link_url %}
+            {% if link_url %}
+             <a href="{{ link_url }}">{{ self.title }}</a>
             {% else %}
               {{ self.title }}
             {% endif %}

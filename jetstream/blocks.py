@@ -38,10 +38,10 @@ class LinkBlock(blocks.StructBlock):
 
     NOTE: Within a template, checking for the existence of `self.link` will always return True because
     the existence of a class is always True even if the class has null contents. To retrieve the value of a
-    LinkBlock, use the link_value template tag.
-        ex. {% link_value self.link as link %}
-            {% if link %}
-                <a href={{ link }}></a>
+    LinkBlock, use the link_url template tag.
+        ex. {% link_url self.link as link_url %}
+            {% if link_url %}
+                <a href={{ link_url }}></a>
             {% endif %}
     """
 

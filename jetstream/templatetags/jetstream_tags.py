@@ -181,8 +181,8 @@ def width_from_arbitrary_parent(parent_px, units):
     return int(parent_px) / 12 * int(units)
 
 
-@register.simple_tag(name='link_value')
-def link_value(block):
+@register.simple_tag(name='link_url')
+def link_url(block):
     """
     Accessory tag to our LinkBlock sub component that returns the linked page if it exists, or the linked
     URL. If neither are specified, returns None.

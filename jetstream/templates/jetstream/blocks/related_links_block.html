@@ -15,9 +15,9 @@
 {% endif %}
   <ul class="list-group related-links-group">
     {% for link in self.links %}
-      {% link_value link.value.link as link %}
-      {% if link %}
-        <a class="related-link list-group-item" href="{{ link }}">{{ link.value.text }}</a>
+      {% link_url link.value.link as link_url %}
+      {% if link_url %}
+        <a class="related-link list-group-item" href="{{ link_url }}">{{ link.value.text }}</a>
       {% endif %}
     {% endfor %}
     {% if self.color.background_image %}

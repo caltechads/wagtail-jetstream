@@ -18,16 +18,16 @@
   <div class="carousel-inner" role="listbox">
     {% for slide in self.slides %}
       <div class="item {% if forloop.counter == 1 %}active{% endif %}">
-        {% link_value slide.link as link %}
-        {% if link %}
-          <a class="image-link" href="{{ link }}"><span></span></a>
+        {% link_url slide.link as link_url %}
+        {% if link_url %}
+          <a class="image-link" href="{{ link_url }}"><span></span></a>
         {% endif %}
         {% arbitrary_image slide.image 'fill' self.width self.height %}
         <div class="text-gradient">
           <div class="carousel-caption">
             <div class="hero-image-caption-title">
-              {% if link %}
-                <a class="title-link" href="{{ link }}">{{ slide.title | bleach }}</a>
+              {% if link_url %}
+                <a class="title-link" href="{{ link_url }}">{{ slide.title | bleach }}</a>
               {% else %}
                 {{ slide.title | bleach }}
               {% endif %}

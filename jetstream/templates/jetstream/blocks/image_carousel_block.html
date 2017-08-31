@@ -24,8 +24,9 @@
   <div class="carousel-inner" role="listbox">
     {% for slide in self.slides %}
       <div class="item {% if forloop.counter == 1 %}active{% endif %}">
-        {% if slide.real_url %}
-          <a class="image-link" href="{{ slide.real_url }}"><span></span></a>
+        {% link_url slide.link as link_url %}
+        {% if link_url %}
+          <a class="image-link" href="{{ link_url }}"><span></span></a>
         {% endif %}
 
         {% if parent_width and parent_height %}
@@ -36,9 +37,8 @@
         {% if slide.text %}
           <div class="carousel-caption">
             <div class="image-carousel-caption-text">
-              {% link_value slide.link as link %}
-              {% if link %}
-                <a href="{{ link }}">{{ slide.text | bleach }}<span class="glyphicon glyphicon-chevron-right"
+              {% if link_url %}
+                <a href="{{ link_url }}">{{ slide.text | bleach }}<span class="glyphicon glyphicon-chevron-right"
                   aria-hidden="true"></span>
                 </a>
               {% else %}
