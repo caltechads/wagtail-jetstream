@@ -179,7 +179,9 @@ class ImageLinkBlock(blocks.StructBlock, BlockTupleMixin):
 class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = (
         ('rollover', 'Image Link w/ Rollover Text', 'jetstream/blocks/image_panel_block-rollover.html', []),
-        ('separate_text', 'Image Card (Equal Heights)', 'jetstream/blocks/image_panel_block-image_card.html', ['equal']),
+        ('separate_text', 'Image Card (Equal Heights)', 'jetstream/blocks/image_panel_block-image_card.html',
+            ['equal']
+        ),
         ('separate_text_natural', 'Image Card (Natural Heights)', 'jetstream/blocks/image_panel_block-image_card.html',
             ['natural']
          ),
@@ -232,11 +234,6 @@ class HeroImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
     slides = blocks.ListBlock(
         blocks.StructBlock([
             ('image', ImageChooserBlock()),
-            # 2016/07/19 - Commented out for now. I dont think an embedded video is what we actually want here, anyway.
-            # ('video', EmbedBlock(
-            #     required=False,
-            #     help_text="If both a video and an image are selected, the video will take precedence."
-            # )),
             ('title', blocks.CharBlock()),
             ('text', blocks.TextBlock()),
             ('link', LinkBlock()),
@@ -263,8 +260,6 @@ class HeroImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'image'
 
 
-# TODO: This is a heck of a lot of overlap between HeroImageCarouselBlock and ImageCarouselBlock.
-# Maybe write a parent class with their shared functionality?
 class ImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
 
     header = blocks.TextBlock()
@@ -616,10 +611,7 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
 class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):
 
     sidebar_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
-    sidebar_alignment = blocks.ChoiceBlock(choices=[
-        ('left', 'Left'),
-        ('right', 'Right'),
-        ], blank=False, default='left')
+    sidebar_alignment = blocks.ChoiceBlock(choices=[('left', 'Left'), ('right', 'Right')], blank=False, default='left')
 
     fixed_height = blocks.IntegerBlock(
         default=250,
