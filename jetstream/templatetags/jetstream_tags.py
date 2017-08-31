@@ -51,8 +51,11 @@ def arbitrary_image(parser, token):
     """
     Usage: {% arbitrary_image self.image __MODE__ __WIDTH__ __HEIGHT__ [ custom-attr="value" ... ] %}
            {% arbitrary_image self.image __MODE__ __WIDTH__ __HEIGHT__ as img %}
-    """
+           {% arbitrary_image self.image __MODE__ __DIMENSION__ as img %}
 
+    Currently supported MODEs are 'fill', 'max', 'min', 'width', and 'height'.
+    The 'width' and 'height' modes take only one dimension argument.
+    """
     return parse_image_tag('arbitrary_image', parser, token, ArbitraryImageNode)
 
 
@@ -60,6 +63,7 @@ def arbitrary_image(parser, token):
 def responsive_image(parser, token):
     """
     Usage: {% responsive_image self.image __MODE__ __WIDTH__ __HEIGHT__ [ custom-attr="value" ... ] %}
+           {% responsive_image self.image __MODE__ __DIMENSION__ [ custom-attr="value" ... ] %}
 
     This tag works just like arbitrary_image, but generates a <picture> tag with a few responsive <source>s, instead of
     an <img> tag. Because more than one rendition is generated, using the "as var_name" functionality would be
@@ -70,7 +74,7 @@ def responsive_image(parser, token):
 
 class ImageNode(template.Node):
 
-    def __init__(self, image_expr, mode_expr, width_expr, height_expr, output_var_name=None, attrs=None):
+    def __init__(self, image_expr, mode_expr, width_expr=None, height_expr=None, output_var_name=None, attrs=None):
         self.image_expr = image_expr
         self.mode_expr = mode_expr
         self.width_expr = width_expr
@@ -87,9 +91,10 @@ class ResponsiveImageNode(ImageNode):
     def render(self, context):
         try:
             image = self.image_expr.resolve(context)
-            width = int(self.width_expr.resolve(context))
-            height = int(self.height_expr.resolve(context))
             mode = self.mode_expr.resolve(context)
+            # Set an unprovided dimension to a large value so that the square_spec will choose the other one.
+            width = int(self.width_expr.resolve(context)) if self.width_expr else 99999
+            height = int(self.height_expr.resolve(context)) if self.height_expr else 99999
         except template.VariableDoesNotExist:
             return ''
 
@@ -97,11 +102,18 @@ class ResponsiveImageNode(ImageNode):
             return ''
 
         # Build a filter spec based on the specified mode, height, and width for the base rendition.
-        base_spec = "{}-{}x{}-c100".format(mode, width, height)
+        if mode == 'width':
+            base_spec = "width-{}".format(width)
+        elif mode == 'height':
+            base_spec = "height-{}".format(height)
+        else:
+            base_spec = "{}-{}x{}-c100".format(mode, width, height)
         base_rendition = get_rendition_or_not_found(image, Filter(spec=base_spec))
+
         # Build another filter spec that generates a square rendition with length and width equal to the shortest side.
         square_spec = "{}-{}x{}-c100".format(mode, min(width, height), min(width, height))
         square_rendition = get_rendition_or_not_found(image, Filter(spec=square_spec))
+
         # Build the fallback <img> tag for browsers that don't support <picture>.
         custom_attrs = {attr_name: expression.resolve(context) for attr_name, expression in self.attrs.items()}
         img_tag = base_rendition.img_tag(custom_attrs)
@@ -123,17 +135,22 @@ class ArbitraryImageNode(ImageNode):
     def render(self, context):
         try:
             image = self.image_expr.resolve(context)
-            width = self.width_expr.resolve(context)
-            height = self.height_expr.resolve(context)
             mode = self.mode_expr.resolve(context)
+            width = int(self.width_expr.resolve(context)) if self.width_expr else 0
+            height = int(self.height_expr.resolve(context)) if self.height_expr else 0
         except template.VariableDoesNotExist:
             return ''
 
         if not image:
             return ''
 
-        # Build a filter spec based on the specified mode, height, and width.
-        spec = "{}-{}x{}-c100".format(mode, int(width), int(height))
+        # Build a filter spec based on the specified mode, height, and width for the base rendition.
+        if mode == 'width':
+            spec = "width-{}".format(width)
+        elif mode == 'height':
+            spec = "height-{}".format(height)
+        else:
+            spec = "{}-{}x{}-c100".format(mode, width, height)
         rendition = get_rendition_or_not_found(image, Filter(spec=spec))
 
         if self.output_var_name:
@@ -200,10 +217,25 @@ def parse_image_tag(tag_name, parser, token, node_class):
     bits = token.split_contents()[1:]
     image_expr = parser.compile_filter(bits[0])
     mode_expr = parser.compile_filter(bits[1])
-    width_expr = parser.compile_filter(bits[2])
-    height_expr = parser.compile_filter(bits[3])
-    # The leftovers are custom-attrs and the "as var" code, if they exist.
-    leftovers = bits[4:]
+
+    # The mode comes in as a string like "'width'", so we need to strip the surrounding quotes.
+    mode_string = bits[1].strip("\"\'")
+    if mode_string == 'width':
+        # The width mode has only one dimension argument.
+        width_expr = parser.compile_filter(bits[2])
+        height_expr = None
+        # The leftovers are custom-attrs and the "as var" code, if they exist.
+        leftovers = bits[3:]
+    elif mode_string == 'height':
+        # The width mode has only one dimension argument.
+        width_expr = None
+        height_expr = parser.compile_filter(bits[2])
+        leftovers = bits[3:]
+    else:
+        # Other modes take two dimension arguments: width, then height.
+        width_expr = parser.compile_filter(bits[2])
+        height_expr = parser.compile_filter(bits[3])
+        leftovers = bits[4:]
 
     attrs = {}
     output_var_name = None
@@ -217,7 +249,8 @@ def parse_image_tag(tag_name, parser, token, node_class):
         """
         '{0}' tag should be of the form
         {{% {0} self.photo 'max' 320 200 [ custom-attr="value" ... ] %}} or
-        {{% {0} self.photo 'max' 320 200 as img %}}.
+        {{% {0} self.photo 'max' 320 200 as img %}} or
+        {{% {0} self.photo 'width' 320 as img %}}.
         You CANNOT use both custom-attr="value" and 'as img'!
         """.format(tag_name)
     )
