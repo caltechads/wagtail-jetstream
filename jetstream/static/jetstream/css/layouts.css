@@ -421,9 +421,11 @@
   }
 }
 @media (min-width: 768px) {
+  .sidebar-layout {
+    padding: 0;
+  }
   .sidebar-layout > .rich-text {
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 0;
     margin-bottom: 2em;
     width: 100%;
   }

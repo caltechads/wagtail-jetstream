@@ -10,7 +10,7 @@
 }
 
 // For landscape-mode phones:
-@media (min-device-width: @screen-phone) 
+@media (min-device-width: @screen-phone)
         and (max-device-width: @screen-tablet) {
   .sidebar-layout > .rich-text {
     padding-left: 10px;
@@ -31,10 +31,13 @@
 }
 
 @media (min-width: @medium_viewport) {
-  .sidebar-layout > .rich-text {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 2em;
-    width: 100%;
+  .sidebar-layout {
+    padding: 0;
+
+    & > .rich-text {
+      padding: 0;
+      margin-bottom: 2em;
+      width: 100%;
+    }
   }
 }
