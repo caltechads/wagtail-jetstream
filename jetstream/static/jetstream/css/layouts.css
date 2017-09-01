@@ -403,6 +403,12 @@
 .sidebar-layout .rich-text {
   width: 800px;
 }
+.sidebar-layout section {
+  margin-bottom: 10px;
+}
+.sidebar-layout section:last-child {
+  margin-bottom: 0;
+}
 @media (min-device-width: 480px) and (max-device-width: 768px) {
   .sidebar-layout > .rich-text {
     padding-left: 10px;

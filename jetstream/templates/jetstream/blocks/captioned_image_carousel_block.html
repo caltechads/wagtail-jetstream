@@ -4,16 +4,17 @@
     <div class="carousel-inner" role="listbox">
     {% for i in self.images %}
         <div class="{% if forloop.counter == 1 %}item active{% else %}item{% endif %}">
-            {% image i.value original as imgdata %}
-            <img src="{{ imgdata.url }}" alt="{{ imgdata.alt }}" />
-            <div class='image-details'>
-                {% if i.value.caption %}
-                    <div class='image-caption'>{{ i.value.caption }}</div>
-                {% endif %}
-                {% if i.value.photo_credit %}
-                    <div class='image-credit'>Credit: {{ i.value.photo_credit }}</div>
-                {% endif %}
-            </div>
+            {% image i.value original %}
+            {% if i.value.caption or i.value.photo_credit %}
+                <div class='image-details'>
+                    {% if i.value.caption %}
+                        <div class='image-caption'>{{ i.value.caption }}</div>
+                    {% endif %}
+                    {% if i.value.photo_credit %}
+                        <div class='image-credit'>Credit: {{ i.value.photo_credit }}</div>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
     {% endfor %}
     </div>

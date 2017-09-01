@@ -2,12 +2,11 @@
 <div class="row">
   <div class="col-md-12 sidebar-layout">
     {% width_from_arbitrary_parent 1000 self.sidebar_width as my_width %}
-    <div class="sidebar" style="width:{{ my_width }}px;
-                                float: {{ self.sidebar_alignment }};">
+    <div class="sidebar" style="width: {{ my_width }}px; float: {{ self.sidebar_alignment }};">
       {% for block in self.sidebar %}
-      <section class="block-{{ block.block_type }}">
-        {% include_block block with parent_width=my_width parent_height=self.fixed_height block_id=block.id %}
-      </section>
+        <section class="block-{{ block.block_type }}">
+          {% include_block block with parent_width=my_width parent_height=self.fixed_height block_id=block.id %}
+        </section>
       {% endfor %}
     </div>
     {{ self.text|richtext }}

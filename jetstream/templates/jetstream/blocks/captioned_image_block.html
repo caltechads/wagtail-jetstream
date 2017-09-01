@@ -12,8 +12,10 @@
     {% else %}
       {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
     {% endif %}
-  <div class='image-details'>
-    <div class='image-caption'>{{ self.image.caption }}</div>
-    <div class='image-credit'>{{ self.image.photo_credit }}</div>
-  </div>
+  {% if self.image.caption or self.image.photo_credit %}
+    <div class='image-details'>
+      <div class='image-caption'>{{ self.image.caption }}</div>
+      <div class='image-credit'>{{ self.image.photo_credit }}</div>
+    </div>
+  {% endif %}
 </div>
