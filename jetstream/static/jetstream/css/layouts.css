@@ -426,16 +426,6 @@
     width: 100%;
   }
 }
-@media (min-width: 768px) {
-  .sidebar-layout {
-    padding: 0;
-  }
-  .sidebar-layout > .rich-text {
-    padding: 0;
-    margin-bottom: 2em;
-    width: 100%;
-  }
-}
 /*************** Spacer Block ******************/
 .spacer-1 {
   height: 25px;
@@ -494,8 +484,7 @@
   font-style: italic;
 }
 @media (min-device-width: 480px) and (max-device-width: 768px) {
-  .captioned-image .image-caption,
-  .captioned-image .image-credit {
+  .captioned-image .image-details {
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -504,8 +493,7 @@
   .captioned-image {
     margin-bottom: 2em;
   }
-  .captioned-image .image-caption,
-  .captioned-image .image-credit {
+  .captioned-image .image-details {
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -1291,14 +1279,6 @@ h3.block_header {
     padding-left: 10px;
     padding-right: 10px;
     margin-top: 2em;
-    margin-bottom: 2em;
-    width: 100%;
-  }
-}
-@media (min-width: 768px) {
-  .fancy-rich-text > .rich-text {
-    padding-left: 10px;
-    padding-right: 10px;
     margin-bottom: 2em;
     width: 100%;
   }
