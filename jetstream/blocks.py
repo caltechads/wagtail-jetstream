@@ -612,7 +612,6 @@ class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):
 
     sidebar_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
     sidebar_alignment = blocks.ChoiceBlock(choices=[('left', 'Left'), ('right', 'Right')], blank=False, default='left')
-
     fixed_height = blocks.IntegerBlock(
         default=250,
         label="Suggested height for child widgets",

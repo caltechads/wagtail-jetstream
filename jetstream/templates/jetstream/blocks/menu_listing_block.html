@@ -14,23 +14,19 @@
   <h2>{{ self.title }}</h2>
 {% endif %}
   {% if self.show == 'children' %}
-      {% page_descendants page as pages %}
+    {% page_descendants page as pages %}
   {% else %}
-      {% page_siblings page as pages %}
+    {% page_siblings page as pages %}
   {% endif %}
   <div class="list-group">
     {% for p in pages %}
-      <a href="{{ p.full_url }}" class="page-listing list-group-item
-      {% if page.full_url == p.full_url %}
-      active
-      {% endif %}
-          ">
-          {{ p.title }}</a>
+      <a href="{{ p.full_url }}" class="page-listing list-group-item {% if page.full_url == p.full_url %}active{% endif %}">
+        {{ p.title }}
+      </a>
     {% endfor %}
   {% if self.color.background_image %}
     <div class="background-image-container">
-      {% image self.color.background_image original as imgdata %}
-      <img class="background-image" src="{{ imgdata.url }}" alt="{{ img_data.alt }}"/>
+      {% image self.color.background_image original class="background-image" %}
     </div>
   {% endif %}
   </div>

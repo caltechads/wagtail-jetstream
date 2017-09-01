@@ -1,46 +1,43 @@
 {% load static jetstream_tags wagtailimages_tags %}
 
 <div id="{{ block_id }}-carousel" class="carousel slide captioned-slider" data-ride="carousel" data-interval="false">
-    <div class="carousel-inner" role="listbox">
-    {% for i in self.images %}
-        <div class="{% if forloop.counter == 1 %}item active{% else %}item{% endif %}">
-            {% image i.value original %}
-            {% if i.value.caption or i.value.photo_credit %}
-                <div class='image-details'>
-                    {% if i.value.caption %}
-                        <div class='image-caption'>{{ i.value.caption }}</div>
-                    {% endif %}
-                    {% if i.value.photo_credit %}
-                        <div class='image-credit'>Credit: {{ i.value.photo_credit }}</div>
-                    {% endif %}
-                </div>
-            {% endif %}
+  <div class="carousel-inner" role="listbox">
+  {% for i in self.images %}
+    <div class="{% if forloop.counter == 1 %}item active{% else %}item{% endif %}">
+      {% image i.value original %}
+      {% if i.value.caption or i.value.photo_credit %}
+        <div class='image-details'>
+          {% if i.value.caption %}
+            <div class='image-caption'>{{ i.value.caption }}</div>
+          {% endif %}
+          {% if i.value.photo_credit %}
+            <div class='image-credit'>Credit: {{ i.value.photo_credit }}</div>
+          {% endif %}
         </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+  </div>
+
+  <div class="carousel-indicators-container">
+    <ol class="carousel-indicators">
+    {% for i in self.images|slice:"1:" %}
+      {% if forloop.counter0 == 0 %}
+        <li data-target="#{{ block_id }}-carousel" data-slide-to="0" class="active">{% image i.value fill-75x75 %}</li>
+      {% else %}
+        <li data-target="#{{ block_id }}-carousel" data-slide-to="{{ forloop.counter0 }}">{% image i.value fill-75x75 %}</li>
+      {% endif %}
     {% endfor %}
-    </div>
+    </ol>
+  </div>
 
-    <div class="carousel-indicators-container">
-        <ol class="carousel-indicators">
-        {% for i in self.images|slice:"1:" %}
-            {% if forloop.counter0 == 0 %}
-                <li data-target="#{{ block_id }}-carousel" data-slide-to="0" class="active">{% image i.value fill-75x75 %}</li>
-            {% else %}
-                <li data-target="#{{ block_id }}-carousel" data-slide-to="{{ forloop.counter0 }}">{% image i.value fill-75x75 %}</li>
-            {% endif %}
-        {% endfor %}
-        </ol>
-    </div>
-
-    <!-- These must be here for the carousel to cycle correctly. We can set them to hidden in CSS -->
-    <a class="left carousel-control" href="#{{ block_id }}-carousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#{{ block_id }}-carousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+  <!-- These must be here for the carousel to cycle correctly. We can set them to hidden in CSS. -->
+  <a class="left carousel-control" href="#{{ block_id }}-carousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#{{ block_id }}-carousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
-
-
-<script src="{% static 'jetstream/js/carousel-resize.js' %}"></script>

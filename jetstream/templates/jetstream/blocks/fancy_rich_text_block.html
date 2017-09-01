@@ -1,19 +1,18 @@
 {% load wagtailimages_tags %}
 
 <div class="fancy-rich-text
-     {% if self.color.text_color %} text-color-{{ self.color.text_color }}{% endif %}
-     {% if self.color.background_color and not self.color.background_image %} bg-color bg-color-{{ self.color.background_color }}{% endif %}
-     {% if self.fixed_dimensions.use %} fixed{% endif %}
+  {% if self.color.text_color %} text-color-{{ self.color.text_color }}{% endif %}
+  {% if self.color.background_color and not self.color.background_image %} bg-color bg-color-{{ self.color.background_color }}{% endif %}
+  {% if self.fixed_dimensions.use %} fixed{% endif %}
 "
-     {% if self.fixed_dimensions.use %}
-     style="height: {{ self.fixed_dimensions.height }}px; width: {{ self.fixed_dimensions.width }}px"
-     {% endif %}
+  {% if self.fixed_dimensions.use %}
+    style="height: {{ self.fixed_dimensions.height }}px; width: {{ self.fixed_dimensions.width }}px"
+  {% endif %}
 >
-    {{ self.text }}
-    {% if self.color.background_image %}
-        <div class="background-image-container">
-            {% image self.color.background_image original as imgdata %}
-            <img class="background-image" src="{{ imgdata.url }}" alt="{{ imgdata.alt }}"/>
-        </div>
-    {% endif %}
+  {{ self.text }}
+  {% if self.color.background_image %}
+    <div class="background-image-container">
+      {% image self.color.background_image original class="background-image" %}
+    </div>
+  {% endif %}
 </div>

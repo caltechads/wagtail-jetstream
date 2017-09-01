@@ -88,7 +88,7 @@
 /*** Responsive Rules ***/
 
 // For landscape-mode phones:
-@media (min-device-width: @screen-phone) 
+@media (min-device-width: @screen-phone)
         and (max-device-width: @screen-tablet) {
   .block-ImagePanelBlock {
     .image-block-link .entry {
@@ -101,6 +101,7 @@
   .block-ImagePanelBlock {
     .image-block-link .entry {
       float: none;
+
       .text {
         padding-top: 1.5em;
         padding-bottom: 1.5em;
@@ -109,12 +110,14 @@
         color: black;
         background-color: transparent;
         height: auto;
+
         .title {
           font-size: 1.4em;
           line-height: 30px;
           position: static;
           height: auto;
           display: inline;
+
           .vertically-centered {
             position: static;
             transform: none;
@@ -127,9 +130,4 @@
 }
 
 @media (min-width: @desktop_viewport) {
-  .image-block-link {
-    .entry {
-      //width: 192px / @responsive_grid_w * 100%;
-    }
-  }
 }
