@@ -1,4 +1,4 @@
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags wagtailcore_tags %}
 
 <div class="fancy-rich-text
   {% if self.color.text_color %} text-color-{{ self.color.text_color }}{% endif %}
@@ -9,7 +9,7 @@
     style="height: {{ self.fixed_dimensions.height }}px; width: {{ self.fixed_dimensions.width }}px"
   {% endif %}
 >
-  {{ self.text }}
+  {{ self.text|richtext }}
   {% if self.color.background_image %}
     <div class="background-image-container">
       {% image self.color.background_image original class="background-image" %}
