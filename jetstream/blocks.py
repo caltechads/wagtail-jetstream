@@ -470,8 +470,18 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
-    left_column = blocks.StreamBlock(COLUMN_PERMITTED_BLOCKS, icon='arrow-left', label='Left column content')
-    right_column = blocks.StreamBlock(COLUMN_PERMITTED_BLOCKS, icon='arrow-right', label='Right column content')
+    left_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-left',
+        label='Left column content',
+        required=False
+    )
+    right_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-right',
+        label='Right column content',
+        required=False
+    )
 
     class Meta:
         template = 'jetstream/blocks/two_column_block.html'
@@ -533,9 +543,24 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
-    left_column = blocks.StreamBlock(COLUMN_PERMITTED_BLOCKS, icon='arrow-left', label='Left column content')
-    middle_column = blocks.StreamBlock(COLUMN_PERMITTED_BLOCKS, icon='arrow-right', label='Middle column content')
-    right_column = blocks.StreamBlock(COLUMN_PERMITTED_BLOCKS, icon='arrow-right', label='Right column content')
+    left_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-left',
+        label='Left column content',
+        required=False
+    )
+    middle_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-right',
+        label='Middle column content',
+        required=False
+    )
+    right_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-right',
+        label='Right column content',
+        required=False
+    )
 
     class Meta:
         template = 'jetstream/blocks/three_column_block.html'
