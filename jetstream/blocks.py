@@ -456,7 +456,21 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     """
     Duplicate of BaseTwoColumnBlock without the sub block to avoid recursion.
     """
+    left_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-left',
+        label='Left column content',
+        required=False
+    )
+    right_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-right',
+        label='Right column content',
+        required=False
+    )
+
     left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=6, help_text=col_helptext)
+
     fixed_height = blocks.IntegerBlock(
         default=350,
         label="Suggested height for contained widgets",
@@ -470,18 +484,7 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
-    left_column = blocks.StreamBlock(
-        COLUMN_PERMITTED_BLOCKS,
-        icon='arrow-left',
-        label='Left column content',
-        required=False
-    )
-    right_column = blocks.StreamBlock(
-        COLUMN_PERMITTED_BLOCKS,
-        icon='arrow-right',
-        label='Right column content',
-        required=False
-    )
+
 
     class Meta:
         template = 'jetstream/blocks/two_column_block.html'
@@ -499,7 +502,22 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
     """
     Base class to be overridden in implementing sub module with boilerplate implementation of column layout.
     """
+    left_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-left',
+        label='Left column content',
+        required=False
+    )
+
+    right_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-right',
+        label='Right column content',
+        required=False
+    )
+
     left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=6, help_text=col_helptext)
+
     fixed_height = blocks.IntegerBlock(
         default=350,
         label="Suggested height for contained widgets",
@@ -529,20 +547,6 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     """
     Duplicate of BaseThreeColumnBlock without the sub block to avoid recursion.
     """
-    left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
-    right_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
-    fixed_height = blocks.IntegerBlock(
-        default=300,
-        label="Suggested height for contained widgets",
-        help_text=fixed_height_helptext
-    )
-    gutter_width = blocks.ChoiceBlock(
-        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
-        blank=False,
-        default=(12, 12),
-        label="Column Gutter Width (pixels)",
-        help_text="This determines how wide the spacing between columns will be, in pixels."
-    )
     left_column = blocks.StreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-left',
@@ -562,6 +566,22 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         required=False
     )
 
+    left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
+    right_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
+
+    fixed_height = blocks.IntegerBlock(
+        default=300,
+        label="Suggested height for contained widgets",
+        help_text=fixed_height_helptext
+    )
+    gutter_width = blocks.ChoiceBlock(
+        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
+        blank=False,
+        default=(12, 12),
+        label="Column Gutter Width (pixels)",
+        help_text="This determines how wide the spacing between columns will be, in pixels."
+    )
+
     class Meta:
         template = 'jetstream/blocks/three_column_block.html'
         form_classname = 'layout-three-column-sub struct-block'
@@ -575,9 +595,30 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
 
 
 class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
+    left_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-left',
+        label='Left column content',
+        required=False
+    )
+
+    middle_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-right',
+        label='Middle column content',
+        required=False
+    )
+
+    right_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-right',
+        label='Right column content',
+        required=False
+    )
 
     left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
     right_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
+
     fixed_height = blocks.IntegerBlock(
         default=300,
         label="Suggested height for contained widgets",
@@ -604,10 +645,31 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
 
 
 class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
+    column_one = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        label='Column One Content',
+        required=False
+    )
+    column_two = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        label='Column Two Content',
+        required=False
+    )
+    column_three = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        label='Column Three Content',
+        required=False
+    )
+    column_four = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        label='Column Four Content',
+        required=False
+    )
 
     column_one_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
     column_two_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
     column_three_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
+
     fixed_height = blocks.IntegerBlock(
         default=250,
         label="Suggested height for contained widgets",
@@ -635,7 +697,12 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
 
 class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):
     text = blocks.RichTextBlock()
-
+    sidebar = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-right',
+        label='Sidebar',
+        required=False
+    )
     sidebar_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
     sidebar_alignment = blocks.ChoiceBlock(choices=[('left', 'Left'), ('right', 'Right')], blank=False, default='left')
     fixed_height = blocks.IntegerBlock(
