@@ -188,6 +188,7 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         ('image_listing_left', 'Listing (Image Left)', 'jetstream/blocks/image_panel_block-listing.html', ['left']),
         ('image_listing_right', 'Listing (Image Right)', 'jetstream/blocks/image_panel_block-listing.html', ['right']),
         ('hero', 'Hero Image', 'jetstream/blocks/image_panel_block-hero.html', []),
+        ('big-background', 'Big Background', 'jetstream/blocks/image_panel_block-big-background.html', []),
     )
     STYLE_TO_TEMPLATE_MAP = {style[0]: (style[2], style[3]) for style in STYLES}
     image_panel_wh_help_text = (
