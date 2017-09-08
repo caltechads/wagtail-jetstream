@@ -1,13 +1,14 @@
-{% load wagtailimages_tags jetstream_tags %}
+{% load wagtailimages_tags jetstream_tags mathfilters %}
 
 {# This markup is loosely based on https://bootsnipp.com/snippets/featured/bootstrap-4-card #}
 
 {% image self.image original as img_data %}
 <div class="big-background {{ extra_classes }}"
+     style="width: {{ img_data.width }}px; margin-left: -{{ img_data.width|div:2 }}px; margin-right: -{{ img_data.width|div:2 }}px;
   {% if self.fixed_dimensions %}
-    style="height: {{ self.fixed_dimensions.height }}px;"
+height: {{ self.fixed_dimensions.height }}px;
   {% endif %}
->
+">
   <img src="{{img_data.url}}"/>
 {% if self.title or self.desc %}
   <div class="body"

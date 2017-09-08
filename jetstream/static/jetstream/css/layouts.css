@@ -761,48 +761,6 @@
     font-size: 3em;
   }
 }
-.block-ImagePanelBlock .big-background {
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  overflow: hidden;
-}
-.block-ImagePanelBlock .big-background img {
-  display: block;
-  width: 100%;
-}
-.block-ImagePanelBlock .big-background .body {
-  text-align: center;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-.block-ImagePanelBlock .big-background .body .inner {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-}
-.block-ImagePanelBlock .big-background .body h1 {
-  font-family: VaudMedium, sans-serif;
-  font-size: 4em;
-  line-height: 1.5em;
-  color: white;
-}
-.block-ImagePanelBlock .big-background .body h2 {
-  font-family: Vaud, sans-serif;
-  font-size: 1.5em;
-  line-height: 1em;
-  color: white;
-}
-@media (max-width: 500px) {
-  .block-ImagePanelBlock .big-background .body {
-    width: 90%;
-  }
-}
 .card {
   font-size: 1em;
   overflow: hidden;
@@ -899,6 +857,45 @@
 }
 @media (max-width: 500px) {
   .block-ImagePanelBlock .hero-body {
+    width: 90%;
+  }
+}
+.block-ImagePanelBlock .big-background {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  overflow: hidden;
+}
+.block-ImagePanelBlock .big-background img {
+  display: block;
+  width: 100%;
+}
+.block-ImagePanelBlock .big-background .body {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+.block-ImagePanelBlock .big-background .body .inner {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+.block-ImagePanelBlock .big-background .body h1 {
+  font-family: VaudMedium, sans-serif;
+  font-size: 4em;
+  line-height: 1.5em;
+  color: white;
+}
+.block-ImagePanelBlock .big-background .body h2 {
+  font-family: Vaud, sans-serif;
+  font-size: 1.5em;
+  line-height: 1em;
+  color: white;
+}
+@media (max-width: 500px) {
+  .block-ImagePanelBlock .big-background .body {
     width: 90%;
   }
 }
