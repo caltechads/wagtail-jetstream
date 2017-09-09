@@ -6,8 +6,6 @@
   overflow: hidden;
   padding: 0;
   border: none;
-  box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
-  border-bottom: 1px solid rgba(34, 36, 38, .1);
 
   &> img {
     display: block;
@@ -42,19 +40,17 @@
 // Image Card -- left/right
 
 .block-ImagePanelBlock {
-  .media {
-    border: 1px solid rgba(34, 36, 38, .1);
-  }
-
   .media-body {
-    padding-left: 25px;
+    padding-left: 15px;
     padding-right: 10px;
-    padding-top: 2%;
     line-height: 20px;
     h4 {
       margin-top: 10px;
       font-family: @font_kievit;
     }
+  }
+  .left .media-body {
+    padding-left: 25px;
   }
 }
 

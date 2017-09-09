@@ -1,0 +1,115 @@
+.block-HeroImageBlock {
+  .full-width {
+    position: relative;
+    left: 50%;
+    right: 50%;
+    overflow: hidden;
+    img {
+      display: block;
+      width: 100%;
+    }
+    .body {
+      position: absolute;
+      top: 0;
+      width: @responsive_grid_w;
+      left: 50%;
+    }
+    .inner {
+      position: absolute;
+      padding: 2em;
+      background-color: rgba(255, 255, 255, 0.3);
+      max-width: 60%;
+    }
+    &.position-top-left .inner {
+      top: 5%;
+      left: -50%;
+      text-align: left;
+    }
+    &.position-top-middle .inner {
+      top: 5%;
+      left: 0;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+    &.position-top-right .inner {
+      top: 5%;
+      right: 0;
+      transform: translateX(-95%);
+      text-align: right;
+    }
+    &.position-left .inner {
+      top: 50%;
+      left: -50%;
+      transform: translateY(-50%);
+      text-align: left;
+    }
+    &.position-middle .inner {
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      text-align: center;
+    }
+    &.position-right .inner {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%) translateX(-95%);
+      text-align: right;
+    }
+    &.position-bottom-left .inner {
+      bottom: 5%;
+      left: -50%;
+      text-align: left;
+    }
+    &.position-bottom-middle .inner {
+      bottom: 5%;
+      left: 0;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+    &.position-bottom-right .inner {
+      bottom: 5%;
+      right: 0;
+      transform: translateX(-95%);
+      text-align: right;
+    }
+    .btn-group {
+      position: relative;
+      bottom: -10px;
+      .btn {
+          font-size: 1.5em;
+          font-family: @font_vaud;
+      }
+      .btn-primary {
+          background-color: @orange;
+          border: none;
+      }
+    }
+    h2 {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 4em;
+      font-family: @font_kievit;
+      line-height: 1.5em;
+      font-weight: normal;
+      color: white;
+    }
+
+    p {
+      color: white;
+      font-size: 1.5em;
+      line-height: 1.5em;
+      font-family: @font_vaud;
+    }
+    
+  }
+}
+
+@media (max-width: @small_viewport) {
+  .block-HeroImageBlock {
+    .full-width {
+      .body {
+        width: 90%;
+      }
+    }
+  }
+}
