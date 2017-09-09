@@ -53,6 +53,7 @@
   .row.@{classname} .col-xs-10,
   .row.@{classname} .col-xs-11,
   .row.@{classname} .col-xs-12 {
+      margin-top: @width;
       padding-left: @half;
       padding-right: @half;
   }
@@ -77,24 +78,27 @@
   margin-top: 0;
 }
 
-.two_col_elem {
-  overflow: hidden;
+.row-wrapper.full-width {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    .row {
+        width: @responsive_grid_w;
+        margin: 0 auto;
+    }
 }
 
-.three_col_elem {
-  overflow: hidden;
-}
-
+.two_col_elem,
+.three_col_elem,
 .four_col_elem {
   overflow: hidden;
 }
 
 .clearall {
   clear: both;
-}
-
-.row {
-  margin-top: 12px;
 }
 
 .row > .grid-elem > section > .row:first-child {

@@ -111,6 +111,33 @@ class DimensionsOptionsBlock(blocks.StructBlock):
         form_classname = 'dimensions-options struct-block'
 
 
+class BackgroundOptionsBlock(blocks.StructBlock):
+    background_image = ImageChooserBlock(
+        required=False,
+        help_text="This image, if supplied, will appear as a background for this block"
+    )
+    background_color = blocks.ChoiceBlock(
+        choices=BACKGROUND_COLORS,
+        blank=False,
+        required=False,
+        default=BACKGROUND_COLORS[0],
+        help_text="Set the background color of this block.  If a Background Image is also supplied, the Background "
+                  "Image will be displayed instead of this color"
+    )
+
+    @property
+    def media(self):
+        return forms.Media(
+            js=['jetstream/js/admin/color-options.js']
+        )
+
+    def js_initializer(self):
+        return "color_options"
+
+    class Meta:
+        form_classname = 'color-options struct-block'
+
+
 class ColorOptionsBlock(blocks.StructBlock):
     background_image = ImageChooserBlock(
         required=False,
@@ -485,10 +512,10 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
-
+    background = BackgroundOptionsBlock()
 
     class Meta:
-        template = 'jetstream/blocks/two_column_block.html'
+        template = 'jetstream/blocks/layout/two_column_block.html'
         form_classname = 'layout-two-column-sub struct-block'
         label = 'Two Columns'
 
@@ -503,6 +530,11 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
     """
     Base class to be overridden in implementing sub module with boilerplate implementation of column layout.
     """
+    STYLES = (
+        ('regular', 'Regular'),
+        ('full-width', 'Full Width')
+    )
+    style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
     left_column = blocks.StreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-left',
@@ -531,9 +563,10 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
+    background = BackgroundOptionsBlock()
 
     class Meta:
-        template = 'jetstream/blocks/two_column_block.html'
+        template = 'jetstream/blocks/layout/two_column_block.html'
         form_classname = 'layout-two-column struct-block'
         label = 'Two Columns'
 
@@ -542,6 +575,20 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
         Overrides this method from BlockTupleMixin so that we use the same machine name as BaseTwoColumnSubBlock.
         """
         return ('two_column_layout', self)
+
+    def render(self, value, context=None):
+        """
+        We override this method to allow classes to be assigned dynamically based on the value of the "style" field.
+        """
+        extra_classes = [value['style']]
+
+        if context is None:
+            new_context = self.get_context(value)
+        else:
+            new_context = self.get_context(value, parent_context=dict(context))
+        new_context['extra_classes'] = " ".join(extra_classes)
+
+        return mark_safe(render_to_string('jetstream/blocks/layout/two_column_block.html', new_context))
 
 
 class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
@@ -582,9 +629,10 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
+    background = BackgroundOptionsBlock()
 
     class Meta:
-        template = 'jetstream/blocks/three_column_block.html'
+        template = 'jetstream/blocks/layout/three_column_block.html'
         form_classname = 'layout-three-column-sub struct-block'
         label = 'Three Columns'
 
@@ -596,6 +644,12 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
 
 
 class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
+    STYLES = (
+        ('regular', 'Regular'),
+        ('full-width', 'Full Width')
+    )
+
+    style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
     left_column = blocks.StreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-left',
@@ -632,9 +686,10 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
+    background = BackgroundOptionsBlock()
 
     class Meta:
-        template = 'jetstream/blocks/three_column_block.html'
+        template = 'jetstream/blocks/layout/three_column_block.html'
         form_classname = 'layout-three-column struct-block'
         label = 'Three Columns'
 
@@ -644,8 +699,28 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
         """
         return ('three_column_layout', self)
 
+    def render(self, value, context=None):
+        """
+        We override this method to allow classes to be assigned dynamically based on the value of the "style" field.
+        """
+        extra_classes = [value['style']]
+
+        if context is None:
+            new_context = self.get_context(value)
+        else:
+            new_context = self.get_context(value, parent_context=dict(context))
+        new_context['extra_classes'] = " ".join(extra_classes)
+
+        return mark_safe(render_to_string('jetstream/blocks/layout/three_column_block.html', new_context))
+
 
 class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
+    STYLES = (
+        ('regular', 'Regular'),
+        ('full-width', 'Full Width')
+    )
+
+    style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
     column_one = blocks.StreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         label='Column One Content',
@@ -683,9 +758,10 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
+    background = BackgroundOptionsBlock()
 
     class Meta:
-        template = 'jetstream/blocks/four_column_block.html'
+        template = 'jetstream/blocks/layout/four_column_block.html'
         form_classname = 'layout-four-column struct-block'
         label = 'Four Columns'
 
@@ -694,6 +770,20 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
         Overrides this method from BlockTupleMixin so that we use the legacy machine name.
         """
         return ('four_column_layout', self)
+
+    def render(self, value, context=None):
+        """
+        We override this method to allow classes to be assigned dynamically based on the value of the "style" field.
+        """
+        extra_classes = [value['style']]
+
+        if context is None:
+            new_context = self.get_context(value)
+        else:
+            new_context = self.get_context(value, parent_context=dict(context))
+        new_context['extra_classes'] = " ".join(extra_classes)
+
+        return mark_safe(render_to_string('jetstream/blocks/layout/four_column_block.html', new_context))
 
 
 class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):
@@ -716,6 +806,6 @@ class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
-        template = 'jetstream/blocks/sidebar_layout_block.html'
+        template = 'jetstream/blocks/layout/sidebar_layout_block.html'
         form_classname = 'layout-sidebar struct-block'
         label = 'Sidebar Layout'
