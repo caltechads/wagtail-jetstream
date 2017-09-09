@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+</head>
+<body>
+<p>This is a collection of useful blocks and layouts for use within Wagtail&#8217;s StreamField construct.</p>
+
+<h1 id="usage">Usage</h1>
+
+<p><strong>DEBUG</strong> For now just install from the git repository and then add <code>jetstream</code> to your <code>INSTALLED_APPLICATIONS</code> in Django settings.</p>
+
+<h2 id="columnlayouts">Column Layouts</h2>
+
+<p>Use of the column layouts requires some boilerplate from the developer because Wagtail currently does not have a mechanism for determining a block&#8217;s contents dynamically at runtime.</p>
+
+<p>In the block declarations, subclass the desired block types as in the following example, adding to the column fields whichever blocks are desired to be added to the column&#8217;s internal StreamField.</p>
+
+<pre><code>class TwoColumnBlock(BaseTwoColumnBlock):
+    left_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS + [
+            get_block_tuple(MyBlockType),
+            ...
+        ],
+        icon='arrow-left',
+        label='Left column content'
+    )
+
+    right_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS + [
+            get_block_tuple(MyBlockType),
+            ...
+        ],
+        icon='arrow-right',
+        label='Right column content'
+    )
+
+</code></pre>
+
+<h2 id="blocktypes">Block Types</h2>
+
+<p><strong>NOTE</strong>: Some classes require custom javascript, so it is important to include <code>&lt;script defer src=&quot;{% static 'jetstream/js/layouts.js' %}&quot;&gt;&lt;/script&gt;</code> somewhere on your page template.</p>
+
+<p><strong>TODO</strong></p>
+
+<h1 id="helpers">Helpers</h1>
+
+<h3 id="get_block_tuple">get_block_tuple()</h3>
+
+<p>Returns a standardized tuple of the block&#8217;s class name and one of it&#8217;s instances for use within the declarations of a StreamField&#8217;s elements. This is useful when writing data migrations for the block because it allows the <code>type</code> field for each block to be standardized.</p>
+
+<h3 id="blocktuplemixin">BlockTupleMixin</h3>
+
+<p>A mixin class that, when included, allows the block to override the return of <code>get_block_tuple</code> for itself, allowing for customization of the block&#8217;s listing type.</p>
+
+</body>
+</html>

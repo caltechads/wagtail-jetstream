@@ -138,6 +138,50 @@ class BackgroundOptionsBlock(blocks.StructBlock):
         form_classname = 'color-options struct-block'
 
 
+class ActionButtonBlock(blocks.StructBlock):
+    STYLES = (
+        ('btn-primary', 'Primary'),
+        ('btn-success', 'Success'),
+        ('btn-info', 'Info'),
+        ('btn-warning', 'Warning'),
+        ('btn-danger', 'Danger'),
+        ('btn-default', 'Default'),
+    )
+
+    text = blocks.TextBlock()
+    link = LinkBlock()
+    style = blocks.ChoiceBlock(
+        choices=[(style[0], style[1]) for style in STYLES],
+        default=STYLES[0][0]
+    )
+
+    class Meta:
+        label = 'Action Button'
+        template = 'jetstream/blocks/action_button_block.html'
+        form_classname = 'action-button struct-block'
+        icon = 'form'
+
+
+class ActionButtonBarBlock(blocks.StructBlock):
+    CHOICES = (
+        ('center-block', 'Center'),
+        ('left-align-block', 'Align Left'),
+        ('right-align-block', 'Align Right')
+    )
+
+    alignment = blocks.ChoiceBlock(
+        choices=[(choice[0], choice[1]) for choice in CHOICES],
+        default=CHOICES[0][0],
+    )
+    actions = blocks.ListBlock(ActionButtonBlock())
+
+    class Meta:
+        label = 'Action Button Bar'
+        template = 'jetstream/blocks/action_button_bar_block.html'
+        form_classname = 'action-button-bar struct-block'
+        icon = 'form'
+
+
 class ColorOptionsBlock(blocks.StructBlock):
     background_image = ImageChooserBlock(
         required=False,
@@ -207,8 +251,8 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = (
         ('rollover', 'Image Link w/ Rollover Text', 'jetstream/blocks/image_panel_block-rollover.html', []),
         ('separate_text', 'Image Card (Equal Heights)', 'jetstream/blocks/image_panel_block-image_card.html',
-            ['equal']
-        ),
+         ['equal']
+         ),
         ('separate_text_natural', 'Image Card (Natural Heights)', 'jetstream/blocks/image_panel_block-image_card.html',
             ['natural']
          ),
@@ -530,6 +574,7 @@ COLUMN_PERMITTED_BLOCKS = [
     get_block_tuple(ImageCarouselBlock()),
     get_block_tuple(CaptionedImageBlock()),
     get_block_tuple(CaptionedImageCarouselBlock()),
+    get_block_tuple(ActionButtonBarBlock()),
     get_block_tuple(RelatedLinksBlock()),
     get_block_tuple(ImagePanelBlock()),
     get_block_tuple(VideoBlock()),

@@ -1,0 +1,1 @@
+!function($,o,i,n){o.color_options=function(o){$("div.color-options").prev("label").hide()}}(jQuery,this,this.document);
