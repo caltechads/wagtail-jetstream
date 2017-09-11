@@ -173,7 +173,10 @@ class ActionButtonBarBlock(blocks.StructBlock):
         choices=[(choice[0], choice[1]) for choice in CHOICES],
         default=CHOICES[0][0],
     )
-    actions = blocks.ListBlock(ActionButtonBlock())
+    actions = blocks.ListBlock(
+        ActionButtonBlock(),
+        default=[]
+    )
 
     class Meta:
         label = 'Action Button Bar'
