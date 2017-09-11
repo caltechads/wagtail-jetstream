@@ -3,7 +3,8 @@
 <div class="media">
 {% if extra_classes == "left" %}
   <div class="media-left">
-    <a href="{% if self.page %}{{ self.page.full_url }}{% elif self.link %}{{ self.link }}{% else %}#{% endif %}">
+    {% link_url self.link as link_url %}
+    <a href="{% if self.page %}{{ self.page.full_url }}{% elif link_url %}{{ link_url}}{% else %}#{% endif %}">
       {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
     </a>
   </div>
@@ -21,7 +22,8 @@
   </div>
 {% if extra_classes == "right" %}
   <div class="media-right">
-    <a href="{% if self.page %}{{ self.page.full_url }}{% elif self.link %}{{ self.link }}{% else %}#{% endif %}">
+    {% link_url self.link as link_url %}
+    <a href="{% if self.page %}{{ self.page.full_url }}{% elif link_url %}{{ link_url}}{% else %}#{% endif %}">
       {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
     </a>
   </div>
