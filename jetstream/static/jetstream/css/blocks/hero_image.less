@@ -1,0 +1,199 @@
+.block-HeroImageBlock {
+  .hero {
+    position: relative;
+    &.full-width {
+      width: 100vw;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      overflow: hidden;
+      .body {
+        left: 50%;
+        width: @responsive_grid_w;
+        margin-left: -@responsive_grid_w / 2;
+      }
+    }
+    .background {
+      background-position: center;
+    }
+    .body {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+    .inner {
+      position: absolute;
+      padding: 2em;
+      background-color: rgba(255, 255, 255, 0.3);
+      max-width: 60%;
+    }
+    &.position-top-left .inner {
+      top: 5%;
+      left: 0;
+      text-align: left;
+    }
+    &.position-top-middle .inner {
+      top: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+    &.position-top-right .inner {
+      top: 5%;
+      right: 0;
+      text-align: right;
+    }
+    &.position-left .inner {
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      text-align: left;
+    }
+    &.position-middle .inner {
+      top: 50%;
+      left: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      text-align: center;
+    }
+    &.position-right .inner {
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      text-align: right;
+    }
+    &.position-bottom-left .inner {
+      bottom: 5%;
+      left: 0%;
+      text-align: left;
+    }
+    &.position-bottom-middle .inner {
+      bottom: 5%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+    &.position-bottom-right .inner {
+      bottom: 5%;
+      right: 0;
+      text-align: right;
+    }
+    .btn-group {
+      position: relative;
+      bottom: -10px;
+      .btn {
+          font-size: 1.2em;
+          font-family: @font_vaud;
+      }
+      .btn-primary {
+          background-color: @orange;
+          border: none;
+      }
+    }
+    h1, h2, h3, h4 {
+      margin-top: 0;
+      margin-bottom: 0;
+      font-family: @font_kievit;
+      line-height: 1.5em;
+      font-weight: normal;
+      color: white;
+    }
+
+    h1 {
+      font-size: 3em;
+    }
+
+    h2 {
+      font-size: 2em;
+    }
+
+    p {
+      color: white;
+      font-size: 1.5em;
+      line-height: 1.4em;
+      font-family: @font_vaud;
+    }
+    
+  }
+}
+
+// For landscape-mode phones:
+@media (min-device-width: @screen-phone)
+        and (max-device-width: @screen-tablet) {
+  .block-HeroImageBlock {
+    .hero.regular-width,
+    .hero.full-width {
+      height: 60vw !important;
+      .body {
+        height: 60vw !important;
+        width: 100%;
+        margin: 0;
+        left: 0;
+      }
+      .background {
+        height: 60vw !important;
+        background-size: auto 100%;
+      }
+    }
+    .hero {
+      h2 {
+        font-size: 1.8em;
+      }
+      h3 {
+        font-size: 1.2em;
+      }
+      p {
+        font-size: 0.8em;
+      }
+    }
+  }
+}
+
+@media (max-width: @small_viewport) {
+  .block-HeroImageBlock {
+    .hero {
+      &.regular-width,
+      &.full-width {
+        width: 100%;
+        height: auto !important;
+        margin:0;
+        left:0;
+        right:0;
+        .background {
+          height: 60vw !important;
+          background-size: auto 100%;
+        }
+        .body {
+          position: static;
+          height: auto !important;
+          left: 0;
+          margin: 0;
+          width: 100%;
+          .inner {
+            text-align: center;
+            height: auto !important;
+            max-width: 100%;
+            left: 0;
+            top: 0;
+            position: static;
+            transform: none;
+            background-color: transparent;
+          }
+        }
+      }
+      h2, h3, h4, p {
+        color: black;
+      }
+      h2 {
+        font-size: 1.8em;
+      }
+      h3 {
+        font-size: 1.2em;
+      }
+      p {
+        font-size: 0.8em;
+      }
+    }
+  }
+}

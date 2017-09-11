@@ -259,7 +259,6 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         ('image_listing_left', 'Listing (Image Left)', 'jetstream/blocks/image_panel_block-listing.html', ['left']),
         ('image_listing_right', 'Listing (Image Right)', 'jetstream/blocks/image_panel_block-listing.html', ['right']),
         ('hero', 'Hero Image', 'jetstream/blocks/image_panel_block-hero.html', []),
-        ('hero-full-width', 'Hero Image: Full Width', 'jetstream/blocks/image_panel_block-hero-full-width.html', []),
     )
     STYLE_TO_TEMPLATE_MAP = {style[0]: (style[2], style[3]) for style in STYLES}
     image_panel_wh_help_text = (
@@ -303,8 +302,8 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
 
 class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = (
-        ('hero', 'Hero Image', 'jetstream/blocks/hero_image_block-hero.html', []),
-        ('hero-full-width', 'Hero Image: Full Width', 'jetstream/blocks/hero_image_block-hero-full-width.html', []),
+        ('hero', 'Regular Width', 'jetstream/blocks/hero_image_block-hero.html', ['regular-width']),
+        ('hero-full-width', 'Full Width', 'jetstream/blocks/hero_image_block-hero.html', ['full-width']),
     )
     STYLE_TO_TEMPLATE_MAP = {style[0]: (style[2], style[3]) for style in STYLES}
 
@@ -313,6 +312,7 @@ class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
         default=STYLES[0][0]
     )
     image = ImageChooserBlock()
+    title = blocks.CharBlock(required=False)
     desc = blocks.RichTextBlock(
         required=False,
         label="Text"
@@ -356,7 +356,7 @@ class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
             # If this block somehow doesn't have a known style, fall back to the basic_render() method.
             return self.render_basic(value, context=context)
 
-        extra_classes = [x for x in extra_classes if x.startswith("position-")]
+        extra_classes = [x for x in extra_classes if not x.startswith("position-")]
         extra_classes.append(value['position'])
 
         if context is None:
@@ -574,7 +574,6 @@ COLUMN_PERMITTED_BLOCKS = [
     get_block_tuple(ImageCarouselBlock()),
     get_block_tuple(CaptionedImageBlock()),
     get_block_tuple(CaptionedImageCarouselBlock()),
-    get_block_tuple(ActionButtonBarBlock()),
     get_block_tuple(RelatedLinksBlock()),
     get_block_tuple(ImagePanelBlock()),
     get_block_tuple(VideoBlock()),
