@@ -304,15 +304,22 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
 
 
 class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
-    STYLES = (
-        ('hero', 'Regular Width', 'jetstream/blocks/hero_image_block-hero.html', ['regular-width']),
-        ('hero-full-width', 'Full Width', 'jetstream/blocks/hero_image_block-hero.html', ['full-width']),
-    )
-    STYLE_TO_TEMPLATE_MAP = {style[0]: (style[2], style[3]) for style in STYLES}
 
     style = blocks.ChoiceBlock(
-        choices=[(style[0], style[1]) for style in STYLES],
-        default=STYLES[0][0]
+        choices=[
+            ('regular-width', 'Regular Width'),
+            ('full-width', 'Full Width')
+        ],
+        default='regular-width',
+        label="Overall style"
+    )
+    text_style = blocks.ChoiceBlock(
+        choices=[
+            ('bare-serif', 'Bare text'),
+            ('white-translucent-serif', 'White translucent background behind text')
+        ],
+        default='white-translucent-serif',
+        label="Text style"
     )
     image = ImageChooserBlock()
     title = blocks.CharBlock(required=False)
@@ -346,29 +353,9 @@ class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
 
     class Meta:
         label = 'Hero Image'
+        template = 'jetstream/blocks/hero_image_block-hero.html'
         form_classname = 'hero-image struct-block'
         icon = 'image'
-
-    def render(self, value, context=None):
-        """
-        We override this method to allow a template to be chosen dynamically based on the value of the "style" field.
-        """
-        try:
-            (template, extra_classes) = self.STYLE_TO_TEMPLATE_MAP[value['style']]
-        except KeyError:
-            # If this block somehow doesn't have a known style, fall back to the basic_render() method.
-            return self.render_basic(value, context=context)
-
-        extra_classes = [x for x in extra_classes if not x.startswith("position-")]
-        extra_classes.append(value['position'])
-
-        if context is None:
-            new_context = self.get_context(value)
-        else:
-            new_context = self.get_context(value, parent_context=dict(context))
-        new_context['extra_classes'] = " ".join(extra_classes)
-
-        return mark_safe(render_to_string(template, new_context))
 
 
 class HeroImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):

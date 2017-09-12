@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags jetstream_tags mathfilters %}
 
 {% image self.image original as img_data %}
-<div class="hero {{ extra_classes }}" style="height: {{ self.height }}px;">
+<div class="hero {{ self.style }} {{ self.text_style }} {{ self.position }}" style="height: {{ self.height }}px;">
     <div class="background" style="background-image: url('{{img_data.url}}'); height: {{self.height }}px;"></div>
 {% if self.desc or self.actions %}
   <div class="body" style="height: {{ self.height }}px;">
