@@ -629,8 +629,10 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
     Base class to be overridden in implementing sub module with boilerplate implementation of column layout.
     """
     STYLES = (
-        ('regular', 'Regular'),
-        ('full-width', 'Full Width')
+        ('regular-width', 'Regular Width'),
+        ('full-width', 'Full Width'),
+        ('regular-width padded', 'Regular Width, Padded'),
+        ('full-width padded', 'Full Width, Padded')
     )
     style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
     left_column = blocks.StreamBlock(
@@ -673,20 +675,6 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
         Overrides this method from BlockTupleMixin so that we use the same machine name as BaseTwoColumnSubBlock.
         """
         return ('two_column_layout', self)
-
-    def render(self, value, context=None):
-        """
-        We override this method to allow classes to be assigned dynamically based on the value of the "style" field.
-        """
-        extra_classes = [value['style']]
-
-        if context is None:
-            new_context = self.get_context(value)
-        else:
-            new_context = self.get_context(value, parent_context=dict(context))
-        new_context['extra_classes'] = " ".join(extra_classes)
-
-        return mark_safe(render_to_string('jetstream/blocks/layout/two_column_block.html', new_context))
 
 
 class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
@@ -743,8 +731,10 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
 
 class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = (
-        ('regular', 'Regular'),
-        ('full-width', 'Full Width')
+        ('regular-width', 'Regular Width'),
+        ('full-width', 'Full Width'),
+        ('regular-width padded', 'Regular Width, Padded'),
+        ('full-width padded', 'Full Width, Padded')
     )
 
     style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
@@ -797,25 +787,13 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
         """
         return ('three_column_layout', self)
 
-    def render(self, value, context=None):
-        """
-        We override this method to allow classes to be assigned dynamically based on the value of the "style" field.
-        """
-        extra_classes = [value['style']]
-
-        if context is None:
-            new_context = self.get_context(value)
-        else:
-            new_context = self.get_context(value, parent_context=dict(context))
-        new_context['extra_classes'] = " ".join(extra_classes)
-
-        return mark_safe(render_to_string('jetstream/blocks/layout/three_column_block.html', new_context))
-
 
 class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = (
-        ('regular', 'Regular'),
-        ('full-width', 'Full Width')
+        ('regular-width', 'Regular Width'),
+        ('full-width', 'Full Width'),
+        ('regular-width padded', 'Regular Width, Padded'),
+        ('full-width padded', 'Full Width, Padded')
     )
 
     style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
@@ -868,20 +846,6 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
         Overrides this method from BlockTupleMixin so that we use the legacy machine name.
         """
         return ('four_column_layout', self)
-
-    def render(self, value, context=None):
-        """
-        We override this method to allow classes to be assigned dynamically based on the value of the "style" field.
-        """
-        extra_classes = [value['style']]
-
-        if context is None:
-            new_context = self.get_context(value)
-        else:
-            new_context = self.get_context(value, parent_context=dict(context))
-        new_context['extra_classes'] = " ".join(extra_classes)
-
-        return mark_safe(render_to_string('jetstream/blocks/layout/four_column_block.html', new_context))
 
 
 class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):

@@ -300,6 +300,10 @@
   width: 1000px;
   margin: 0 auto;
 }
+.row-wrapper.padded .row {
+  padding-left: 50px;
+  padding-right: 50px;
+}
 .two_col_elem,
 .three_col_elem,
 .four_col_elem {
@@ -321,6 +325,10 @@
   }
   .row-wrapper.full-width .row {
     width: 100%;
+  }
+  .row-wrapper.padded .row {
+    padding-left: 0;
+    padding-right: 0;
   }
 }
 @media (min-device-width: 480px) and (max-device-width: 768px) {
@@ -793,17 +801,39 @@
   right: 0;
   text-align: right;
 }
-.block-HeroImageBlock .hero .btn-group {
-  position: relative;
-  bottom: -10px;
+.block-HeroImageBlock .hero .action-button-bar {
+  margin-top: 2em;
 }
-.block-HeroImageBlock .hero .btn-group .btn {
+.block-HeroImageBlock .hero .action-button-bar a,
+.block-HeroImageBlock .hero .action-button-bar a:visited {
+  color: white;
+}
+.block-HeroImageBlock .hero .action-button-bar .btn {
   font-size: 1.2em;
   font-family: Vaud, sans-serif;
+  margin-right: 10px;
 }
-.block-HeroImageBlock .hero .btn-group .btn-primary {
+.block-HeroImageBlock .hero .action-button-bar .btn-primary {
   background-color: #ff6e1e;
   border: none;
+}
+.block-HeroImageBlock .hero .action-button-bar .btn-primary:hover {
+  background-color: #ff8f51;
+}
+.block-HeroImageBlock .hero .action-button-bar .btn-default {
+  background-color: #ffffff;
+  border: none;
+  color: #616265;
+}
+.block-HeroImageBlock .hero .action-button-bar .btn-default:hover {
+  background-color: #e6e6e6;
+}
+.block-HeroImageBlock .hero .action-button-bar a.btn-info {
+  background-color: transparent;
+  border: none;
+}
+.block-HeroImageBlock .hero .action-button-bar a.btn-info:hover {
+  text-decoration: underline;
 }
 .block-HeroImageBlock .hero h1,
 .block-HeroImageBlock .hero h2,
@@ -845,14 +875,17 @@
     height: 60vw !important;
     background-size: auto 100%;
   }
-  .block-HeroImageBlock .hero h2 {
+  .block-HeroImageBlock .hero h1 {
     font-size: 1.8em;
   }
-  .block-HeroImageBlock .hero h3 {
+  .block-HeroImageBlock .hero h2 {
     font-size: 1.2em;
   }
+  .block-HeroImageBlock .hero h3 {
+    font-size: 1em;
+  }
   .block-HeroImageBlock .hero p {
-    font-size: 0.8em;
+    font-size: 1em;
   }
 }
 @media (max-width: 500px) {
@@ -888,17 +921,21 @@
     transform: none;
     background-color: transparent;
   }
+  .block-HeroImageBlock .hero h1,
   .block-HeroImageBlock .hero h2,
   .block-HeroImageBlock .hero h3,
   .block-HeroImageBlock .hero h4,
   .block-HeroImageBlock .hero p {
     color: black;
   }
-  .block-HeroImageBlock .hero h2 {
+  .block-HeroImageBlock .hero h1 {
     font-size: 1.8em;
   }
-  .block-HeroImageBlock .hero h3 {
+  .block-HeroImageBlock .hero h2 {
     font-size: 1.2em;
+  }
+  .block-HeroImageBlock .hero h3 {
+    font-size: 1em;
   }
   .block-HeroImageBlock .hero p {
     font-size: 0.8em;

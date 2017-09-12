@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags jetstream_tags %}
 
-<div class="row-wrapper {{ extra_classes }}
+<div class="row-wrapper {{ self.style }}
   {% if self.background.background_color and not self.background.background_image %} bg-color bg-color-{{ self.background.background_color }}{% endif %}
 ">
   <div class="row gutter-{{ self.gutter_width }}px">

@@ -78,7 +78,8 @@
   margin-top: 0;
 }
 
-.row-wrapper.full-width {
+.row-wrapper {
+  &.full-width {
     position: relative;
     width: 100vw;
     left: 50%;
@@ -86,9 +87,14 @@
     margin-left: -50vw;
     margin-right: -50vw;
     .row {
-        width: @responsive_grid_w;
-        margin: 0 auto;
+      width: @responsive_grid_w;
+      margin: 0 auto;
     }
+  }
+  &.padded .row {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
 }
 
 .two_col_elem,
@@ -114,10 +120,14 @@
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
-  .row-wrapper.full-width {
-      .row {
+  .row-wrapper {
+    &.full-width .row {
         width: 100%;
-      }
+    }
+    &.padded .row {
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 }
 
