@@ -158,7 +158,7 @@ class ActionButtonBlock(blocks.StructBlock):
     class Meta:
         label = 'Action Button'
         template = 'jetstream/blocks/action_button_block.html'
-        form_classname = 'action-button struct-block'
+        form_classname = 'action-button-block struct-block'
         icon = 'form'
 
 
