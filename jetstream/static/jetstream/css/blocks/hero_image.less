@@ -81,16 +81,37 @@
       right: 0;
       text-align: right;
     }
-    .btn-group {
-      position: relative;
-      bottom: -10px;
+    .action-button-bar{
+      margin-top: 2em;
+      a, a:visited {
+        color: white;
+      }
       .btn {
           font-size: 1.2em;
           font-family: @font_vaud;
+          margin-right: 10px;
       }
       .btn-primary {
-          background-color: @orange;
-          border: none;
+        background-color: @orange;
+        border: none;
+        &:hover {
+          background-color: lighten(@orange, 10%);
+        }
+      }
+      .btn-default {
+        background-color: @white;
+        border: none;
+        &:hover {
+          background-color: darken(@white, 10%);
+        }
+        color: @dkgray;
+      }
+      a.btn-info {
+        background-color: transparent;
+        border: none;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
     h1, h2, h3, h4 {
