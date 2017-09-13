@@ -582,19 +582,6 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     """
     Duplicate of BaseTwoColumnBlock without the sub block to avoid recursion.
     """
-    left_column = blocks.StreamBlock(
-        COLUMN_PERMITTED_BLOCKS,
-        icon='arrow-left',
-        label='Left column content',
-        required=False
-    )
-    right_column = blocks.StreamBlock(
-        COLUMN_PERMITTED_BLOCKS,
-        icon='arrow-right',
-        label='Right column content',
-        required=False
-    )
-
     left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=6, help_text=col_helptext)
 
     fixed_height = blocks.IntegerBlock(
@@ -611,6 +598,18 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
     background = BackgroundOptionsBlock()
+    left_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-left',
+        label='Left column content',
+        required=False
+    )
+    right_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-right',
+        label='Right column content',
+        required=False
+    )
 
     class Meta:
         template = 'jetstream/blocks/layout/two_column_block.html'
@@ -635,22 +634,7 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
         ('full-width padded', 'Full Width, Padded')
     )
     style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
-    left_column = blocks.StreamBlock(
-        COLUMN_PERMITTED_BLOCKS,
-        icon='arrow-left',
-        label='Left column content',
-        required=False
-    )
-
-    right_column = blocks.StreamBlock(
-        COLUMN_PERMITTED_BLOCKS,
-        icon='arrow-right',
-        label='Right column content',
-        required=False
-    )
-
     left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=6, help_text=col_helptext)
-
     fixed_height = blocks.IntegerBlock(
         default=350,
         label="Suggested height for contained widgets",
@@ -664,6 +648,19 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
     background = BackgroundOptionsBlock()
+    left_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-left',
+        label='Left column content',
+        required=False
+    )
+
+    right_column = blocks.StreamBlock(
+        COLUMN_PERMITTED_BLOCKS,
+        icon='arrow-right',
+        label='Right column content',
+        required=False
+    )
 
     class Meta:
         template = 'jetstream/blocks/layout/two_column_block.html'
@@ -738,6 +735,21 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
+    left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
+    right_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
+    fixed_height = blocks.IntegerBlock(
+        default=300,
+        label="Suggested height for contained widgets",
+        help_text=fixed_height_helptext
+    )
+    gutter_width = blocks.ChoiceBlock(
+        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
+        blank=False,
+        default=(12, 12),
+        label="Column Gutter Width (pixels)",
+        help_text="This determines how wide the spacing between columns will be, in pixels."
+    )
+    background = BackgroundOptionsBlock()
     left_column = blocks.StreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-left',
@@ -758,23 +770,6 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
         label='Right column content',
         required=False
     )
-
-    left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
-    right_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
-
-    fixed_height = blocks.IntegerBlock(
-        default=300,
-        label="Suggested height for contained widgets",
-        help_text=fixed_height_helptext
-    )
-    gutter_width = blocks.ChoiceBlock(
-        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
-        blank=False,
-        default=(12, 12),
-        label="Column Gutter Width (pixels)",
-        help_text="This determines how wide the spacing between columns will be, in pixels."
-    )
-    background = BackgroundOptionsBlock()
 
     class Meta:
         template = 'jetstream/blocks/layout/three_column_block.html'
@@ -797,6 +792,22 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
+    column_one_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
+    column_two_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
+    column_three_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
+    fixed_height = blocks.IntegerBlock(
+        default=250,
+        label="Suggested height for contained widgets",
+        help_text=fixed_height_helptext
+    )
+    gutter_width = blocks.ChoiceBlock(
+        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
+        blank=False,
+        default=(12, 12),
+        label="Column Gutter Width (pixels)",
+        help_text="This determines how wide the spacing between columns will be, in pixels."
+    )
+    background = BackgroundOptionsBlock()
     column_one = blocks.StreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         label='Column One Content',
@@ -817,24 +828,6 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
         label='Column Four Content',
         required=False
     )
-
-    column_one_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
-    column_two_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
-    column_three_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
-
-    fixed_height = blocks.IntegerBlock(
-        default=250,
-        label="Suggested height for contained widgets",
-        help_text=fixed_height_helptext
-    )
-    gutter_width = blocks.ChoiceBlock(
-        choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
-        blank=False,
-        default=(12, 12),
-        label="Column Gutter Width (pixels)",
-        help_text="This determines how wide the spacing between columns will be, in pixels."
-    )
-    background = BackgroundOptionsBlock()
 
     class Meta:
         template = 'jetstream/blocks/layout/four_column_block.html'
