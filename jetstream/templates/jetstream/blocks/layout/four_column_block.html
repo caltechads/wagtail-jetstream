@@ -1,8 +1,12 @@
 {% load wagtailcore_tags wagtailimages_tags jetstream_tags %}
 
 <div class="row-wrapper {{ self.style }}
-  {% if self.background.background_color and not self.background.background_image %} bg-color bg-color-{{ self.background.background_color }}{% endif %}
-">
+  {% if self.background.background_color and not self.background.background_image %} bg-color bg-color-{{ self.background.background_color }}{% endif %}"
+  {% if self.background.background_image %}
+    {% image self.background.background_image original as img_data %}
+    style="background-image: url('{{img_data.url}}');"
+  {% endif %}
+>
   <div class="row gutter-{{ self.gutter_width }}px">
     {% subtract_from_twelve self.column_one_width self.column_two_width self.column_three_width as fill_width %}
     <div class="four_col_elem col-md-{{ self.column_one_width }} grid-elem">

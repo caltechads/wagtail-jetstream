@@ -448,47 +448,63 @@
   }
 }
 /*************** Spacer Block ******************/
-.spacer-1 {
+.spacer-12 {
+  height: 12px;
+}
+.spacer-20 {
+  height: 20px;
+}
+.spacer-25 {
   height: 25px;
 }
-.spacer-2 {
+.spacer-30 {
+  height: 30px;
+}
+.spacer-40 {
+  height: 40px;
+}
+.spacer-50 {
   height: 50px;
 }
-.spacer-3 {
+.spacer-75 {
   height: 75px;
 }
-.spacer-4 {
+.spacer-100 {
   height: 100px;
 }
-.spacer-5 {
+.spacer-125 {
   height: 125px;
 }
-.spacer-6 {
+.spacer-150 {
   height: 150px;
 }
-.spacer-7 {
+.spacer-175 {
   height: 175px;
 }
-.spacer-8 {
+.spacer-200 {
   height: 200px;
 }
-.spacer-9 {
+.spacer-225 {
   height: 225px;
 }
-.spacer-10 {
+.spacer-250 {
   height: 250px;
 }
 @media (max-width: 500px) {
-  .spacer-1,
-  .spacer-2,
-  .spacer-3,
-  .spacer-4,
-  .spacer-5,
-  .spacer-6,
-  .spacer-7,
-  .spacer-8,
-  .spacer-9,
-  .spacer-10 {
+  .spacer-12,
+  .spacer-20,
+  .spacer-25,
+  .spacer-30,
+  .spacer-40,
+  .spacer-50,
+  .spacer-75,
+  .spacer-100,
+  .spacer-125,
+  .spacer-150,
+  .spacer-175,
+  .spacer-200,
+  .spacer-225,
+  .spacer-250 {
     height: 0px;
   }
 }
@@ -854,7 +870,7 @@
 }
 .block-HeroImageBlock .hero p {
   color: white;
-  font-size: 1.5em;
+  font-size: 1.3em;
   line-height: 1.4em;
   font-family: Vaud, sans-serif;
 }
