@@ -423,7 +423,22 @@ class CaptionedImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
 class SpacerBlock(blocks.StructBlock):
 
     height = blocks.ChoiceBlock(
-        choices=[(x, x*25) for x in range(1, 10)],
+        choices=[
+            (12, 12),
+            (20, 20),
+            (25, 25),
+            (30, 30),
+            (40, 40),
+            (50, 50),
+            (75, 75),
+            (100, 100),
+            (125, 125),
+            (150, 150),
+            (175, 175),
+            (200, 200),
+            (225, 225),
+            (250, 250)
+        ],
         blank=False,
         default=1,
         label="Height (pixels)",
