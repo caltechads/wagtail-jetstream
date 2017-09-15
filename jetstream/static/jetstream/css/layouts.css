@@ -1475,7 +1475,7 @@ h2.section_divider {
   background-color: #e9e7e4;
   padding-left: 25px;
   position: relative;
-  font-size: 22px;
+  font-size: 1.6em;
   font-family: KievitSlabRegular, Times, serif;
   color: #731936;
 }
@@ -1490,6 +1490,17 @@ h3.block_header {
   font-size: 1.1em;
   font-family: VaudMedium, sans-serif;
   padding-bottom: 10px;
+}
+@media (max-width: 768px) {
+  h2.section_divider {
+    padding-left: 10px;
+    font-size: 1.2em;
+  }
+}
+@media (max-width: 500px) {
+  h2.section_divider {
+    font-size: 1.2em;
+  }
 }
 /**************** Fancy Rich Text ***************/
 .fancy-rich-text {
