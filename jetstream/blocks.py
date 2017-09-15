@@ -440,7 +440,7 @@ class SpacerBlock(blocks.StructBlock):
             (250, 250)
         ],
         blank=False,
-        default=1,
+        default=(25, 25),
         label="Height (pixels)",
         help_text="Add empty vertical space whose height is this many pixels.")
 
