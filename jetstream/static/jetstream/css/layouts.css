@@ -509,6 +509,9 @@
   }
 }
 /**************** Captioned Image Blocks ***************/
+.captioned-image {
+  overflow: hidden;
+}
 .captioned-image .image-details {
   line-height: 1.5;
   margin-top: 10px;
