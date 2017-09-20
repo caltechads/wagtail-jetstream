@@ -6,7 +6,7 @@
   {% if self.fixed_dimensions.use %}fixed{% endif %}
   {% if self.color.background_image %}bgimage{% endif %}
 "
-  {% if self.fixed_dimensions %}
+  {% if self.fixed_dimensions.use %}
     style="height: {{ self.fixed_dimensions.height }}px; width: {{ self.fixed_dimensions.width }}px"
   {% endif %}
 >
