@@ -10,7 +10,6 @@
     var target = $('#' + prefix + '-use');
     // Initialize existing elements to correct behavior state
     disable_following_elems(target);
-    $("div.dimensions-options").prev("label").hide();
     // Apply behavior to existing elements
     target.change(function() {
       disable_following_elems($(this));

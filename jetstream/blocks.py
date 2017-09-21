@@ -109,6 +109,8 @@ class DimensionsOptionsBlock(blocks.StructBlock):
 
     class Meta:
         form_classname = 'dimensions-options struct-block'
+        # Don't display a label for this block. Our override of wagtailadmin/block_forms/struct.html obeys this flag.
+        no_label = True
 
 
 class BackgroundOptionsBlock(blocks.StructBlock):
@@ -125,17 +127,13 @@ class BackgroundOptionsBlock(blocks.StructBlock):
                   "Image will be displayed instead of this color"
     )
 
-    @property
-    def media(self):
-        return forms.Media(
-            js=['jetstream/js/admin/color-options.js']
-        )
-
     def js_initializer(self):
         return "color_options"
 
     class Meta:
         form_classname = 'color-options struct-block'
+        # Don't display a label for this block. Our override of wagtailadmin/block_forms/struct.html obeys this flag.
+        no_label = True
 
 
 class ActionButtonBlock(blocks.StructBlock):
