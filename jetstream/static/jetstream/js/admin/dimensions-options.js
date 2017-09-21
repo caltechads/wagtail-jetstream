@@ -1,39 +1,27 @@
 (function($, window, document, undefined) {
+  /**
+   * This function gets called by wagtail's StreamField javascript each time a new DimensionsOptionsBlock is generated
+   * within the form. The 'prefix' argument is a string that uniquely identifies the instance of the
+   * DimentionsOptionsBlock that was just generated.
+   */
   window.fixed_dimensions = function(prefix) {
-    function disable_following_elems(target) {
-      var height_li = target.closest("li").next("li");
-      var width_li = height_li.next("li");
-      height_li.find("input").prop("readonly", !target.prop("checked"));
-      width_li.find("input").prop("readonly", !target.prop("checked"));
+    function toggle_height_and_width_editability(target) {
+      // To get at the Height and Width fields, we traverse up the tree to the closest <ul>, which is the nearest
+      // ancestor of both this checkbox and the height/width inputs.
+      var parent_ul = target.closest('ul');
+      // On each number input within this DimentionsOptionsBlock, set the readOnly property to True when the "Use"
+      // checkbox is unchecked, and False when it's checked. Since the checkbox defaults to unchecked, these properties
+      // are not editable by default.
+      parent_ul.find('input[type="number"]').prop('readOnly', !target.prop('checked'));
     }
 
+    // Get the "Use Fixed Dimentions" checkbox for this instance of the DimentionsOptionsBlock.
     var target = $('#' + prefix + '-use');
-    // Initialize existing elements to correct behavior state
-    disable_following_elems(target);
-    // Apply behavior to existing elements
+    // Initialize existing elements to correct editability state.
+    toggle_height_and_width_editability(target);
+    // Re-toggle editability each time the checkbox is clicked.
     target.change(function() {
-      disable_following_elems($(this));
+      toggle_height_and_width_editability($(this));
     });
-
-    function apply_disable_to_observer(mutations) {
-      mutations.forEach(function (mutation) {
-        var newNodes = mutation.addedNodes;
-        if (newNodes != null) {
-          $(newNodes).each(function() {
-            target = $(this).find('.fieldname-use');
-            if (target) {
-              disable_following_elems(target);
-              target.change(function() {
-                disable_following_elems($(this));
-              });
-            }
-          });
-        }
-      });
-    }
-
-    // Apply behavior to new elements
-    var observer = new MutationObserver(apply_disable_to_observer);
-    observer.observe(document, {childList: true, subtree: true, characterData: true});
   }
 })(jQuery, this, this.document);
