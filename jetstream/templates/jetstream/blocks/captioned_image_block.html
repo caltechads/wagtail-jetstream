@@ -10,7 +10,7 @@
         {% arbitrary_image self.image 'width' parent_width %}
       {% endif %}
     {% else %}
-      {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+      {% image self.image original %}
     {% endif %}
   {% if self.image.caption or self.image.photo_credit %}
     <div class='image-details'>
