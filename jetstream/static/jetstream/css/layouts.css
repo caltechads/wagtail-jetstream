@@ -407,8 +407,16 @@
 }
 .sidebar-layout .sidebar {
   height: auto;
-  margin-left: 25px;
   margin-bottom: 40px;
+}
+.sidebar-layout.right .sidebar {
+  margin-left: 25px;
+}
+.sidebar-layout.left .sidebar {
+  margin-right: 25px;
+}
+.sidebar-layout.left .rich-text {
+  margin-left: 200px;
 }
 .sidebar-layout .rich-text {
   width: 800px;
