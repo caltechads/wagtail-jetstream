@@ -1,0 +1,75 @@
+.block-ImagePanelBlock {
+  .image-panel-link {
+    position: relative;
+    margin-right: -15px; //Stretch here because bootstrap's grid system stretches things out to get separators with no gap on the side
+    width: auto;
+    height: auto;
+    display: inline-block;
+
+    a.image-link {
+      span {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 100;
+      }
+    }
+
+    .image {
+      display: block;
+      position: relative;
+
+      .text-gradient {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+        font-family: @font_vaud_medium;
+        font-size: 16px;
+
+        .image-link-caption {
+          position: absolute;
+          bottom: 10px;
+          right: 15px;
+          text-align: right;
+          color: white;
+
+          .glyphicon.glyphicon-chevron-right {
+            color: @orange;
+          }
+        }
+      }
+    }
+  }
+}
+
+// For landscape-mode phones:
+@media (min-device-width: @screen-phone)
+   and (max-device-width: @screen-tablet) {
+  .block-ImagePanelBlock {
+    .image-panel-link {
+      width: 100%;
+    }
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+@media (max-width: @small_viewport) {
+  .block-ImagePanelBlock {
+    .image-panel-link {
+      width: 100%;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+}

@@ -1,30 +1,28 @@
 {% load jetstream_tags %}
 
-<div class="image-block-link">
+<div class="image-panel-rollover">
   <div class="entry">
-    <div class="image-link">
-      {% link_url self.link as link_url %}
-      {% if link_url %}
-        <a class="image-link" href="{{ link_url }}"><span></span></a>
-      {% endif %}
-      {% if parent_width and not self.fixed_dimensions.use %}
-        {% arbitrary_image self.image 'fill' parent_width parent_width %}
-      {% else %}
-        {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
-      {% endif %}
-      {% if self.title or self.desc or self.link %}
-        <span class="text">
-          {% if self.title %}
-            <span class="title"><span class="vertically-centered">{{ self.title }}</span></span>
-          {% endif %}
-          {% if self.desc %}
-            <span class="blurb">{{ self.desc }}</span>
-          {% endif %}
-          {% if link_url %}
-            <span href="{{ link_url }}" class="read-more-link">Read more...</span>
-          {% endif %}
-        </span>
-      {% endif %}
-    </div>
+    {% link_url self.link as link_url %}
+    {% if link_url %}
+      <a class="image-link" href="{{ link_url }}"><span></span></a>
+    {% endif %}
+    {% if parent_width and not self.fixed_dimensions.use %}
+      {% arbitrary_image self.image 'fill' parent_width parent_width %}
+    {% else %}
+      {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+    {% endif %}
+    {% if self.title or self.desc or self.link %}
+      <div class="text">
+        {% if self.title %}
+          <div class="title"><span class="vertically-centered">{{ self.title }}</span></div>
+        {% endif %}
+        {% if self.desc %}
+          <div class="blurb">{{ self.desc }}</div>
+        {% endif %}
+        {% if link_url %}
+          <a href="{{ link_url }}" class="read-more-link">Read more...</a>
+        {% endif %}
+      </div>
+    {% endif %}
   </div>
 </div>

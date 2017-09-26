@@ -1,39 +1,34 @@
-.block-ImageLinkBlock {
-  overflow: hidden;
-}
-
-//TODO: Rename appropriately following image panel implementation
-.image-block-link {
-  @teaser_margin: 10px / @responsive_grid_w * 100%;
-  position: relative;
+.image-panel-rollover {
   .clearfix();
+  position: relative;
 
   .entry {
-    float: left;
+    display: inline-block;
     position: relative;
     overflow: hidden;
-  }
-
-  .image-link {
-    display: block;
-
-    a {
-      span {
-        position: absolute;
-        width: 100%;
-        height: 100%;
+    &:hover {
+      .text {
         top: 0;
-        left: 0;
-        z-index: 11;
-        cursor: pointer;
       }
     }
+  }
 
-    img {
-      display: block;
+  a.image-link {
+    span {
+      position: absolute;
       width: 100%;
-      height: auto;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 11;
+      cursor: pointer;
     }
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
 
   .text {
@@ -43,9 +38,9 @@
     position: absolute;
     background-color: rgba(0, 0, 0, 0.65);
     color: #FFFFFF;
-    // NOTE: If this top property changes, the javascript also has to change!
     top: 70%;
-    display: block;
+    // Tells the browser to animate the "top" property whenever it changes, which happens when the .entry is hovered.
+    transition: top 0.5s ease-in-out 0.5s;
   }
 
   .title {
@@ -55,33 +50,18 @@
     font-family: @font_kievit;
     font-weight: normal;
     font-size: unit(16px / @font_size_base, em);
-    display: block;
+    padding: 0 15px;
   }
 
   .vertically-centered {
-    padding: 0 12px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
   }
 
-  .blurb {
-    // These start hidden, and appear in a slide-up animation when the user hovers.
+  .blurb, .read-more-link {
     padding: 0 15px;
-    font-size: unit(13px / @font_size_base, em);
-    display: block;
-  }
-
-  .read-more-link {
-    // This isn't an actual <a>, since you can't legally put an <a> inside another <a>. So it's a span
-    // that CSS makes behave like an <a>.
-    padding: 0 15px;
-    font-size: unit(13px / @font_size_base, em);
-    cursor: pointer;
-    &:hover {
-      color: @orange;
-    }
+    font-size: unit(14px / @font_size_base, em);
   }
 }
 
@@ -90,39 +70,34 @@
 // For landscape-mode phones:
 @media (min-device-width: @screen-phone)
         and (max-device-width: @screen-tablet) {
-  .block-ImagePanelBlock {
-    .image-block-link .entry {
-      float: none;
-    }
+  .image-panel-rollover .entry {
+    float: none;
   }
 }
 
 @media (max-width: @small_viewport) {
-  .block-ImagePanelBlock {
-    .image-block-link .entry {
-      float: none;
+  .image-panel-rollover .entry {
+    float: none;
 
-      .text {
-        padding-top: 1.5em;
-        padding-bottom: 1.5em;
+    .text {
+      padding-top: 1.5em;
+      padding-bottom: 1.5em;
+      position: static;
+      line-height: 24px;
+      color: black;
+      background-color: transparent;
+      height: auto;
+
+      .title {
+        font-size: 1.4em;
+        line-height: 30px;
         position: static;
-        line-height: 24px;
-        color: black;
-        background-color: transparent;
         height: auto;
+        display: inline;
 
-        .title {
-          font-size: 1.4em;
-          line-height: 30px;
+        .vertically-centered {
           position: static;
-          height: auto;
-          display: inline;
-
-          .vertically-centered {
-            position: static;
-            transform: none;
-            -webkit-transform: none;
-          }
+          transform: none;
         }
       }
     }

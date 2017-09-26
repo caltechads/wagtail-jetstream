@@ -204,51 +204,25 @@ class ColorOptionsBlock(blocks.StructBlock):
         # Don't display a label for this block. Our override of wagtailadmin/block_forms/struct.html obeys this flag.
         no_label = True
 
+
 # ======================================================================================================
 # ====================================== MEDIA BLOCKS ==================================================
 # ======================================================================================================
 
-
-class CaptionedImageBlock(blocks.StructBlock, BlockTupleMixin):
-    image = ImageChooserBlock(required=True)
-    fixed_dimensions = DimensionsOptionsBlock()
-
-    class Meta:
-        label = 'Captioned Image'
-        template = 'jetstream/blocks/captioned_image_block.html'
-        form_classname = 'captioned-image struct-block'
-        icon = 'image'
-
-
-class ImageLinkBlock(blocks.StructBlock, BlockTupleMixin):
-
-    image = ImageChooserBlock(required=True)
-    title = blocks.CharBlock(required=False)
-    subtitle = blocks.CharBlock(required=False)
-    link = LinkBlock()
-    fixed_dimensions = DimensionsOptionsBlock()
-
-    class Meta:
-        label = 'Image Link'
-        template = 'jetstream/blocks/image_link_block.html'
-        form_classname = 'image-link struct-block'
-        icon = 'image'
-
-
 class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = (
+        ('link', 'Image Link', 'jetstream/blocks/image_panel_block-link.html', []),
         ('rollover', 'Image Link w/ Rollover Text', 'jetstream/blocks/image_panel_block-rollover.html', []),
         ('separate_text', 'Image Card (Equal Heights)', 'jetstream/blocks/image_panel_block-image_card.html',
-         ['equal']
-         ),
+            ['equal']
+        ),
         ('separate_text_natural', 'Image Card (Natural Heights)', 'jetstream/blocks/image_panel_block-image_card.html',
             ['natural']
-         ),
+        ),
         ('image_listing_left', 'Listing (Image Left)', 'jetstream/blocks/image_panel_block-listing.html', ['left']),
         ('image_listing_right', 'Listing (Image Right)', 'jetstream/blocks/image_panel_block-listing.html', ['right']),
         ('hero', 'Hero Image', 'jetstream/blocks/image_panel_block-hero.html', []),
     )
-    STYLE_TO_TEMPLATE_MAP = {style[0]: (style[2], style[3]) for style in STYLES}
     image_panel_wh_help_text = (
         "Width and Height are used based on which Style has been selected. Some styles ingore these settings unless "
         "Fixed Dimensions is checked. Others use them regardless."
@@ -273,8 +247,9 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         """
         We override this method to allow a template to be chosen dynamically based on the value of the "style" field.
         """
+        style_to_template_map = {style[0]: (style[2], style[3]) for style in self.STYLES}
         try:
-            (template, extra_classes) = self.STYLE_TO_TEMPLATE_MAP[value['style']]
+            (template, extra_classes) = style_to_template_map[value['style']]
         except KeyError:
             # If this block somehow doesn't have a known style, fall back to the basic_render() method.
             return self.render_basic(value, context=context)
@@ -286,6 +261,17 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         new_context['extra_classes'] = " ".join(extra_classes)
 
         return mark_safe(render_to_string(template, new_context))
+
+
+class CaptionedImageBlock(blocks.StructBlock, BlockTupleMixin):
+    image = ImageChooserBlock(required=True)
+    fixed_dimensions = DimensionsOptionsBlock()
+
+    class Meta:
+        label = 'Captioned Image'
+        template = 'jetstream/blocks/captioned_image_block.html'
+        form_classname = 'captioned-image struct-block'
+        icon = 'image'
 
 
 class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
@@ -551,6 +537,25 @@ class FancyRichTextBlock(blocks.StructBlock, BlockTupleMixin):
         form_classname = 'fancy-richtext struct-block'
         label = 'Rich Text'
         icon = 'doc-full'
+
+
+###############################################################################
+######################### DEPRECATED BLOCK TYPES ##############################
+###############################################################################
+
+class ImageLinkBlock(blocks.StructBlock, BlockTupleMixin):
+
+    image = ImageChooserBlock(required=True)
+    title = blocks.CharBlock(required=False)
+    subtitle = blocks.CharBlock(required=False)
+    link = LinkBlock()
+    fixed_dimensions = DimensionsOptionsBlock()
+
+    class Meta:
+        label = 'Image Link'
+        template = 'jetstream/blocks/image_link_block.html'
+        form_classname = 'image-link struct-block'
+        icon = 'image'
 
 
 # ==================

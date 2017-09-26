@@ -207,8 +207,6 @@ def page_siblings(page):
 # ---------------
 # UTIL FUNCTIONS
 # ---------------
-
-
 def parse_image_tag(tag_name, parser, token, node_class):
     """
     Send this function the name of the tag it's parsing for, the arguments to the tag function, and the class of
