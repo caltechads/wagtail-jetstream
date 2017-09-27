@@ -223,17 +223,19 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         ('image_listing_right', 'Listing (Image Right)', 'jetstream/blocks/image_panel_block-listing.html', ['right']),
         ('hero', 'Hero Image', 'jetstream/blocks/image_panel_block-hero.html', []),
     )
-    image_panel_wh_help_text = (
-        "Width and Height are used based on which Style has been selected. Some styles ingore these settings unless "
-        "Fixed Dimensions is checked. Others use them regardless."
-    )
 
     image = ImageChooserBlock()
-    style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
+    style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default='link')
     title = blocks.CharBlock(required=False)
     desc = blocks.CharBlock(
         required=False,
-        label="Body"
+        label='Body'
+    )
+    display_caption = blocks.BooleanBlock(
+        label='Display Caption',
+        help_text='Check this box to display the caption and photo credit below this image.',
+        required=False,
+        default=False
     )
     link = LinkBlock()
     fixed_dimensions = DimensionsOptionsBlock()
@@ -261,6 +263,15 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         new_context['extra_classes'] = " ".join(extra_classes)
 
         return mark_safe(render_to_string(template, new_context))
+
+    @property
+    def media(self):
+        return forms.Media(
+            js=['jetstream/js/admin/image-panel.js']
+        )
+
+    def js_initializer(self):
+        return "image_panel"
 
 
 class CaptionedImageBlock(blocks.StructBlock, BlockTupleMixin):
