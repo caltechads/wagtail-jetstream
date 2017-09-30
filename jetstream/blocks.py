@@ -576,7 +576,6 @@ class ImageLinkBlock(blocks.StructBlock, BlockTupleMixin):
 # ==================
 COLUMN_PERMITTED_BLOCKS = [
     get_block_tuple(FancyRichTextBlock()),
-    get_block_tuple(ImageLinkBlock()),
     get_block_tuple(ImageCarouselBlock()),
     get_block_tuple(CaptionedImageBlock()),
     get_block_tuple(CaptionedImageCarouselBlock()),
