@@ -212,6 +212,7 @@ class ColorOptionsBlock(blocks.StructBlock):
 class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = (
         ('link', 'Image Link', 'jetstream/blocks/image_panel_block-link.html', []),
+        ('captioned', 'Image w/ Caption', 'jetstream/blocks/image_panel_block-caption.html', []),
         ('rollover', 'Image Link w/ Rollover Text', 'jetstream/blocks/image_panel_block-rollover.html', []),
         ('separate_text', 'Image Card (Equal Heights)', 'jetstream/blocks/image_panel_block-image_card.html',
             ['equal']
@@ -272,17 +273,6 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
 
     def js_initializer(self):
         return "image_panel"
-
-
-class CaptionedImageBlock(blocks.StructBlock, BlockTupleMixin):
-    image = ImageChooserBlock(required=True)
-    fixed_dimensions = DimensionsOptionsBlock()
-
-    class Meta:
-        label = 'Captioned Image'
-        template = 'jetstream/blocks/captioned_image_block.html'
-        form_classname = 'captioned-image struct-block'
-        icon = 'image'
 
 
 class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
@@ -553,7 +543,6 @@ class FancyRichTextBlock(blocks.StructBlock, BlockTupleMixin):
 ###############################################################################
 ######################### DEPRECATED BLOCK TYPES ##############################
 ###############################################################################
-
 class ImageLinkBlock(blocks.StructBlock, BlockTupleMixin):
 
     image = ImageChooserBlock(required=True)
@@ -569,11 +558,21 @@ class ImageLinkBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'image'
 
 
-# ==================
-# Layout Blocks
-# -----
-# These go at the end because they need to include all of the previous content blocks.
-# ==================
+class CaptionedImageBlock(blocks.StructBlock, BlockTupleMixin):
+    image = ImageChooserBlock(required=True)
+    fixed_dimensions = DimensionsOptionsBlock()
+
+    class Meta:
+        label = 'Captioned Image'
+        template = 'jetstream/blocks/captioned_image_block.html'
+        form_classname = 'captioned-image struct-block'
+        icon = 'image'
+
+
+###############################################################################
+########################### LAYOUT BLOCK TYPES ################################
+###############################################################################
+# These go at the end because they need to include all of the content blocks defined above.
 COLUMN_PERMITTED_BLOCKS = [
     get_block_tuple(FancyRichTextBlock()),
     get_block_tuple(ImageCarouselBlock()),
