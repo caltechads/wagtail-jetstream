@@ -8,6 +8,9 @@
     {% else %}
       {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
     {% endif %}
+    {% if self.display_caption %}
+      {% include 'jetstream/image_details.html' with image=self.image %}
+    {% endif %}
     {% if self.title or self.desc %}
       <div class="card-block">
         {% if self.title %}
