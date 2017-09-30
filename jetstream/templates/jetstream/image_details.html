@@ -1,0 +1,10 @@
+{% if image.caption or image.photo_credit %}
+  <div class='image-details'>
+    {% if image.caption %}
+      <div class='image-caption'>{{ image.caption }}</div>
+    {% endif %}
+    {% if image.photo_credit %}
+      <div class='image-credit'>Credit: {{ image.photo_credit }}</div>
+    {% endif %}
+  </div>
+{% endif %}

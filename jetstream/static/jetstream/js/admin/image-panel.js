@@ -11,9 +11,9 @@
      */
     function configure_display_caption_checkbox(prefix, current_style) {
       var checkbox = $('#' + prefix + '-display_caption');
-      // If the Style dropdown is set to a style where displaying the caption doesn't make sense, don't show the
-      // Display Caption field.
-      if (['rollover', 'hero'].indexOf(current_style) > -1) {
+      // If the Style dropdown is set to a style where optionally displaying the caption doesn't make sense, don't
+      // show the Display Caption field.
+      if (['rollover', 'hero', 'captioned', 'link'].indexOf(current_style) > -1) {
         // If there's no checkbox, we've already stored and removed the field, so we can't do it again.
         if (checkbox.length) {
           // If we use .show()/.hide(), the striping for the <li>s in the form won't update, which looks ugly.
