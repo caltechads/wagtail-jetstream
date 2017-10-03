@@ -2,7 +2,8 @@
 
 <div class="fancy-rich-text
   {% if self.color.text_color %} text-color-{{ self.color.text_color }}{% endif %}
-  {% if self.color.background_color and not self.color.background_image %} bg-color bg-color-{{ self.color.background_color }}{% endif %}
+  {% if self.color.background_color or self.color.background_image %} bg {% endif %}
+  {% if self.color.background_color and not self.color.background_image %} bg-color-{{ self.color.background_color }}{% endif %}
   {% if self.fixed_dimensions.use %} fixed{% endif %}
 "
   {% if self.fixed_dimensions.use %}
