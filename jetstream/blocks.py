@@ -576,7 +576,6 @@ class CaptionedImageBlock(blocks.StructBlock, BlockTupleMixin):
 COLUMN_PERMITTED_BLOCKS = [
     get_block_tuple(FancyRichTextBlock()),
     get_block_tuple(ImageCarouselBlock()),
-    get_block_tuple(CaptionedImageBlock()),
     get_block_tuple(CaptionedImageCarouselBlock()),
     get_block_tuple(RelatedLinksBlock()),
     get_block_tuple(ImagePanelBlock()),
