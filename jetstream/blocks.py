@@ -36,13 +36,14 @@ class LinkBlock(blocks.StructBlock):
     NOTE: Due to limitations in CSS, callers of LinkBlock() must not specify a label in the construction arguments.
     See the comment in the Meta class for why.
 
-    NOTE: Within a template, checking for the existence of `self.link` will always return True because
-    the existence of a class is always True even if the class has null contents. To retrieve the value of a
-    LinkBlock, use the link_url template tag.
-        ex. {% link_url self.link as link_url %}
-            {% if link_url %}
-                <a href={{ link_url }}></a>
-            {% endif %}
+    NOTE: Within a template, checking for the existence of `self.link` will always return True because the LinkBlock
+    object is not falsey, even if it has no contents. To retrieve the value of a LinkBlock, use the {% link_url %}
+    template tag from jetstream_tags. ex:
+        {% load jetstream_tags %}
+        {% link_url self.link as url %}
+        {% if url %}
+            <a href={{ url }}></a>
+        {% endif %}
     """
 
     page = blocks.PageChooserBlock(
@@ -430,15 +431,17 @@ class RelatedLinksNodeBlock(blocks.StructBlock):
     text = blocks.CharBlock(required=True)
     link = LinkBlock()
 
+    class Meta:
+        template = 'jetstream/blocks/related_link.html'
 
-# TODO: Convert the 'links' to a ListBlock.
+
 class RelatedLinksBlock(blocks.StructBlock, BlockTupleMixin):
     title = blocks.CharBlock(
         required=False,
         label='Title',
     )
-    links = blocks.StreamBlock(
-        [('link', RelatedLinksNodeBlock(label='Link'))],
+    links = blocks.ListBlock(
+        RelatedLinksNodeBlock(label='Link'),
         label='Links'
     )
     color = ColorOptionsBlock()
