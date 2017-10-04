@@ -1,8 +1,9 @@
 {% load static jetstream_tags wagtailimages_tags %}
 
-<div id="{{ block_id }}-gallery" class="image-gallery-gallery">
+<section id="{{ block_id }}-gallery" class="image-gallery-gallery" data-featherlight-gallery data-featherlight-filter="a">
   {% for img in self.images %}
-    <div class="gallery-item"
+    {% image img original as full_img %}
+    <a class="gallery-item" href="{{ full_img.url }}"
       {% if self.fixed_dimensions.use %}
         style="width: {{ self.fixed_dimensions.width }}px"
       {% endif %}
@@ -19,6 +20,6 @@
         {% image img original %}
       {% endif %}
       {% include 'jetstream/image_details.html' with image=img %}
-    </div>
+    </a>
   {% endfor %}
-</div>
+</section>

@@ -1,10 +1,10 @@
 {% if image.caption or image.photo_credit %}
-  <div class='image-details'>
+  <span class='image-details'>
     {% if image.caption %}
-      <div class='image-caption'>{{ image.caption }}</div>
+      <span class='image-caption'>{{ image.caption }}</span>
     {% endif %}
     {% if image.photo_credit %}
-      <div class='image-credit'>Credit: {{ image.photo_credit }}</div>
+      <span class='image-credit'>Credit: {{ image.photo_credit }}</span>
     {% endif %}
-  </div>
+  </span>
 {% endif %}
