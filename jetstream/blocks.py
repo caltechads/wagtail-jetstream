@@ -383,17 +383,42 @@ class ImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'image'
 
 
-# TODO: Convert the 'images' to a ListBlock.
-class CaptionedImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
-    images = blocks.StreamBlock([
-        ('image', ImageChooserBlock()),
-    ])
+class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
+    """
+    Renders an Image Gallery in a variety of styles.
+    """
+    STYLES = (
+        ('galery', 'Image Gallery', 'jetstream/blocks/image_gallery_block-gallery.html', []),
+        ('slider', 'Image Slider w/ Thumbnail Picker', 'jetstream/blocks/image_gallery_block-slider.html', []),
+    )
+
+    style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default='normal')
+    images = blocks.ListBlock(ImageChooserBlock(label='image'))
+    fixed_dimensions = DimensionsOptionsBlock()
 
     class Meta:
-        template = 'jetstream/blocks/captioned_image_carousel_block.html'
-        form_classname = 'captioned-slider struct-block'
-        label = 'Captioned Image Slider'
+        label = 'Image Gallery'
+        form_classname = 'image-gallery struct-block'
         icon = 'image'
+
+    def render(self, value, context=None):
+        """
+        We override this method to allow a template to be chosen dynamically based on the value of the "style" field.
+        """
+        style_to_template_map = {style[0]: (style[2], style[3]) for style in self.STYLES}
+        try:
+            (template, extra_classes) = style_to_template_map[value['style']]
+        except KeyError:
+            # If this block somehow doesn't have a known style, fall back to the basic_render() method.
+            return self.render_basic(value, context=context)
+
+        if context is None:
+            new_context = self.get_context(value)
+        else:
+            new_context = self.get_context(value, parent_context=dict(context))
+        new_context['extra_classes'] = " ".join(extra_classes)
+
+        return mark_safe(render_to_string(template, new_context))
 
 
 class SpacerBlock(blocks.StructBlock):
@@ -579,7 +604,7 @@ class CaptionedImageBlock(blocks.StructBlock, BlockTupleMixin):
 COLUMN_PERMITTED_BLOCKS = [
     get_block_tuple(FancyRichTextBlock()),
     get_block_tuple(ImageCarouselBlock()),
-    get_block_tuple(CaptionedImageCarouselBlock()),
+    get_block_tuple(ImageGalleryBlock()),
     get_block_tuple(RelatedLinksBlock()),
     get_block_tuple(ImagePanelBlock()),
     get_block_tuple(VideoBlock()),

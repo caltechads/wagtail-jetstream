@@ -1,0 +1,24 @@
+{% load static jetstream_tags wagtailimages_tags %}
+
+<div id="{{ block_id }}-gallery" class="image-gallery-gallery">
+  {% for img in self.images %}
+    <div class="gallery-item"
+      {% if self.fixed_dimensions.use %}
+        style="width: {{ self.fixed_dimensions.width }}px"
+      {% endif %}
+    >
+      {% if self.fixed_dimensions.use %}
+        {% responsive_image img 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+      {% elif parent_width %}
+        {% if parent_height %}
+          {% responsive_image img 'fill' parent_width parent_height %}
+        {% else %}
+          {% responsive_image img 'width' parent_width %}
+        {% endif %}
+      {% else %}
+        {% image img original %}
+      {% endif %}
+      {% include 'jetstream/image_details.html' with image=img %}
+    </div>
+  {% endfor %}
+</div>

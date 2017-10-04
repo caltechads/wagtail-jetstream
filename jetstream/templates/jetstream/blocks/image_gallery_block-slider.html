@@ -1,0 +1,44 @@
+{% load static jetstream_tags wagtailimages_tags %}
+
+<div id="{{ block_id }}-carousel" class="carousel slide image-gallery-slider" data-ride="carousel" data-interval="false">
+  <div class="carousel-inner" role="listbox">
+  {% for img in self.images %}
+    <div class="{% if forloop.counter0 == 0 %}item active{% else %}item{% endif %}">
+      {% if self.fixed_dimensions.use %}
+        {% responsive_image img 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+      {% elif parent_width %}
+        {% if parent_height %}
+          {% responsive_image img 'fill' parent_width parent_height %}
+        {% else %}
+          {% responsive_image img 'width' parent_width %}
+        {% endif %}
+      {% else %}
+        {% image img original %}
+      {% endif %}
+      {% include 'jetstream/image_details.html' with image=img %}
+    </div>
+  {% endfor %}
+  </div>
+
+  <div class="carousel-indicators-container">
+    <ol class="carousel-indicators">
+      {% for img in self.images %}
+        {% if forloop.counter0 == 0 %}
+          <li data-target="#{{ block_id }}-carousel" data-slide-to="0" class="active">{% image img fill-75x75 %}</li>
+        {% else %}
+          <li data-target="#{{ block_id }}-carousel" data-slide-to="{{ forloop.counter0 }}">{% image img fill-75x75 %}</li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  </div>
+
+  <!-- These must be here for the carousel to cycle correctly. We can set them to hidden in CSS. -->
+  <a class="left carousel-control" href="#{{ block_id }}-carousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#{{ block_id }}-carousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
