@@ -20,9 +20,11 @@
   {% endif %}
   <div class="list-group">
     {% for p in pages %}
-      <a href="{{ p.full_url }}" class="page-listing list-group-item {% if page.full_url == p.full_url %}active{% endif %}">
-        {{ p.title }}
-      </a>
+      {% if p.pk == page.pk %}
+        <span class="page-listing list-group-item active">{{ page.title }}</span>
+      {% else %}
+        <a href="{{ p.full_url }}" class="page-listing list-group-item">{{ p.title }}</a>
+      {% endif %}
     {% endfor %}
   {% if self.color.background_image %}
     <div class="background-image-container">

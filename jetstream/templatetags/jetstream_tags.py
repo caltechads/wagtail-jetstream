@@ -194,14 +194,20 @@ def link_url(block):
 
 
 @register.simple_tag()
-def page_descendants(page):
-    return Page.objects.child_of(page)
+def page_descendants(page, only_published=True):
+    queryset = Page.objects.child_of(page)
+    if only_published:
+        queryset = queryset.live()
+    return queryset
 
 
 @register.simple_tag()
-def page_siblings(page):
+def page_siblings(page, only_published=True):
     # Results don't include itself, so need to add a non-hyperlink dummy listing
-    return page.get_siblings(inclusive=True)
+    queryset = page.get_siblings(inclusive=True)
+    if only_published:
+        queryset = queryset.live()
+    return queryset
 
 
 # ---------------
