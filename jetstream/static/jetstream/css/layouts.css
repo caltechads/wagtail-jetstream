@@ -558,9 +558,10 @@
   display: block;
 }
 .image-carousel .item {
-  transition: opacity ease-out 0.7s;
+  transition: opacity ease-out 0.7s, visibility 0.7s;
   left: 0;
   opacity: 0;
+  visibility: hidden;
   top: 0;
   position: absolute;
   width: 100%;
@@ -574,6 +575,7 @@
 }
 .image-carousel .item.active {
   opacity: 1;
+  visibility: visible;
 }
 .image-carousel .carousel-inner {
   height: 100%;

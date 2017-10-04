@@ -9,9 +9,11 @@
   }
 
   .item {
-    transition: opacity ease-out .7s;
+    transition: opacity ease-out .7s, visibility 0.7s;
     left: 0;
     opacity: 0;
+    // Need opacity for the transition, and visibility to hide the inactive ones so links don't overlap.
+    visibility: hidden;
     top: 0;
     position: absolute;
     width: 100%;
@@ -24,6 +26,7 @@
     }
     &.active {
       opacity:1;
+      visibility: visible;
     }
   }
 
