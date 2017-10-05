@@ -1,7 +1,8 @@
 {% load wagtailcore_tags wagtailimages_tags jetstream_tags %}
 
 <div class="row-wrapper {{ self.style }}
-  {% if self.background.background_color and not self.background.background_image %} bg-color bg-color-{{ self.background.background_color }}{% endif %}"
+  {% if self.background.background_color or self.background.background_image %} bg {% endif %}
+  {% if self.background.background_color and not self.background.background_image %} bg-color-{{ self.background.background_color }}{% endif %}"
   {% if self.background.background_image %}
     {% image self.background.background_image original as img_data %}
     style="background-image: url('{{img_data.url}}');"
