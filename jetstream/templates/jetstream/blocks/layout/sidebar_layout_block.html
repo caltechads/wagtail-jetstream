@@ -1,7 +1,7 @@
 {% load wagtailcore_tags wagtailimages_tags jetstream_tags %}
 <div class="row">
   <div class="col-md-12 sidebar-layout {{ self.sidebar_alignment }}">
-    {% width_from_arbitrary_parent 1000 self.sidebar_width as my_width %}
+    {% width_from_arbitrary_parent 1000 self.sidebar_width 0 as my_width %}
     <div class="sidebar" style="width: {{ my_width }}px; float: {{ self.sidebar_alignment }};">
       {% for block in self.sidebar %}
         <section class="block-{{ block.block_type }}">

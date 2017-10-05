@@ -17,10 +17,10 @@
         {% else %}
           <section class="block-{{ block.block_type }}">
             {% if parent_width %}
-              {% width_from_arbitrary_parent parent_width self.left_column_width as my_width %}
+              {% width_from_arbitrary_parent parent_width self.left_column_width self.gutter_width as my_width %}
               {% include_block block with parent_width=my_width parent_height=self.fixed_height block_id=block.id %}
             {% else %}
-              {% width_from_arbitrary_parent 1000 self.left_column_width as my_width %}
+              {% width_from_arbitrary_parent 1000 self.left_column_width self.gutter_width as my_width %}
               {% include_block block with parent_width=my_width parent_height=self.fixed_height block_id=block.id %}
             {% endif %}
           </section>
@@ -34,10 +34,10 @@
         {% else %}
           <section class="block-{{ block.block_type }}">
             {% if parent_width %}
-              {% width_from_arbitrary_parent parent_width fill_width as my_width %}
+              {% width_from_arbitrary_parent parent_width fill_width self.gutter_width as my_width %}
               {% include_block block with parent_width=my_width parent_height=self.fixed_height block_id=block.id %}
             {% else %}
-              {% width_from_arbitrary_parent 1000 fill_width as my_width %}
+              {% width_from_arbitrary_parent 1000 fill_width self.gutter_width as my_width %}
               {% include_block block with parent_width=my_width parent_height=self.fixed_height block_id=block.id %}
             {% endif %}
           </section>
