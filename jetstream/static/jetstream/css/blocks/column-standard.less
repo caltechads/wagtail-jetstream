@@ -123,7 +123,7 @@
 }
 
 // For landscape-mode phones:
-@media (min-device-width: @screen-phone) 
+@media (min-device-width: @screen-phone)
         and (max-device-width: @screen-tablet) {
 
   .block-two_column_layout {
@@ -183,8 +183,11 @@
     .col-md-12 {
       width: 33%;
       float: left;
+      &:last-child {
+        width: 34%;
+      }
       img {
-        width: auto;
+        height: fit-content;
       }
     }
   }
