@@ -968,7 +968,6 @@
 }
 .block-ImagePanelBlock .image-panel-link {
   position: relative;
-  margin-right: -15px;
   width: auto;
   height: auto;
   display: inline-block;
@@ -1004,6 +1003,13 @@
 }
 .block-ImagePanelBlock .image-panel-link .image .text-gradient .image-link-caption .glyphicon.glyphicon-chevron-right {
   color: #ff6e1e;
+}
+.block-ImagePanelBlock .image-panel-link.top-level {
+  display: block;
+}
+.block-ImagePanelBlock .image-panel-link.top-level img {
+  width: 100%;
+  height: auto;
 }
 @media (min-device-width: 480px) and (max-device-width: 768px) {
   .block-ImagePanelBlock .image-panel-link {
