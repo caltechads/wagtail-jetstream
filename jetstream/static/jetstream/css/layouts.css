@@ -1537,6 +1537,10 @@ h3.block_header {
   z-index: 11;
   cursor: pointer;
 }
+.video-block-overlay.mc-hammer {
+  touch-action: manipulation;
+  pointer-events: none;
+}
 .video-block-title-background {
   position: absolute;
   bottom: 0;
@@ -1545,6 +1549,8 @@ h3.block_header {
   height: 80px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+  touch-action: auto;
+  pointer-events: auto;
 }
 .video-block-title {
   color: white;

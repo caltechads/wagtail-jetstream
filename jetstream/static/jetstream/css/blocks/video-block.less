@@ -17,6 +17,13 @@
   left: 0;
   z-index: 11;
   cursor: pointer;
+  &.mc-hammer {
+    // Prevent tap actions and mouse clicks when the overlay has this class. Can't use "touch-actions: none" because
+    // iOS Safari doesn't support that. This is probably better anyway, because it allows scroll events that
+    // start on the video overlay to still function.
+    touch-action: manipulation;
+    pointer-events: none;
+  }
 }
 
 .video-block-title-background {
@@ -27,6 +34,9 @@
   height: 80px;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.7);
+  // Ensures that even if the main overlay has its interactivity disabled, this div will still be clickable/tappable.
+  touch-action: auto;
+  pointer-events: auto;
 }
 
 .video-block-title {
