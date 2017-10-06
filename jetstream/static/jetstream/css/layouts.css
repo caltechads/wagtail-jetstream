@@ -527,6 +527,12 @@
 .image-gallery-gallery .gallery-item:hover {
   text-decoration: none;
 }
+.image-gallery-gallery .gallery-item:first-child {
+  margin-left: 0;
+}
+.image-gallery-gallery .gallery-item:last-child {
+  margin-right: 0;
+}
 .image-gallery-slider .carousel-control {
   display: none;
 }
