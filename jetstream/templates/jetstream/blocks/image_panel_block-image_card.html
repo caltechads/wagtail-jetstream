@@ -3,10 +3,19 @@
 {# This markup is loosely based on https://bootsnipp.com/snippets/featured/bootstrap-4-card #}
 <div class="image-card-wrapper">
   <div class="card {{ extra_classes }}">
-    {% if parent_width and not self.fixed_dimensions.use %}
-      {% arbitrary_image self.image 'fill' parent_width parent_width %}
+    {% link_url self.link as link_url %}
+    {% if link_url %}
+      <a href="{{ link_url }}">
+    {% endif %}
+    {% if self.fixed_dimensions.use %}
+        {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
     {% else %}
-      {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+      {% if parent_width %}
+        {% arbitrary_image self.image 'fill' parent_width parent_width %}
+      {% endif %}
+    {% endif %}
+    {% if link_url %}
+      </a>
     {% endif %}
     {% if self.display_caption %}
       {% include 'jetstream/image_details.html' with image=self.image %}
@@ -15,7 +24,6 @@
       <div class="card-block">
         {% if self.title %}
           <h4 class="card-title">
-            {% link_url self.link as link_url %}
             {% if link_url %}
              <a href="{{ link_url }}">{{ self.title }}</a>
             {% else %}

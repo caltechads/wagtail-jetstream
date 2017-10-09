@@ -7,7 +7,7 @@
   padding: 0;
   border: none;
 
-  &> img {
+  & img {
     display: block;
     width: 100%;
     height: auto;
@@ -40,10 +40,13 @@
 // Image Card -- left/right
 
 .block-ImagePanelBlock {
-  .media-body {
-    padding-left: 15px;
+  .media.left .media-body {
+    padding-left: 10px;
+  }
+  .media.right .media-body {
     padding-right: 10px;
-    line-height: 20px;
+  }
+  .media-body {
     h4 {
       margin-top: 10px;
       font-family: @font_kievit;
