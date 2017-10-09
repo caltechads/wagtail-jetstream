@@ -1035,7 +1035,7 @@
   padding: 0;
   border: none;
 }
-.card > img {
+.card img {
   display: block;
   width: 100%;
   height: auto;
@@ -1059,10 +1059,11 @@
   margin-top: .5em;
   color: rgba(0, 0, 0, 0.68);
 }
-.block-ImagePanelBlock .media-body {
-  padding-left: 15px;
+.block-ImagePanelBlock .media.left .media-body {
+  padding-left: 10px;
+}
+.block-ImagePanelBlock .media.right .media-body {
   padding-right: 10px;
-  line-height: 20px;
 }
 .block-ImagePanelBlock .media-body h4 {
   margin-top: 10px;

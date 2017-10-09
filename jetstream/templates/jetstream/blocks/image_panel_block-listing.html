@@ -1,12 +1,16 @@
 {% load jetstream_tags %}
 
-<div class="media">
+<div class="media {{ extra_classes }}">
 {% if extra_classes == "left" %}
   <div class="media-left">
     {% link_url self.link as link_url %}
-    <a href="{% if self.page %}{{ self.page.full_url }}{% elif link_url %}{{ link_url}}{% else %}#{% endif %}">
+    {% if link_url %}
+      <a href="{{ link_url}}">
+        {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+      </a>
+    {% else %}
       {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
-    </a>
+    {% endif %}
     {% if self.display_caption %}
       {% include 'jetstream/image_details.html' with image=self.image %}
     {% endif %}
@@ -26,9 +30,13 @@
 {% if extra_classes == "right" %}
   <div class="media-right">
     {% link_url self.link as link_url %}
-    <a href="{% if self.page %}{{ self.page.full_url }}{% elif link_url %}{{ link_url}}{% else %}#{% endif %}">
+    {% if link_url %}
+      <a href="{{ link_url}}">
+        {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+      </a>
+    {% else %}
       {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
-    </a>
+    {% endif %}
     {% if self.display_caption %}
       {% include 'jetstream/image_details.html' with image=self.image %}
     {% endif %}
