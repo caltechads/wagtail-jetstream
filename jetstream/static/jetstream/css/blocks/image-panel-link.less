@@ -1,7 +1,6 @@
 .block-ImagePanelBlock {
   .image-panel-link {
     position: relative;
-    margin-right: -15px; //Stretch here because bootstrap's grid system stretches things out to get separators with no gap on the side
     width: auto;
     height: auto;
     display: inline-block;
@@ -42,6 +41,15 @@
             color: @orange;
           }
         }
+      }
+    }
+
+    &.top-level {
+      display: block;
+
+      img {
+        width: 100%;
+        height: auto;
       }
     }
   }

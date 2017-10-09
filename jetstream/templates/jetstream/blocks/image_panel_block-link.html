@@ -1,6 +1,6 @@
 {% load wagtailimages_tags jetstream_tags %}
 
-<div class="image-panel-link clearfix">
+<div class="image-panel-link clearfix {% if not self.fixed_dimensions.use and not parent_width %}top-level{% endif %}">
   {% link_url self.link as link_url %}
   {% if link_url %}
     <a class="image-link" href="{{ link_url }}"><span></span></a>
@@ -17,7 +17,9 @@
           {% responsive_image self.image 'fill' parent_width parent_width %}
         {% endif %}
       {% else %}
-        {% responsive_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+        {# If we get to here, this ImagePanelBlock is being rendered at the top level. #}
+        {# So we give them the biggest version of the image we have, and the CSS scales it to 100% width. #}
+        {% image self.image original %}
       {% endif %}
     {% endif %}
     {% if self.title %}
