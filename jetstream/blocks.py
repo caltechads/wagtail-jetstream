@@ -336,8 +336,8 @@ class HeroImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
     slides = blocks.ListBlock(
         blocks.StructBlock([
             ('image', ImageChooserBlock()),
-            ('title', blocks.CharBlock()),
-            ('text', blocks.TextBlock()),
+            ('title', blocks.CharBlock(required=False)),
+            ('text', blocks.TextBlock(required=False)),
             ('link', LinkBlock()),
         ])
     )
