@@ -23,6 +23,15 @@ h3.block_header {
   padding-bottom: 10px;
 }
 
+// Remove the top margin from both types of SectionTitleBlocks if they're the first element in a column/sidebar.
+.grid-elem, .sidebar {
+  .block-SectionTitleBlock:first-child {
+    .section_divider, .block_header {
+      margin-top: 0;
+    }
+  }
+}
+
 @media (max-width: @medium_viewport) {
   h2.section_divider {
     padding-left: 10px;

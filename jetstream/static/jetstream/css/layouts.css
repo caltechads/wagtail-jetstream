@@ -1486,6 +1486,12 @@ h3.block_header {
   font-family: VaudMedium, sans-serif;
   padding-bottom: 10px;
 }
+.grid-elem .block-SectionTitleBlock:first-child .section_divider,
+.sidebar .block-SectionTitleBlock:first-child .section_divider,
+.grid-elem .block-SectionTitleBlock:first-child .block_header,
+.sidebar .block-SectionTitleBlock:first-child .block_header {
+  margin-top: 0;
+}
 @media (max-width: 768px) {
   h2.section_divider {
     padding-left: 10px;

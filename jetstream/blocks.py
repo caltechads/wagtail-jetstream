@@ -483,11 +483,11 @@ class VideoBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'media'
 
 
-STYLE_MAP = {'section_divider': 'jetstream/blocks/heading-section_divider.html',
-             'block_header': 'jetstream/blocks/heading-block_header.html'}
-
-
 class SectionTitleBlock(blocks.StructBlock, BlockTupleMixin):
+    STYLES = {
+        'section_divider': 'jetstream/blocks/heading-section_divider.html',
+        'block_header': 'jetstream/blocks/heading-block_header.html'
+    }
 
     text = blocks.CharBlock(required=True)
     style = blocks.ChoiceBlock(
@@ -501,12 +501,19 @@ class SectionTitleBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     def render(self, value, context=None):
-        if value['style']:
-            setattr(self.meta, 'template', STYLE_MAP[value['style']])
-        return super(SectionTitleBlock, self).render(value, context)
+        """
+        Uses the appropriate template to render this block, based on the 'style' value.
+        """
+        try:
+            template = self.STYLES[value['style']]
+        except KeyError:
+            # If this block somehow doesn't have a known style, fall back to the basic_render() method.
+            return self.render_basic(value, context=context)
+
+        new_context = self.get_context(value, parent_context=context if context is None else dict(context))
+        return mark_safe(render_to_string(template, new_context))
 
     class Meta:
-        template = 'jetstream/blocks/heading-section_divider.html'
         form_classname = 'section-title struct-block'
         label = 'Section Title'
         icon = 'form'
