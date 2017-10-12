@@ -1,8 +1,7 @@
 {% load jetstream_tags wagtailcore_tags bleach_tags %}
 
 <div id="{{ block_id }}-carousel" data-ride="carousel" data-interval="{{ self.cycle_timeout }}"
-  class="carousel {{ self.cycle_effect }} hero-image-carousel"
-  style="height: {{ self.height }}px; width: {{ self.width }}px;"
+  class="carousel slide hero-image-carousel" style="height: {{ self.height }}px; width: {{ self.width }}px;"
 >
   {% if self.slides|length > 1 %}
     <ol class="carousel-indicators">

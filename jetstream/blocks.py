@@ -20,11 +20,6 @@ wh_width_helptext = (
     'layout), set the image to be this many pixels wide.'
 )
 
-CYCLE_EFFECTS = [
-    ('fade', 'Fade'),
-    ('slide', 'Slide'),
-]
-
 
 # ====================
 # Component Sub-blocks
@@ -349,7 +344,6 @@ class HeroImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
         default=1000,
         label="Hero Image Width (pixels)",
     )
-    cycle_effect = blocks.ChoiceBlock(choices=CYCLE_EFFECTS, default='slide')
     cycle_timeout = blocks.IntegerBlock(
         default=10000,
         help_text="The time between automatic image cycles (in milliseonds). Set to 0 to disable automatic cycling."
