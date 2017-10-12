@@ -253,12 +253,8 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
             # If this block somehow doesn't have a known style, fall back to the basic_render() method.
             return self.render_basic(value, context=context)
 
-        if context is None:
-            new_context = self.get_context(value)
-        else:
-            new_context = self.get_context(value, parent_context=dict(context))
+        new_context = self.get_context(value, parent_context=context if context is None else dict(context))
         new_context['extra_classes'] = " ".join(extra_classes)
-
         return mark_safe(render_to_string(template, new_context))
 
     @property
@@ -406,12 +402,8 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
             # If this block somehow doesn't have a known style, fall back to the basic_render() method.
             return self.render_basic(value, context=context)
 
-        if context is None:
-            new_context = self.get_context(value)
-        else:
-            new_context = self.get_context(value, parent_context=dict(context))
+        new_context = self.get_context(value, parent_context=context if context is None else dict(context))
         new_context['extra_classes'] = " ".join(extra_classes)
-
         return mark_safe(render_to_string(template, new_context))
 
 
