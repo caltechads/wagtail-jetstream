@@ -2,15 +2,15 @@
 
 {% image self.image original as img_data %}
 <div class="hero {{ self.style }} {{ self.text_style }} {{ self.position }}" style="height: {{ self.height }}px;">
-    <div class="background" style="background-image: url('{{img_data.url}}'); height: {{self.height }}px;"></div>
-{% if self.desc or self.actions %}
-  <div class="body" style="height: {{ self.height }}px;">
-  <div class="inner">
-    <h1>{{ self.title }}</h1>
-    {{ self.desc|richtext }}
-    {% include_block self.actions %}
-  </div> 
-</div>
-{% endif %}
+  <div class="background" style="background-image: url('{{ img_data.url }}'); height: {{ self.height }}px;"></div>
+  {% if self.desc or self.actions %}
+    <div class="body" style="height: {{ self.height }}px;">
+      <div class="inner">
+        <h1>{{ self.title }}</h1>
+        {{ self.desc|richtext }}
+        {% include_block self.actions %}
+      </div>
+    </div>
+  {% endif %}
 </div>
 

@@ -1,7 +1,7 @@
 {% load jetstream_tags wagtailcore_tags bleach_tags %}
 
 <div id="{{ block_id }}-carousel" data-ride="carousel" data-interval="{{ self.cycle_timeout }}"
-  class="carousel {{ self.cycle_effect }} hero-image-carousel" 
+  class="carousel {{ self.cycle_effect }} hero-image-carousel"
   style="height: {{ self.height }}px; width: {{ self.width }}px;"
 >
   {% if self.slides|length > 1 %}
@@ -24,18 +24,20 @@
           <a class="image-link" href="{{ link_url }}"><span></span></a>
         {% endif %}
         {% arbitrary_image slide.image 'fill' self.width self.height %}
-        <div class="text-gradient">
-          <div class="carousel-caption">
-            <div class="hero-image-caption-title">
-              {% if link_url %}
-                <a class="title-link" href="{{ link_url }}">{{ slide.title | bleach }}</a>
-              {% else %}
-                {{ slide.title | bleach }}
-              {% endif %}
+        {% if slide.title or slide.text %}
+          <div class="text-gradient">
+            <div class="carousel-caption">
+              <div class="hero-image-caption-title">
+                {% if link_url %}
+                  <a class="title-link" href="{{ link_url }}">{{ slide.title | bleach }}</a>
+                {% else %}
+                  {{ slide.title | bleach }}
+                {% endif %}
+              </div>
+              <div class="hero-image-caption-text">{{ slide.text | bleach }}</div>
             </div>
-            <div class="hero-image-caption-text">{{ slide.text | bleach }}</div>
           </div>
-        </div>
+        {% endif %}
       </div>
     {% endfor %}
   </div>
