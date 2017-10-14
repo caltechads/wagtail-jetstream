@@ -547,6 +547,7 @@
   text-indent: 0;
   border-radius: 0;
   border: none;
+  margin: 0;
   width: 75px;
   height: 75px;
 }
@@ -554,6 +555,9 @@
   width: 100%;
   height: 150px;
   position: relative;
+}
+.image-gallery-slider a:hover {
+  text-decoration: none;
 }
 .image-gallery-slider img {
   max-width: 100%;

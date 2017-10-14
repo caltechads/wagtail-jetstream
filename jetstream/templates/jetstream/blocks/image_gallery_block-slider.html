@@ -2,23 +2,23 @@
 
 <div id="{{ block_id }}-carousel" class="carousel slide image-gallery-slider" data-ride="carousel" data-interval="false">
   <div class="carousel-inner" role="listbox" data-featherlight-gallery data-featherlight-filter="a">
-  {% for img in self.images %}
-    {% image img original as full_img %}
-    <a class="{% if forloop.counter0 == 0 %}item active{% else %}item{% endif %}" href="{{ full_img.url }}">
-      {% if self.fixed_dimensions.use %}
-        {% responsive_image img 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
-      {% elif parent_width %}
-        {% if parent_height %}
-          {% responsive_image img 'fill' parent_width parent_height %}
+    {% for img in self.images %}
+      {% image img original as full_img %}
+      <a class="{% if forloop.counter0 == 0 %}item active{% else %}item{% endif %}" href="{{ full_img.url }}">
+        {% if self.fixed_dimensions.use %}
+          {% responsive_image img 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+        {% elif parent_width %}
+          {% if parent_height %}
+            {% responsive_image img 'fill' parent_width parent_height %}
+          {% else %}
+            {% responsive_image img 'width' parent_width %}
+          {% endif %}
         {% else %}
-          {% responsive_image img 'width' parent_width %}
+          {% image img original %}
         {% endif %}
-      {% else %}
-        {% image img original %}
-      {% endif %}
-      {% include 'jetstream/image_details.html' with image=img %}
-    </a>
-  {% endfor %}
+        {% include 'jetstream/image_details.html' with image=img %}
+      </a>
+    {% endfor %}
   </div>
 
   <div class="carousel-indicators-container">
