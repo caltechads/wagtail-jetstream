@@ -43,8 +43,16 @@
     });
   }
 
+  function image_carousel_block_mobile_helper() {
+    // On mobile, the ImageCarouselBlocks need some extra help to remain "pretty".
+    if (Modernizr.mobile) {
+      $('.block-ImageCarouselBlock .image-carousel').removeAttr('style');
+    }
+  }
+
   $(document).ready(function() {
     set_up_video_blocks();
+    image_carousel_block_mobile_helper();
   });
 
   $(window).load(function() {

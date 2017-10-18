@@ -604,6 +604,9 @@
 .image-carousel .carousel-inner {
   height: 100%;
 }
+.image-carousel .carousel-inner .item {
+  text-align: center;
+}
 .image-carousel .carousel-inner .item > img {
   height: inherit;
 }
@@ -1488,7 +1491,7 @@ h3.block_header {
   color: #ff6e1e;
   font-size: 1.1em;
   font-family: VaudMedium, sans-serif;
-  padding-bottom: 10px;
+  padding: 0 10px 10px;
 }
 .grid-elem .block-SectionTitleBlock:first-child .section_divider,
 .sidebar .block-SectionTitleBlock:first-child .section_divider,
@@ -1505,6 +1508,11 @@ h3.block_header {
 @media (max-width: 500px) {
   h2.section_divider {
     font-size: 1.2em;
+  }
+}
+@media (min-width: 1000px) {
+  h3.block_header {
+    padding: 0 0 10px;
   }
 }
 /**************** Fancy Rich Text ***************/

@@ -1,3 +1,4 @@
+from __future__ import division
 import re
 
 from django import template
@@ -92,9 +93,8 @@ class ResponsiveImageNode(ImageNode):
         try:
             image = self.image_expr.resolve(context)
             mode = self.mode_expr.resolve(context)
-            # Set an unprovided dimension to a large value so that the square_spec will choose the other one.
-            width = int(self.width_expr.resolve(context)) if self.width_expr else 99999
-            height = int(self.height_expr.resolve(context)) if self.height_expr else 99999
+            width = int(self.width_expr.resolve(context)) if self.width_expr else 1
+            height = int(self.height_expr.resolve(context)) if self.height_expr else 1
         except template.VariableDoesNotExist:
             return ''
 
@@ -110,24 +110,35 @@ class ResponsiveImageNode(ImageNode):
             base_spec = "{}-{}x{}-c100".format(mode, width, height)
         base_rendition = get_rendition_or_not_found(image, Filter(spec=base_spec))
 
-        # Build another filter spec that generates a square rendition with length and width equal to the shortest side.
-        square_spec = "{}-{}x{}-c100".format(mode, min(width, height), min(width, height))
-        square_rendition = get_rendition_or_not_found(image, Filter(spec=square_spec))
-
         # Build the fallback <img> tag for browsers that don't support <picture>.
         custom_attrs = {attr_name: expression.resolve(context) for attr_name, expression in self.attrs.items()}
         img_tag = base_rendition.img_tag(custom_attrs)
 
-        # For now, we render just two sources:
-        # - the full-size rendition, which we let the browser resise for us on < 1000px devices
-        # - a square rendition which we display on portrait oriented phones only.
-        return """
-            <picture>
-              <source srcset="{square.url}" media="(max-width: 499px)">
-              <source srcset="{full.url}" media="(min-width: 500px)">
-              {img_tag}
-            </picture>
-        """.format(img_tag=img_tag, full=base_rendition, square=square_rendition)
+        if width > 425:
+            # If the image is wider than a phone, add an additional, smaller rendition with the same aspect ratio.
+            small_width = 425
+            # Two notes here:
+            # 1) We used 'from __future__ import division' to make this use floating point division.
+            # 2) Filter specs don't accept floats, so we need to cast back to int at the end.
+            small_height = int(height * (small_width / width))
+            small_spec = "{}-{}x{}-c100".format(mode, small_width, small_height)
+            small_rendition = get_rendition_or_not_found(image, Filter(spec=small_spec))
+
+            return """
+                <picture>
+                  <source srcset="{small.url}" media="(max-width: 499px)">
+                  <source srcset="{full.url}" media="(min-width: 500px)">
+                  {img_tag}
+                </picture>
+            """.format(img_tag=img_tag, full=base_rendition, small=small_rendition)
+        else:
+            # If the base rendition is already smaller than a phone, we dont need a second rendition.
+            return """
+                <picture>
+                  <source srcset="{full.url}" media="(min-width: 500px)">
+                  {img_tag}
+                </picture>
+            """.format(img_tag=img_tag, full=base_rendition)
 
 
 class ArbitraryImageNode(ImageNode):

@@ -20,7 +20,7 @@ h3.block_header {
   color: @orange;
   font-size: 1.1em;
   font-family: @font_vaud_medium;
-  padding-bottom: 10px;
+  padding: 0 10px 10px;
 }
 
 // Remove the top margin from both types of SectionTitleBlocks if they're the first element in a column/sidebar.
@@ -42,5 +42,11 @@ h3.block_header {
 @media (max-width: @small_viewport) {
   h2.section_divider {
     font-size: 1.2em;
+  }
+}
+
+@media (min-width: @desktop_viewport) {
+  h3.block_header {
+    padding: 0 0 10px;
   }
 }
