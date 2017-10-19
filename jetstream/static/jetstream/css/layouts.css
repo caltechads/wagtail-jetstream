@@ -441,7 +441,7 @@
 .sidebar-layout section:last-child {
   margin-bottom: 0;
 }
-@media (min-device-width: 480px) and (max-device-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   .sidebar-layout > .rich-text {
     padding-left: 10px;
     padding-right: 10px;
@@ -647,7 +647,7 @@
 .image-carousel .image-carousel-caption-text a:visited:hover {
   text-decoration: none;
 }
-@media (min-device-width: 480px) and (max-device-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   .block-ImageCarouselBlock img {
     width: 100%;
     height: auto;
@@ -871,7 +871,7 @@
   line-height: 1.4em;
   font-family: Vaud, sans-serif;
 }
-@media (min-device-width: 480px) and (max-device-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   .block-HeroImageBlock .hero.regular-width,
   .block-HeroImageBlock .hero.full-width {
     height: 60vw !important;
@@ -1018,7 +1018,7 @@
   width: 100%;
   height: auto;
 }
-@media (min-device-width: 480px) and (max-device-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   .block-ImagePanelBlock .image-panel-link {
     width: 100%;
   }
@@ -1079,7 +1079,7 @@
 .block-ImagePanelBlock .left .media-body {
   padding-left: 25px;
 }
-@media (min-device-width: 480px) and (max-device-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   .block-ImagePanelBlock .card img {
     width: 100%;
     height: auto;
@@ -1196,7 +1196,7 @@
   font-size: 1em;
 }
 /*** Responsive Rules ***/
-@media (min-device-width: 480px) and (max-device-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   .image-panel-rollover .entry {
     float: none;
   }
@@ -1547,7 +1547,7 @@ h3.block_header {
 .fancy-rich-text > .rich-text {
   padding-right: 25px;
 }
-@media (min-device-width: 480px) and (max-device-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   .fancy-rich-text > .rich-text {
     padding-left: 10px;
     padding-right: 10px;
@@ -1950,7 +1950,7 @@ h3.block_header {
   font-style: italic;
   display: block;
 }
-@media (min-device-width: 480px) and (max-device-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   .image-details {
     padding-left: 10px;
     padding-right: 10px;

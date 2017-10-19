@@ -58,8 +58,10 @@
 }
 
 // For landscape-mode phones:
-@media (min-device-width: @screen-phone)
-        and (max-device-width: @screen-tablet) {
+// rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
+// with these rules IS what we want, even though it's applying to more than we say it should be.
+@media (min-width: @screen-phone)
+        and (max-width: @screen-tablet) {
   .block-ImagePanelBlock {
     .card img {
       width: 100%;
