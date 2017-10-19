@@ -105,20 +105,24 @@
 // Rules specifically for phone and portrait tablet view. I don't like doing this, since it violates mobile-first.
 // Unfortunately, it's the best solution I can think of due to the complexity of the column layout styles.
 @media (max-width: @medium_viewport) {
-  .row, .grid-elem {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
   .row-wrapper {
     &.full-width .row {
-        width: 100%;
+      width: 100%;
     }
     &.padded .row {
       padding-left: 0;
       padding-right: 0;
     }
+  }
+}
+// Only remove the inter-column padding on the smallest devices, since anything larger than a portrait phone shows
+// multiple columns.
+@media (max-width: @small_viewport) {
+  .row, .grid-elem {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
 

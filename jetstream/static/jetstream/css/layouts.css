@@ -305,13 +305,6 @@
   margin-top: 0;
 }
 @media (max-width: 768px) {
-  .row,
-  .grid-elem {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-  }
   .row-wrapper.full-width .row {
     width: 100%;
   }
@@ -320,7 +313,16 @@
     padding-right: 0;
   }
 }
-@media (min-device-width: 480px) and (max-device-width: 768px) {
+@media (max-width: 500px) {
+  .row,
+  .grid-elem {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+@media (min-width: 480px) and (max-width: 768px) {
   .block-two_column_layout .col-md-1,
   .block-two_column_layout .col-md-2,
   .block-two_column_layout .col-md-3,
