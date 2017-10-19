@@ -551,6 +551,7 @@
   margin: 0;
   width: 75px;
   height: 75px;
+  margin: 5px 5px 0 0;
 }
 .image-gallery-slider .carousel-indicators-container {
   width: 100%;

@@ -22,15 +22,17 @@
   </div>
 
   <div class="carousel-indicators-container">
-    <ol class="carousel-indicators">
-      {% for img in self.images %}
-        {% if forloop.counter0 == 0 %}
-          <li data-target="#{{ block_id }}-carousel" data-slide-to="0" class="active">{% image img fill-75x75 %}</li>
-        {% else %}
-          <li data-target="#{{ block_id }}-carousel" data-slide-to="{{ forloop.counter0 }}">{% image img fill-75x75 %}</li>
-        {% endif %}
-      {% endfor %}
-    </ol>
+    {% spaceless %}
+      <ol class="carousel-indicators">
+        {% for img in self.images %}
+          {% if forloop.counter0 == 0 %}
+            <li data-target="#{{ block_id }}-carousel" data-slide-to="0" class="active">{% image img fill-75x75 %}</li>
+          {% else %}
+            <li data-target="#{{ block_id }}-carousel" data-slide-to="{{ forloop.counter0 }}">{% image img fill-75x75 %}</li>
+          {% endif %}
+        {% endfor %}
+      </ol>
+    {% endspaceless %}
   </div>
 
   <!-- These must be here for the carousel to cycle correctly. We can set them to hidden in CSS. -->
