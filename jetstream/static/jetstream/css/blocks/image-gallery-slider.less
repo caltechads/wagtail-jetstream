@@ -3,12 +3,12 @@
     display: none;
   }
 
+  // These rules override a bunch of stuff from bootstrap.
   .carousel-indicators {
-    bottom: 40px;
-    top: auto;
-    left: 0;
+    position: static;
     width: auto;
-    margin-left: auto;
+    margin-left: 0;
+    text-align: start;
 
     li {
       text-indent: 0;
@@ -22,8 +22,8 @@
 
   .carousel-indicators-container {
     width: 100%;
-    height: 150px;
     position: relative;
+    margin-top: 15px;
   }
 
   a:hover {
