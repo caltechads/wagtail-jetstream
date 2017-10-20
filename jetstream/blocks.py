@@ -561,35 +561,6 @@ class FancyRichTextBlock(blocks.StructBlock, BlockTupleMixin):
 
 
 ###############################################################################
-######################### DEPRECATED BLOCK TYPES ##############################
-###############################################################################
-class ImageLinkBlock(blocks.StructBlock, BlockTupleMixin):
-
-    image = ImageChooserBlock(required=True)
-    title = blocks.CharBlock(required=False)
-    subtitle = blocks.CharBlock(required=False)
-    link = LinkBlock()
-    fixed_dimensions = DimensionsOptionsBlock()
-
-    class Meta:
-        label = 'Image Link'
-        template = 'jetstream/blocks/image_link_block.html'
-        form_classname = 'image-link struct-block'
-        icon = 'image'
-
-
-class CaptionedImageBlock(blocks.StructBlock, BlockTupleMixin):
-    image = ImageChooserBlock(required=True)
-    fixed_dimensions = DimensionsOptionsBlock()
-
-    class Meta:
-        label = 'Captioned Image'
-        template = 'jetstream/blocks/captioned_image_block.html'
-        form_classname = 'captioned-image struct-block'
-        icon = 'image'
-
-
-###############################################################################
 ########################### LAYOUT BLOCK TYPES ################################
 ###############################################################################
 # These go at the end because they need to include all of the content blocks defined above.
