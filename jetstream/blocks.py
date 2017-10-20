@@ -214,7 +214,6 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         ),
         ('image_listing_left', 'Listing (Image Left)', 'jetstream/blocks/image_panel_block-listing.html', ['left']),
         ('image_listing_right', 'Listing (Image Right)', 'jetstream/blocks/image_panel_block-listing.html', ['right']),
-        ('hero', 'Hero Image', 'jetstream/blocks/image_panel_block-hero.html', []),
     )
 
     image = ImageChooserBlock()
