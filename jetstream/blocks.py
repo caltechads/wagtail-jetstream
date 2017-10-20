@@ -260,7 +260,7 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         )
 
     def js_initializer(self):
-        return "image_panel"
+        return 'image_panel'
 
 
 class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
@@ -271,25 +271,30 @@ class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
             ('full-width', 'Full Width')
         ],
         default='regular-width',
-        label="Overall style"
+        label='Overall style',
+        help_text=('Regular Width fills the normal page area. '
+                  'Full Width fills the entire width of the browser. Shorter images will be tiled.')
     )
     text_style = blocks.ChoiceBlock(
         choices=[
-            ('bare-serif', 'Bare text'),
-            ('white-translucent-serif', 'White translucent background behind text')
+            ('bare-serif', 'Bare text w/ serif font'),
+            ('bare-sans-serif', 'Bare text w/ sans-serif font'),
+            ('white-translucent-serif', 'White translucent background behind serif text'),
+            ('white-translucent-sans-serif', 'White translucent background behind sans-serif text'),
         ],
         default='white-translucent-serif',
-        label="Text style"
+        label='Text style'
     )
     image = ImageChooserBlock()
     title = blocks.CharBlock(required=False)
     desc = blocks.RichTextBlock(
         required=False,
-        label="Text"
+        label='Text'
     )
+    link = LinkBlock()
     height = blocks.IntegerBlock(
         default=500,
-        label="Height (pixels)"
+        label='Height (pixels)'
     )
     position = blocks.ChoiceBlock(
         choices=[
@@ -303,17 +308,17 @@ class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
             ('position-bottom-middle', 'Bottom Middle'),
             ('position-bottom-right', 'Bottom Right'),
         ],
-        default=('middle', "Middle"),
-        label="Text Position"
+        default=('middle', 'Middle'),
+        label='Text Position'
     )
     actions = ActionButtonBarBlock(
-        label="Action Buttons",
+        label='Action Buttons',
         required=False
     )
 
     class Meta:
         label = 'Hero Image'
-        template = 'jetstream/blocks/hero_image_block-hero.html'
+        template = 'jetstream/blocks/hero_image_block.html'
         form_classname = 'hero-image struct-block'
         icon = 'image'
 

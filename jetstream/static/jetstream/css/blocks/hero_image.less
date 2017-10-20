@@ -14,22 +14,15 @@
         margin-left: -@responsive_grid_w / 2;
       }
     }
-    .background {
-      background-position: center;
-    }
-    .body {
-      position: absolute;
-      width: 100%;
-      top: 0;
-      left: 0;
-    }
-    .inner {
-      position: absolute;
-      padding: 2em;
-      max-width: 60%;
-    }
     &.white-translucent-serif .inner {
       background-color: rgba(255, 255, 255, 0.3);
+    }
+    &.bare-sans-serif, &.white-translucent-sans-serif {
+      font-family: @font_vaud;
+      
+      h1 {
+        font-family: @font_vaud_medium;
+      }
     }
     &.position-top-left .inner {
       top: 5%;
@@ -81,16 +74,37 @@
       right: 0;
       text-align: right;
     }
+
+    .background {
+      background-position: center;
+    }
+
+    .body {
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+    }
+
+    .inner {
+      position: absolute;
+      padding: 2em;
+      max-width: 60%;
+    }
+
     .action-button-bar{
       margin-top: 2em;
+
       a, a:visited {
         color: white;
       }
+
       .btn {
           font-size: 1.2em;
           font-family: @font_vaud;
           margin-right: 10px;
       }
+
       .btn-primary {
         background-color: @orange;
         border: none;
@@ -98,6 +112,7 @@
           background-color: lighten(@orange, 10%);
         }
       }
+
       a.btn-default {
         background-color: @white;
         border: none;
@@ -106,6 +121,7 @@
         }
         color: @dkgray;
       }
+
       a.btn-info {
         background-color: transparent;
         border: none;
@@ -114,6 +130,7 @@
         }
       }
     }
+
     h1, h2, h3, h4 {
       margin-top: 0;
       margin-bottom: 0;
@@ -150,27 +167,33 @@
     .hero.regular-width,
     .hero.full-width {
       height: 60vw !important;
+
       .body {
         height: 60vw !important;
         width: 100%;
         margin: 0;
         left: 0;
       }
+
       .background {
         height: 60vw !important;
         background-size: 100%;
       }
     }
+
     .hero {
       h1 {
         font-size: 1.8em;
       }
+
       h2 {
         font-size: 1.2em;
       }
+
       h3 {
         font-size: 1em;
       }
+
       p {
         font-size: 1em;
       }
@@ -188,16 +211,19 @@
         margin:0;
         left:0;
         right:0;
+
         .background {
           height: 60vw !important;
           background-size: 100%;
         }
+
         .body {
           position: static;
           height: auto !important;
           left: 0;
           margin: 0;
           width: 100%;
+
           .inner {
             text-align: center;
             height: auto !important;
@@ -210,21 +236,27 @@
           }
         }
       }
+
       h1, h2, h3, h4, p {
         color: black;
       }
+
       h1 {
         font-size: 1.8em;
       }
+
       h2 {
         font-size: 1.2em;
       }
+
       h3 {
         font-size: 1em;
       }
+
       p {
         font-size: 0.8em;
       }
+
       .action-button-bar {
         a.btn-info, a.btn-info:visited {
           color: black;

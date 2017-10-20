@@ -1,16 +1,22 @@
 {% load wagtailcore_tags wagtailimages_tags jetstream_tags %}
 
 {% image self.image original as img_data %}
+{% link_url self.link as url %}
 <div class="hero {{ self.style }} {{ self.text_style }} {{ self.position }}" style="height: {{ self.height }}px;">
   <div class="background" style="background-image: url('{{ img_data.url }}'); height: {{ self.height }}px;"></div>
-  {% if self.desc or self.actions %}
+  {% if self.desc.source or self.actions.actions or self.title %}
     <div class="body" style="height: {{ self.height }}px;">
       <div class="inner">
-        <h1>{{ self.title }}</h1>
-        {{ self.desc|richtext }}
+        <h1>
+          {% if url %}
+            <a href="{{ url }}">{{ self.title }}</a>
+          {% else %}
+            {{ self.title }}
+          {% endif %}
+        </h1>
+        {{ self.desc | richtext }}
         {% include_block self.actions %}
       </div>
     </div>
   {% endif %}
 </div>
-
