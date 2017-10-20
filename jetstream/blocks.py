@@ -290,7 +290,6 @@ class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
         required=False,
         label='Text'
     )
-    link = LinkBlock()
     height = blocks.IntegerBlock(
         default=500,
         label='Height (pixels)'
