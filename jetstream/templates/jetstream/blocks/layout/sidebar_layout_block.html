@@ -5,7 +5,7 @@
     <div class="sidebar" style="width: {{ my_width }}px; float: {{ self.sidebar_alignment }};">
       {% for block in self.sidebar %}
         <section class="block-{{ block.block_type }}">
-          {% include_block block with parent_width=my_width parent_height=self.fixed_height block_id=block.id %}
+          {% include_block block with parent_width=my_width parent_height=self.fixed_height %}
         </section>
       {% endfor %}
     </div>

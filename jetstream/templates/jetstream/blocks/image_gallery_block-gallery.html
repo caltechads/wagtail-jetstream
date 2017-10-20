@@ -1,6 +1,6 @@
 {% load static jetstream_tags wagtailimages_tags %}
 
-<section id="{{ block_id }}-gallery" class="image-gallery-gallery" data-featherlight-gallery data-featherlight-filter="a">
+<section id="{{ block.id }}-gallery" class="image-gallery-gallery" data-featherlight-gallery data-featherlight-filter="a">
   {% for img in self.images %}
     {% image img original as full_img %}
     <a class="gallery-item" href="{{ full_img.url }}"
