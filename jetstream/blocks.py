@@ -63,11 +63,7 @@ class LinkBlock(blocks.StructBlock):
             return value['url']
 
     class Meta:
-        # By giving this entire block the label "Page", we can use some css in core/admin.less to "get rid of" the
-        # unnecessary label that Wagtail adds to this block, by labeling the block as "Page" and then hiding the label
-        # of the actual Page field. This is super gross, but there's no other way to do it because form_classname gets
-        # applied to the preceding sibling of the offending label, rather than a parent.
-        label = 'Page'
+        label = 'Link'
         form_classname = 'link-block'
 
 
