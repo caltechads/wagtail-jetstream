@@ -198,10 +198,12 @@ def link_url(block):
     Accessory tag to our LinkBlock sub component that returns the linked page if it exists, or the linked
     URL. If neither are specified, returns None.
     """
-    if block['page']:
+    if block.get('page'):
         return block['page'].full_url
-    else:
+    elif block.get('url'):
         return block['url']
+    else:
+        return None
 
 
 @register.simple_tag()
