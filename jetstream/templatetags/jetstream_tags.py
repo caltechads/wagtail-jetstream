@@ -114,31 +114,22 @@ class ResponsiveImageNode(ImageNode):
         custom_attrs = {attr_name: expression.resolve(context) for attr_name, expression in self.attrs.items()}
         img_tag = base_rendition.img_tag(custom_attrs)
 
-        if width > 425:
-            # If the image is wider than a phone, add an additional, smaller rendition with the same aspect ratio.
-            small_width = 425
-            # Two notes here:
-            # 1) We used 'from __future__ import division' to make this use floating point division.
-            # 2) Filter specs don't accept floats, so we need to cast back to int at the end.
-            small_height = int(height * (small_width / width))
-            small_spec = "{}-{}x{}-c100".format(mode, small_width, small_height)
-            small_rendition = get_rendition_or_not_found(image, Filter(spec=small_spec))
+        # If the image is wider than a phone, add an additional, smaller rendition with the same aspect ratio.
+        small_width = 425
+        # Two notes here:
+        # 1) We used 'from __future__ import division' to make this use floating point division.
+        # 2) Filter specs don't accept floats, so we need to cast back to int at the end.
+        small_height = int(height * (small_width / width))
+        small_spec = "{}-{}x{}-c100".format(mode, small_width, small_height)
+        small_rendition = get_rendition_or_not_found(image, Filter(spec=small_spec))
 
-            return """
-                <picture>
-                  <source srcset="{small.url}" media="(max-width: 499px)">
-                  <source srcset="{full.url}" media="(min-width: 500px)">
-                  {img_tag}
-                </picture>
-            """.format(img_tag=img_tag, full=base_rendition, small=small_rendition)
-        else:
-            # If the base rendition is already smaller than a phone, we dont need a second rendition.
-            return """
-                <picture>
-                  <source srcset="{full.url}" media="(min-width: 500px)">
-                  {img_tag}
-                </picture>
-            """.format(img_tag=img_tag, full=base_rendition)
+        return """
+            <picture>
+              <source srcset="{small.url}" media="(max-width: 499px)">
+              <source srcset="{full.url}" media="(min-width: 500px)">
+              {img_tag}
+            </picture>
+        """.format(img_tag=img_tag, full=base_rendition, small=small_rendition)
 
 
 class ArbitraryImageNode(ImageNode):
