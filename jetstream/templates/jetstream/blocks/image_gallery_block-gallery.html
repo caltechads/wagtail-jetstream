@@ -1,25 +1,17 @@
 {% load static jetstream_tags wagtailimages_tags %}
 
-<section id="{{ block.id }}-gallery" class="image-gallery-gallery" data-featherlight-gallery data-featherlight-filter="a">
-  {% for img in self.images %}
-    {% image img original as full_img %}
-    <a class="gallery-item" href="{{ full_img.url }}"
-      {% if self.fixed_dimensions.use %}
-        style="width: {{ self.fixed_dimensions.width }}px"
+<section id="{{ block.id }}-gallery" class="image-gallery-gallery clearfix" data-featherlight-gallery data-featherlight-filter="a">
+  <div class="row clearfix">
+    {% for img in self.images %}
+      {% image img original as full_img %}
+      <a class="gallery-item col-md-{{ bootstrap_column_width }}" href="{{ full_img.url }}">
+        {% get_gallery_image_width as width %}
+        {% responsive_image img 'fill' width self.height %}
+        {% include 'jetstream/image_details.html' with image=img %}
+      </a>
+      {% if forloop.counter|divisibleby:self.columns and not forloop.last %}
+        </div><div class="row clearfix">
       {% endif %}
-    >
-      {% if self.fixed_dimensions.use %}
-        {% responsive_image img 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
-      {% elif parent_width %}
-        {% if parent_height %}
-          {% responsive_image img 'fill' parent_width parent_height %}
-        {% else %}
-          {% responsive_image img 'width' parent_width %}
-        {% endif %}
-      {% else %}
-        {% image img original %}
-      {% endif %}
-      {% include 'jetstream/image_details.html' with image=img %}
-    </a>
-  {% endfor %}
+    {% endfor %}
+  </div>
 </section>

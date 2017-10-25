@@ -223,6 +223,17 @@ def page_siblings(page, only_published=True):
     return queryset
 
 
+@register.simple_tag(takes_context=True)
+def get_gallery_image_width(context):
+    parent_width = context.get('parent_width', None)
+    if parent_width is None:
+        parent_width = 1000
+
+    number_of_gutters = context['self']['columns'] - 1
+    available_pixels = parent_width - (12 * number_of_gutters)
+    return available_pixels / context['self']['columns']
+
+
 # ---------------
 # UTIL FUNCTIONS
 # ---------------

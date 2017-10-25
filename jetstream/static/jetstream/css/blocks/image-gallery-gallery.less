@@ -1,16 +1,51 @@
 .image-gallery-gallery {
+  .row:not(:last-child) {
+    padding-bottom: 12px;
+  }
+
   .gallery-item {
-    margin: 6px;
-    float: left;
-    &:hover {
-      text-decoration: none
-    }
-    &:first-child {
-      margin-left: 0;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
+    display: block;
+  }
+
+  // Has no effect on desktop because we build the main rendition pixel-perfect. But it's needed on phones and tablets.
+  img {
+    width: 100%;
+    height: auto;
   }
 }
 
+@media (min-width: @screen-phone)
+        and (max-width: @screen-tablet) {
+  .image-gallery-gallery {
+    // This rule is restricted because we don't want them floating on phones, and Bootstrap floats them on desktop.
+    .gallery-item {
+      float: left;
+    }
+
+    // For some reason, Bootstrap excludes these rules on portrait tablets. So I added them back.
+    .col-md-2 {
+      width: 16.666%;
+    }
+    .col-md-3 {
+      width: 25%;
+    }
+    .col-md-4 {
+      width: 33%;
+    }
+    .col-md-5 {
+      width: 41.6666%;
+    }
+    .col-md-6 {
+      width: 50%;
+    }
+    .col-md-7 {
+      width: 58.3333%;
+    }
+    .col-md-8 {
+      width: 66.6666%;
+    }
+    .col-md-9 {
+      width: 75%;
+    }
+  }
+}

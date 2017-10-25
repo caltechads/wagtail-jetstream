@@ -24,6 +24,21 @@ wh_width_helptext = (
 # ====================
 # Component Sub-blocks
 # ====================
+class IntegerChoiceBlock(blocks.ChoiceBlock):
+    """
+    A ChoiceBlock for intergers only. Using this instead of ChoiceBlock ensures that
+    """
+
+    def to_python(self, value):
+        return int(value)
+
+    def get_prep_value(self, value):
+        return int(value)
+
+    def value_from_form(self, value):
+        return int(value)
+
+
 class LinkBlock(blocks.StructBlock):
     """
     Allows a user to optionally link the containing block to a Page or a relative or absolute URL.
@@ -377,13 +392,20 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
     Renders an Image Gallery in a variety of styles.
     """
     STYLES = (
-        ('galery', 'Image Gallery', 'jetstream/blocks/image_gallery_block-gallery.html', []),
+        ('gallery', 'Image Gallery', 'jetstream/blocks/image_gallery_block-gallery.html', []),
         ('slider', 'Image Slider w/ Thumbnail Picker', 'jetstream/blocks/image_gallery_block-slider.html', []),
     )
+    # Only factors of 12 are allowed, because we use a 12-column layout.
+    COLUMN_CHOICES = [(1, 1), (2, 2), (3, 3), (4, 4), (6, 6)]
 
     style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default='normal')
-    images = blocks.ListBlock(ImageChooserBlock(label='image'))
-    fixed_dimensions = DimensionsOptionsBlock()
+    columns = IntegerChoiceBlock(choices=COLUMN_CHOICES, default=3)
+    height = blocks.IntegerBlock(
+        default=300,
+        label='Height (pixels)',
+        help_text="Images' widths will be scaled with the number of columns. This field determines their height."
+    )
+    images = blocks.ListBlock(ImageChooserBlock(label='Image'))
 
     class Meta:
         label = 'Image Gallery'
@@ -403,6 +425,7 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
 
         new_context = self.get_context(value, parent_context=context if context is None else dict(context))
         new_context['extra_classes'] = " ".join(extra_classes)
+        new_context['bootstrap_column_width'] = 12 / value['columns']
         return mark_safe(render_to_string(template, new_context))
 
 
