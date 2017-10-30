@@ -70,6 +70,11 @@
 }
 
 .row-wrapper {
+  &.regular-width {
+    // Fixes the odd problem with bootstrap's column CSS that makes it too wide, allowing tablets to scroll.
+    overflow-x: hidden;
+  }
+
   &.full-width {
     position: relative;
     width: 100vw;
