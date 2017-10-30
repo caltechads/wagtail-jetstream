@@ -428,6 +428,15 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
         new_context['bootstrap_column_width'] = 12 / value['columns']
         return mark_safe(render_to_string(template, new_context))
 
+    @property
+    def media(self):
+        return forms.Media(
+            js=['jetstream/js/admin/image-gallery.js']
+        )
+
+    def js_initializer(self):
+        return 'image_gallery'
+
 
 class SpacerBlock(blocks.StructBlock):
 
