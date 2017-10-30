@@ -1,5 +1,6 @@
 from __future__ import division
 import re
+import uuid
 
 from django import template
 from django.utils.safestring import mark_safe
@@ -223,6 +224,15 @@ def get_gallery_image_width(context):
     number_of_gutters = context['self']['columns'] - 1
     available_pixels = parent_width - (12 * number_of_gutters)
     return available_pixels / context['self']['columns']
+
+
+@register.simple_tag()
+def generate_unique_id():
+    """
+    Used by the carousel block templates to generate unique IDs when they can't get one from the block itself.
+    """
+    unique_id = uuid.uuid4()
+    return unique_id
 
 
 # ---------------
