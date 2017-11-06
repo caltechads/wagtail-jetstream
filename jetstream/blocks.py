@@ -1,9 +1,21 @@
+from collections import OrderedDict
 from django import forms
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
+from djunk.middleware import get_current_request
 from wagtail.wagtailcore import blocks
+from wagtail.wagtailcore.blocks import BaseStreamBlock, BaseStructBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
+
+try:
+    # Imports the register_feature decorator from the 'features' module.
+    from features.registry import register_feature, registry
+except ImportError:
+    # If features isn't installed, @register_feature becomes a noop, and the registry is empty.
+    def register_feature(**kwargs):
+        return lambda klass: klass
+    registry = {'default': set(), 'special': set()}
 
 from .utils import BACKGROUND_COLORS, FOREGROUND_COLORS, get_block_tuple, BlockTupleMixin
 
@@ -19,6 +31,114 @@ wh_width_helptext = (
     'If "Fixed Dimensions" is checked, or if this block is placed outside a layout element (e.g. outside a N-Column '
     'layout), set the image to be this many pixels wide.'
 )
+
+
+class FeatureCustomizedStreamBlock(blocks.StreamBlock):
+    """
+    Identical to StreamBlock, except that we override the constructor to make it save self._base_blocks and
+    self._dependencies, instead of self.base_blocks and self.dependencies. This lets us replace them with @properties.
+    """
+
+    def __init__(self, local_blocks=None, **kwargs):
+        self._constructor_kwargs = kwargs
+
+        # Note, this is calling BaseStreamBlock's super __init__, not FeatureCustomizedStreamBlock's. We don't want
+        # BaseStreamBlock.__init__() to run, because it tries to assign to self.child_blocks, which it can't do because
+        # we've overriden it with an @property. But we DO want Block.__init__() to run.
+        super(BaseStreamBlock, self).__init__(**kwargs)
+
+        # create a local (shallow) copy of base_blocks so that it can be supplemented by local_blocks
+        self._child_blocks = self.base_blocks.copy()
+        if local_blocks:
+            for name, block in local_blocks:
+                block.set_name(name)
+                self._child_blocks[name] = block
+
+        self._dependencies = self._child_blocks.values()
+
+    @property
+    def child_blocks(self):
+        request = get_current_request()
+        # Protect against crashing in case this ever runs outside of a request cycle.
+        if request is None:
+            return self._child_blocks
+        return OrderedDict([
+            item for item in self._child_blocks.items() if item[0] not in request.site.features.disabled_defaults
+        ])
+
+    @property
+    def dependencies(self):
+        request = get_current_request()
+        # Protect against crashing in case this ever runs outside of a request cycle.
+        if request is None:
+            return self._child_blocks
+        return [block for block in self._dependencies if block.name not in request.site.features.disabled_defaults]
+
+
+class FeatureCustomizedStructBlock(blocks.StructBlock):
+    """
+    Identical to StreamBlock, except that we override the constructor to make it save self._base_blocks,
+    self._dependencies, and self._child_js_initializers instead. This lets us replace them with @properties.
+    """
+
+    def __init__(self, local_blocks=None, **kwargs):
+        self._constructor_kwargs = kwargs
+
+        super(BaseStructBlock, self).__init__(**kwargs)
+
+        # create a local (shallow) copy of base_blocks so that it can be supplemented by local_blocks
+        self._child_blocks = self.base_blocks.copy()
+        if local_blocks:
+            for name, block in local_blocks:
+                block.set_name(name)
+                self._child_blocks[name] = block
+
+        self._child_js_initializers = {}
+        for name, block in self._child_blocks.items():
+            js_initializer = block.js_initializer()
+            if js_initializer is not None:
+                self._child_js_initializers[name] = js_initializer
+
+        self._dependencies = self._child_blocks.values()
+
+    @property
+    def child_blocks(self):
+        """
+        We converted this to an @property so that it can be changed at runtime to match the current site's features.
+        """
+        request = get_current_request()
+        # Protect against crashing in case this ever runs outside of a request cycle.
+        if request is None:
+            return self._child_blocks
+        return OrderedDict([
+            item for item in self._child_blocks.items() if item[0] not in request.site.features.disabled_defaults
+        ])
+
+    @property
+    def child_js_initializers(self):
+        """
+        We converted this to an @property so that it can be changed at runtime to match the current site's features.
+        """
+        request = get_current_request()
+        # Protect against crashing in case this ever runs outside of a request cycle.
+        if request is None:
+            return self._child_js_initializers
+        return {
+            key: value
+            for key, value in self._child_js_initializers.items()
+            if key not in request.site.features.disabled_defaults
+        }
+
+    @property
+    def dependencies(self):
+        """
+        We converted this to an @property so that it can be changed at runtime to match the current site's features.
+        """
+        request = get_current_request()
+        # Protect against crashing in case this ever runs outside of a request cycle.
+        if request is None:
+            return self._child_blocks
+        return [block for block in self._dependencies if block.name not in request.site.features.disabled_defaults]
 
 
 # ====================
@@ -212,10 +332,18 @@ class ColorOptionsBlock(blocks.StructBlock):
         no_label = True
 
 
+class RelatedLinksNodeBlock(blocks.StructBlock):
+    text = blocks.CharBlock(required=True)
+    link = LinkBlock()
+
+    class Meta:
+        template = 'jetstream/blocks/related_link.html'
+
+
 # ======================================================================================================
 # ====================================== MEDIA BLOCKS ==================================================
 # ======================================================================================================
-
+@register_feature(feature_type='default')
 class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = (
         ('link', 'Image Link', 'jetstream/blocks/image_panel_block-link.html', []),
@@ -277,6 +405,7 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         return 'image_panel'
 
 
+@register_feature(feature_type='default')
 class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
 
     style = blocks.ChoiceBlock(
@@ -336,6 +465,7 @@ class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'image'
 
 
+@register_feature(feature_type='default')
 class HeroImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
 
     slides = blocks.ListBlock(
@@ -366,6 +496,7 @@ class HeroImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'image'
 
 
+@register_feature(feature_type='default')
 class ImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
 
     header = blocks.TextBlock(required=False)
@@ -387,6 +518,7 @@ class ImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'image'
 
 
+@register_feature(feature_type='default')
 class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
     """
     Renders an Image Gallery in a variety of styles.
@@ -438,7 +570,8 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
         return 'image_gallery'
 
 
-class SpacerBlock(blocks.StructBlock):
+@register_feature(feature_type='default')
+class SpacerBlock(blocks.StructBlock, BlockTupleMixin):
 
     height = blocks.ChoiceBlock(
         choices=[
@@ -469,14 +602,7 @@ class SpacerBlock(blocks.StructBlock):
         icon = 'arrows-up-down'
 
 
-class RelatedLinksNodeBlock(blocks.StructBlock):
-    text = blocks.CharBlock(required=True)
-    link = LinkBlock()
-
-    class Meta:
-        template = 'jetstream/blocks/related_link.html'
-
-
+@register_feature(feature_type='default')
 class RelatedLinksBlock(blocks.StructBlock, BlockTupleMixin):
     title = blocks.CharBlock(
         required=False,
@@ -496,6 +622,7 @@ class RelatedLinksBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'list-ul'
 
 
+@register_feature(feature_type='default')
 class VideoBlock(blocks.StructBlock, BlockTupleMixin):
 
     video = EmbedBlock(
@@ -514,6 +641,7 @@ class VideoBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'media'
 
 
+@register_feature(feature_type='default')
 class SectionTitleBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = {
         'section_divider': 'jetstream/blocks/heading-section_divider.html',
@@ -550,6 +678,7 @@ class SectionTitleBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'form'
 
 
+@register_feature(feature_type='default')
 class MenuListingBlock(blocks.StructBlock, BlockTupleMixin):
 
     title = blocks.CharBlock(
@@ -576,6 +705,7 @@ class MenuListingBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'list-ul'
 
 
+@register_feature(feature_type='default')
 class FancyRichTextBlock(blocks.StructBlock, BlockTupleMixin):
 
     text = blocks.RichTextBlock(
@@ -637,13 +767,13 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
     background = BackgroundOptionsBlock()
-    left_column = blocks.StreamBlock(
+    left_column = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-left',
         label='Left column content',
         required=False
     )
-    right_column = blocks.StreamBlock(
+    right_column = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-right',
         label='Right column content',
@@ -687,14 +817,14 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
     background = BackgroundOptionsBlock()
-    left_column = blocks.StreamBlock(
+    left_column = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-left',
         label='Left column content',
         required=False
     )
 
-    right_column = blocks.StreamBlock(
+    right_column = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-right',
         label='Right column content',
@@ -717,19 +847,19 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     """
     Duplicate of BaseThreeColumnBlock without the sub block to avoid recursion.
     """
-    left_column = blocks.StreamBlock(
+    left_column = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-left',
         label='Left column content',
         required=False
     )
-    middle_column = blocks.StreamBlock(
+    middle_column = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-right',
         label='Middle column content',
         required=False
     )
-    right_column = blocks.StreamBlock(
+    right_column = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-right',
         label='Right column content',
@@ -789,21 +919,21 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
     background = BackgroundOptionsBlock()
-    left_column = blocks.StreamBlock(
+    left_column = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-left',
         label='Left column content',
         required=False
     )
 
-    middle_column = blocks.StreamBlock(
+    middle_column = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-right',
         label='Middle column content',
         required=False
     )
 
-    right_column = blocks.StreamBlock(
+    right_column = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-right',
         label='Right column content',
@@ -847,22 +977,22 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
     background = BackgroundOptionsBlock()
-    column_one = blocks.StreamBlock(
+    column_one = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         label='Column One Content',
         required=False
     )
-    column_two = blocks.StreamBlock(
+    column_two = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         label='Column Two Content',
         required=False
     )
-    column_three = blocks.StreamBlock(
+    column_three = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         label='Column Three Content',
         required=False
     )
-    column_four = blocks.StreamBlock(
+    column_four = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         label='Column Four Content',
         required=False
@@ -882,7 +1012,7 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
 
 class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):
     text = blocks.RichTextBlock()
-    sidebar = blocks.StreamBlock(
+    sidebar = FeatureCustomizedStreamBlock(
         COLUMN_PERMITTED_BLOCKS,
         icon='arrow-right',
         label='Sidebar',
