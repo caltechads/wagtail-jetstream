@@ -1,7 +1,8 @@
 {% load static jetstream_tags wagtailimages_tags %}
 
 {% generate_unique_id as backup_block_id %}
-<div id="{{ block.id | default:backup_block_id }}-carousel" class="carousel slide image-gallery-slider"
+<div id="{{ block.id | default:backup_block_id }}"
+  class="carousel slide image-gallery-slider"
   data-ride="carousel" data-interval="false"
 >
   <div class="carousel-inner" role="listbox" data-featherlight-gallery data-featherlight-filter="a">
@@ -29,11 +30,11 @@
       <ol class="carousel-indicators">
         {% for img in self.images %}
           {% if forloop.counter0 == 0 %}
-            <li data-target="#{{ block.id | default:backup_block_id }}-carousel" data-slide-to="0" class="active">
+            <li data-target="#{{ block.id | default:backup_block_id }}" data-slide-to="0" class="active">
               {% image img fill-75x75 %}
             </li>
           {% else %}
-            <li data-target="#{{ block.id | default:backup_block_id }}-carousel" data-slide-to="{{ forloop.counter0 }}">
+            <li data-target="#{{ block.id | default:backup_block_id }}" data-slide-to="{{ forloop.counter0 }}">
               {% image img fill-75x75 %}
             </li>
           {% endif %}
@@ -43,11 +44,11 @@
   </div>
 
   <!-- These must be here for the carousel to cycle correctly. We can set them to hidden in CSS. -->
-  <a class="left carousel-control" href="#{{ block.id | default:backup_block_id }}-carousel" role="button" data-slide="prev">
+  <a class="left carousel-control" href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="right carousel-control" href="#{{ block.id | default:backup_block_id }}-carousel" role="button" data-slide="next">
+  <a class="right carousel-control" href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="next">
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>

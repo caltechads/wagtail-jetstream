@@ -80,7 +80,8 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
 # ====================
 class IntegerChoiceBlock(blocks.ChoiceBlock):
     """
-    A ChoiceBlock for intergers only. Using this instead of ChoiceBlock ensures that
+    A ChoiceBlock for intergers only. Using this instead of ChoiceBlock ensures that the value retrieved from the
+    field is an integer instead of a string.
     """
 
     def to_python(self, value):
