@@ -385,7 +385,7 @@ class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
             ('position-bottom-middle', 'Bottom Middle'),
             ('position-bottom-right', 'Bottom Right'),
         ],
-        default=('middle', 'Middle'),
+        default='position-middle',
         label='Text Position'
     )
     actions = ActionButtonBarBlock(
@@ -526,7 +526,7 @@ class SpacerBlock(blocks.StructBlock, BlockTupleMixin):
             (250, 250)
         ],
         blank=False,
-        default=(25, 25),
+        default=25,
         label="Height (pixels)",
         help_text="Add empty vertical space whose height is this many pixels.")
 
@@ -591,7 +591,7 @@ class SectionTitleBlock(blocks.StructBlock, BlockTupleMixin):
         ],
         requried=True,
         blank=False,
-        default=('section_divider', 'Section Divider')
+        default='section_divider'
     )
 
     def render(self, value, context=None):
@@ -626,9 +626,9 @@ class MenuListingBlock(blocks.StructBlock, BlockTupleMixin):
             ('children', 'Page Children')
         ],
         blank=False,
-        default=('siblings', 'Page Siblings'),
-        help_text='"Page Siblings" lists all pages at the same level of the site page heirarchy as this page; '
-                  '"Page Children" lists all pages that are directly below this page in the page heirarchy.'
+        default='siblings',
+        help_text='"Page Siblings" lists all pages at the same level of the site page hierarchy as this page; '
+                  '"Page Children" lists all pages that are directly below this page in the page hierarchy.'
     )
     color = ColorOptionsBlock()
     fixed_dimensions = DimensionsOptionsBlock()
@@ -697,7 +697,7 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     gutter_width = blocks.ChoiceBlock(
         choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
-        default=(12, 12),
+        default=12,
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
@@ -747,7 +747,7 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
     gutter_width = blocks.ChoiceBlock(
         choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
-        default=(12, 12),
+        default=12,
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
@@ -812,7 +812,7 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     gutter_width = blocks.ChoiceBlock(
         choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
-        default=(12, 12),
+        default=12,
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
@@ -849,7 +849,7 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
     gutter_width = blocks.ChoiceBlock(
         choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
-        default=(12, 12),
+        default=12,
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
@@ -907,7 +907,7 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
     gutter_width = blocks.ChoiceBlock(
         choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
-        default=(12, 12),
+        default=12,
         label="Column Gutter Width (pixels)",
         help_text="This determines how wide the spacing between columns will be, in pixels."
     )
