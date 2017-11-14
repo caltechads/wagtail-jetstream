@@ -1,5 +1,12 @@
 @spacer_increment: 25px;
 
+
+/* Sometimes the block before us will end with a float, which
+   makes the spacer block not appear to be its full height */
+.block-SpacerBlock {
+  clear: both;
+}
+
 .spacer-12 { height: 12px; }
 .spacer-20 { height: 20px; }
 .spacer-25 { height: @spacer_increment; }
