@@ -121,7 +121,11 @@ class ResponsiveImageNode(ImageNode):
         # 1) We used 'from __future__ import division' to make this use floating point division.
         # 2) Filter specs don't accept floats, so we need to cast back to int at the end.
         small_height = int(height * (small_width / width))
-        small_spec = "{}-{}x{}-c100".format(mode, small_width, small_height)
+        if mode == 'width':
+            small_spec = "width-{}".format(small_width)
+        else:
+            # TODO: If the mode is 'height', this might not look right. I'm not really sure, though.
+            small_spec = "fill-{}x{}-c100".format(small_width, small_height)
         small_rendition = get_rendition_or_not_found(image, Filter(spec=small_spec))
 
         return """
