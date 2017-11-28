@@ -4,7 +4,7 @@ from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from djunk.middleware import get_current_request
 from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.blocks import BaseStreamBlock, BaseStructBlock
+from wagtail.wagtailcore.blocks import BaseStreamBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 
@@ -508,7 +508,7 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
 @register_feature(feature_type='default')
 class SpacerBlock(blocks.StructBlock, BlockTupleMixin):
 
-    height = blocks.ChoiceBlock(
+    height = IntegerChoiceBlock(
         choices=[
             (12, 12),
             (20, 20),
@@ -686,7 +686,7 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     """
     Duplicate of BaseTwoColumnBlock without the sub block to avoid recursion.
     """
-    left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=6, help_text=col_helptext)
+    left_column_width = IntegerChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=6, help_text=col_helptext)
 
     fixed_height = blocks.IntegerBlock(
         default=350,
@@ -694,7 +694,7 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         help_text="Blocks that contain images that are placed in one of the columns here will set themselves to this "
                   "height unless specifically overridden on the block."
     )
-    gutter_width = blocks.ChoiceBlock(
+    gutter_width = IntegerChoiceBlock(
         choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
         default=12,
@@ -738,13 +738,13 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
         ('full-width padded', 'Full Width, Padded')
     )
     style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
-    left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=6, help_text=col_helptext)
+    left_column_width = IntegerChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=6, help_text=col_helptext)
     fixed_height = blocks.IntegerBlock(
         default=350,
         label="Suggested height for contained widgets",
         help_text=fixed_height_helptext
     )
-    gutter_width = blocks.ChoiceBlock(
+    gutter_width = IntegerChoiceBlock(
         choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
         default=12,
@@ -801,15 +801,15 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         required=False
     )
 
-    left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
-    right_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
+    left_column_width = IntegerChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
+    right_column_width = IntegerChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
 
     fixed_height = blocks.IntegerBlock(
         default=300,
         label="Suggested height for contained widgets",
         help_text=fixed_height_helptext
     )
-    gutter_width = blocks.ChoiceBlock(
+    gutter_width = IntegerChoiceBlock(
         choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
         default=12,
@@ -839,14 +839,14 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
-    left_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
-    right_column_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
+    left_column_width = IntegerChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
+    right_column_width = IntegerChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
     fixed_height = blocks.IntegerBlock(
         default=300,
         label="Suggested height for contained widgets",
         help_text=fixed_height_helptext
     )
-    gutter_width = blocks.ChoiceBlock(
+    gutter_width = IntegerChoiceBlock(
         choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
         default=12,
@@ -896,15 +896,15 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default=STYLES[0][0])
-    column_one_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
-    column_two_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
-    column_three_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
+    column_one_width = IntegerChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
+    column_two_width = IntegerChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
+    column_three_width = IntegerChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=3, help_text=col_helptext)
     fixed_height = blocks.IntegerBlock(
         default=250,
         label="Suggested height for contained widgets",
         help_text=fixed_height_helptext
     )
-    gutter_width = blocks.ChoiceBlock(
+    gutter_width = IntegerChoiceBlock(
         choices=[(0, 0), (12, 12), (20, 20), (30, 30), (40, 40)],
         blank=False,
         default=12,
@@ -953,7 +953,7 @@ class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):
         label='Sidebar',
         required=False
     )
-    sidebar_width = blocks.ChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
+    sidebar_width = IntegerChoiceBlock(choices=BS_COL_CHOICES, blank=False, default=4, help_text=col_helptext)
     sidebar_alignment = blocks.ChoiceBlock(choices=[('left', 'Left'), ('right', 'Right')], blank=False, default='left')
     fixed_height = blocks.IntegerBlock(
         default=250,
