@@ -472,7 +472,9 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
         label='Height (pixels)',
         help_text="Images' widths will be scaled with the number of columns. This field determines their height."
     )
-    images = blocks.ListBlock(ImageChooserBlock(label='Image'))
+    images = blocks.ListBlock(
+        ImageChooserBlock(label='Image')
+    )
 
     class Meta:
         label = 'Image Gallery'
@@ -495,14 +497,16 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
         new_context['bootstrap_column_width'] = 12 / value['columns']
         return mark_safe(render_to_string(template, new_context))
 
-    @property
-    def media(self):
-        return forms.Media(
-            js=['jetstream/js/admin/image-gallery.js']
-        )
-
-    def js_initializer(self):
-        return 'image_gallery'
+    # rrollins 2017-12-01: Due to an apparent bug in Wagtail (https://github.com/wagtail/wagtail/issues/4090), defining
+    # custom javascript for this block breaks all the javascript behavior from ListBlock.
+    # @property
+    # def media(self):
+    #     return forms.Media(
+    #         js=['jetstream/js/admin/image-gallery.js']
+    #     )
+    #
+    # def js_initializer(self):
+    #     return 'image_gallery'
 
 
 @register_feature(feature_type='default')

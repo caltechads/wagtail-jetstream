@@ -7,7 +7,7 @@
     var stored_li = null, stored_li_sibling = null;
 
     /**
-     * Sets up the Display Caption checkbox to only appear when an appropriate Style is selected.
+     * Sets up the Columns field to only appear when an appropriate Style is selected.
      */
     function configure_columns_dropdown(prefix, current_style) {
       var columns_dropdown = $('#' + prefix + '-columns');
