@@ -1,16 +1,19 @@
-(function($, window, document, undefined) {
-  /**
-   * This function gets called by wagtail's StreamField javascript each time a new ImageGalleryBlock is generated
-   * within the form. The 'prefix' argument is a string that uniquely identifies the ImageGalleryBlock instance.
-   */
-  window.image_gallery = function(prefix) {
+/**
+ * ImageGallery gets called once on startup; the function it returns will
+ * be called whenever we need to set up an image gallery block on the form
+*/
+function ImageGallery(parent_initializer) {
+  return function(element_prefix) {
+    /* Call the original StructBlock initializer, so that its ListBlock code runs. */
+    parent_initializer(element_prefix);
+
     var stored_li = null, stored_li_sibling = null;
 
     /**
      * Sets up the Columns field to only appear when an appropriate Style is selected.
      */
     function configure_columns_dropdown(prefix, current_style) {
-      var columns_dropdown = $('#' + prefix + '-columns');
+      var columns_dropdown = jQuery('#' + prefix + '-columns');
       // If the Style dropdown is set to a style with columns (e.g. gallery), show the Columns field.
       if (current_style != 'gallery') {
         // If there's no dropdown, we've already stored and removed the field, so we can't do it again.
@@ -24,7 +27,7 @@
         var hidden_name = columns_dropdown.attr('name');
         var hidden_value = columns_dropdown.val();
         parent_block.append(
-          $('<input type="hidden" id="' + hidden_id + '" name="' + hidden_name + '" value="' + hidden_value + '">')
+          jQuery('<input type="hidden" id="' + hidden_id + '" name="' + hidden_name + '" value="' + hidden_value + '">')
         );
         stored_li = columns_dropdown.closest('li');
         stored_li_sibling = stored_li.prev();
@@ -34,17 +37,17 @@
         stored_li_sibling.after(stored_li);
         stored_li = null;
         stored_li_sibling = null;
-        $('#' + prefix + '-columns-hidden').remove();
+        jQuery('#' + prefix + '-columns-hidden').remove();
       }
     }
 
     // Get the "Style" dropdown for this instance of ImagePanelBlock.
-    var style_select = $('#' + prefix + '-style');
+    var style_select = jQuery('#' + element_prefix + '-style');
     // Initialize the Columns dropdown appropriately.
-    configure_columns_dropdown(prefix, style_select.val());
+    configure_columns_dropdown(element_prefix, style_select.val());
     // Re-toggle the Columns dropdown each time the Style is changed.
     style_select.change(function() {
-      configure_columns_dropdown(prefix, $(this).val());
+      configure_columns_dropdown(element_prefix, jQuery(this).val());
     });
-  }
-})(jQuery, this, this.document);
+  };
+}

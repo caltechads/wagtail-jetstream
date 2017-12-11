@@ -13,6 +13,7 @@ try:
     from features.registry import register_feature, registry
 except ImportError:
     # If features isn't installed, @register_feature becomes a noop, and the registry is empty.
+    # noinspection PyUnusedLocal
     def register_feature(**kwargs):
         return lambda klass: klass
     registry = {'default': set(), 'special': set()}
@@ -497,16 +498,18 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
         new_context['bootstrap_column_width'] = 12 / value['columns']
         return mark_safe(render_to_string(template, new_context))
 
-    # rrollins 2017-12-01: Due to an apparent bug in Wagtail (https://github.com/wagtail/wagtail/issues/4090), defining
-    # custom javascript for this block breaks all the javascript behavior from ListBlock.
-    # @property
-    # def media(self):
-    #     return forms.Media(
-    #         js=['jetstream/js/admin/image-gallery.js']
-    #     )
-    #
-    # def js_initializer(self):
-    #     return 'image_gallery'
+    @property
+    def media(self):
+        # We need to pull in StructBlock's own js code, in addition to ours.
+        return super().media + forms.Media(
+            js=['jetstream/js/admin/image-gallery.js']
+        )
+
+    def js_initializer(self):
+        # Until this gets documented properly, see the following link for an explanation of what's going on here:
+        # https://stackoverflow.com/a/47743729/464318
+        parent_initialiser = super().js_initializer()
+        return "ImageGallery(%s)" % parent_initialiser
 
 
 @register_feature(feature_type='default')
