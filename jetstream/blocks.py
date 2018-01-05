@@ -495,7 +495,7 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
 
         new_context = self.get_context(value, parent_context=context if context is None else dict(context))
         new_context['extra_classes'] = " ".join(extra_classes)
-        new_context['bootstrap_column_width'] = 12 / value['columns']
+        new_context['bootstrap_column_width'] = int(12 / value['columns'])
         return mark_safe(render_to_string(template, new_context))
 
     @property
