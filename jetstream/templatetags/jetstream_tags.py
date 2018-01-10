@@ -94,8 +94,9 @@ class ResponsiveImageNode(ImageNode):
         try:
             image = self.image_expr.resolve(context)
             mode = self.mode_expr.resolve(context)
-            width = int(self.width_expr.resolve(context)) if self.width_expr else 1
-            height = int(self.height_expr.resolve(context)) if self.height_expr else 1
+            # We call abs() just in case the user set one of the dimensions to a negative number.
+            width = abs(int(self.width_expr.resolve(context))) if self.width_expr else 1
+            height = abs(int(self.height_expr.resolve(context))) if self.height_expr else 1
         except template.VariableDoesNotExist:
             return ''
 
@@ -143,8 +144,9 @@ class ArbitraryImageNode(ImageNode):
         try:
             image = self.image_expr.resolve(context)
             mode = self.mode_expr.resolve(context)
-            width = int(self.width_expr.resolve(context)) if self.width_expr else 0
-            height = int(self.height_expr.resolve(context)) if self.height_expr else 0
+            # We call abs() just in case the user set one of the dimensions to a negative number.
+            width = abs(int(self.width_expr.resolve(context))) if self.width_expr else 0
+            height = abs(int(self.height_expr.resolve(context))) if self.height_expr else 0
         except template.VariableDoesNotExist:
             return ''
 
