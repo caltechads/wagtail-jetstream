@@ -540,7 +540,7 @@
   width: 100%;
   height: auto;
 }
-@media (min-width: 480px) and (max-width: 768px) {
+@media (min-width: 480px) {
   .image-gallery-gallery .gallery-item {
     float: left;
   }
