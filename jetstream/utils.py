@@ -21,9 +21,11 @@ class BlockTupleMixin(object):
     def get_block_tuple(self):
         return (self.__class__.__name__, self)
 
+
 # Used for the "choices" param on StreamField blocks that can list a variable
 # number of items
 SHOW_CHOICES = [
+    (2, 2),
     (3, 3),
     (4, 4),
     (5, 5),

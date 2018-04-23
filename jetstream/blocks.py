@@ -352,7 +352,7 @@ class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
         default='regular-width',
         label='Overall style',
         help_text=('Regular Width fills the normal page area. '
-                  'Full Width fills the entire width of the browser. Shorter images will be tiled.')
+                   'Full Width fills the entire width of the browser. Shorter images will be tiled.')
     )
     text_style = blocks.ChoiceBlock(
         choices=[
