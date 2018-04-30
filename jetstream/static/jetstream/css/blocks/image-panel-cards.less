@@ -40,13 +40,10 @@
 // Image Card -- left/right
 
 .block-ImagePanelBlock {
-  .media.left .media-body {
-    padding-left: 10px;
-  }
-  .media.right .media-body {
-    padding-right: 10px;
-  }
   .media-body {
+    padding-left: 10px;
+    padding-right: 10px;
+
     h4 {
       margin-top: 10px;
       font-family: @font_kievit;
@@ -61,7 +58,7 @@
 // rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
 // with these rules IS what we want, even though it's applying to more than we say it should be.
 @media (min-width: @screen-phone)
-        and (max-width: @screen-tablet) {
+        and (max-width: @responsive_grid_w) {
   .block-ImagePanelBlock {
     .card img {
       width: 100%;
@@ -91,6 +88,15 @@
 
     .media-left {
       margin-bottom: 1.5em;
+    }
+  }
+}
+
+// Once we reach full page width, don't add left padding.
+@media (min-width: @responsive_grid_w) {
+  .block-ImagePanelBlock {
+    .media-body {
+      padding-left: 0;
     }
   }
 }
