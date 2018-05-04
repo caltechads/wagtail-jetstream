@@ -64,7 +64,7 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
         if request is None:
             return self._child_blocks
         return OrderedDict([
-            item for item in self._child_blocks.items() if item[0] not in request.site.features.disabled_defaults
+            item for item in self._child_blocks.items() if request.site.features.feature_is_enabled(item[0])
         ])
 
     @property
@@ -73,7 +73,7 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
         # Protect against crashing in case this ever runs outside of a request cycle.
         if request is None:
             return self._child_blocks
-        return [block for block in self._dependencies if block.name not in request.site.features.disabled_defaults]
+        return [block for block in self._dependencies if request.site.features.feature_is_enabled(block.name)]
 
 
 # ====================
