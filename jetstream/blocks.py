@@ -5,6 +5,7 @@ from django.utils.safestring import mark_safe
 from djunk.middleware import get_current_request
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.blocks import BaseStreamBlock
+from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 
@@ -97,7 +98,7 @@ class IntegerChoiceBlock(blocks.ChoiceBlock):
 
 class LinkBlock(blocks.StructBlock):
     """
-    Allows a user to optionally link the containing block to a Page or a relative or absolute URL.
+    Allows a user to optionally link the containing block to a Page, a Document, or a relative or absolute URL.
 
     NOTE: Due to limitations in CSS, callers of LinkBlock() must not specify a label in the construction arguments.
     See the comment in the Meta class for why.
@@ -111,10 +112,13 @@ class LinkBlock(blocks.StructBlock):
             <a href={{ url }}></a>
         {% endif %}
     """
-
     page = blocks.PageChooserBlock(
         required=False,
-        help_text="Link to the chosen page. If both a page and a URL are specified, the page will take precedence."
+        help_text="Link to the chosen page. If a Page is selected, it will take precedence over both."
+    )
+    document = DocumentChooserBlock(
+        required=False,
+        help_text="Link to the chosen document. If a document is selected, it will take precedence over a URL."
     )
     url = blocks.CharBlock(
         required=False,
@@ -122,16 +126,6 @@ class LinkBlock(blocks.StructBlock):
                   "or an absolute URL to a page on another site (e.g. http://www.caltech.edu). Note: absolute URLs "
                   "must include the http:// otherwise they will not work."
     )
-
-    def render_basic(self, value, context=None):
-        """
-        We can get away with not rendering the whole html <a> tag because we always reference the LinkBlock
-        attribute of parent classes in the href attribute of an already specified <a> class.
-        """
-        if value['page']:
-            return value['page'].full_url
-        else:
-            return value['url']
 
     class Meta:
         label = 'Link'

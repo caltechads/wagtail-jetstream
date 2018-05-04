@@ -190,14 +190,16 @@ def width_from_arbitrary_parent(parent_px, units, gutter_width):
     return int((float(parent_px) / 12.0 * float(units)) - float(gutter_width)/2.0)
 
 
-@register.simple_tag(name='link_url')
+@register.simple_tag()
 def link_url(block):
     """
-    Accessory tag to our LinkBlock sub component that returns the linked page if it exists, or the linked
-    URL. If neither are specified, returns None.
+    Accessory tag to our LinkBlock sub component that returns the linked page if it exists, or the linked document, or
+    the URL. If none are specified, returns None.
     """
     if block.get('page'):
-        return block['page'].full_url
+        return block['page'].get_url_parts()[2]
+    elif block.get('document'):
+        return block['document'].url
     elif block.get('url'):
         return block['url']
     else:
