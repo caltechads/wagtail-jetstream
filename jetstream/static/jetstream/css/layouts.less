@@ -1,6 +1,10 @@
 @import "globals.less";
 
-/*************** Column Layouts ******************/
+/****** Generic CSS For Similar Blocks *********/
+
+@import "blocks/generic.less";
+
+/************** Column Layouts *****************/
 
 @import "blocks/column-standard.less";
 @import "blocks/column-sidebar.less";
@@ -10,21 +14,21 @@
 
 @import "blocks/spacer.less";
 
-/**************** Image Gallery Blocks ***************/
+/************* Image Gallery Blocks ************/
 
 @import "blocks/image-gallery-gallery.less";
 @import "blocks/image-gallery-slider.less";
 
-/**************** Image Carousel Blocks ***************/
+/************ Image Carousel Blocks ************/
 
 @import "blocks/image-carousel.less";
 @import "blocks/hero-image-carousel.less";
 
-/**************** Hero Image Blocks ***************/
+/************** Hero Image Blocks **************/
 
 @import "blocks/hero_image.less";
 
-/**************** Image Panel Blocks ***************/
+/************** Image Panel Blocks *************/
 
 @import "blocks/image-panel.less";
 @import "blocks/image-panel-caption.less";
@@ -33,36 +37,9 @@
 @import "blocks/image-panel-hero.less";
 @import "blocks/image-panel-rollover.less";
 
-/**************** Menu Listing Blocks ***************/
+/************* Menu Listing Blocks *************/
 
 @import "blocks/menu-listing.less";
-
-/**************** Text block general settings ***************/
-
-// Background image for all listing types
-.listing-background-image {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: auto;
-  width: 100%;
-  z-index: -100;
-}
-
-.bg-color-white { background-color: @white; }
-.bg-color-black { background-color: @black; }
-.bg-color-orange { background-color: @orange; }
-.bg-color-ltgray { background-color: @ltgray; }
-.bg-color-midgray { background-color: @midgray; }
-.bg-color-darkergray { background-color: @darkergray; }
-.bg-color-dkgray { background-color: @dkgray; }
-.bg-color-olivegreen { background-color: @olivegreen; }
-.bg-color-purple { background-color: @purple; }
-.bg-color-darkteal { background-color: @darkteal; }
-
-.text-color-white { color: @white; }
-.text-color-dkgray { color: @dkgray; }
-.text-color-black { color: @black; }
 
 /**************** Section Title Blocks ***************/
 

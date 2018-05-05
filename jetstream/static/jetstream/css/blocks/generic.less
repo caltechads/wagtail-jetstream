@@ -1,0 +1,57 @@
+/******** Text block general settings **********/
+
+// Background image for all listing types
+.listing-background-image {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: auto;
+  width: 100%;
+  z-index: -100;
+}
+
+.bg-color-white { background-color: @white; }
+.bg-color-black { background-color: @black; }
+.bg-color-orange { background-color: @orange; }
+.bg-color-ltgray { background-color: @ltgray; }
+.bg-color-midgray { background-color: @midgray; }
+.bg-color-darkergray { background-color: @darkergray; }
+.bg-color-dkgray { background-color: @dkgray; }
+.bg-color-olivegreen { background-color: @olivegreen; }
+.bg-color-purple { background-color: @purple; }
+.bg-color-darkteal { background-color: @darkteal; }
+
+.text-color-white { color: @white; }
+.text-color-dkgray { color: @dkgray; }
+.text-color-black { color: @black; }
+
+/****** Image Panel/Carousel/ctc. Settings *****/
+.text-gradient {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50%;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7));
+  font-family: @font_vaud_medium;
+  font-size: 16px;
+
+  .caption {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+    color: white;
+    margin: 0 15px 10px 20px;
+
+    span {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .glyphicon {
+      color: @orange;
+      padding-left: 5px;
+    }
+  }
+
+}

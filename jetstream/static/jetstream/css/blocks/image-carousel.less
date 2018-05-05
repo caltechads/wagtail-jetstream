@@ -2,11 +2,6 @@
   width: 100%;
   height: 100%;
   opacity: 1;
-  &:hover {
-    .carousel-control {
-      display: block;
-    }
-  }
 
   .item {
     transition: opacity ease-out .7s, visibility 0.7s;
@@ -36,21 +31,11 @@
     .item {
       text-align: center;
 
-      & > img {
-        height: inherit;
+      img {
+        width: 100%;
+        height: auto;
       }
     }
-  }
-
-  .carousel-caption {
-    left: auto;
-    width: auto;
-    margin-right: 20px;
-    right: 3%;
-    bottom: 3%;
-    top: auto; //Override from above
-    font-family: @font_vaud_medium;
-    font-size: 16px;
   }
 
   .carousel-indicators {
@@ -75,34 +60,29 @@
     font-size: 1.17em;
   }
 
-  .image-carousel-caption-text {
-    a, a:visited {
-      color: inherit;
-      &:hover {
-        text-decoration: none;
+  // Only display the controls when the user hovers them. And replace the gradiant background with a solid black 30%
+  // opacity block.
+  .carousel-control {
+    background: none;
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+
+      span {
+        visibility: visible;
       }
     }
-  }
-}
 
-// For landscape-mode phones:
-// rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
-// with these rules IS what we want, even though it's applying to more than we say it should be.
-@media (min-width: @screen-phone)
-        and (max-width: @screen-tablet) {
-  .block-ImageCarouselBlock {
-    img {
-      width: 100%;
-      height: auto;
+    span {
+      visibility: hidden;
     }
   }
 }
 
+// On phones, the images get resized to a different size, but the carousel markup still has style="height: 350px", or
+// whatever, to size the block correctly for the layout its in. We must forcibly ignore that on phones because they
+// ignore the specified layout and convert it into a single column flow with different sizes.
 @media (max-width: @small_viewport) {
-  .block-ImageCarouselBlock {
-    img {
-      width: 100%;
-      height: auto;
-    }
+  .image-carousel {
+    height: 100% !important;
   }
 }

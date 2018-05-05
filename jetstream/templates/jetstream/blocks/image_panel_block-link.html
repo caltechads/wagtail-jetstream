@@ -1,4 +1,4 @@
-{% load wagtailimages_tags jetstream_tags %}
+{% load wagtailimages_tags jetstream_tags bleach_tags %}
 
 <div class="image-panel-link clearfix {% if not self.fixed_dimensions.use and not parent_width %}top-level{% endif %}">
   {% link_url self.link as url %}
@@ -24,8 +24,8 @@
     {% endif %}
     {% if self.title %}
       <div class="text-gradient">
-        <div class="image-link-caption">
-          {{ self.title }}
+        <div class="caption">
+          <span class="text">{{ self.title | bleach }}</span>
           {% if url %}
             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
           {% endif %}

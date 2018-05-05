@@ -3,11 +3,12 @@ from setuptools import setup
 setup(
     name='wagtail-jetstream',
     version='0.11.0',
-    description='A set of complex layout blocks for use in Wagtail Streamfields',
+    description='A set of complex layout blocks for use in Wagtail Streamfields.',
     url='https://github.com/caltechads/wagtail-jetstream',
     author='Caltech ADS',
     author_email='imss-ads@caltech.edu',
     license='GPL-3.0',
+    install_requires=['django-bleach>=0.3.0'],
     classifiers=[
         "Environment :: Web Environment",
         "Framework :: Django",

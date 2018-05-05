@@ -38,14 +38,11 @@
           {% image slide.image %}
         {% endif %}
         {% if slide.text %}
-          <div class="carousel-caption">
-            <div class="image-carousel-caption-text">
+          <div class="text-gradient">
+            <div class="caption">
+              <span class="text">{{ slide.text | bleach }}</span>
               {% if link_url %}
-                <a href="{{ link_url }}">{{ slide.text | bleach }}<span class="glyphicon glyphicon-chevron-right"
-                  aria-hidden="true"></span>
-                </a>
-              {% else %}
-                {{ slide.text | bleach }}
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
               {% endif %}
             </div>
           </div>
