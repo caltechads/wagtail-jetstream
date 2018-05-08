@@ -45,9 +45,10 @@
 
 @import "blocks/section-title.less";
 
-/**************** Fancy Rich Text ***************/
+/**************** Text Blocks ***************/
 
 @import "blocks/fancy-rich-text.less";
+@import "blocks/callout.less";
 
 /**************** Video Block ***************/
 
@@ -91,9 +92,8 @@
   }
 }
 
-// For landscape-mode phones:
-// rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
-// with these rules IS what we want, even though it's applying to more than we say it should be.
+// For landscape-mode phones and portrait tablets:
+// Note that these apply to portrait tablets because it's not "max-width: @screen-tablet - 1".
 @media (min-width: @screen-phone)
         and (max-width: @screen-tablet) {
   .image-details {

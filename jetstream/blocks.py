@@ -658,12 +658,37 @@ class FancyRichTextBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'doc-full'
 
 
+@register_feature(feature_type='default')
+class CalloutBlock(blocks.StructBlock, BlockTupleMixin):
+    """
+    CalloutBlock is for those Divisions-style grid blocks that have a solid background color, a title, and a blurb.
+    They should not be able to be placed at the top level; they only belong inside a column layout.
+    """
+
+    title = blocks.CharBlock(
+        required=True,
+        max_length=100
+    )
+    body = blocks.RichTextBlock(
+        required=True
+    )
+    color = ColorOptionsBlock()
+    fixed_dimensions = DimensionsOptionsBlock()
+
+    class Meta:
+        template = 'jetstream/blocks/callout_block.html'
+        form_classname = 'callout struct-block'
+        label = 'Callout'
+        icon = 'doc-full'
+
+
 ###############################################################################
 ########################### LAYOUT BLOCK TYPES ################################
 ###############################################################################
 # These go at the end because they need to include all of the content blocks defined above.
 COLUMN_PERMITTED_BLOCKS = [
     get_block_tuple(FancyRichTextBlock()),
+    get_block_tuple(CalloutBlock()),
     get_block_tuple(ImageCarouselBlock()),
     get_block_tuple(ImageGalleryBlock()),
     get_block_tuple(RelatedLinksBlock()),

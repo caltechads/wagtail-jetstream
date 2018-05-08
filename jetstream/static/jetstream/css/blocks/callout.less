@@ -1,0 +1,47 @@
+.callout {
+  padding: 20px;
+
+  .rich-text {
+    font-family: @font_vaud_medium;
+    line-height: 1.4;
+  }
+}
+
+.callout-title {
+  font-size: 25px;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  line-height: 90%;
+}
+
+// Devices at least as large as landscape phones:
+@media (min-width: @small_viewport) {
+  .callout {
+  }
+
+  .callout-title {
+  }
+}
+
+// Devices at least as large as portrait tablets:
+@media (min-width: @medium_viewport) {
+  .callout {
+  }
+
+  .callout-title {
+    font-size: 28px;
+  }
+}
+
+// Devices at least as large as desktops/landscape tablets
+@media (min-width: @desktop_viewport) {
+  .callout {
+    padding: 40px 40px 0;
+  }
+
+  .callout-title {
+    font-size: 35px;
+  }
+}
+
