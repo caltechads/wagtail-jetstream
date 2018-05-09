@@ -1,66 +1,94 @@
 .fancy-rich-text {
-    position: relative;
-    &.bg .rich-text {
-        padding: 25px;
-    }
-
-    .background-image-container {
-        overflow: hidden;
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        z-index: -100;
-    }
-
-    .background-image {
-        width: 100%;
-        height: auto;
-    }
-}
-
-
-.fancy-rich-text > .rich-text > h1:first-child,
-.fancy-rich-text > .rich-text > h2:first-child,
-.fancy-rich-text > .rich-text > h3:first-child,
-.fancy-rich-text > .rich-text > h4:first-child {
-    margin-top: 0;
-}
-
-.fancy-rich-text.fixed {
+  position: relative;
+  &.fixed {
     overflow: hidden;
-}
+  }
 
-.fancy-rich-text > .rich-text {
-    padding-left: 25px;
-    padding-right: 25px;
-}
-
-// For landscape-mode phones and portrait tablets:
-// Note that these apply to portrait tablets because it's not "max-width: @screen-tablet - 1".
-@media (min-width: @screen-phone)
-        and (max-width: @screen-tablet) {
-  .fancy-rich-text > .rich-text {
+  // Give left and right padding to keep the text separated from the screen edges on mobile.
+  .rich-text {
     padding-left: 10px;
     padding-right: 10px;
-    margin-bottom: 2em;
+  }
+
+  // When a FancyRichTextBlock is given a background, regardless of whether it's top-level or not, it's text area
+  // needs all-around padding so the text doesn't butt up against the edge of the background.
+  &.bg .rich-text {
+    padding: 10px;
+  }
+
+  .background-image-container {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
     width: 100%;
+    z-index: -100;
+  }
+
+  .background-image {
+    width: 100%;
+  }
+
+  // Don't give margin-top to a heading in the block if it's the first element.
+  .rich-text {
+    h1, h2, h3, h4 {
+      &:first-child {
+        margin-top: 0;
+      }
+    }
   }
 }
 
-@media (max-width: @small_viewport) {
-  .fancy-rich-text > .rich-text {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    width: 100%;
-  }
+// For landscape phones and larger:
+@media (min-width: @small_viewport) {
 }
 
-@media (min-width: @responsive_grid_w) {
-  .fancy-rich-text > .rich-text {
-    padding-left: 0;
+// For portrait tablets and larger:
+@media (min-width: @medium_viewport) {
+}
+
+// For landscape tablets and desktops:
+@media (min-width: @desktop_viewport) {
+  .fancy-rich-text {
+    // On desktop we want no left-padding, because that will pull the text away from the edge of the content area,
+    // but we do want right-padding for those times when a rich text block has column content to its right.
+    .rich-text {
+      padding-left: 0;
+      padding-right: 25px;
+    }
+
+    // Increase the all-around padding for backgrounds to 25px on desktop.
+    &.bg .rich-text {
+      padding: 25px;
+    }
+
+    // We only set height: auto on the desktop view because the block will change aspect ratios on smaller devices.
+    // This results in stretched images on phones and portrait tablets, but that's better than having the background not
+    // enclose the entire text area.
+    .background-image {
+      height: auto;
+    }
+  }
+
+  // Top-level, non-background blocks need to have 0 padding, because we want them to reach the edges of the layout,
+  // like a normal Page's text would.
+  #main-content > .block-FancyRichTextBlock {
+    .fancy-rich-text:not(.bg) {
+      .rich-text {
+        padding: 0;
+      }
+    }
+  }
+
+  // Remove the right padding from the text area in the right-most column of a layout, since the only reason to keep
+  // right-padding on the text area when displayed on desktop is to separate it from elements to its right. This rule
+  // applies only to desktop because the right-padding on mobile keeps it separated from the screen edge.
+  .grid-elem:last-child {
+    .fancy-rich-text {
+      .rich-text {
+        padding-right: 0;
+      }
+    }
   }
 }
