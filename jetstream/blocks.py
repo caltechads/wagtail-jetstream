@@ -5,6 +5,7 @@ from django.utils.safestring import mark_safe
 from djunk.middleware import get_current_request
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.blocks import BaseStreamBlock
+from wagtail.wagtailcore.models import Site
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
@@ -64,9 +65,15 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
         # Protect against crashing in case this ever runs outside of a request cycle.
         if request is None:
             return self._child_blocks
-        return OrderedDict([
-            item for item in self._child_blocks.items() if request.site.features.feature_is_enabled(item[0])
-        ])
+
+        # Protect against crashing of the site has no features (like the initial site built by Wagtail migration)
+        try:
+            features = request.site.features
+            return OrderedDict([
+                item for item in self._child_blocks.items() if features.feature_is_enabled(item[0])
+            ])
+        except Site.features.RelatedObjectDoesNotExist:
+            return self._child_blocks
 
     @property
     def dependencies(self):
@@ -74,7 +81,13 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
         # Protect against crashing in case this ever runs outside of a request cycle.
         if request is None:
             return self._child_blocks
-        return [block for block in self._dependencies if request.site.features.feature_is_enabled(block.name)]
+
+        # Protect against crashing of the site has no features (like the initial site built by Wagtail migration)
+        try:
+            features = request.site.features
+            return [block for block in self._dependencies if features.feature_is_enabled(block.name)]
+        except Site.features.RelatedObjectDoesNotExist:
+            return self._child_blocks
 
 
 # ====================
