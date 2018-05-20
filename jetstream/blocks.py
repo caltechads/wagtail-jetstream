@@ -695,6 +695,28 @@ class CalloutBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'doc-full'
 
 
+@register_feature(feature_type='special')
+class IFrameBlock(blocks.StructBlock, BlockTupleMixin):
+    """
+    Offer users the ability to use iframes but in a way that we can restrict which sites are allowed to use them.
+    """
+    html = blocks.CharBlock(
+        label="IFrame Embed Code",
+        help_text="Paste the iFrame from your provider here. e.g.  "
+                  '<iframe height="300px" frameborder="0" style="padding: 25px 10px;" src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'
+                  '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
+                  '</iframe>'
+    )
+
+    fixed_dimensions = DimensionsOptionsBlock()
+
+    class Meta:
+        label = 'iFrame'
+        template = 'jetstream/blocks/iframe_block.html'
+        form_classname = 'iframe-block struct-block'
+        icon = 'media'
+
+
 ###############################################################################
 ########################### LAYOUT BLOCK TYPES ################################
 ###############################################################################
@@ -707,6 +729,7 @@ COLUMN_PERMITTED_BLOCKS = [
     get_block_tuple(RelatedLinksBlock()),
     get_block_tuple(ImagePanelBlock()),
     get_block_tuple(VideoBlock()),
+    get_block_tuple(IFrameBlock()),
     get_block_tuple(SectionTitleBlock()),
     get_block_tuple(MenuListingBlock()),
     get_block_tuple(SpacerBlock()),

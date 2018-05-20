@@ -1,0 +1,9 @@
+{% load jetstream_tags %}
+
+<div class="iframe-block"
+  {% if self.fixed_dimensions.use %}
+    style="width: {{ self.fixed_dimensions.width}}px; height: {{ self.fixed_dimensions.height}}px;"
+  {% endif %}
+>
+  {{ self.html|safe }}
+</div>
