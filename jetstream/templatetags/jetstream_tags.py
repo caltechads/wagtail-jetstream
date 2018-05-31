@@ -1,9 +1,10 @@
 from __future__ import division
 import re
 import uuid
-
+import bleach
 from django import template
 from django.utils.safestring import mark_safe
+from django_bleach.templatetags.bleach_tags import bleach_args
 from wagtail.wagtailembeds.exceptions import EmbedException
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailembeds import embeds
@@ -241,6 +242,19 @@ def generate_unique_id():
     """
     unique_id = uuid.uuid4()
     return unique_id
+
+
+@register.filter(name='custom_bleach')
+def custom_bleach(value, allowed_tags):
+    """
+    Works just like the 'bleach' tempalte filter, but takes an argument of a comma-separated string of the tags that
+    should be allowed through the filter. This list of tags *overrides* the list in the settings, so be thorough.
+    """
+    # Use the bleach_args built from the settings, but replace the 'tags' arg with the supplied comma-separated list.
+    kwargs = dict(**bleach_args)
+    kwargs['tags'] = [tag.strip() for tag in allowed_tags.split(',')]
+    bleached_value = bleach.clean(value, **kwargs)
+    return mark_safe(bleached_value)
 
 
 # ---------------

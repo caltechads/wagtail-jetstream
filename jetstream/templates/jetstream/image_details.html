@@ -1,10 +1,12 @@
+{% load jetstream_tags %}
+
 {% if image.caption or image.photo_credit %}
   <span class='image-details'>
     {% if image.caption %}
-      <span class='image-caption'>{{ image.caption }}</span>
+      <span class='image-caption'>{{ image.caption | custom_bleach:"a,b,i,em,strong,br,sup,sub" }}</span>
     {% endif %}
     {% if image.photo_credit %}
-      <span class='image-credit'>Credit: {{ image.photo_credit }}</span>
+      <span class='image-credit'>Credit: {{ image.photo_credit | custom_bleach:"a,b,i,em,strong,br,sup,sub" }}</span>
     {% endif %}
   </span>
 {% endif %}
