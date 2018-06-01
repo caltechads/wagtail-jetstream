@@ -1,5 +1,5 @@
 // Taken from the www styling
-h2.section_divider {
+h2.section-divider {
   height: 50px;
   background-color: @ltbrngray;
   padding-left: 25px;
@@ -16,7 +16,7 @@ h2.section_divider {
   }
 }
 
-h3.block_header {
+h3.block-header {
   color: @orange;
   font-size: 1.1em;
   font-family: @font_vaud_medium;
@@ -26,27 +26,27 @@ h3.block_header {
 // Remove the top margin from both types of SectionTitleBlocks if they're the first element in a column/sidebar.
 .grid-elem, .sidebar {
   .block-SectionTitleBlock:first-child {
-    .section_divider, .block_header {
+    .section-divider, .block-header {
       margin-top: 0;
     }
   }
 }
 
 @media (max-width: @medium_viewport) {
-  h2.section_divider {
+  h2.section-divider {
     padding-left: 10px;
     font-size: 1.2em;
   }
 }
 
 @media (max-width: @small_viewport) {
-  h2.section_divider {
+  h2.section-divider {
     font-size: 1.2em;
   }
 }
 
 @media (min-width: @desktop_viewport) {
-  h3.block_header {
+  h3.block-header {
     padding: 0 0 10px;
   }
 }

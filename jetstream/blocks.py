@@ -593,8 +593,8 @@ class VideoBlock(blocks.StructBlock, BlockTupleMixin):
 @register_feature(feature_type='default')
 class SectionTitleBlock(blocks.StructBlock, BlockTupleMixin):
     STYLES = {
-        'section_divider': 'jetstream/blocks/heading-section_divider.html',
-        'block_header': 'jetstream/blocks/heading-block_header.html'
+        'section_divider': 'jetstream/blocks/section_title-section_divider.html',
+        'block_header': 'jetstream/blocks/section_title-block_header.html'
     }
 
     text = blocks.CharBlock(required=True)
