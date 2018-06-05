@@ -1,7 +1,10 @@
+from bs4 import BeautifulSoup
 from collections import OrderedDict
 from django import forms
+from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext as _
 from djunk.middleware import get_current_request
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.blocks import BaseStreamBlock
@@ -9,6 +12,7 @@ from wagtail.wagtailcore.models import Site
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
+from .templatetags.jetstream_tags import custom_bleach
 
 try:
     # Imports the register_feature decorator from the 'features' module.
@@ -695,18 +699,54 @@ class CalloutBlock(blocks.StructBlock, BlockTupleMixin):
         icon = 'doc-full'
 
 
+class IFrameBlock(blocks.CharBlock, BlockTupleMixin):
+    """
+    We need a custom field as a place to add a validation. Orignally we just used a CharBlock directly,
+    but then you could put anything in here - including script tags.
+    """
+    class Meta:
+        help_text = ("Paste the iFrame from your provider here. e.g.  "
+                     '<iframe height="300px" frameborder="0" style="padding: 25px 10px;" src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'
+                     '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
+                     '</iframe>')
+        label = 'iFrame'
+        template = 'jetstream/blocks/iframe_block.html'
+        form_classname = 'iframe-block struct-block'
+        icon = 'media'
+
+    def clean(self, value):
+        '''
+        Parse the iframe data submitted and then rebuild the tag using only the allowed attributes.
+        For browsers that do not support iframes, we allow a subset of tags inside the iframe contents.
+        '''
+        soup = BeautifulSoup(value, "lxml")
+        iframe = soup.find('iframe')
+        if not iframe:
+            raise ValidationError(_("The embed string needs to look like '<iframe ...></iframe>'"))
+
+        contents = ' '.join(str(item) for item in iframe.contents) if iframe.contents else ''
+        contents = custom_bleach(contents, "a,b,i,em,strong,br,sup,sub")
+        # I am allowing the standards compliant tags listed on
+        # https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe
+        # plus 'frameborder' - in case someone actually wants a border around their embed
+        allowed_tags = ['allowfullscreen', 'height', 'width', 'name', 'referrerpolicy', 'sandbox', 'src',
+                        'title', 'width', 'frameborder']
+        tag = "<iframe"
+        for attr in iframe.attrs.keys():
+            if attr in allowed_tags:
+                tag += ' {0}="{1}"'.format(attr, iframe.attrs[attr])
+        tag += ' scrolling="auto">{0}</iframe>'.format(contents)
+
+        return tag
+
+
 @register_feature(feature_type='special')
-class IFrameBlock(blocks.StructBlock, BlockTupleMixin):
+class IFrameEmbedBlock(blocks.StructBlock, BlockTupleMixin):
     """
-    Offer users the ability to use iframes but in a way that we can restrict which sites are allowed to use them.
+    Offer users the ability to use iframes.
+    BECAUSE this is a 'special feature' we can restrict which sites are allowed to use them.
     """
-    html = blocks.CharBlock(
-        label="IFrame Embed Code",
-        help_text="Paste the iFrame from your provider here. e.g.  "
-                  '<iframe height="300px" frameborder="0" style="padding: 25px 10px;" src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'
-                  '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
-                  '</iframe>'
-    )
+    html = IFrameBlock()
 
     fixed_dimensions = DimensionsOptionsBlock()
 
@@ -729,7 +769,7 @@ COLUMN_PERMITTED_BLOCKS = [
     get_block_tuple(RelatedLinksBlock()),
     get_block_tuple(ImagePanelBlock()),
     get_block_tuple(VideoBlock()),
-    get_block_tuple(IFrameBlock()),
+    get_block_tuple(IFrameEmbedBlock()),
     get_block_tuple(SectionTitleBlock()),
     get_block_tuple(MenuListingBlock()),
     get_block_tuple(SpacerBlock()),
