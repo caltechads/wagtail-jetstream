@@ -1,6 +1,6 @@
 {% load wagtailimages_tags jetstream_tags bleach_tags %}
 
-<div class="image-panel-link clearfix {% if not self.fixed_dimensions.use and not parent_width %}top-level{% endif %}">
+<div class="image-panel-link our_clearfix {% if not self.fixed_dimensions.use and not parent_width %}top-level{% endif %}">
   {% link_url self.link as url %}
   {% if url %}
     <a class="image-link" href="{{ url }}"><span></span></a>

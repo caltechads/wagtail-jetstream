@@ -1,10 +1,10 @@
 {% load static jetstream_tags wagtailimages_tags %}
 
 {% generate_unique_id as backup_block_id %}
-<section id="{{ block.id | default:backup_block_id }}-gallery" class="image-gallery-gallery clearfix"
+<section id="{{ block.id | default:backup_block_id }}-gallery" class="image-gallery-gallery our_clearfix"
   data-featherlight-gallery data-featherlight-filter="a"
 >
-  <div class="row clearfix">
+  <div class="row our_clearfix">
     {% for img in self.images %}
       {% image img original as full_img %}
       <a class="gallery-item col-md-{{ bootstrap_column_width }}" href="{{ full_img.url }}">
@@ -13,7 +13,7 @@
         {% include 'jetstream/image_details.html' with image=img %}
       </a>
       {% if forloop.counter|divisibleby:self.columns and not forloop.last %}
-        </div><div class="row clearfix">
+        </div><div class="row our_clearfix">
       {% endif %}
     {% endfor %}
   </div>
