@@ -41,15 +41,15 @@
 }
 
 // For landscape phones and larger:
-@media (min-width: @small_viewport) {
+@media (min-width: $small_viewport) {
 }
 
 // For portrait tablets and larger:
-@media (min-width: @medium_viewport) {
+@media (min-width: $medium_viewport) {
 }
 
 // For landscape tablets and desktops:
-@media (min-width: @desktop_viewport) {
+@media (min-width: $desktop_viewport) {
   .fancy-rich-text {
     // On desktop we want no left-padding, because that will pull the text away from the edge of the content area,
     // but we do want right-padding for those times when a rich text block has column content to its right.

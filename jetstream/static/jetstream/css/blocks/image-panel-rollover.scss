@@ -1,5 +1,5 @@
 .image-panel-rollover {
-  .our_clearfix();
+  @include our_clearfix();
   position: relative;
 
   .entry {
@@ -47,9 +47,9 @@
     position: relative;
     margin: 0;
     height: 30%;
-    font-family: @font_kievit;
+    font-family: $font_kievit;
     font-weight: normal;
-    font-size: unit(16px / @font_size_base, em);
+    font-size: #{16px / $font_size_base}em;
     padding: 0 15px;
   }
 
@@ -61,7 +61,7 @@
 
   .blurb, .read-more-link {
     padding: 0 15px;
-    font-size: unit(14px / @font_size_base, em);
+    font-size: #{14px / $font_size_base}em;
   }
 }
 
@@ -70,14 +70,14 @@
 // For landscape-mode phones:
 // rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
 // with these rules IS what we want, even though it's applying to more than we say it should be.
-@media (min-width: @screen-phone)
-        and (max-width: @screen-tablet) {
+@media (min-width: $screen-phone)
+        and (max-width: $screen-tablet) {
   .image-panel-rollover .entry {
     float: none;
   }
 }
 
-@media (max-width: @small_viewport) {
+@media (max-width: $small_viewport) {
   .image-panel-rollover .entry {
     float: none;
 
@@ -86,7 +86,7 @@
       padding-bottom: 1.5em;
       position: static;
       line-height: 24px;
-      color: black;
+      color: $black;
       background-color: transparent;
       height: auto;
 
@@ -106,5 +106,5 @@
   }
 }
 
-@media (min-width: @desktop_viewport) {
+@media (min-width: $desktop_viewport) {
 }

@@ -49,8 +49,8 @@
   .image-carousel-header {
     position: absolute;
     margin: 10px 0 10px 25px;
-    font-family: @font_vaud;
-    color: @white;
+    font-family: $font_vaud;
+    color: $white;
     font-weight: normal;
     font-size: 1.17em;
   }
@@ -76,7 +76,7 @@
 // On phones, the images get resized to a different size, but the carousel markup still has style="height: 350px", or
 // whatever, to size the block correctly for the layout its in. We must forcibly ignore that on phones because they
 // ignore the specified layout and convert it into a single column flow with different sizes.
-@media (max-width: @small_viewport) {
+@media (max-width: $small_viewport) {
   .image-carousel {
     height: 100% !important;
   }

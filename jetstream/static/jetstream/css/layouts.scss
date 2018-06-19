@@ -1,65 +1,65 @@
-@import "globals.less";
+@import "globals.scss";
 
 /****** Generic CSS For Similar Blocks *********/
 
-@import "blocks/generic.less";
+@import "blocks/generic.scss";
 
 /************** Column Layouts *****************/
 
-@import "blocks/column-standard.less";
-@import "blocks/column-sidebar.less";
+@import "blocks/column-standard.scss";
+@import "blocks/column-sidebar.scss";
 
 
 /*************** Spacer Block ******************/
 
-@import "blocks/spacer.less";
+@import "blocks/spacer.scss";
 
 /************* Image Gallery Blocks ************/
 
-@import "blocks/image-gallery-gallery.less";
-@import "blocks/image-gallery-slider.less";
+@import "blocks/image-gallery-gallery.scss";
+@import "blocks/image-gallery-slider.scss";
 
 /************ Image Carousel Blocks ************/
 
-@import "blocks/image-carousel.less";
-@import "blocks/hero-image-carousel.less";
+@import "blocks/image-carousel.scss";
+@import "blocks/hero-image-carousel.scss";
 
 /************** Hero Image Blocks **************/
 
-@import "blocks/hero_image.less";
+@import "blocks/hero_image.scss";
 
 /************** Image Panel Blocks *************/
 
-@import "blocks/image-panel.less";
-@import "blocks/image-panel-caption.less";
-@import "blocks/image-panel-link.less";
-@import "blocks/image-panel-cards.less";
-@import "blocks/image-panel-hero.less";
-@import "blocks/image-panel-rollover.less";
+@import "blocks/image-panel.scss";
+@import "blocks/image-panel-caption.scss";
+@import "blocks/image-panel-link.scss";
+@import "blocks/image-panel-cards.scss";
+@import "blocks/image-panel-hero.scss";
+@import "blocks/image-panel-rollover.scss";
 
 /************* Menu Listing Blocks *************/
 
-@import "blocks/menu-listing.less";
+@import "blocks/menu-listing.scss";
 
 /**************** Section Title Blocks ***************/
 
-@import "blocks/section-title.less";
+@import "blocks/section-title.scss";
 
 /**************** Text Blocks ***************/
 
-@import "blocks/fancy-rich-text.less";
-@import "blocks/callout.less";
+@import "blocks/fancy-rich-text.scss";
+@import "blocks/callout.scss";
 
 /**************** Video Block ***************/
 
-@import "blocks/video-block.less";
+@import "blocks/video-block.scss";
 
 
 /*************** Related Links Block ******************/
 
-@import "blocks/related-links.less";
+@import "blocks/related-links.scss";
 
-@media (max-width: @small_viewport) {
+@media (max-width: $small_viewport) {
   .richtext-image {
     &.Small {
       width:100%;
@@ -94,15 +94,15 @@
 
 // For landscape-mode phones and portrait tablets:
 // Note that these apply to portrait tablets because it's not "max-width: @screen-tablet - 1".
-@media (min-width: @screen-phone)
-        and (max-width: @screen-tablet) {
+@media (min-width: $screen-phone)
+        and (max-width: $screen-tablet) {
   .image-details {
     padding-left: 10px;
     padding-right: 10px;
   }
 }
 
-@media (max-width: @small_viewport) {
+@media (max-width: $small_viewport) {
   .image-details {
     padding-left: 10px;
     padding-right: 10px;

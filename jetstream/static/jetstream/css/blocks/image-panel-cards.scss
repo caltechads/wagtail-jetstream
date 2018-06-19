@@ -25,10 +25,10 @@
   font-size: 1.28571429em;
   font-weight: 700;
   line-height: 1.2857em;
-  color: @dkgray;
+  color: $dkgray;
 
   a {
-    color: @dkgray;
+    color: $dkgray;
   }
 }
 
@@ -46,7 +46,7 @@
 
     h4 {
       margin-top: 10px;
-      font-family: @font_kievit;
+      font-family: $font_kievit;
     }
   }
   .left .media-body {
@@ -57,8 +57,8 @@
 // For landscape-mode phones:
 // rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
 // with these rules IS what we want, even though it's applying to more than we say it should be.
-@media (min-width: @screen-phone)
-        and (max-width: @responsive_grid_w) {
+@media (min-width: $screen-phone)
+        and (max-width: $responsive_grid_w) {
   .block-ImagePanelBlock {
     .card img {
       width: 100%;
@@ -67,7 +67,7 @@
   }
 }
 
-@media (max-width: @small_viewport) {
+@media (max-width: $small_viewport) {
   .block-ImagePanelBlock {
     .media-body {
       width: 100%;
@@ -93,7 +93,7 @@
 }
 
 // Once we reach full page width, don't add left padding.
-@media (min-width: @responsive_grid_w) {
+@media (min-width: $responsive_grid_w) {
   .block-ImagePanelBlock {
     .media-body {
       padding-left: 0;

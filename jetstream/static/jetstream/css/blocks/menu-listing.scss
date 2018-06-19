@@ -1,0 +1,17 @@
+// menu listing
+@include linksbgdark(menu-listing, 'white', $white);
+.menu-listing.bg-color-white h2 {
+  color: $black;
+}
+@include linksbglight(menu-listing, 'black', $black);
+@include linksbglight(menu-listing, 'orange', $orange);
+@include linksbgdark(menu-listing, 'ltgray', $ltgray);
+@include linksbgdark(menu-listing, 'midgray', $midgray);
+@include linksbglight(menu-listing, 'darkergray', $darkergray);
+@include linksbglight(menu-listing, 'dkgray', $dkgray);
+@include linksbgdark(menu-listing, 'olivegreen', $olivegreen);
+@include linksbglight(menu-listing, 'purple', $purple);
+.menu-listing.bg-color-purple h2 {
+  color: $white;
+}
+@include linksbglight(menu-listing, 'darkteal', $darkteal);

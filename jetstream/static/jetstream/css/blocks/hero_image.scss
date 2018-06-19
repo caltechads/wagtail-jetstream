@@ -10,18 +10,18 @@
       overflow: hidden;
       .body {
         left: 50%;
-        width: @responsive_grid_w;
-        margin-left: -@responsive_grid_w / 2;
+        width: $responsive_grid_w;
+        margin-left: -$responsive_grid_w / 2;
       }
     }
     &.white-translucent-serif .inner {
       background-color: rgba(255, 255, 255, 0.3);
     }
     &.bare-sans-serif, &.white-translucent-sans-serif {
-      font-family: @font_vaud;
+      font-family: $font_vaud;
 
       h1 {
-        font-family: @font_vaud_medium;
+        font-family: $font_vaud_medium;
       }
     }
     &.position-top-left .inner {
@@ -101,25 +101,25 @@
 
       .btn {
           font-size: 1.2em;
-          font-family: @font_vaud;
+          font-family: $font_vaud;
           margin-right: 10px;
       }
 
       .btn-primary {
-        background-color: @orange;
+        background-color: $orange;
         border: none;
         &:hover {
-          background-color: lighten(@orange, 10%);
+          background-color: lighten($orange, 10%);
         }
       }
 
       a.btn-default {
-        background-color: @white;
+        background-color: $white;
         border: none;
         &:hover {
-          background-color: darken(@white, 10%);
+          background-color: darken($white, 10%);
         }
-        color: @dkgray;
+        color: $dkgray;
       }
 
       a.btn-info {
@@ -134,7 +134,7 @@
     h1, h2, h3, h4 {
       margin-top: 0;
       margin-bottom: 0;
-      font-family: @font_kievit;
+      font-family: $font_kievit;
       line-height: 1.5em;
       font-weight: normal;
       color: white;
@@ -149,10 +149,10 @@
     }
 
     p {
-      color: white;
+      color: $white;
       font-size: 1.3em;
       line-height: 1.4em;
-      font-family: @font_vaud;
+      font-family: $font_vaud;
     }
 
   }
@@ -161,8 +161,8 @@
 // For landscape-mode phones:
 // rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
 // with these rules IS what we want, even though it's applying to more than we say it should be.
-@media (min-width: @screen-phone)
-        and (max-width: @screen-tablet) {
+@media (min-width: $screen-phone)
+        and (max-width: $screen-tablet) {
   .block-HeroImageBlock {
     .hero.regular-width,
     .hero.full-width {
@@ -201,7 +201,7 @@
   }
 }
 
-@media (max-width: @small_viewport) {
+@media (max-width: $small_viewport) {
   .block-HeroImageBlock {
     .hero {
       &.regular-width,
@@ -238,7 +238,7 @@
       }
 
       h1, h2, h3, h4, p {
-        color: black;
+        color: $black;
       }
 
       h1 {
@@ -259,7 +259,7 @@
 
       .action-button-bar {
         a.btn-info, a.btn-info:visited {
-          color: black;
+          color: $black;
           text-decoration: underline;
         }
       }

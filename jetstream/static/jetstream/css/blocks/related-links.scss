@@ -3,31 +3,31 @@
   border: 0;
   &.active {
     background-color: transparent;
-    color: black;
+    color: $black;
     &:hover {
       background-color: transparent;
-      color: black;
+      color: $black;
     }
   }
 }
 
 // related links
-.linksbgdark(related-links, "white");
+@include linksbgdark(related-links, 'white', $white);
 .related-links.bg-color-white h2 {
-  color: @black;
+  color: $black;
 }
-.linksbglight(related-links, "black");
-.linksbglight(related-links, "orange");
-.linksbgdark(related-links, "ltgray");
-.linksbgdark(related-links, "midgray");
-.linksbglight(related-links, "darkergray");
-.linksbglight(related-links, "dkgray");
-.linksbgdark(related-links, "olivegreen");
-.linksbglight(related-links, "purple");
+@include linksbglight(related-links, 'black', $black);
+@include linksbglight(related-links, 'orange', $orange);
+@include linksbgdark(related-links, 'ltgray', $ltgray);
+@include linksbgdark(related-links, 'midgray', $midgray);
+@include linksbglight(related-links, 'darkergray', $darkergray);
+@include linksbglight(related-links, 'dkgray', $dkgray);
+@include linksbgdark(related-links, 'olivegreen', $olivegreen);
+@include linksbglight(related-links, 'purple', $purple);
 .related-links.bg-color-purple h2 {
-  color: @white;
+  color: $white;
 }
-.linksbglight(related-links, "darkteal");
+@include linksbglight(related-links, 'darkteal', $darkteal);
 
 .related-links,
 .menu-listing {
@@ -36,50 +36,50 @@
   h2 {
     padding: 12px 25px 10px 25px;
     font-size: 1.3em;
-    font-family: @font_kievit_regular;
+    font-family: $font_kievit_regular;
     margin: 0;
-    background-color: @ltbrngray;
-    color: @crimson;
+    background-color: $ltbrngray;
+    color: $crimson;
   }
 
   a {
-    color: @dkgray;
+    color: $dkgray;
     &:hover {
-      color: @dkgray;
+      color: $dkgray;
       text-decoration: underline;
     }
   }
 
   &.text-color-white a
   {
-    color: @white;
+    color: $white;
     &:hover {
-      color: @white;
+      color: $white;
       text-decoration: underline;
     }
   }
 
   &.text-color-dkgray a
   {
-    color: @dkgray;
+    color: $dkgray;
     &:hover {
-      color: @dkgray;
+      color: $dkgray;
       text-decoration: underline;
     }
   }
 
   &.text-color-black a
   {
-    color: @black;
+    color: $black;
     &:hover {
-      color: @black;
+      color: $black;
       text-decoration: underline;
     }
   }
 
   &.text-color-dkgray.bgimage a:hover,
   &.text-color-black.bgimage a:hover {
-     color: @white !important;
+     color: $white !important;
   }
 
   .list-group {
@@ -89,7 +89,7 @@
   &.bgimage {
     h2 {
       background-color: rgba(0, 0, 0, 0.7);
-      color: @white;
+      color: $white;
     }
 
     img {
@@ -99,7 +99,7 @@
     .list-group-item:hover {
       background-color: rgba(0, 0, 0, 0.8);
       a, a:hover {
-        color: @white !important;
+        color: $white !important;
       }
     }
   }
@@ -109,7 +109,7 @@
   .list-group {
     .list-group-item {
       padding: 5px 25px;
-      border-bottom: 1px solid darken(@white, 5%);
+      border-bottom: 1px solid darken($white, 5%);
     }
 
     .background-image-container {

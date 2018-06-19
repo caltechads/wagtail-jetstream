@@ -27,9 +27,9 @@
   }
 
   .hero-image-caption-title {
-    font-size: unit(24px / @font_size_base, em);;
+    font-size: #{24px / $font_size_base}em;
     font-weight: bold;
-    color: @goldenrod;
+    color: $goldenrod;
     line-height: normal;
 
     a, a:visited {
@@ -40,11 +40,11 @@
 
   .hero-image-caption-text {
     font-family: Vaud, sans-serif;
-    color: @black-text;
+    color: $black-text;
   }
 }
 
-@media (min-width: @medium_viewport) {
+@media (min-width: $medium_viewport) {
   .hero-image-carousel {
     .carousel-caption {
       position: absolute;
@@ -66,7 +66,7 @@
     .hero-image-caption-title {
       font-size: 2.5em;
       font-weight: bold;
-      color: @goldenrod;
+      color: $goldenrod;
       line-height: normal;
 
       a, a:visited {

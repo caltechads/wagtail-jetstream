@@ -1,12 +1,12 @@
 // Taken from the www styling
 h2.section-divider {
   height: 50px;
-  background-color: @ltbrngray;
+  background-color: $ltbrngray;
   padding-left: 25px;
   position: relative;
   font-size: 1.6em;
-  font-family: @font_kievit_regular;
-  color: @crimson;
+  font-family: $font_kievit_regular;
+  color: $crimson;
 
   span {
     font-weight: normal;
@@ -17,9 +17,9 @@ h2.section-divider {
 }
 
 h3.block-header {
-  color: @orange;
+  color: $orange;
   font-size: 1.1em;
-  font-family: @font_vaud_medium;
+  font-family: $font_vaud_medium;
   padding: 0 10px 10px;
 }
 
@@ -32,20 +32,20 @@ h3.block-header {
   }
 }
 
-@media (max-width: @medium_viewport) {
+@media (max-width: $medium_viewport) {
   h2.section-divider {
     padding-left: 10px;
     font-size: 1.2em;
   }
 }
 
-@media (max-width: @small_viewport) {
+@media (max-width: $small_viewport) {
   h2.section-divider {
     font-size: 1.2em;
   }
 }
 
-@media (min-width: @desktop_viewport) {
+@media (min-width: $desktop_viewport) {
   h3.block-header {
     padding: 0 0 10px;
   }

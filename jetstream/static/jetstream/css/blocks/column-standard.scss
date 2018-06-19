@@ -1,68 +1,69 @@
-.gutter(@width) {
-  @classname: ~"gutter-@{width}";
-  @half: (@width/2);
-  .row.@{classname} {
-      margin-left: -@half;
-      margin-right: -@half;
+@mixin gutter($width) {
+  $classname: "gutter-#{$width}";
+  $half: $width/2;
+
+  .row.#{$classname} {
+      margin-left: -$half;
+      margin-right: -$half;
   }
-  .row.@{classname} .col-lg-1,
-  .row.@{classname} .col-lg-2,
-  .row.@{classname} .col-lg-3,
-  .row.@{classname} .col-lg-4,
-  .row.@{classname} .col-lg-5,
-  .row.@{classname} .col-lg-6,
-  .row.@{classname} .col-lg-7,
-  .row.@{classname} .col-lg-8,
-  .row.@{classname} .col-lg-9,
-  .row.@{classname} .col-lg-10,
-  .row.@{classname} .col-lg-11,
-  .row.@{classname} .col-lg-12,
-  .row.@{classname} .col-md-1,
-  .row.@{classname} .col-md-2,
-  .row.@{classname} .col-md-3,
-  .row.@{classname} .col-md-4,
-  .row.@{classname} .col-md-5,
-  .row.@{classname} .col-md-6,
-  .row.@{classname} .col-md-7,
-  .row.@{classname} .col-md-8,
-  .row.@{classname} .col-md-9,
-  .row.@{classname} .col-md-10,
-  .row.@{classname} .col-md-11,
-  .row.@{classname} .col-md-12,
-  .row.@{classname} .col-sm-1,
-  .row.@{classname} .col-sm-2,
-  .row.@{classname} .col-sm-3,
-  .row.@{classname} .col-sm-4,
-  .row.@{classname} .col-sm-5,
-  .row.@{classname} .col-sm-6,
-  .row.@{classname} .col-sm-7,
-  .row.@{classname} .col-sm-8,
-  .row.@{classname} .col-sm-9,
-  .row.@{classname} .col-sm-10,
-  .row.@{classname} .col-sm-11,
-  .row.@{classname} .col-sm-12,
-  .row.@{classname} .col-xs-1,
-  .row.@{classname} .col-xs-2,
-  .row.@{classname} .col-xs-3,
-  .row.@{classname} .col-xs-4,
-  .row.@{classname} .col-xs-5,
-  .row.@{classname} .col-xs-6,
-  .row.@{classname} .col-xs-7,
-  .row.@{classname} .col-xs-8,
-  .row.@{classname} .col-xs-9,
-  .row.@{classname} .col-xs-10,
-  .row.@{classname} .col-xs-11,
-  .row.@{classname} .col-xs-12 {
-      padding-left: @half;
-      padding-right: @half;
+  .row.#{$classname} .col-lg-1,
+  .row.#{$classname} .col-lg-2,
+  .row.#{$classname} .col-lg-3,
+  .row.#{$classname} .col-lg-4,
+  .row.#{$classname} .col-lg-5,
+  .row.#{$classname} .col-lg-6,
+  .row.#{$classname} .col-lg-7,
+  .row.#{$classname} .col-lg-8,
+  .row.#{$classname} .col-lg-9,
+  .row.#{$classname} .col-lg-10,
+  .row.#{$classname} .col-lg-11,
+  .row.#{$classname} .col-lg-12,
+  .row.#{$classname} .col-md-1,
+  .row.#{$classname} .col-md-2,
+  .row.#{$classname} .col-md-3,
+  .row.#{$classname} .col-md-4,
+  .row.#{$classname} .col-md-5,
+  .row.#{$classname} .col-md-6,
+  .row.#{$classname} .col-md-7,
+  .row.#{$classname} .col-md-8,
+  .row.#{$classname} .col-md-9,
+  .row.#{$classname} .col-md-10,
+  .row.#{$classname} .col-md-11,
+  .row.#{$classname} .col-md-12,
+  .row.#{$classname} .col-sm-1,
+  .row.#{$classname} .col-sm-2,
+  .row.#{$classname} .col-sm-3,
+  .row.#{$classname} .col-sm-4,
+  .row.#{$classname} .col-sm-5,
+  .row.#{$classname} .col-sm-6,
+  .row.#{$classname} .col-sm-7,
+  .row.#{$classname} .col-sm-8,
+  .row.#{$classname} .col-sm-9,
+  .row.#{$classname} .col-sm-10,
+  .row.#{$classname} .col-sm-11,
+  .row.#{$classname} .col-sm-12,
+  .row.#{$classname} .col-xs-1,
+  .row.#{$classname} .col-xs-2,
+  .row.#{$classname} .col-xs-3,
+  .row.#{$classname} .col-xs-4,
+  .row.#{$classname} .col-xs-5,
+  .row.#{$classname} .col-xs-6,
+  .row.#{$classname} .col-xs-7,
+  .row.#{$classname} .col-xs-8,
+  .row.#{$classname} .col-xs-9,
+  .row.#{$classname} .col-xs-10,
+  .row.#{$classname} .col-xs-11,
+  .row.#{$classname} .col-xs-12 {
+      padding-left: $half;
+      padding-right: $half;
   }
 }
 
-.gutter(0px);
-.gutter(12px);
-.gutter(20px);
-.gutter(30px);
-.gutter(40px);
+@include gutter(0px);
+@include gutter(12px);
+@include gutter(20px);
+@include gutter(30px);
+@include gutter(40px);
 
 
 .grid-elem {
@@ -83,7 +84,7 @@
     margin-left: -50vw;
     margin-right: -50vw;
     .row {
-      width: @responsive_grid_w;
+      width: $responsive_grid_w;
       margin: 0 auto;
     }
   }
@@ -109,7 +110,7 @@
 
 // Rules specifically for phone and portrait tablet view. I don't like doing this, since it violates mobile-first.
 // Unfortunately, it's the best solution I can think of due to the complexity of the column layout styles.
-@media (max-width: @medium_viewport) {
+@media (max-width: $medium_viewport) {
   .row-wrapper {
     &.full-width .row {
       width: 100%;
@@ -122,7 +123,7 @@
 }
 // Only remove the inter-column padding on the smallest devices, since anything larger than a portrait phone shows
 // multiple columns.
-@media (max-width: @small_viewport) {
+@media (max-width: $small_viewport) {
   .row, .grid-elem {
     padding-left: 0 !important;
     padding-right: 0 !important;
@@ -134,8 +135,8 @@
 // For landscape-mode phones:
 // rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
 // with these rules IS what we want, even though it's applying to more than we say it should be.
-@media (min-width: @screen-phone)
-        and (max-width: @screen-tablet) {
+@media (min-width: $screen-phone)
+        and (max-width: $screen-tablet) {
   .block-two_column_layout {
     .col-md-1,
     .col-md-2,

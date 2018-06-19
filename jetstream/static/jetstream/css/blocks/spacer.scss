@@ -1,0 +1,42 @@
+$spacer_increment: 25px;
+
+
+/* Sometimes the block before us will end with a float, which
+   makes the spacer block not appear to be its full height */
+.block-SpacerBlock {
+  clear: both;
+}
+
+.spacer-12 { height: 12px; }
+.spacer-20 { height: 20px; }
+.spacer-25 { height: $spacer_increment; }
+.spacer-30 { height: 30px; }
+.spacer-40 { height: 40px; }
+.spacer-50 { height: 2 * $spacer_increment; }
+.spacer-75 { height: 3 * $spacer_increment; }
+.spacer-100 { height: 4 * $spacer_increment; }
+.spacer-125 { height: 5 * $spacer_increment; }
+.spacer-150 { height: 6 * $spacer_increment; }
+.spacer-175 { height: 7 * $spacer_increment; }
+.spacer-200 { height: 8 * $spacer_increment; }
+.spacer-225 { height: 9 * $spacer_increment; }
+.spacer-250 { height: 10 * $spacer_increment; }
+
+@media (max-width: $small_viewport) {
+  .spacer-12,
+  .spacer-20,
+  .spacer-25,
+  .spacer-30,
+  .spacer-40,
+  .spacer-50,
+  .spacer-75,
+  .spacer-100,
+  .spacer-125,
+  .spacer-150,
+  .spacer-175,
+  .spacer-200,
+  .spacer-225,
+  .spacer-250 {
+    height: 0px;
+  }
+}

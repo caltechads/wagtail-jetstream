@@ -10,23 +10,23 @@
   }
 
   .hero-body {
-    color: white;
+    color: $white;
     width: 60%;
     margin: 0 auto;
   }
 
   h1 {
-    font-family: @font_vaud_medium;
+    font-family: $font_vaud_medium;
     font-size: 4em;
   }
 
   h2 {
-    font-family: @font_vaud;
+    font-family: $font_vaud;
     font-size: 1.5em;
   }
 }
 
-@media (max-width: @small_viewport) {
+@media (max-width: $small_viewport) {
   .block-ImagePanelBlock {
     .hero-body {
       width: 90%;

@@ -2,7 +2,7 @@
   overflow: hidden;
 }
 
-@media (max-width: @small_viewport) {
+@media (max-width: $small_viewport) {
   .captioned-image {
     margin-bottom: 2em;
   }
