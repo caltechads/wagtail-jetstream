@@ -6,12 +6,12 @@ from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 from djunk.middleware import get_current_request
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.blocks import BaseStreamBlock
-from wagtail.wagtailcore.models import Site
-from wagtail.wagtaildocs.blocks import DocumentChooserBlock
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailembeds.blocks import EmbedBlock
+from wagtail.core import blocks
+from wagtail.core.blocks import BaseStreamBlock
+from wagtail.core.models import Site
+from wagtail.docs.blocks import DocumentChooserBlock
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.embeds.blocks import EmbedBlock
 from .templatetags.jetstream_tags import custom_bleach
 
 try:

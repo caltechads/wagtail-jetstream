@@ -5,11 +5,11 @@ import bleach
 from django import template
 from django.utils.safestring import mark_safe
 from django_bleach.templatetags.bleach_tags import bleach_args
-from wagtail.wagtailembeds.exceptions import EmbedException
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailembeds import embeds
-from wagtail.wagtailimages.models import Filter
-from wagtail.wagtailimages.shortcuts import get_rendition_or_not_found
+from wagtail.embeds.exceptions import EmbedException
+from wagtail.core.models import Page
+from wagtail.embeds import embeds
+from wagtail.images.models import Filter
+from wagtail.images.shortcuts import get_rendition_or_not_found
 
 register = template.Library()
 
