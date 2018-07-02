@@ -1,5 +1,5 @@
-from wagtail.wagtailcore.blocks import Block
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.core.blocks import Block
+from wagtail.core.fields import StreamField
 
 from jetstream.blocks import FeatureCustomizedStreamBlock
 
