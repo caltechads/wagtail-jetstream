@@ -1,35 +1,43 @@
-.block-ImagePanelBlock {
-  .image-panel-link {
+.image-panel-link {
+  @include our_clearfix;
+  position: relative;
+  width: auto;
+  height: auto;
+  display: inline-block;
+
+  &.top-level {
+    display: block;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__image-link {
+    span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 11;
+      cursor: pointer;
+    }
+  }
+
+  &__image {
+    display: block;
     position: relative;
-    width: auto;
-    height: auto;
-    display: inline-block;
 
-    a.image-link {
-      span {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: 100;
-      }
-    }
+  }
 
-    .image {
-      display: block;
-      position: relative;
+  &__text-gradient {
+    @include text-gradient;
+  }
 
-    }
-
-    &.top-level {
-      display: block;
-
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
+  &__title {
+    @include caption;
   }
 }
 
@@ -40,10 +48,9 @@
 // cnk 2018-4-30: without the -1 below, all the images disappear (because their height is 0)
 @media (min-width: $screen-phone)
         and (max-width: $screen-tablet - 1) {
-  .block-ImagePanelBlock {
-    .image-panel-link {
-      width: 100%;
-    }
+  .image-panel-link {
+    width: 100%;
+
     img {
       width: 100%;
       height: auto;
@@ -52,10 +59,8 @@
 }
 
 @media (max-width: $small_viewport) {
-  .block-ImagePanelBlock {
-    .image-panel-link {
-      width: 100%;
-    }
+  .image-panel-link {
+    width: 100%;
 
     img {
       width: 100%;

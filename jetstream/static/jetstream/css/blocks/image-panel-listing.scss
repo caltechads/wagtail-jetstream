@@ -1,0 +1,50 @@
+// Image Listing -- title and description on left or right sides
+
+.image-panel-listing {
+  &__body {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    h4 {
+      margin-top: 10px;
+      font-family: $font_kievit;
+    }
+  }
+}
+.left .image-panel-listing__body {
+  padding-left: 25px;
+}
+
+@media (max-width: $small_viewport) {
+  .image-panel-listing {
+    &__body {
+      width: 100%;
+      padding-left: 15px;
+      padding-right: 15px;
+      padding-bottom: 2em;
+    }
+    &--right,
+    &--left
+    {
+      display: block;
+      padding: 0;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    &--left {
+      margin-bottom: 1.5em;
+    }
+  }
+}
+
+// Once we reach full page width, don't add left padding.
+@media (min-width: $responsive_grid_w) {
+  .image-panel-listing {
+    &__body {
+      padding-left: 0;
+    }
+  }
+}

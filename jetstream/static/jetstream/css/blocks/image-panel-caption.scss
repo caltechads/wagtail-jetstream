@@ -1,9 +1,21 @@
-.captioned-image {
+.image-panel-caption {
   overflow: hidden;
+
+  &__image-link {
+    span {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 11;
+      cursor: pointer;
+    }
+  }
 }
 
 @media (max-width: $small_viewport) {
-  .captioned-image {
+  .image-panel-caption {
     margin-bottom: 2em;
   }
 }

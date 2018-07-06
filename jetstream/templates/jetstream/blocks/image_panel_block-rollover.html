@@ -1,18 +1,14 @@
 {% load jetstream_tags %}
 
 <div class="image-panel-rollover">
-  <div class="entry">
+  <div class="image-panel-rollover__entry">
     {% link_url self.link as link_url %}
     {% if link_url %}
-      <a class="image-link" href="{{ link_url }}"><span></span></a>
+      <a class="image-panel-rollover__image-link" href="{{ link_url }}"><span></span></a>
     {% endif %}
-    {% if parent_width and not self.fixed_dimensions.use %}
-      {% arbitrary_image self.image 'fill' parent_width parent_width %}
-    {% else %}
-      {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
-    {% endif %}
-    {% if self.title or self.desc or self.link %}
-      <div class="text">
+    {% include 'jetstream/blocks/image_panel_block-image_square.html' with image=self.image %}
+    {% if self.title or self.desc or link_url %}
+      <div class="text image-panel-rollover__drawer">
         {% if self.title %}
           <div class="title"><span class="vertically-centered">{{ self.title }}</span></div>
         {% endif %}

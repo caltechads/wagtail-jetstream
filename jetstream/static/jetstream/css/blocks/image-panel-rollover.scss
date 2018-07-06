@@ -1,8 +1,8 @@
 .image-panel-rollover {
-  @include our_clearfix();
+  @include our_clearfix;
   position: relative;
 
-  .entry {
+  &__entry {
     display: inline-block;
     position: relative;
     overflow: hidden;
@@ -13,7 +13,7 @@
     }
   }
 
-  a.image-link {
+  &__image-link {
     span {
       position: absolute;
       width: 100%;
@@ -72,14 +72,16 @@
 // with these rules IS what we want, even though it's applying to more than we say it should be.
 @media (min-width: $screen-phone)
         and (max-width: $screen-tablet) {
-  .image-panel-rollover .entry {
+  .image-panel-rollover__entry {
     float: none;
   }
 }
 
 @media (max-width: $small_viewport) {
-  .image-panel-rollover .entry {
-    float: none;
+  .image-panel-rollover {
+    &__entry {
+      float: none;
+    }
 
     .text {
       padding-top: 1.5em;
@@ -89,19 +91,19 @@
       color: $black;
       background-color: transparent;
       height: auto;
+    }
 
-      .title {
-        font-size: 1.4em;
-        line-height: 30px;
-        position: static;
-        height: auto;
-        display: inline;
+    .title {
+      font-size: 1.4em;
+      line-height: 30px;
+      position: static;
+      height: auto;
+      display: inline;
+    }
 
-        .vertically-centered {
-          position: static;
-          transform: none;
-        }
-      }
+    .vertically-centered {
+      position: static;
+      transform: none;
     }
   }
 }

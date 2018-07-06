@@ -1,8 +1,8 @@
 {% load jetstream_tags %}
 
-<div class="media {{ extra_classes }}">
+<div class="media image-panel-listing {{ extra_classes }}">
 {% if extra_classes == "left" %}
-  <div class="media-left">
+  <div class="media-left image-panel-listing--left">
     {% link_url self.link as link_url %}
     {% if link_url %}
       <a href="{{ link_url}}">
@@ -16,8 +16,8 @@
     {% endif %}
   </div>
 {% endif %}
-  <div class="media-body">
-    <h4 class="media-heading">
+  <div class="media-body image-panel-listing__body">
+    <h4 class="media-heading image-panel-listing__heading">
       {% link_url self.link as link_url %}
       {% if link_url %}
         <a href="{{ link_url }}">{{ self.title }}</a>
@@ -28,7 +28,7 @@
     {{ self.desc }}
   </div>
 {% if extra_classes == "right" %}
-  <div class="media-right">
+  <div class="media-right image-panel-listing--right">
     {% link_url self.link as link_url %}
     {% if link_url %}
       <a href="{{ link_url}}">

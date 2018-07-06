@@ -296,12 +296,8 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         ('link', 'Image Link', 'jetstream/blocks/image_panel_block-link.html', []),
         ('captioned', 'Image w/ Caption', 'jetstream/blocks/image_panel_block-caption.html', []),
         ('rollover', 'Image Link w/ Rollover Text', 'jetstream/blocks/image_panel_block-rollover.html', []),
-        ('separate_text', 'Image Card (Equal Heights)', 'jetstream/blocks/image_panel_block-image_card.html',
-            ['equal']
-        ),
-        ('separate_text_natural', 'Image Card (Natural Heights)', 'jetstream/blocks/image_panel_block-image_card.html',
-            ['natural']
-        ),
+        ('separate_text', 'Image Card (Equal Heights)', 'jetstream/blocks/image_panel_block-card.html', ['equal']),
+        ('separate_text_natural', 'Image Card (Natural Heights)', 'jetstream/blocks/image_panel_block-card.html', ['natural']),  # noqa
         ('image_listing_left', 'Listing (Image Left)', 'jetstream/blocks/image_panel_block-listing.html', ['left']),
         ('image_listing_right', 'Listing (Image Right)', 'jetstream/blocks/image_panel_block-listing.html', ['right']),
     )
@@ -706,7 +702,7 @@ class IFrameBlock(blocks.CharBlock, BlockTupleMixin):
     """
     class Meta:
         help_text = ("Paste the iFrame from your provider here. e.g.  "
-                     '<iframe height="300px" frameborder="0" style="padding: 25px 10px;" src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'
+                     '<iframe height="300px" frameborder="0" style="padding: 25px 10px;" src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'  # noqa
                      '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
                      '</iframe>')
         label = 'iFrame'

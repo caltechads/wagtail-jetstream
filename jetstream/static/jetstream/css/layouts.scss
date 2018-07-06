@@ -1,4 +1,5 @@
 @import "globals.scss";
+@import "mixins.scss";
 
 /****** Generic CSS For Similar Blocks *********/
 
@@ -30,10 +31,10 @@
 
 /************** Image Panel Blocks *************/
 
-@import "blocks/image-panel.scss";
 @import "blocks/image-panel-caption.scss";
 @import "blocks/image-panel-link.scss";
 @import "blocks/image-panel-cards.scss";
+@import "blocks/image-panel-listing.scss";
 @import "blocks/image-panel-hero.scss";
 @import "blocks/image-panel-rollover.scss";
 

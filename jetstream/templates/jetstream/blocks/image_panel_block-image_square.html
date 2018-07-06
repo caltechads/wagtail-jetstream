@@ -1,0 +1,9 @@
+{% load wagtailimages_tags jetstream_tags %}
+
+{% if self.fixed_dimensions.use %}
+  {% responsive_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+{% else %}
+  {% if parent_width %}
+    {% responsive_image self.image 'fill' parent_width parent_width %}
+  {% endif %}
+{% endif %}

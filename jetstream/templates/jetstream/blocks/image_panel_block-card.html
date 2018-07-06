@@ -1,19 +1,13 @@
 {% load wagtailimages_tags jetstream_tags %}
 
 {# This markup is loosely based on https://bootsnipp.com/snippets/featured/bootstrap-4-card #}
-<div class="image-card-wrapper">
-  <div class="card {{ extra_classes }}">
+<div class="image-panel-card-wrapper">
+  <div class="image-panel-card {{ extra_classes }}">
     {% link_url self.link as link_url %}
     {% if link_url %}
-      <a href="{{ link_url }}">
+      <a class="image-panel-card__image-link" href="{{ link_url }}">
     {% endif %}
-    {% if self.fixed_dimensions.use %}
-        {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
-    {% else %}
-      {% if parent_width %}
-        {% arbitrary_image self.image 'fill' parent_width parent_width %}
-      {% endif %}
-    {% endif %}
+    {% include 'jetstream/blocks/image_panel_block-image_square.html' with image=self.image %}
     {% if link_url %}
       </a>
     {% endif %}
@@ -21,9 +15,9 @@
       {% include 'jetstream/image_details.html' with image=self.image %}
     {% endif %}
     {% if self.title or self.desc %}
-      <div class="card-block">
+      <div class="image-panel-card__block">
         {% if self.title %}
-          <h4 class="card-title">
+          <h4 class="image-panel-card__title">
             {% if link_url %}
              <a href="{{ link_url }}">{{ self.title }}</a>
             {% else %}
@@ -32,7 +26,7 @@
           </h4>
         {% endif %}
         {% if self.desc %}
-          <div class="card-text">{{ self.desc }}</div>
+          <div class="image-panel-card__text">{{ self.desc }}</div>
         {% endif %}
       </div>
     {% endif %}

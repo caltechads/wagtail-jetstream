@@ -1,0 +1,9 @@
+Changelog
+
+* ImagePanelBlock rollover style used to not respect parent element height suggestions.
+  Changed this to match the other image panel block styles.
+
+* ImagePanelBlock listing style says "When in a layout block with Fixed Dimensions as False,
+  the image will be square, with its height and width equal to the suggested height on the
+  parent layout block." But the code was actually using the height and width from the fixed
+  dimensions field EVEN when 'use fixed dimensions' was not selected.

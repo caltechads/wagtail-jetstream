@@ -16,17 +16,6 @@ $olivegreen: #a9b734;
 $purple:     #95348d;
 $darkteal:   #005e5c;
 
-@mixin our_clearfix() {
-  &:before,
-  &:after {
-    content: " ";
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
-}
-
 // Media Query Breakpoints
 $small_viewport: 500px;
 $medium_viewport: 768px;
@@ -46,57 +35,3 @@ $font_kievit_regular: KievitSlabRegular, Times, serif;
 $font_vaud: Vaud, sans-serif;
 // We call it Vaud Medium, but the style guide calls it Vaud Display Extra Bold. The style guide is right.
 $font_vaud_medium: VaudMedium, sans-serif;
-
-
-// ===================
-// Functions
-// ===================
-
-@mixin linksbglight($wrapper_class, $color_name, $color) {
-  $classname: "bg-color-" + $color_name;
-
-  ".#{$wrapper_class}.#{$classname}" {
-    box-shadow: none;
-    border: none;
-    background-color: $color;
-    h2 {
-      color: darken($color, 20%);
-      background-color: lighten($color, 10%);
-    }
-    .list-group-item {
-      border-bottom: 1px solid lighten($color, 5%);
-      &:hover {
-        background-color: lighten($color, 10%);
-      }
-    }
-    .list-group-item.active {
-        color: darken($color, 10%);
-        background-color: lighten($color, 5%);
-    }
-  }
-}
-
-@mixin linksbgdark($wrapper_class, $color_name, $color) {
-  $classname: "bg-color-" + $color_name;
-
-  ".#{$wrapper_class}.#{$classname}" {
-    box-shadow: none;
-    border: none;
-    background-color: $color;
-    h2 {
-      color: lighten($color, 20%);
-      background-color: darken($color, 10%);
-    }
-    .list-group-item {
-      border-bottom: 1px solid lighten($color, 5%);
-      &:hover {
-        background-color: darken($color, 10%);
-      }
-    }
-    .list-group-item.active {
-      color: darken($color, 30%);
-      background-color: darken($color, 5%);
-    }
-  }
-}
-

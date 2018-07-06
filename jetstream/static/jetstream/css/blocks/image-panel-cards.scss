@@ -1,7 +1,7 @@
 // This CSS is loosely based on https://bootsnipp.com/snippets/featured/bootstrap-4-card
 
-// Image Cards -- bottom
-.card {
+// Image Cards -- title and description on bottom
+.image-panel-card {
   font-size: 1em;
   overflow: hidden;
   padding: 0;
@@ -12,45 +12,28 @@
     width: 100%;
     height: auto;
   }
-}
 
-.card-block {
-  font-size: 1em;
-  margin: 0;
-  padding: 1em;
-  border: none;
-}
-
-.card-title {
-  font-size: 1.28571429em;
-  font-weight: 700;
-  line-height: 1.2857em;
-  color: $dkgray;
-
-  a {
-    color: $dkgray;
+  &__block {
+    font-size: 1em;
+    margin: 0;
+    padding: 1em;
+    border: none;
   }
-}
 
-.card-text {
-  margin-top: .5em;
-  color: rgba(0, 0, 0, .68);
-}
+  &__title {
+    font-size: 1.28571429em;
+    font-weight: 700;
+    line-height: 1.2857em;
+    color: $dkgray;
 
-// Image Card -- left/right
-
-.block-ImagePanelBlock {
-  .media-body {
-    padding-left: 10px;
-    padding-right: 10px;
-
-    h4 {
-      margin-top: 10px;
-      font-family: $font_kievit;
+    a {
+      color: $dkgray;
     }
   }
-  .left .media-body {
-    padding-left: 25px;
+
+  &__text {
+    margin-top: .5em;
+    color: rgba(0, 0, 0, .68);
   }
 }
 
@@ -59,44 +42,8 @@
 // with these rules IS what we want, even though it's applying to more than we say it should be.
 @media (min-width: $screen-phone)
         and (max-width: $responsive_grid_w) {
-  .block-ImagePanelBlock {
-    .card img {
-      width: 100%;
-      height: auto;
-    }
-  }
-}
-
-@media (max-width: $small_viewport) {
-  .block-ImagePanelBlock {
-    .media-body {
-      width: 100%;
-      padding-left: 15px;
-      padding-right: 15px;
-      padding-bottom: 2em;
-    }
-    .media-right,
-    .media-left
-    {
-      display: block;
-      padding: 0;
-      img {
-        width: 100%;
-        height: auto;
-      }
-    }
-
-    .media-left {
-      margin-bottom: 1.5em;
-    }
-  }
-}
-
-// Once we reach full page width, don't add left padding.
-@media (min-width: $responsive_grid_w) {
-  .block-ImagePanelBlock {
-    .media-body {
-      padding-left: 0;
-    }
+  .image-panel-card img {
+    width: 100%;
+    height: auto;
   }
 }
