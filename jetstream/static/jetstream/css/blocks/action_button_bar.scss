@@ -1,0 +1,47 @@
+.action-button-bar{
+  margin-top: 2em;
+
+  a, a:visited {
+    color: white;
+  }
+
+  .btn {
+      font-size: 1.2em;
+      font-family: $font_vaud;
+      margin-right: 10px;
+  }
+
+  .btn-primary {
+    background-color: $orange;
+    border: none;
+    &:hover {
+      background-color: lighten($orange, 10%);
+    }
+  }
+
+  a.btn-default {
+    background-color: $white;
+    border: none;
+    &:hover {
+      background-color: darken($white, 10%);
+    }
+    color: $dkgray;
+  }
+
+  a.btn-info {
+    background-color: transparent;
+    border: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+@media (max-width: $small_viewport) {
+  .action-button-bar {
+    a.btn-info, a.btn-info:visited {
+      color: $black;
+      text-decoration: underline;
+    }
+  }
+}
