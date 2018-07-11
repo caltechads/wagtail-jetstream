@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 	<meta charset="utf-8"/>
 </head>
 <body>
+
 <p>This is a collection of useful blocks and layouts for use within Wagtail&#8217;s StreamField construct.</p>
 
 <h1 id="usage">Usage</h1>
@@ -41,7 +42,9 @@
 
 <p><strong>NOTE</strong>: Some classes require custom javascript, so it is important to include <code>&lt;script defer src=&quot;{% static 'jetstream/js/layouts.js' %}&quot;&gt;&lt;/script&gt;</code> somewhere on your page template.</p>
 
-<p>Several image-related blocks, e.g. HeroImageCarouselBlock, use Bootstrap.js to implement their slideshow functionality. You&#8217;ll need to install and load Bootstrap 3.x for that those to function.</p>
+<p>Several image-related blocks, e.g. HeroImageCarouselBlock, use Bootstrap.js to implement their slideshow functionality. You&#8217;ll need to install and load Bootstrap 4.1+ for that those to function.</p>
+
+<p>We also assume that you are using jQuery 3.x and Moderizr.</p>
 
 <p><strong>TODO</strong></p>
 
@@ -57,3 +60,4 @@
 
 </body>
 </html>
+

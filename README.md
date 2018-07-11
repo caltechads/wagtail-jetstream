@@ -38,8 +38,9 @@ class TwoColumnBlock(BaseTwoColumnBlock):
 
 **NOTE**: Some classes require custom javascript, so it is important to include `<script defer src="{% static 'jetstream/js/layouts.js' %}"></script>` somewhere on your page template.
 
-Several image-related blocks, e.g. HeroImageCarouselBlock, use Bootstrap.js to implement their slideshow functionality. You'll need to install and load Bootstrap 3.x for that those to function.
+Several image-related blocks, e.g. HeroImageCarouselBlock, use Bootstrap.js to implement their slideshow functionality. You'll need to install and load Bootstrap 4.1+ for that those to function.
 
+We also assume that you are using jQuery 3.x and Moderizr.
 
 **TODO**
 

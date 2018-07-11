@@ -1,3 +1,5 @@
+/*global Modernizr, jQuery */
+
 (function ($, window, document) {
   function make_image_cards_same_height_in_same_row() {
     var max_height = 0;
@@ -55,7 +57,7 @@
     image_carousel_block_mobile_helper();
   });
 
-  $(window).load(function() {
+  $(window).on('load', function() {
     make_image_cards_same_height_in_same_row();
   });
 }(jQuery, this, this.document));
