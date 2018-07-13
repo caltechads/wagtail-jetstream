@@ -848,6 +848,7 @@
 
 .hero-image-carousel .carousel-item img {
   height: inherit;
+  width: 100%;
 }
 
 .hero-image-carousel .carousel-item.active {

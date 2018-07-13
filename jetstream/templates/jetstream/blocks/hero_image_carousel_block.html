@@ -4,7 +4,7 @@
 <div id="{{ block.id | default:backup_block_id }}"
   data-ride="carousel" data-interval="{{ self.cycle_timeout }}"
   class="carousel slide hero-image-carousel"
-  style="height: {{ self.height }}px; width: {{ self.width }}px;"
+  style="max-height: {{ self.height }}px;"
 >
   {% if self.slides|length > 1 %}
     <ol class="carousel-indicators hero-image-carousel__carousel-indicators">
@@ -25,7 +25,7 @@
         {% if link_url %}
           <a class="image-link" href="{{ link_url }}"><span></span></a>
         {% endif %}
-        {% responsive_image slide.image 'fill' self.width self.height %}
+        {% responsive_image slide.image 'fill' 1000 self.height %}
         {% if slide.title or slide.text %}
           <div class="hero-image-carousel__text-gradient">
             <div class="carousel-caption hero-image-carousel__carousel-caption">
