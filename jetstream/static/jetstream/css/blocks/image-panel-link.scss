@@ -33,11 +33,11 @@
   }
 
   &__text-gradient {
-    @include text-gradient;
+    @include text-gradient--bottom;
   }
 
   &__title {
-    @include caption;
+    @include image_title;
   }
 }
 
