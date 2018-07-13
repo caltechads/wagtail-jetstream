@@ -1,4 +1,38 @@
 // ===================
+// Media Query Mixins
+// ===================
+
+// Breakpoints
+$landscape_phone_viewport: 500px;
+$portrait_tablet_viewport: 768px;
+$desktop_viewport: 1000px;
+
+@mixin landscape-phone {
+  @media (min-width: $landscape_phone_viewport) {
+    @content;
+  }
+}
+
+@mixin portrait-tablet {
+  @media (min-width: $portrait_tablet_viewport) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $desktop_viewport) {
+    @content;
+  }
+}
+
+// For those times when you want behavior to apply ONLY on desktops, and NOT on landscape tablets.
+@mixin real-desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
+
+// ===================
 // Functions
 // ===================
 
@@ -110,13 +144,48 @@
   left: auto;
   right: 3%;
   bottom: 3%;
+  position: static;
+
+  @include portrait-tablet {
+    position: absolute;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
   li {
-    width: 10px;
-    height: 10px;
-    margin: 1px;
+    width: 15px;
+    height: 15px;
+    margin: 0 10px;
     cursor: pointer;
     background-color: rgba(0,0,0,0);
-    border: 1px solid #fff;
+    border: 1px solid $black;
     border-radius: 10px;
+
+    &.active {
+      background-color: black;
+    }
+
+    @include portrait-tablet {
+      border-color: white;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+
+      &.active {
+        background-color: white;
+      }
+    }
+  }
+}
+
+@mixin wrapper-link {
+  // NOTE: When using this mixin, ensure that the direct parent of the mixed-in class has "position: relative".
+  span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
   }
 }

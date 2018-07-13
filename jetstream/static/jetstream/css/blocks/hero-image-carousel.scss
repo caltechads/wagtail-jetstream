@@ -3,44 +3,50 @@
   overflow: hidden;
   position: relative;
 
-  .carousel-item {
-    img {
-      height: inherit;
-      width: 100%;
-    }
+  &__image {
+    height: inherit;
+    width: 100%;
   }
 
-  .carousel-item {
-    &.active {
-      display: block;
+  &__wrapper-link {
+    @include portrait-tablet {
+      @include wrapper-link;
     }
   }
 
   &__text-gradient {
-    @include text-gradient--bottom;
+    @include portrait-tablet {
+      @include text-gradient--right;
+    }
   }
 
   &__carousel-caption {
     position: static;
     text-align: left;
-    padding: 0 10px;
-    text-shadow: none;
+    padding: 10px;
+
+    @include portrait-tablet {
+      position: absolute;
+      left: 30%;
+      right: auto;
+      bottom: auto;
+      top: 25%;
+      padding: 0 10px;
+    }
   }
 
   &__carousel-indicators {
     @include carousel_indicators;
   }
 
-  &__carousel-control-prev,
-  &__carousel-control-next {
-    display: none;
-  }
-
   &__caption-title {
     font-size: #{24px / $font_size_base}em;
     font-weight: bold;
     color: $goldenrod;
-    line-height: normal;
+
+    @include portrait-tablet {
+      font-size: 2.5em;
+    }
 
     a, a:visited {
       color: inherit;
@@ -51,31 +57,16 @@
   &__caption-text {
     font-family: Vaud, sans-serif;
     color: $black-text;
-  }
-}
 
-@media (min-width: $medium_viewport) {
-  .hero-image-carousel {
-    &__carousel-caption {
-      position: absolute;
-      left: 30%;
-      right: auto;
-      bottom: auto;
-      top: 25%;
-    }
-
-  &__text-gradient {
-    @include text-gradient--right;
-  }
-
-    &__caption-title {
-      font-size: 2.5em;
-    }
-
-    &__caption-text {
+    @include portrait-tablet {
       font-weight: bold;
       padding-right: 3em;
       color: white;
     }
+  }
+
+  &__carousel-control-prev,
+  &__carousel-control-next {
+    display: none;
   }
 }

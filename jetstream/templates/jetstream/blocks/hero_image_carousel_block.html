@@ -6,32 +6,20 @@
   class="carousel slide hero-image-carousel"
   style="max-height: {{ self.height }}px;"
 >
-  {% if self.slides|length > 1 %}
-    <ol class="carousel-indicators hero-image-carousel__carousel-indicators">
-      {% for slide in self.slides %}
-        {% if forloop.counter0 == 0 %}
-          <li data-target="#{{ block.id | default:backup_block_id }}" data-slide-to="0" class="active"></li>
-        {% else %}
-          <li data-target="#{{ block.id | default:backup_block_id }}" data-slide-to="{{ forloop.counter0 }}"></li>
-        {% endif %}
-      {% endfor %}
-    </ol>
-  {% endif %}
-
   <div class="carousel-inner" role="listbox">
     {% for slide in self.slides %}
       <div class="carousel-item hero-image-carousel__carousel-item {% if forloop.counter == 1 %}active{% endif %}">
         {% link_url slide.link as link_url %}
         {% if link_url %}
-          <a class="image-link" href="{{ link_url }}"><span></span></a>
+          <a class="hero-image-carousel__wrapper-link" href="{{ link_url }}"><span></span></a>
         {% endif %}
-        {% responsive_image slide.image 'fill' 1000 self.height %}
+        {% responsive_image slide.image 'fill' 1000 self.height class="hero-image-carousel__image" %}
         {% if slide.title or slide.text %}
           <div class="hero-image-carousel__text-gradient">
             <div class="carousel-caption hero-image-carousel__carousel-caption">
               <div class="hero-image-carousel__caption-title">
                 {% if link_url %}
-                  <a class="title-link" href="{{ link_url }}">{{ slide.title | bleach }}</a>
+                  <a class="hero-image-carousel__title-link" href="{{ link_url }}">{{ slide.title | bleach }}</a>
                 {% else %}
                   {{ slide.title | bleach }}
                 {% endif %}
@@ -44,7 +32,19 @@
     {% endfor %}
   </div>
 
-  <!-- These must be here for the carousel to cycle correctly. We hide them in the CSS. -->
+  {% if self.slides|length > 1 %}
+    <ol class="carousel-indicators hero-image-carousel__carousel-indicators">
+      {% for slide in self.slides %}
+        {% if forloop.counter0 == 0 %}
+          <li class="hero-image-carousel__indicator-dot active" data-target="#{{ block.id | default:backup_block_id }}" data-slide-to="0"></li>
+        {% else %}
+          <li class="hero-image-carousel__indicator-dot" data-target="#{{ block.id | default:backup_block_id }}" data-slide-to="{{ forloop.counter0 }}"></li>
+        {% endif %}
+      {% endfor %}
+    </ol>
+  {% endif %}
+
+  <!-- These are the left/right arrows for changing slides. Our CSS hides them by default. -->
   <a class="left carousel-control-prev hero-image-carousel__carousel-control-prev" href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
