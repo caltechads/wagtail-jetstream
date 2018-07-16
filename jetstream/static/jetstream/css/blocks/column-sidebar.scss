@@ -1,52 +1,59 @@
 .sidebar-layout {
-  .sidebar {
+  &__sidebar {
     height: auto;
-    margin-bottom: 40px;
   }
 
-  &.right .sidebar {
+  &.right &__sidebar {
     margin-left: 25px;
   }
 
-  &.left .sidebar {
+  &.left &__sidebar {
     margin-right: 25px;
   }
 
-  &.left .rich-text {
-    margin-left: 200px;
-  }
-
-  .rich-text {
-    width: 800px;
-  }
-
   section {
+    // Give some spacing between blocks in the sidebar
     margin-bottom: 10px;
     &:last-child {
-      margin-bottom: 0;
+      margin-bottom: 40px;
+    }
+  }
+
+  &__rich-text {
+    margin: 0 10px;
+  }
+}
+
+// Turn off sidebar layouts on portrait phones
+@media (max-width: $screen-phone - 1) {
+  .sidebar-layout {
+    padding: 0;
+
+    &__sidebar {
+      width: 100% !important;
+      margin: 0;
     }
   }
 }
 
-// For landscape-mode phones:
-// rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
-// with these rules IS what we want, even though it's applying to more than we say it should be.
 @media (min-width: $screen-phone)
-        and (max-width: $screen-tablet) {
-  .sidebar-layout > .rich-text {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 2em;
-    width: 100%;
+        and (max-width: $desktop_viewport) {
+  // Keep the text off the edges on tablets
+  .sidebar-layout {
+    &__rich-text {
+      max-width: 800px;
+    }
+
+    &.left &__rich-text {
+      margin-left: 200px;
+    }
   }
 }
 
-@media (max-width: $small_viewport) {
-  .sidebar-layout > .rich-text {
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    width: 100%;
+@media (min-width: $responsive_grid_w) {
+  .sidebar-layout {
+    &__rich-text {
+      margin-left: 0;
+    }
   }
 }

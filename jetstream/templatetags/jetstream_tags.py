@@ -188,7 +188,7 @@ def width_from_arbitrary_parent(parent_px, units, gutter_width):
     Math tag for calculating the pixel width of certain column blocks because we can't do arithmetic
     within Django templates.
     """
-    return int((float(parent_px) / 12.0 * float(units)) - float(gutter_width)/2.0)
+    return int((float(parent_px) / 12.0 * float(units)) - (float(gutter_width) / 2.0))
 
 
 @register.simple_tag()

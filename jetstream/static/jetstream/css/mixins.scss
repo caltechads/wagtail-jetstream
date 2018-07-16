@@ -3,18 +3,18 @@
 // ===================
 
 // Breakpoints
-$landscape_phone_viewport: 500px;
-$portrait_tablet_viewport: 768px;
-$desktop_viewport: 1000px;
+// $small_viewport: 500px; # aka landscape_phone_viewport
+// $medium_viewport: 768px; # aka portrait_tablet_viewport
+// $desktop_viewport: 1000px;
 
 @mixin landscape-phone {
-  @media (min-width: $landscape_phone_viewport) {
+  @media (min-width: $small_viewport) {
     @content;
   }
 }
 
 @mixin portrait-tablet {
-  @media (min-width: $portrait_tablet_viewport) {
+  @media (min-width: $medium_viewport) {
     @content;
   }
 }
