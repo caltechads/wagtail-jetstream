@@ -1804,6 +1804,7 @@ h2.section-divider {
   height: 50px;
   background-color: #e9e7e4;
   padding-left: 25px;
+  margin-top: 20px;
   position: relative;
   font-size: 1.6em;
   font-family: KievitSlabRegular, Times, serif;
