@@ -839,6 +839,12 @@
   visibility: visible;
 }
 
+@media (max-width: 499px) {
+  .image-carousel {
+    max-height: unset !important;
+  }
+}
+
 .hero-image-carousel {
   overflow: hidden;
   position: relative;

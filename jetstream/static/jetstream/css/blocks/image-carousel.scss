@@ -75,3 +75,12 @@
     }
   }
 }
+
+// On phones, the images get resized to a different size, but the carousel markup still has style="max-height: 350px",
+// or whatever, to size the block correctly for the layout its in. We must forcibly ignore that on phones because they
+// ignore the specified layout and convert it into a single column flow with different sizes.
+@media (max-width: $small_viewport - 1) {
+  .image-carousel {
+    max-height: unset !important;
+  }
+}

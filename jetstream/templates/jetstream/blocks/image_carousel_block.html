@@ -20,7 +20,7 @@
     </div>
   {% endif %}
 
-  <div class="carousel-inner image-carousel__inner">
+  <div class="image-carousel__inner carousel-inner">
     {% for slide in self.slides %}
       <div class="image-carousel__item carousel-item {% if forloop.counter == 1 %}active{% endif %}">
         {% link_url slide.link as link_url %}
@@ -50,7 +50,8 @@
   {% if self.slides|length > 1 %}
     {# These must be here for the carousel to cycle correctly. #}
     <a class="image-carousel__control image-carousel__control--prev carousel-control-prev"
-      href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="prev">
+      href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="prev"
+    >
       <span class="image-carousel__control__component carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="image-carousel__control__component sr-only">Previous</span>
     </a>
