@@ -1,5 +1,6 @@
 .image-panel-caption {
   overflow: hidden;
+  margin-bottom: 2em;
 
   &__image-link {
     span {
@@ -12,10 +13,14 @@
       cursor: pointer;
     }
   }
+
+  &__image-details {
+    @include image-details;
+  }
 }
 
-@media (max-width: $small_viewport) {
+@media (min-width: $small_viewport) {
   .image-panel-caption {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
   }
 }

@@ -10,6 +10,10 @@
       font-family: $font_kievit;
     }
   }
+
+  &__image-details {
+    @include image-details;
+  }
 }
 .left .image-panel-listing__body {
   padding-left: 25px;

@@ -1,3 +1,4 @@
+/*************** Image Caption ***************/
 /****** Generic CSS For Similar Blocks *********/
 /******** Text block general settings **********/
 .listing-background-image {
@@ -674,7 +675,7 @@
   padding-bottom: 12px;
 }
 
-.image-gallery-gallery .gallery-item {
+.image-gallery-gallery__gallery-item {
   display: block;
 }
 
@@ -683,48 +684,81 @@
   height: auto;
 }
 
-@media (min-width: 480px) {
-  .image-gallery-gallery .gallery-item {
-    float: left;
-  }
-  .image-gallery-gallery .col-md-2 {
-    width: 16.6666%;
-  }
-  .image-gallery-gallery .col-md-3 {
-    width: 25%;
-  }
-  .image-gallery-gallery .col-md-4 {
-    width: 33.3333%;
-  }
-  .image-gallery-gallery .col-md-5 {
-    width: 41.6666%;
-  }
-  .image-gallery-gallery .col-md-6 {
-    width: 50%;
-  }
-  .image-gallery-gallery .col-md-7 {
-    width: 58.3333%;
-  }
-  .image-gallery-gallery .col-md-8 {
-    width: 66.6666%;
-  }
-  .image-gallery-gallery .col-md-9 {
-    width: 75%;
+.image-gallery-gallery__image-details {
+  line-height: 1.5;
+  margin-top: 10px;
+  display: block;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .image-gallery-gallery__image-details {
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
-.image-gallery-slider .carousel-control {
-  display: none;
+.image-gallery-gallery__image-details .image-caption {
+  font-size: 12px;
+  display: block;
 }
 
-.image-gallery-slider .carousel-indicators {
+.image-gallery-gallery__image-details .image-credit {
+  font-size: 11px;
+  font-style: italic;
+  display: block;
+}
+
+.image-gallery-slider__inner a:hover {
+  text-decoration: none;
+}
+
+.image-gallery-slider__item img {
+  width: 100%;
+  height: auto;
+}
+
+.image-gallery-slider__image-details {
+  line-height: 1.5;
+  margin-top: 10px;
+  display: block;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .image-gallery-slider__image-details {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.image-gallery-slider__image-details .image-caption {
+  font-size: 12px;
+  display: block;
+}
+
+.image-gallery-slider__image-details .image-credit {
+  font-size: 11px;
+  font-style: italic;
+  display: block;
+}
+
+.image-gallery-slider__carousel-indicators-container {
+  width: 100%;
+  position: relative;
+  margin-top: 15px;
+}
+
+.image-gallery-slider__carousel-indicators {
   position: static;
   width: auto;
   margin-left: 0;
-  text-align: start;
+  margin-right: 0;
+  flex-wrap: wrap;
+  justify-content: left;
 }
 
-.image-gallery-slider .carousel-indicators li {
+.image-gallery-slider__carousel-indicators li {
   text-indent: 0;
   border-radius: 0;
   border: none;
@@ -734,31 +768,8 @@
   margin: 5px 5px 0 0;
 }
 
-.image-gallery-slider .carousel-indicators-container {
-  width: 100%;
-  position: relative;
-  margin-top: 15px;
-}
-
-.image-gallery-slider a:hover {
-  text-decoration: none;
-}
-
-.image-gallery-slider img {
-  max-width: 100%;
-}
-
-.image-gallery-slider .image-details {
-  line-height: 1.5;
-}
-
-.image-gallery-slider .image-details .image-caption {
-  font-size: 12px;
-}
-
-.image-gallery-slider .image-details .image-credit {
-  font-size: 11px;
-  font-style: italic;
+.image-gallery-slider__carousel-control-prev, .image-gallery-slider__carousel-control-next {
+  display: none;
 }
 
 /************ Image Carousel Blocks ************/
@@ -1227,6 +1238,7 @@
 /************** Image Panel Blocks *************/
 .image-panel-caption {
   overflow: hidden;
+  margin-bottom: 2em;
 }
 
 .image-panel-caption__image-link span {
@@ -1239,9 +1251,34 @@
   cursor: pointer;
 }
 
-@media (max-width: 500px) {
+.image-panel-caption__image-details {
+  line-height: 1.5;
+  margin-top: 10px;
+  display: block;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .image-panel-caption__image-details {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.image-panel-caption__image-details .image-caption {
+  font-size: 12px;
+  display: block;
+}
+
+.image-panel-caption__image-details .image-credit {
+  font-size: 11px;
+  font-style: italic;
+  display: block;
+}
+
+@media (min-width: 500px) {
   .image-panel-caption {
-    margin-bottom: 2em;
+    margin-bottom: 1em;
   }
 }
 
@@ -1312,7 +1349,7 @@
 .image-panel-link__title .icon {
   color: #ff6e1e;
   font-size: 25px;
-  padding-left: 5px;
+  padding-bottom: 3px;
 }
 
 @media (min-width: 480px) and (max-width: 767px) {
@@ -1371,6 +1408,31 @@
   color: rgba(0, 0, 0, 0.68);
 }
 
+.image-panel-card__image-details {
+  line-height: 1.5;
+  margin-top: 10px;
+  display: block;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .image-panel-card__image-details {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.image-panel-card__image-details .image-caption {
+  font-size: 12px;
+  display: block;
+}
+
+.image-panel-card__image-details .image-credit {
+  font-size: 11px;
+  font-style: italic;
+  display: block;
+}
+
 @media (min-width: 480px) and (max-width: 1000px) {
   .image-panel-card img {
     width: 100%;
@@ -1386,6 +1448,31 @@
 .image-panel-listing__body h4 {
   margin-top: 10px;
   font-family: KievitSlabMedium, Times, serif;
+}
+
+.image-panel-listing__image-details {
+  line-height: 1.5;
+  margin-top: 10px;
+  display: block;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .image-panel-listing__image-details {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.image-panel-listing__image-details .image-caption {
+  font-size: 12px;
+  display: block;
+}
+
+.image-panel-listing__image-details .image-credit {
+  font-size: 11px;
+  font-style: italic;
+  display: block;
 }
 
 .left .image-panel-listing__body {
@@ -2387,39 +2474,6 @@ h3.block-header {
   }
   .richtext-image.Large {
     width: 100%;
-  }
-}
-
-/*************** Image Caption ***************/
-.image-details {
-  line-height: 1.5;
-  margin-top: 10px;
-  display: block;
-  color: #333;
-}
-
-.image-details .image-caption {
-  font-size: 12px;
-  display: block;
-}
-
-.image-details .image-credit {
-  font-size: 11px;
-  font-style: italic;
-  display: block;
-}
-
-@media (min-width: 480px) and (max-width: 768px) {
-  .image-details {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-
-@media (max-width: 500px) {
-  .image-details {
-    padding-left: 10px;
-    padding-right: 10px;
   }
 }
 

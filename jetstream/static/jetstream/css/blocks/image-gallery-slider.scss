@@ -1,14 +1,36 @@
 .image-gallery-slider {
-  .carousel-control {
-    display: none;
+  &__inner {
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  &__item {
+    img {
+      // Ensures that images resize themselves properly on phones.
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__image-details {
+    @include image-details;
+  }
+
+  &__carousel-indicators-container {
+    width: 100%;
+    position: relative;
+    margin-top: 15px;
   }
 
   // These rules override a bunch of stuff from bootstrap.
-  .carousel-indicators {
+  &__carousel-indicators {
     position: static;
     width: auto;
     margin-left: 0;
-    text-align: start;
+    margin-right: 0;
+    flex-wrap: wrap;
+    justify-content: left;
 
     li {
       text-indent: 0;
@@ -21,30 +43,8 @@
     }
   }
 
-  .carousel-indicators-container {
-    width: 100%;
-    position: relative;
-    margin-top: 15px;
-  }
-
-  a:hover {
-    text-decoration: none
-  }
-
-  img {
-    max-width: 100%;
-  }
-
-  .image-details {
-    line-height: 1.5;
-
-    .image-caption {
-      font-size: 12px;
-    }
-
-    .image-credit {
-      font-size: 11px;
-      font-style: italic;
-    }
-  }
+  &__carousel-control-prev,
+  &__carousel-control-next {
+    display: none;
+}
 }

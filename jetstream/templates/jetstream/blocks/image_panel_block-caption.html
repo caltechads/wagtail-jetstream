@@ -6,5 +6,5 @@
     <a class="image-panel-caption__image-link" href="{{ url }}"><span></span></a>
   {% endif %}
   {% include 'jetstream/blocks/image_panel_block-image.html' with image=self.image %}
-  {% include 'jetstream/image_details.html' with image=self.image %}
+  {% include 'jetstream/image_details.html' with image=self.image parent_block="image-panel-caption" %}
 </div>

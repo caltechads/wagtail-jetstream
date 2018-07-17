@@ -12,7 +12,7 @@
       {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
     {% endif %}
     {% if self.display_caption %}
-      {% include 'jetstream/image_details.html' with image=self.image %}
+      {% include 'jetstream/image_details.html' with image=self.image parent_block="image-panel-listing" %}
     {% endif %}
   </div>
 {% endif %}
@@ -38,7 +38,7 @@
       {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
     {% endif %}
     {% if self.display_caption %}
-      {% include 'jetstream/image_details.html' with image=self.image %}
+      {% include 'jetstream/image_details.html' with image=self.image parent_block="image-panel-listing" %}
     {% endif %}
   </div>
 {% endif %}

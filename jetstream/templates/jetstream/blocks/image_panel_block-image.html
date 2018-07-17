@@ -1,13 +1,13 @@
 {% load wagtailimages_tags jetstream_tags %}
 
 {% if self.fixed_dimensions.use %}
-  {% responsive_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
+  {% responsive_image image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
 {% elif parent_width %}
   {% if parent_height %}
-    {% responsive_image self.image 'fill' parent_width parent_height %}
+    {% responsive_image image 'fill' parent_width parent_height %}
   {% else %}
-    {% responsive_image self.image 'width' parent_width %}
+    {% responsive_image image 'width' parent_width %}
   {% endif %}
 {% else %}
-  {% image self.image original %}
+  {% image image original %}
 {% endif %}

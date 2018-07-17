@@ -35,6 +35,10 @@
     margin-top: .5em;
     color: rgba(0, 0, 0, .68);
   }
+
+  &__image-details {
+    @include image-details;
+  }
 }
 
 // For landscape-mode phones:

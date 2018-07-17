@@ -12,7 +12,7 @@
       </a>
     {% endif %}
     {% if self.display_caption %}
-      {% include 'jetstream/image_details.html' with image=self.image %}
+      {% include 'jetstream/image_details.html' with image=self.image parent_block="image-panel-card" %}
     {% endif %}
     {% if self.title or self.desc %}
       <div class="image-panel-card__block">

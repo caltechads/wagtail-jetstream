@@ -75,39 +75,3 @@
     }
   }
 }
-
-/*************** Image Caption ***************/
-.image-details {
-  line-height: 1.5;
-  margin-top: 10px;
-  display: block;
-  color: #333;
-
-  .image-caption {
-    font-size: 12px;
-    display: block;
-  }
-
-  .image-credit {
-    font-size: 11px;
-    font-style: italic;
-    display: block;
-  }
-}
-
-// For landscape-mode phones and portrait tablets:
-// Note that these apply to portrait tablets because it's not "max-width: @screen-tablet - 1".
-@media (min-width: $screen-phone)
-        and (max-width: $screen-tablet) {
-  .image-details {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}
-
-@media (max-width: $small_viewport) {
-  .image-details {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-}

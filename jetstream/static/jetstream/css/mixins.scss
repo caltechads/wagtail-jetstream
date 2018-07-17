@@ -136,7 +136,8 @@
   .icon {
     color: $orange;
     font-size: 25px;
-    padding-left: 5px;
+    // display: table-cell; vertical-align: middle; doesn't completely work with this icon so nudge it up a little
+    padding-bottom: 3px;
   }
 }
 
@@ -180,6 +181,8 @@
 }
 
 @mixin wrapper-link {
+  // This provides a 100% x 100% link overlay so that the background image in the element has an overlay.
+  // Mainly used to make links that overlay background images.
   // NOTE: When using this mixin, ensure that the direct parent of the mixed-in class has "position: relative".
   span {
     position: absolute;
@@ -188,5 +191,30 @@
     top: 0;
     left: 0;
     z-index: 100;
+  }
+}
+
+
+/*************** Image Caption ***************/
+@mixin image-details {
+  line-height: 1.5;
+  margin-top: 10px;
+  display: block;
+  color: #333;
+
+  @media (max-width: $medium_viewport) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .image-caption {
+    font-size: 12px;
+    display: block;
+  }
+
+  .image-credit {
+    font-size: 11px;
+    font-style: italic;
+    display: block;
   }
 }

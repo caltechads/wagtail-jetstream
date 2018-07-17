@@ -7,10 +7,10 @@
   <div class="row our_clearfix">
     {% for img in self.images %}
       {% image img original as full_img %}
-      <a class="gallery-item col-md-{{ bootstrap_column_width }}" href="{{ full_img.url }}">
+      <a class="image-gallery--gallery-item col-md-{{ bootstrap_column_width }}" href="{{ full_img.url }}">
         {% get_gallery_image_width as width %}
         {% responsive_image img 'fill' width self.height %}
-        {% include 'jetstream/image_details.html' with image=img %}
+        {% include 'jetstream/image_details.html' with image=img parent_block="image-gallery-gallery" %}
       </a>
       {% if forloop.counter|divisibleby:self.columns and not forloop.last %}
         </div><div class="row our_clearfix">
