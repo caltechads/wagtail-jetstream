@@ -1986,7 +1986,7 @@ h3.block-header {
   .fancy-rich-text .background-image {
     height: auto;
   }
-  #main-content > .block-FancyRichTextBlock .fancy-rich-text:not(.bg) .rich-text {
+  .content > .block-FancyRichTextBlock .fancy-rich-text:not(.bg) .rich-text {
     padding: 0;
   }
   .grid-elem:last-child .fancy-rich-text .rich-text {

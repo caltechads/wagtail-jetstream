@@ -73,7 +73,7 @@
 
   // Top-level, non-background blocks need to have 0 padding, because we want them to reach the edges of the layout,
   // like a normal Page's text would.
-  #main-content > .block-FancyRichTextBlock {
+  .content > .block-FancyRichTextBlock {
     .fancy-rich-text:not(.bg) {
       .rich-text {
         padding: 0;
