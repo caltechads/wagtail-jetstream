@@ -2,47 +2,43 @@
 
 {% generate_unique_id as backup_block_id %}
 <div id="{{ block.id | default:backup_block_id }}"
-  class="carousel fade image-carousel"
+  {% comment %}
+  This block takes advantage of Bootstrap 4's Carousel feature: https://getbootstrap.com/docs/4.0/components/carousel/
+  The following classes are part of Carousel:
+  carousel, carousel-fade, slide, carousel-inner, carousel-item, active, carousel-control-prev, carousel-control-next
+  The "image-carousel" BEM block classes are for our own styles.
+  {% endcomment %}
+  class="image-carousel carousel carousel-fade slide" {# 'carousel carousel-fade slide' are all needed for fade transitions. #}
   data-ride="carousel" data-interval="{{ self.cycle_timeout }}"
-  {% if parent_height %}style="height: {{ parent_height }}px;"{% endif %}
+  {% if parent_height %}
+    style="max-height: {{ parent_height }}px;"
+  {% endif %}
 >
   {% if self.header %}
-    <div class="image-carousel-header-banner">
-      <div class="image-carousel-header">{{ self.header }}</div>
+    <div class="image-carousel__banner">
+      <div class="image-carousel__banner__header">{{ self.header }}</div>
     </div>
   {% endif %}
 
-  {% if self.slides|length > 1 %}
-    <ol class="carousel-indicators">
-      {% for slide in self.slides %}
-        {% if forloop.counter0 == 0 %}
-          <li data-target="#{{ block.id | default:backup_block_id }}" data-slide-to="0" class="active"></li>
-        {% else %}
-          <li data-target="#{{ block.id | default:backup_block_id }}" data-slide-to="{{ forloop.counter0 }}"></li>
-        {% endif %}
-      {% endfor %}
-    </ol>
-  {% endif %}
-
-  <div class="carousel-inner" role="listbox">
+  <div class="carousel-inner image-carousel__inner">
     {% for slide in self.slides %}
-      <div class="item {% if forloop.counter == 1 %}active{% endif %}">
+      <div class="image-carousel__item carousel-item {% if forloop.counter == 1 %}active{% endif %}">
         {% link_url slide.link as link_url %}
         {% if link_url %}
-          <a class="image-link" href="{{ link_url }}"><span></span></a>
+          <a class="image-carousel__item__wrapper-link" href="{{ link_url }}"><span></span></a>
         {% endif %}
 
         {% if parent_width and parent_height %}
-          {% responsive_image slide.image 'fill' parent_width parent_height %}
+          {% responsive_image slide.image 'fill' parent_width parent_height class="image-carousel__item__image" %}
         {% else %}
-          {% image slide.image %}
+          {% image slide.image original class="image-carousel__item__image" %}
         {% endif %}
         {% if slide.text %}
-          <div class="text-gradient">
-            <div class="caption">
-              <span class="text">{{ slide.text | bleach }}</span>
+          <div class="image-carousel__item__text-wrapper">
+            <div class="image-carousel__item__text">
+              {{ slide.text | bleach }}
               {% if link_url %}
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="image-carousel__item__text__link-icon icon icon-arrow-right" aria-hidden="true"></span>
               {% endif %}
             </div>
           </div>
@@ -52,14 +48,17 @@
   </div>
 
   {% if self.slides|length > 1 %}
-    <!-- These must be here for the carousel to cycle correctly. We can set them to hidden in CSS -->
-    <a class="left carousel-control" href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
+    {# These must be here for the carousel to cycle correctly. #}
+    <a class="image-carousel__control image-carousel__control--prev carousel-control-prev"
+      href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="prev">
+      <span class="image-carousel__control__component carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="image-carousel__control__component sr-only">Previous</span>
     </a>
-    <a class="right carousel-control" href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
+    <a class="image-carousel__control image-carousel__control--next carousel-control-next"
+      href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="next"
+    >
+      <span class="image-carousel__control__component carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="image-carousel__control__component sr-only">Next</span>
     </a>
   {% endif %}
 </div>

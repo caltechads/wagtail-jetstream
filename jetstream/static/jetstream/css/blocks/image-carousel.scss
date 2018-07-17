@@ -1,83 +1,77 @@
 .image-carousel {
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-
-  .item {
-    transition: opacity ease-out .7s, visibility 0.7s;
-    left: 0;
-    opacity: 0;
-    // Need opacity for the transition, and visibility to hide the inactive ones so links don't overlap.
-    visibility: hidden;
-    top: 0;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: block;
-    &:first-child {
-      top: auto;
-      opacity: 1;
-      position: relative;
-    }
-    &.active {
-      opacity:1;
-      visibility: visible;
-    }
-  }
-
-  .carousel-inner {
-    height: 100%;
-
-    .item {
-      text-align: center;
-    }
-  }
-
-  .carousel-indicators {
-    display: none;
-  }
-
-  .image-carousel-header-banner {
+  &__banner {
     position: absolute;
     top: 0;
-    background-color: rgba(0,0,0,0.3);
-    z-index: 5;
     width: 100%;
     height: 42px;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 5;
+
+    &__header {
+      position: absolute;
+      margin: 10px 0 10px 25px;
+      font-family: $font_vaud;
+      color: $white;
+      font-weight: normal;
+      font-size: 1.17em;
+    }
   }
 
-  .image-carousel-header {
-    position: absolute;
-    margin: 10px 0 10px 25px;
-    font-family: $font_vaud;
-    color: $white;
-    font-weight: normal;
-    font-size: 1.17em;
+  // We need to use nesting here to override Bootstrap 4's default fade transition rules.
+  & &__item {
+    transition-duration: 0.8s;
+    transition-timing-function: ease-out;
+  }
+
+  &__item {
+    &__wrapper-link {
+      @include wrapper-link;
+    }
+
+    &__image {
+      // Ensures that images resize themselves properly on phones.
+      width: 100%;
+      height: auto;
+    }
+
+    &__text-wrapper {
+      @include text-gradient--bottom;
+    }
+
+    &__text {
+      font-size: 16px;
+      font-family: $font_vaud_medium;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      padding: 0 15px 10px 20px;
+      text-align: right;
+      color: white;
+
+      &__link-icon {
+        font-size: 25px;
+        color: $orange;
+      }
+    }
   }
 
   // Only display the controls when the user hovers them. And replace the gradiant background with a solid black 30%
   // opacity block.
-  .carousel-control {
+  &__control {
     background: none;
     &:hover {
       background: rgba(0, 0, 0, 0.3);
-
-      span {
-        visibility: visible;
-      }
     }
 
-    span {
+    // Hide the component by default. This style of hiding is needed because if we just hide the control itself, the
+    // user can't hover it in order to make the background and component appear.
+    &__component {
       visibility: hidden;
     }
-  }
-}
 
-// On phones, the images get resized to a different size, but the carousel markup still has style="height: 350px", or
-// whatever, to size the block correctly for the layout its in. We must forcibly ignore that on phones because they
-// ignore the specified layout and convert it into a single column flow with different sizes.
-@media (max-width: $small_viewport) {
-  .image-carousel {
-    height: 100% !important;
+    // When the component's parent is hovered, show the component.
+    &:hover &__component {
+      visibility: visible;
+    }
   }
 }
