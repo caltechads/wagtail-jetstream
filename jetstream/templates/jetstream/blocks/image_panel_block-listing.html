@@ -1,11 +1,17 @@
 {% load jetstream_tags %}
 
+{% comment %}
+2018-07-18 rrollins/cnk:
+NOTE: The {% arbitrary_image %} tags use the fixed dimension values even when fixed_dimensions.use is not True.
+This is a bug that the layout actually relies on, so we're not fixing it now.
+{% endcomment %}
+
 <div class="media image-panel-listing {{ extra_classes }}">
 {% if extra_classes == "left" %}
-  <div class="media-left image-panel-listing--left">
+  <div class="media-left image-panel-listing__image image-panel-listing__image--left">
     {% link_url self.link as link_url %}
     {% if link_url %}
-      <a href="{{ link_url}}">
+      <a href="{{ link_url }}">
         {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
       </a>
     {% else %}
@@ -16,7 +22,7 @@
     {% endif %}
   </div>
 {% endif %}
-  <div class="media-body image-panel-listing__body">
+  <div class="media-body image-panel-listing__body image-panel-listing__body--{{ extra_classes }}">
     <h4 class="media-heading image-panel-listing__heading">
       {% link_url self.link as link_url %}
       {% if link_url %}
@@ -28,10 +34,10 @@
     {{ self.desc }}
   </div>
 {% if extra_classes == "right" %}
-  <div class="media-right image-panel-listing--right">
+  <div class="media-right image-panel-listing__image image-panel-listing__image--right">
     {% link_url self.link as link_url %}
     {% if link_url %}
-      <a href="{{ link_url}}">
+      <a href="{{ link_url }}">
         {% arbitrary_image self.image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
       </a>
     {% else %}

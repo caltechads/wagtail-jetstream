@@ -1,54 +1,59 @@
 // Image Listing -- title and description on left or right sides
 
 .image-panel-listing {
+  flex-wrap: wrap;
+
+  @include portrait-tablet {
+    flex-wrap: unset;
+  }
+
   &__body {
     padding-left: 10px;
     padding-right: 10px;
+    padding-bottom: 2em;
+    flex: 100%;
+
+    @include portrait-tablet {
+      flex: 50%;
+    }
+
+    @include desktop {
+      // Matches bootstrap's .media-body. We only want this on desktop because only smaller devices need it to be 50%.
+      flex: 1;
+
+      // The "right" vs "left" refers to the image, so the body is opposite.
+      &--right {
+        padding-left: 0;
+      }
+    }
+
+    &--left {
+      padding-left: 25px;
+    }
 
     h4 {
       margin-top: 10px;
       font-family: $font_kievit;
     }
   }
-
   &__image-details {
     @include image-details;
   }
-}
-.left .image-panel-listing__body {
-  padding-left: 25px;
-}
 
-@media (max-width: $small_viewport) {
-  .image-panel-listing {
-    &__body {
+  &__image {
+    flex: 50%;
+
+    img {
       width: 100%;
-      padding-left: 15px;
-      padding-right: 15px;
-      padding-bottom: 2em;
+      height: auto;
     }
-    &--right,
-    &--left
-    {
-      display: block;
-      padding: 0;
+
+    @include desktop {
+      flex: unset;
+
       img {
-        width: 100%;
-        height: auto;
+        width: auto;
       }
-    }
-
-    &--left {
-      margin-bottom: 1.5em;
-    }
-  }
-}
-
-// Once we reach full page width, don't add left padding.
-@media (min-width: $responsive_grid_w) {
-  .image-panel-listing {
-    &__body {
-      padding-left: 0;
     }
   }
 }
