@@ -62,6 +62,11 @@
   color: #000000;
 }
 
+.responsive-image-fallthrough {
+  width: 100%;
+  height: auto;
+}
+
 /****** Image Panel/Carousel/ctc. Settings *****/
 .text-gradient {
   position: absolute;

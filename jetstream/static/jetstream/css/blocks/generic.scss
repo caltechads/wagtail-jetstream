@@ -25,6 +25,13 @@
 .text-color-dkgray { color: $dkgray; }
 .text-color-black { color: $black; }
 
+// The image_panel_block-image template renders a fallthrough responsive_image when it doesn't get dimensions from
+// fixed_dimensions or parent. Such images must size themselves to the device, as they are rendered at 1000px wide.
+.responsive-image-fallthrough {
+  width: 100%;
+  height: auto;
+}
+
 /****** Image Panel/Carousel/ctc. Settings *****/
 .text-gradient {
   position: absolute;
@@ -54,5 +61,4 @@
       padding-left: 5px;
     }
   }
-
 }

@@ -1,13 +1,18 @@
 {% load wagtailimages_tags jetstream_tags %}
 
+{# un-template-comment the HTML comments to see them in the inspector when debugging this template. #}
 {% if self.fixed_dimensions.use %}
+  {# <!-- fixed dimensions --> #}
   {% responsive_image image 'fill' self.fixed_dimensions.width self.fixed_dimensions.height %}
 {% elif parent_width %}
   {% if parent_height %}
+    {# <!-- parent_height and parent_width --> #}
     {% responsive_image image 'fill' parent_width parent_height %}
   {% else %}
+    {# <!-- only parent_width --> #}
     {% responsive_image image 'width' parent_width %}
   {% endif %}
 {% else %}
-  {% image image original %}
+  {# <!-- fallthrough --> #}
+  {% responsive_image image 'width' 1000 class="responsive-image-fallthrough" %}
 {% endif %}
