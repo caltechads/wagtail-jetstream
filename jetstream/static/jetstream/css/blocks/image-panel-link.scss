@@ -3,15 +3,9 @@
   position: relative;
   width: auto;
   height: auto;
-  display: inline-block;
 
   &.top-level {
     display: block;
-
-    img {
-      width: 100%;
-      height: auto;
-    }
   }
 
   &__image-link {
@@ -29,6 +23,11 @@
   &__image {
     display: block;
     position: relative;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 
   &__text-gradient {
@@ -37,33 +36,5 @@
 
   &__title {
     @include image_title;
-  }
-}
-
-// For landscape-mode phones:
-// rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
-// with these rules IS what we want, even though it's applying to more than we say it should be.
-//
-// cnk 2018-4-30: without the -1 below, all the images disappear (because their height is 0)
-@media (min-width: $screen-phone)
-        and (max-width: $screen-tablet - 1) {
-  .image-panel-link {
-    width: 100%;
-
-    img {
-      width: 100%;
-      height: auto;
-    }
-  }
-}
-
-@media (max-width: $small_viewport) {
-  .image-panel-link {
-    width: 100%;
-
-    img {
-      width: 100%;
-      height: auto;
-    }
   }
 }

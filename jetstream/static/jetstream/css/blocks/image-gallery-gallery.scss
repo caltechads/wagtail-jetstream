@@ -1,10 +1,8 @@
 .image-gallery-gallery {
-  .row:not(:last-child) {
-    padding-bottom: 12px;
-  }
-
-  &__gallery-item {
+  &__item {
     display: block;
+    // Matches the default Bootstrap padding for left/right.
+    padding-bottom: 12px;
   }
 
   // Has no effect on desktop because we build the main rendition pixel-perfect. But it's needed on phones and tablets.
