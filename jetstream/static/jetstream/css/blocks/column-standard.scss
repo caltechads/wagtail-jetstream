@@ -54,15 +54,15 @@
   .row.#{$classname} .col-xs-10,
   .row.#{$classname} .col-xs-11,
   .row.#{$classname} .col-xs-12 {
-    // Give columns no padding on portrait phones.
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: $half;
+    padding-right: $half;
 
-    // Give columns their programmed padding on anything larger.
-    @include landscape-phone {
-      padding-left: $half;
-      padding-right: $half;
+    // On portrait phones, ignore column layout rules and just stretch everything to the full width.
+    @media (max-width: 499px) {
+      flex: 0 0 100%;
+      max-width: unset;
     }
+
   }
 }
 
