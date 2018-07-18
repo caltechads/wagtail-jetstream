@@ -7,7 +7,7 @@
   <div class="row {% if parent_gutter_width %}gutter-{{ parent_gutter_width }}px{% endif %}">
     {% for img in self.images %}
       {% image img original as full_img %}
-      <a class="image-gallery-gallery__item col-md-{{ bootstrap_column_width }}" href="{{ full_img.url }}">
+      <a class="image-gallery-gallery__item col-md-{{ bootstrap_column_width }} col-sm-{{ bootstrap_column_width }}" href="{{ full_img.url }}">
         {% get_gallery_image_width as width %}
         {% responsive_image img 'fill' width self.height %}
         {% include 'jetstream/image_details.html' with image=img parent_block="image-gallery-gallery" %}

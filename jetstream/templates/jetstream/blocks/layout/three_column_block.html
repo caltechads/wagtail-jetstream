@@ -10,7 +10,7 @@
 >
   <div class="row gutter-{{ self.gutter_width }}px">
     {% subtract_from_twelve self.left_column_width self.right_column_width as fill_width %}
-    <div class="three_col_elem col-md-{{ self.left_column_width }} grid-elem">
+    <div class="three_col_elem col-md-{{ self.left_column_width }} col-sm-{{ self.left_column_width }} grid-elem">
       {% for block in self.left_column %}
         {% if block.block_type == 'heading' %}
           <h1>{{ block.value }}</h1>
@@ -27,7 +27,7 @@
         {% endif %}
       {% endfor %}
     </div>
-    <div class="three_col_elem col-md-{{ fill_width }} grid-elem">
+    <div class="three_col_elem col-md-{{ fill_width }} col-sm-{{ fill_width }} grid-elem">
       {% for block in self.middle_column %}
         {% if block.block_type == 'heading' %}
           <h1>{{ block.value }}</h1>
@@ -44,7 +44,7 @@
         {% endif %}
       {% endfor %}
     </div>
-    <div class="three_col_elem col-md-{{ self.right_column_width }} grid-elem">
+    <div class="three_col_elem col-md-{{ self.right_column_width }} col-sm-{{ self.right_column_width }} grid-elem">
       {% for block in self.right_column %}
         {% if block.block_type == 'heading' %}
           <h1>{{ block.value }}</h1>
