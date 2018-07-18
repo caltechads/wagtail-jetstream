@@ -2,10 +2,10 @@
 
 {% image self.image original as img_data %}
 <div class="hero-image {{ self.style }} {{ self.text_style }} {{ self.position }}" style="height: {{ self.height }}px;">
-  <div class="hero-image--background" style="background-image: url('{{ img_data.url }}'); height: {{ self.height }}px;"></div>
+  <div class="hero-image__background" style="background-image: url('{{ img_data.url }}'); height: {{ self.height }}px;"></div>
   {% if self.desc.source or self.actions.actions or self.title %}
-    <div class="hero-image--body" style="height: {{ self.height }}px;">
-      <div class="hero-image--inner-body">
+    <div class="hero-image__body" style="height: {{ self.height }}px;">
+      <div class="hero-image__inner">
         <h1>{{ self.title }}</h1>
         {{ self.desc | richtext }}
         {% include_block self.actions %}
