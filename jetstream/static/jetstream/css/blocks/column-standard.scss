@@ -99,16 +99,16 @@
       padding-right: 50px;
     }
   }
+
+  &.bg {
+    background-size: cover;
+  }
 }
 
 .two_col_elem,
 .three_col_elem,
 .four_col_elem {
   overflow: hidden;
-}
-
-.clearall {
-  clear: both;
 }
 
 .row > .grid-elem > section > .row:first-child {

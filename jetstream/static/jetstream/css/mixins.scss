@@ -32,6 +32,14 @@
   }
 }
 
+// For those times when you need to use a non-mobile-first media query to apply rules ONLY on portrait phones.
+// Only use when you ABSOLUTELY have to!
+@mixin portrait-phone-only {
+  @media (max-width: $small_viewport - 1) {
+    @content;
+  }
+}
+
 // ===================
 // Functions
 // ===================
