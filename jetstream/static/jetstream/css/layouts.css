@@ -1709,7 +1709,7 @@
   overflow: hidden;
 }
 
-.image-panel-rollover__entry:hover .text {
+.image-panel-rollover__entry:hover .image-panel-rollover__drawer {
   top: 0;
 }
 
@@ -1729,69 +1729,50 @@
   height: auto;
 }
 
-.image-panel-rollover .text {
-  width: 100%;
-  line-height: 14px;
-  height: 100%;
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.65);
-  color: #FFFFFF;
-  top: 70%;
-  transition: top 0.5s ease-in-out 0.5s;
+.image-panel-rollover__drawer {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  color: #000000;
+  background-color: transparent;
 }
 
-.image-panel-rollover .title {
-  position: relative;
-  margin: 0;
-  height: 30%;
+@media (hover) {
+  .image-panel-rollover__drawer {
+    width: 100%;
+    line-height: 14px;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.65);
+    color: #FFFFFF;
+    top: 70%;
+    transition: top 0.5s ease-in-out 0.5s;
+  }
+}
+
+.image-panel-rollover__title {
+  font-size: 1.4em;
+  padding: 0 15px;
+  margin-bottom: 0.5em;
   font-family: KievitSlabMedium, Times, serif;
   font-weight: normal;
-  font-size: 1.1em;
-  padding: 0 15px;
 }
 
-.image-panel-rollover .vertically-centered {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+@media (hover) {
+  .image-panel-rollover__title {
+    position: relative;
+    height: 30%;
+    font-size: 1.1em;
+  }
+  .image-panel-rollover__title--vertically-centered {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
-.image-panel-rollover .blurb, .image-panel-rollover .read-more-link {
+.image-panel-rollover__blurb, .image-panel-rollover .read-more-link {
   padding: 0 15px;
   font-size: 1em;
-}
-
-/*** Responsive Rules ***/
-@media (min-width: 480px) and (max-width: 768px) {
-  .image-panel-rollover__entry {
-    float: none;
-  }
-}
-
-@media (max-width: 500px) {
-  .image-panel-rollover__entry {
-    float: none;
-  }
-  .image-panel-rollover .text {
-    padding-top: 1.5em;
-    padding-bottom: 1.5em;
-    position: static;
-    line-height: 24px;
-    color: #000000;
-    background-color: transparent;
-    height: auto;
-  }
-  .image-panel-rollover .title {
-    font-size: 1.4em;
-    line-height: 30px;
-    position: static;
-    height: auto;
-    display: inline;
-  }
-  .image-panel-rollover .vertically-centered {
-    position: static;
-    transform: none;
-  }
 }
 
 /************* Menu Listing Blocks *************/

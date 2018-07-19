@@ -8,12 +8,12 @@
     {% endif %}
     {% include 'jetstream/blocks/image_panel_block-image_square.html' with image=self.image %}
     {% if self.title or self.desc or link_url %}
-      <div class="text image-panel-rollover__drawer">
+      <div class="image-panel-rollover__drawer">
         {% if self.title %}
-          <div class="title"><span class="vertically-centered">{{ self.title }}</span></div>
+          <div class="image-panel-rollover__title"><span class="image-panel-rollover__title--vertically-centered">{{ self.title }}</span></div>
         {% endif %}
         {% if self.desc %}
-          <div class="blurb">{{ self.desc }}</div>
+          <div class="image-panel-rollover__blurb">{{ self.desc }}</div>
         {% endif %}
         {% if link_url %}
           <a href="{{ link_url }}" class="read-more-link">Read more...</a>

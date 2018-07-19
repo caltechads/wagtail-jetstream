@@ -7,7 +7,7 @@
     position: relative;
     overflow: hidden;
     &:hover {
-      .text {
+      .image-panel-rollover__drawer {
         top: 0;
       }
     }
@@ -31,82 +31,54 @@
     height: auto;
   }
 
-  .text {
-    width: 100%;
-    line-height: 14px;
-    height: 100%;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.65);
-    color: #FFFFFF;
-    top: 70%;
-    // Tells the browser to animate the "top" property whenever it changes, which happens when the .entry is hovered.
-    transition: top 0.5s ease-in-out 0.5s;
+  // On phones, we don't do the rollover, we put the title, description, and link below the image
+  &__drawer {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    // line-height: 24px;
+    color: $black;
+    background-color: transparent;
   }
 
-  .title {
-    position: relative;
-    margin: 0;
-    height: 30%;
+  @media (hover) {
+    &__drawer {
+      width: 100%;
+      line-height: 14px;
+      height: 100%;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.65);
+      color: #FFFFFF;
+      top: 70%;
+      // Tells the browser to animate the "top" property whenever it changes, which happens when the .entry is hovered.
+      transition: top 0.5s ease-in-out 0.5s;
+    }
+  }
+
+  &__title {
+    font-size: 1.4em;
+    padding: 0 15px;
+    margin-bottom: 0.5em;
     font-family: $font_kievit;
     font-weight: normal;
-    font-size: #{16px / $font_size_base}em;
-    padding: 0 15px;
   }
 
-  .vertically-centered {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+  @media (hover) {
+    &__title {
+      position: relative;
+      // margin: 0;
+      height: 30%;
+      font-size: #{16px / $font_size_base}em;
+
+      &--vertically-centered {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
   }
 
-  .blurb, .read-more-link {
+  &__blurb, .read-more-link {
     padding: 0 15px;
     font-size: #{14px / $font_size_base}em;
   }
-}
-
-/*** Responsive Rules ***/
-
-// For landscape-mode phones:
-// rrollins 2017-10-19: Except, no, because these rules apply on portrait tablets, too. However, the behavior we get
-// with these rules IS what we want, even though it's applying to more than we say it should be.
-@media (min-width: $screen-phone)
-        and (max-width: $screen-tablet) {
-  .image-panel-rollover__entry {
-    float: none;
-  }
-}
-
-@media (max-width: $small_viewport) {
-  .image-panel-rollover {
-    &__entry {
-      float: none;
-    }
-
-    .text {
-      padding-top: 1.5em;
-      padding-bottom: 1.5em;
-      position: static;
-      line-height: 24px;
-      color: $black;
-      background-color: transparent;
-      height: auto;
-    }
-
-    .title {
-      font-size: 1.4em;
-      line-height: 30px;
-      position: static;
-      height: auto;
-      display: inline;
-    }
-
-    .vertically-centered {
-      position: static;
-      transform: none;
-    }
-  }
-}
-
-@media (min-width: $desktop_viewport) {
 }
