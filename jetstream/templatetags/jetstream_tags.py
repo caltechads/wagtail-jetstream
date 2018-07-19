@@ -1,4 +1,5 @@
 from __future__ import division
+import math
 import re
 import uuid
 import bleach
@@ -183,12 +184,24 @@ def subtract_from_twelve(*numbers):
 
 
 @register.simple_tag()
-def width_from_arbitrary_parent(parent_px, units, gutter_width):
+def width_from_arbitrary_parent(parent_px, number_of_column_units, gutter_width):
     """
     Math tag for calculating the pixel width of certain column blocks because we can't do arithmetic
     within Django templates.
+
+    Here's how the math logic works:
+    The actual parent column is (parent_px + gutter_width) wide, due to the negative margins that pull in the left-most
+    and right-most gutter padding. So each unit of width within the column is (parent_px + gutter_width) / 12.0.
+    We then multiply the unit width by the specified number of columns units, and subtract the gutter width to account
+    for the column's padding.
+    Finally, we ceil() the width value because Wagtail doesn't render derivatives with partial pixel widths. If we
+    didn't do this, a three-column row with no padding would have one single pixel of whitespace between two of the
+    images due to the images being only 333px wide. By sizing them up to 334, and then relying on the column layout's
+    "overflow: hidden" CSS, we get rid of the white pixel.
     """
-    return int((float(parent_px) / 12.0 * float(units)) - (float(gutter_width) / 2.0))
+    single_unit_of_column_width = (parent_px + gutter_width) / 12.0
+    width_of_column = (single_unit_of_column_width * number_of_column_units) - gutter_width
+    return math.ceil(width_of_column)
 
 
 @register.simple_tag()

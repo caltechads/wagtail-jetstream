@@ -1462,6 +1462,12 @@
   }
 }
 
+@media (min-width: 1000px) {
+  .image-panel-link img {
+    width: auto;
+  }
+}
+
 .image-panel-link__text-gradient {
   position: absolute;
   bottom: 0;
