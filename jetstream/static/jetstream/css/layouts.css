@@ -2073,8 +2073,14 @@ h3.block-header {
   padding-right: 10px;
 }
 
-.fancy-rich-text.bg .rich-text {
+.fancy-rich-text.bg .rich-text, .row-wrapper.bg .fancy-rich-text .rich-text {
   padding: 10px;
+}
+
+@media (min-width: 1000px) {
+  .fancy-rich-text.bg .rich-text, .row-wrapper.bg .fancy-rich-text .rich-text {
+    padding: 25px;
+  }
 }
 
 .fancy-rich-text .background-image-container {
@@ -2091,8 +2097,10 @@ h3.block-header {
   width: 100%;
 }
 
-.fancy-rich-text .rich-text h1:first-child, .fancy-rich-text .rich-text h2:first-child, .fancy-rich-text .rich-text h3:first-child, .fancy-rich-text .rich-text h4:first-child {
-  margin-top: 0;
+@media (min-width: 1000px) {
+  .fancy-rich-text .background-image {
+    height: auto;
+  }
 }
 
 @media (min-width: 1000px) {
@@ -2100,17 +2108,15 @@ h3.block-header {
     padding-left: 0;
     padding-right: 25px;
   }
-  .fancy-rich-text.bg .rich-text {
-    padding: 25px;
-  }
-  .fancy-rich-text .background-image {
-    height: auto;
-  }
+}
+
+.fancy-rich-text .rich-text h1:first-child, .fancy-rich-text .rich-text h2:first-child, .fancy-rich-text .rich-text h3:first-child, .fancy-rich-text .rich-text h4:first-child {
+  margin-top: 0;
+}
+
+@media (min-width: 1000px) {
   .content > .block-FancyRichTextBlock .fancy-rich-text:not(.bg) .rich-text {
     padding: 0;
-  }
-  .grid-elem:last-child .fancy-rich-text .rich-text {
-    padding-right: 0;
   }
 }
 
