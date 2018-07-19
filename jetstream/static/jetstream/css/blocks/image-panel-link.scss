@@ -1,12 +1,5 @@
 .image-panel-link {
-  @include our_clearfix;
   position: relative;
-  width: auto;
-  height: auto;
-
-  &.top-level {
-    display: block;
-  }
 
   &__image-link {
     span {
@@ -20,13 +13,17 @@
     }
   }
 
-  &__image {
-    display: block;
-    position: relative;
-
-    img {
-      width: 100%;
-      height: auto;
+  // Always size up imgs to fill their parent...
+  img {
+    width: 100%;
+    height: auto;
+  }
+  // Unless it's a top-level image on a larger-than-phone device.
+  &.top-level {
+    @include landscape-phone {
+      img {
+        width: auto;
+      }
     }
   }
 

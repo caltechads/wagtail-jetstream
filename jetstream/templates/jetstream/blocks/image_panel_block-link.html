@@ -1,21 +1,19 @@
 {% load wagtailimages_tags jetstream_tags bleach_tags %}
 
-<div class="image-panel-link {% if not self.fixed_dimensions.use and not parent_width %}top-level{% endif %}">
+<div class="image-panel-link {% if not parent_width %}top-level{% endif %}">
   {% link_url self.link as url %}
   {% if url %}
     <a class="image-panel-link__image-link" href="{{ url }}"><span></span></a>
   {% endif %}
-  <div class="image-panel-link__image">
-    {% include 'jetstream/blocks/image_panel_block-image.html' with image=self.image %}
-    {% if self.title %}
-      <div class="image-panel-link__text-gradient">
-        <div class="image-panel-link__title">
-          <span>{{ self.title | bleach }}</span>
-          {% if url %}
-            <span class="icon icon-arrow-right" aria-hidden="true"></span>
-          {% endif %}
-        </div>
+  {% include 'jetstream/blocks/image_panel_block-image.html' with image=self.image %}
+  {% if self.title %}
+    <div class="image-panel-link__text-gradient">
+      <div class="image-panel-link__title">
+        <span>{{ self.title | bleach }}</span>
+        {% if url %}
+          <span class="icon icon-arrow-right" aria-hidden="true"></span>
+        {% endif %}
       </div>
-    {% endif %}
-  </div>
+    </div>
+  {% endif %}
 </div>
