@@ -73,10 +73,6 @@
 @include gutter(40px);
 
 
-.grid-elem {
-  height: 100%;
-}
-
 .row-wrapper {
   &.full-width {
     position: relative;
@@ -105,12 +101,12 @@
   }
 }
 
-.two_col_elem,
-.three_col_elem,
-.four_col_elem {
+.grid-item {
+  height: 100%;
   overflow: hidden;
 }
 
-.row > .grid-elem > section > .row:first-child {
+// TODO: What is this for?
+.row > .grid-item > section > .row:first-child {
   margin-top: 0;
 }
