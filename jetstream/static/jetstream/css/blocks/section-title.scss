@@ -1,53 +1,43 @@
-// Taken from the www styling
-h2.section-divider {
-  height: 50px;
-  background-color: $ltbrngray;
-  padding-left: 25px;
-  margin-top: 20px;
+.section-header {
   position: relative;
-  font-size: 1.6em;
+  height: 50px;
+  padding-left: 10px;
+  margin-top: 20px;
+  font-size: 1.2em;
   font-family: $font_kievit_regular;
   color: $crimson;
+  background-color: $ltbrngray;
 
-  span {
-    font-weight: normal;
+  @include desktop {
+    padding-left: 25px;
+    font-size: 1.6em;
+  }
+
+  &__text {
     position: absolute;
+    font-weight: normal;
     top: 50%;
     transform: translateY(-45%);
   }
 }
 
-h3.block-header {
+.block-header {
   color: $orange;
   font-size: 1.1em;
   font-family: $font_vaud_medium;
   padding: 0 10px 10px;
+  margin-top: 20px;
+
+  @include desktop {
+    padding: 0 0 10px;
+  }
 }
 
 // Remove the top margin from both types of SectionTitleBlocks if they're the first element in a column/sidebar.
 .grid-item, .sidebar-layout__sidebar {
   .block-SectionTitleBlock:first-child {
-    .section-divider, .block-header {
+    .section-header, .block-header {
       margin-top: 0;
     }
-  }
-}
-
-@media (max-width: $medium_viewport) {
-  h2.section-divider {
-    padding-left: 10px;
-    font-size: 1.2em;
-  }
-}
-
-@media (max-width: $small_viewport) {
-  h2.section-divider {
-    font-size: 1.2em;
-  }
-}
-
-@media (min-width: $desktop_viewport) {
-  h3.block-header {
-    padding: 0 0 10px;
   }
 }
