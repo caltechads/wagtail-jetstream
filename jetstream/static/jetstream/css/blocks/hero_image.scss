@@ -24,6 +24,9 @@
     h1 {
       font-family: $font_vaud_medium;
     }
+    h2, h3, h4, h5, h6 {
+      font-family: $font_vaud;
+    }
   }
   &.position-top-left &__inner {
     top: 5%;
@@ -92,33 +95,6 @@
     padding: 2em;
     max-width: 60%;
   }
-
-  // The h1-3 & p nested selectors are nested because the html comes from user entered data wihch we can't mark up
-  // with extra classes.
-  h1, h2, h3, h4 {
-    margin-top: 0;
-    margin-bottom: 0;
-    font-family: $font_kievit;
-    line-height: 1.5em;
-    font-weight: normal;
-    color: white;
-  }
-
-  h1 {
-    font-size: 3em;
-  }
-
-  h2 {
-    font-size: 2em;
-  }
-
-  p {
-    color: $white;
-    font-size: 1.3em;
-    line-height: 1.4em;
-    font-family: $font_vaud;
-  }
-
 }
 
 // For landscape-mode phones:
@@ -131,7 +107,7 @@
 
     &__background {
       height: 60vw !important;
-      background-size: 100%;
+      background-size: auto;
     }
 
     &__body {
@@ -139,22 +115,6 @@
       width: 100%;
       margin: 0;
       left: 0;
-    }
-
-    h1 {
-      font-size: 1.8em;
-    }
-
-    h2 {
-      font-size: 1.2em;
-    }
-
-    h3 {
-      font-size: 1em;
-    }
-
-    p {
-      font-size: 1em;
     }
   }
 }
@@ -169,7 +129,7 @@
 
     &__background {
       height: 60vw !important;
-      background-size: 100%;
+      background-size: auto;
     }
 
     &__body {
@@ -185,7 +145,6 @@
     // we need to overcome the specificity of selectors like .hero-image.position-left and .hero-image.white-bare-serif
     &.full-width, &.regular-width {
       .hero-image__inner {
-        text-align: center;
         height: auto !important;
         max-width: 100%;
         left: 0;
@@ -193,27 +152,67 @@
         position: static;
         transform: none;
         background-color: transparent;
+        text-align: center;
+        // except lists look weird centered.
+        ol, ul {
+          text-align: left;
+        }
       }
     }
+  }
+}
 
-    h1, h2, h3, h4, p {
-      color: $black;
+// The h & p changes below us nested selectors because the html comes from user entered data wihch we can't mark up
+// with extra classes.
+.hero-image {
+  &__body {
+    font-size: 0.8em;
+  }
+  h1 {
+    font-size: 1.8em;
+    font-family: $font_kievit;
+  }
+
+  h2 {
+    font-size: 1.2em;
+    font-family: $font_kievit;
+  }
+
+  h3, h4, h5, h6 {
+    font-size: 1em;
+    font-family: $font_kievit;
+    margin-top: 0;  // .rich-text h3 has a margin top of 2em that we don't want here.
+  }
+
+  // Text in the hero_image body is black (default color) when shown below the image; white when on top of the image.
+  @include landscape-phone {
+    &__body {
+      color: $white;
     }
+  }
 
-    h1 {
-      font-size: 1.8em;
-    }
-
-    h2 {
-      font-size: 1.2em;
-    }
-
-    h3 {
+  @include portrait-tablet {
+    &__body {
       font-size: 1em;
     }
 
-    p {
-      font-size: 0.8em;
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 0;
+      margin-bottom: 0;
+      line-height: 1.5em;
+      font-weight: normal;
+    }
+  }
+
+  @include desktop {
+    &__body {
+      font-size: 1.3em;
+    }
+    h1 {
+      font-size: 2.4em;
+    }
+    h2 {
+      font-size: 1.6em;
     }
   }
 }
