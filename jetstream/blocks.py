@@ -71,6 +71,7 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
             return self._child_blocks
 
         # Protect against crashing of the site has no features (like the initial site built by Wagtail migration)
+        # noinspection PyUnresolvedReferences
         try:
             features = request.site.features
             return OrderedDict([
@@ -87,6 +88,7 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
             return self._child_blocks
 
         # Protect against crashing of the site has no features (like the initial site built by Wagtail migration)
+        # noinspection PyUnresolvedReferences
         try:
             features = request.site.features
             return [block for block in self._dependencies if features.feature_is_enabled(block.name)]
@@ -701,20 +703,23 @@ class IFrameBlock(blocks.CharBlock, BlockTupleMixin):
     but then you could put anything in here - including script tags.
     """
     class Meta:
-        help_text = ("Paste the iFrame from your provider here. e.g.  "
-                     '<iframe height="300px" frameborder="0" style="padding: 25px 10px;" src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'  # noqa
-                     '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
-                     '</iframe>')
+        help_text = (
+            "Paste the iFrame from your provider here. e.g.  "
+             '<iframe height="300px" frameborder="0" style="padding: 25px 10px;"'
+                ' src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'
+             '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
+             '</iframe>'
+        )
         label = 'iFrame'
         template = 'jetstream/blocks/iframe_block.html'
         form_classname = 'iframe-block struct-block'
         icon = 'media'
 
     def clean(self, value):
-        '''
+        """
         Parse the iframe data submitted and then rebuild the tag using only the allowed attributes.
         For browsers that do not support iframes, we allow a subset of tags inside the iframe contents.
-        '''
+        """
         soup = BeautifulSoup(value, "lxml")
         iframe = soup.find('iframe')
         if not iframe:

@@ -4,14 +4,20 @@
   {% if self.color.text_color %} text-color-{{ self.color.text_color }}{% endif %}
   {% if self.color.background_color or self.color.background_image %} bg {% endif %}
   {% if self.color.background_color and not self.color.background_image %} bg-color-{{ self.color.background_color }}{% endif %}
-  {% if self.fixed_dimensions.use %} fixed{% endif %}
+  {% if self.fixed_dimensions.use %} callout--fixed{% endif %}
 "
-  {% if self.fixed_dimensions.use %}
-    style="height: {{ self.fixed_dimensions.height }}px; width: {{ self.fixed_dimensions.width }}px"
-  {% elif parent_height %}
-     style="min-height: {{ parent_height }}px"
-  {% endif %}
+  style="
+    {% if self.fixed_dimensions.use %}
+      height: {{ self.fixed_dimensions.height }}px; width: {{ self.fixed_dimensions.width }}px;
+    {% elif parent_height %}
+       min-height: {{ parent_height }}px;
+    {% endif %}
+    {% if self.color.background_image %}
+      {% image self.color.background_image original as img_data %}
+      background-image: url('{{ img_data.url }}');
+    {% endif %}
+  "
 >
-  <h2 class="callout-title">{{ self.title }}</h2>
+  <h2 class="callout__title">{{ self.title }}</h2>
   {{ self.body | richtext }}
 </div>

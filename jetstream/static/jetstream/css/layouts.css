@@ -2100,14 +2100,24 @@
 
 .callout {
   padding: 20px;
-}
-
-.callout .rich-text {
   font-family: VaudMedium, sans-serif;
-  line-height: 1.4;
 }
 
-.callout-title {
+.callout--fixed {
+  overflow: hidden;
+}
+
+.callout.bg {
+  background-size: cover;
+}
+
+@media (min-width: 1000px) {
+  .callout {
+    padding: 40px 40px 0;
+  }
+}
+
+.callout__title {
   font-size: 25px;
   margin: 0 0 15px 0;
   text-transform: uppercase;
@@ -2116,16 +2126,13 @@
 }
 
 @media (min-width: 768px) {
-  .callout-title {
+  .callout__title {
     font-size: 28px;
   }
 }
 
 @media (min-width: 1000px) {
-  .callout {
-    padding: 40px 40px 0;
-  }
-  .callout-title {
+  .callout__title {
     font-size: 35px;
   }
 }
