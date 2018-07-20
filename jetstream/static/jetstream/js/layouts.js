@@ -17,11 +17,11 @@
     if (!Modernizr.mobile) {
       // The .video-block-overlay div covers the entire video block. On desktop, we need to translate clicks through
       // it and onto the iframe.
-      $('.video-block-overlay').on('click', function() {
+      $('.video-block__overlay').on('click', function() {
         // Hide the overlay so that video's controls are fully accessible.
         $(this).hide();
 
-        var $iframe = $('iframe', $(this).parent());
+        var $iframe = $('.video-block__video', $(this).parent());
         var iframe = $iframe[0];
         // YouTube and Vimeo videos require different actions to make this work.
         if ($iframe.data('provider') == 'YouTube') {
@@ -35,12 +35,12 @@
     else {
       // On mobile, we set up the overlay to be untouchable; clicks will pass through it and hit the iframe directly.
       // This doesn't hide the title, but that's OK on phones because the video plays in full screen.
-      $('.video-block-overlay').addClass('mc-hammer');
+      $('.video-block__overlay').addClass('js-no-touch');
     }
 
     // Rergardless of whether we're on mobile, make clicks/taps on the title itself hide the overlay.
     // This lets tablet users hide the title with a second click.
-    $('.video-block-title-background').on('click', function() {
+    $('.video-block__title-banner').on('click', function() {
       $(this).parent().hide();
     });
   }

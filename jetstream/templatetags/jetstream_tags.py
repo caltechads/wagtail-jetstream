@@ -22,9 +22,11 @@ VIEWPORT_WIDTHS = [DESKTOP_WIDTH, TABLET_WIDTH, PHONE_WIDTH]
 
 
 @register.simple_tag(name='arbitrary_video')
-def arbitrary_video(video, width, height):
+def arbitrary_video(video, width, height, classes=None):
     """
     Renders an embedded video with the given width and height.
+
+    If passed in, 'classes' must be a string of CSS class names.
     """
     try:
         embed = embeds.get_embed(video.url, width)
@@ -33,6 +35,9 @@ def arbitrary_video(video, width, height):
         html = re.sub(r'height="(\d+)"', 'height="{}"'.format(height), html)
         # Add the provider name as a data attr, so that the javascript can determine how to interact with this iframe.
         html = re.sub(r'<iframe', '<iframe data-provider="{}"'.format(embed.provider_name), html)
+        # Add any classes that may have been specified.
+        if classes:
+            html = re.sub(r'<iframe', f'<iframe class="{classes}"', html)
 
         # Remove the video player chrome.
         if embed.provider_name == 'YouTube':

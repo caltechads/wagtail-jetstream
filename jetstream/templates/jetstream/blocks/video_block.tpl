@@ -12,18 +12,18 @@
   {% endif %}
 >
   {% if self.fixed_dimensions.use %}
-    {% arbitrary_video self.video self.fixed_dimensions.width self.fixed_dimensions.height %}
+    {% arbitrary_video self.video self.fixed_dimensions.width self.fixed_dimensions.height classes="video-block__video" %}
   {% else %}
     {% if parent_width %}
-      {% arbitrary_video self.video parent_width parent_height %}
+      {% arbitrary_video self.video parent_width parent_height classes="video-block__video" %}
     {% else %}
-      {% arbitrary_video self.video 600 400 %}
+      {% arbitrary_video self.video 600 400 classes="video-block__video" %}
     {% endif %}
   {% endif %}
-  <div class="video-block-overlay">
+  <div class="video-block__overlay">
     {% if self.title %}
-      <div class="video-block-title-background">
-        <div class="video-block-title">{{ self.title }}</div>
+      <div class="video-block__title-banner">
+        <div class="video-block__title">{{ self.title }}</div>
       </div>
     {% endif %}
   </div>

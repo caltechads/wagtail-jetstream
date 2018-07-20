@@ -2136,12 +2136,12 @@
   background-color: #000000;
 }
 
-.video-block iframe {
+.video-block__video {
   display: block;
   margin: auto;
 }
 
-.video-block-overlay {
+.video-block__overlay {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -2151,12 +2151,12 @@
   cursor: pointer;
 }
 
-.video-block-overlay.mc-hammer {
+.video-block__overlay.js-no-touch {
   touch-action: manipulation;
   pointer-events: none;
 }
 
-.video-block-title-background {
+.video-block__title-banner {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -2168,7 +2168,7 @@
   pointer-events: auto;
 }
 
-.video-block-title {
+.video-block__title {
   color: #ffffff;
   font-family: KievitSlabRegular, Times, serif;
   font-size: 18px;
@@ -2181,9 +2181,20 @@
   text-align: center;
 }
 
-@media (max-width: 500px) {
-  .block-VideoBlock .video-block iframe {
+@media (max-width: 499px) {
+  .video-block {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    width: 100% !important;
+    height: auto !important;
+  }
+  .video-block__video {
+    left: 0;
+    top: 0;
+    height: 100%;
     width: 100%;
+    position: absolute;
   }
 }
 

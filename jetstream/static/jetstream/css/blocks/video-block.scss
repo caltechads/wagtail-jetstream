@@ -2,60 +2,75 @@
   position: relative;
   background-color: $black;
 
-  iframe {
+  &__video {
     display: block;
     margin: auto;
   }
-}
 
-// This overlay sits on top of the video, so that when a user clicks, the title can be removed via javascript.
-.video-block-overlay {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 11;
-  cursor: pointer;
-  &.mc-hammer {
-    // Prevent tap actions and mouse clicks when the overlay has this class. Can't use "touch-actions: none" because
-    // iOS Safari doesn't support that. This is probably better anyway, because it allows scroll events that
-    // start on the video overlay to still function.
-    touch-action: manipulation;
-    pointer-events: none;
+  // This overlay sits on top of the video, so that when a user clicks, the title can be removed via javascript.
+  &__overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 11;
+    cursor: pointer;
+    &.js-no-touch {
+      // Prevent tap actions and mouse clicks when the overlay has this class. Can't use "touch-actions: none" because
+      // iOS Safari doesn't support that. This is probably better anyway, because it allows scroll events that
+      // start on the video overlay to still function.
+      touch-action: manipulation;
+      pointer-events: none;
+    }
+  }
+
+  &__title-banner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    // Ensures that even if the main overlay has its interactivity disabled, this div will still be clickable/tappable.
+    touch-action: auto;
+    pointer-events: auto;
+  }
+
+  &__title {
+    color: $white;
+    font-family: $font_kievit_regular;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    padding: 0 50px;
+    width: 100%;
+    text-align: center;
   }
 }
 
-.video-block-title-background {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  // Ensures that even if the main overlay has its interactivity disabled, this div will still be clickable/tappable.
-  touch-action: auto;
-  pointer-events: auto;
-}
+// Since we need to use !important to override style'd width/height on phones, we have to violate mobile-first for this.
+@include portrait-phone-only {
+  // This crazy combination of CSS rules causes video iframes to be properly responsive. I don't fully understand how it
+  // works, but it does. I got these rules from https://www.ostraining.com/blog/coding/responsive-videos/
+  .video-block {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    // These two are different than the example I pulled this code from, because we also have to turn off the style'd
+    // width and height from fixed-dimensions.
+    width: 100% !important;
+    height: auto !important;
 
-.video-block-title {
-  color: $white;
-  font-family: $font_kievit_regular;
-  font-size: 18px;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  padding: 0 50px;
-  width: 100%;
-  text-align: center;
-}
-
-@media (max-width: $small_viewport) {
-  .block-VideoBlock {
-    .video-block iframe {
+    &__video {
+      left: 0;
+      top: 0;
+      height: 100%;
       width: 100%;
+      position: absolute;
     }
   }
 }
