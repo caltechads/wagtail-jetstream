@@ -1,3 +1,4 @@
+// Override the bootstrap defaults so we can set different backgrounds and colors
 .list-group-item {
   background-color: transparent;
   border: 0;
@@ -17,6 +18,9 @@
   color: $black;
 }
 @include linksbglight(related-links, 'black', $black);
+.related-links.bg-color-black h2 {
+  color: $ltgray;
+}
 @include linksbglight(related-links, 'orange', $orange);
 @include linksbgdark(related-links, 'ltgray', $ltgray);
 @include linksbgdark(related-links, 'midgray', $midgray);
@@ -32,6 +36,14 @@
 .related-links,
 .menu-listing {
   border: 1px solid rgba(34, 36, 38, .1);
+  overflow: hidden;
+  position: relative;
+  .list-group {
+    .list-group-item {
+      padding: 5px 25px;
+      border-bottom: 1px solid darken($white, 5%);
+    }
+  }
 
   h2 {
     padding: 12px 25px 10px 25px;
@@ -42,7 +54,8 @@
     color: $crimson;
   }
 
-  a {
+  a.list-group-item,
+  span.list-group-item {
     color: $dkgray;
     &:hover {
       color: $dkgray;
@@ -50,40 +63,21 @@
     }
   }
 
-  &.text-color-white a
-  {
+  &.text-color-white a, a:hover {
     color: $white;
-    &:hover {
-      color: $white;
-      text-decoration: underline;
-    }
   }
 
-  &.text-color-dkgray a
-  {
+  &.text-color-dkgray a, a:hover {
     color: $dkgray;
-    &:hover {
-      color: $dkgray;
-      text-decoration: underline;
-    }
   }
 
-  &.text-color-black a
-  {
+  &.text-color-black a, a:hover {
     color: $black;
-    &:hover {
-      color: $black;
-      text-decoration: underline;
-    }
   }
 
   &.text-color-dkgray.bgimage a:hover,
   &.text-color-black.bgimage a:hover {
      color: $white !important;
-  }
-
-  .list-group {
-    margin-bottom: 0;
   }
 
   &.bgimage {
@@ -92,39 +86,9 @@
       color: $white;
     }
 
-    img {
-      opacity: 0.7;
-    }
-
-    .list-group-item:hover {
+    a.list-group-item:hover {
       background-color: rgba(0, 0, 0, 0.8);
-      a, a:hover {
-        color: $white !important;
-      }
-    }
-  }
-
-  overflow: hidden;
-  position: relative;
-  .list-group {
-    .list-group-item {
-      padding: 5px 25px;
-      border-bottom: 1px solid darken($white, 5%);
-    }
-
-    .background-image-container {
-      overflow: hidden;
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      z-index: -100;
-    }
-
-    .background-image {
-      width: 100%;
-      height: auto;
+      color: $white !important;
     }
   }
 }

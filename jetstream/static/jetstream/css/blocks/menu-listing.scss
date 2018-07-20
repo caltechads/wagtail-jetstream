@@ -4,6 +4,12 @@
   color: $black;
 }
 @include linksbglight(menu-listing, 'black', $black);
+.menu-listing.bg-color-black h2 {
+  color: $ltgray;
+}
+.menu-listing.bg-color-black .list-group-item.active {
+  color: $ltgray;
+}
 @include linksbglight(menu-listing, 'orange', $orange);
 @include linksbgdark(menu-listing, 'ltgray', $ltgray);
 @include linksbgdark(menu-listing, 'midgray', $midgray);

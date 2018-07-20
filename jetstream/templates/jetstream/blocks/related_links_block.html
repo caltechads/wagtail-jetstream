@@ -6,22 +6,24 @@
   {% if self.fixed_dimensions.use %}fixed{% endif %}
   {% if self.color.background_image %}bgimage{% endif %}
 "
-  {% if self.fixed_dimensions.use %}
-    style="height: {{ self.fixed_dimensions.height }}px; width: {{ self.fixed_dimensions.width }}px"
+  {% if self.fixed_dimensions.use or self.color.background_image %}
+    style="
+    {% if self.fixed_dimensions.use %}
+      height: {{ self.fixed_dimensions.height }}px; width: {{ self.fixed_dimensions.width }}px;
+    {% endif %}
+    {% if self.color.background_image %}
+      {% image self.color.background_image original as img_data %}
+      background-image: linear-gradient(to bottom, rgba(255,255,255,0.3), rgba(255,255,255,0.3)), url('{{ img_data.url }}');
+    {% endif %}
+    "
   {% endif %}
 >
   {% if self.title %}
     <h2>{{ self.title }}</h2>
   {% endif %}
-  <div class="list-group">
+  <div class="list-group related-links__list-group">
     {% for link in self.links %}
       {% include_block link %}
     {% endfor %}
-    {% if self.color.background_image %}
-      <div class="background-image-container">
-        {% image self.color.background_image original as imgdata %}
-        <img class="background-image" src="{{ imgdata.url }}" alt="{{ img_data.alt }}"/>
-      </div>
-    {% endif %}
   </div>
 </div>

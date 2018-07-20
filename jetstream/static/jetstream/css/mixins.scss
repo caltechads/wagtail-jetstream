@@ -59,6 +59,7 @@
   $classname: "bg-color-" + $color_name;
 
   ".#{$wrapper_class}.#{$classname}" {
+    // We are adding a border to each $wrapper_class and then turning it off whenever we set a bg-color
     box-shadow: none;
     border: none;
     background-color: $color;
@@ -83,6 +84,7 @@
   $classname: "bg-color-" + $color_name;
 
   ".#{$wrapper_class}.#{$classname}" {
+    // We are adding a border to each $wrapper_class and then turning it off whenever we set a bg-color
     box-shadow: none;
     border: none;
     background-color: $color;
