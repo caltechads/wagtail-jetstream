@@ -67,37 +67,6 @@
   height: auto;
 }
 
-/****** Image Panel/Carousel/ctc. Settings *****/
-.text-gradient {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50%;
-  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
-  font-family: VaudMedium, sans-serif;
-  font-size: 16px;
-}
-
-.text-gradient .caption {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  text-align: right;
-  color: white;
-  margin: 0 15px 10px 20px;
-}
-
-.text-gradient .caption span {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.text-gradient .caption .icon {
-  color: #ff6e1e;
-  font-size: 25px;
-  padding-left: 5px;
-}
-
 /************** Column Layouts *****************/
 .row.gutter-0px {
   margin-left: 0px;
@@ -877,6 +846,12 @@
 }
 
 /************ Image Carousel Blocks ************/
+@media (max-width: 499px) {
+  .image-carousel {
+    max-height: unset !important;
+  }
+}
+
 .image-carousel__banner {
   position: absolute;
   top: 0;
@@ -889,7 +864,7 @@
 .image-carousel__banner__header {
   position: absolute;
   margin: 10px 0 10px 25px;
-  font-family: Vaud, sans-serif;
+  font-family: Helvetica, sans-serif;
   color: #ffffff;
   font-weight: normal;
   font-size: 1.17em;
@@ -924,7 +899,7 @@
 
 .image-carousel__item__text {
   font-size: 16px;
-  font-family: VaudMedium, sans-serif;
+  font-family: Helvetica, sans-serif;
   position: absolute;
   bottom: 0;
   right: 0;
@@ -952,12 +927,6 @@
 
 .image-carousel__control:hover .image-carousel__control__component {
   visibility: visible;
-}
-
-@media (max-width: 499px) {
-  .image-carousel {
-    max-height: unset !important;
-  }
 }
 
 .hero-image-carousel {
@@ -1091,7 +1060,6 @@
 
 .action-button {
   font-size: 1.2em;
-  font-family: Vaud, sans-serif;
   margin-right: 10px;
   border: none;
 }
@@ -1152,15 +1120,15 @@
 }
 
 .hero-image.bare-sans-serif, .hero-image.white-translucent-sans-serif {
-  font-family: Vaud, sans-serif;
+  font-family: Helvetica, sans-serif;
 }
 
 .hero-image.bare-sans-serif h1, .hero-image.white-translucent-sans-serif h1 {
-  font-family: VaudMedium, sans-serif;
+  font-family: Helvetica, sans-serif;
 }
 
 .hero-image.bare-sans-serif h2, .hero-image.bare-sans-serif h3, .hero-image.bare-sans-serif h4, .hero-image.bare-sans-serif h5, .hero-image.bare-sans-serif h6, .hero-image.white-translucent-sans-serif h2, .hero-image.white-translucent-sans-serif h3, .hero-image.white-translucent-sans-serif h4, .hero-image.white-translucent-sans-serif h5, .hero-image.white-translucent-sans-serif h6 {
-  font-family: Vaud, sans-serif;
+  font-family: Helvetica, sans-serif;
 }
 
 .hero-image.position-top-left .hero-image__inner {
@@ -1295,17 +1263,17 @@
 
 .hero-image h1 {
   font-size: 1.8em;
-  font-family: KievitSlabMedium, Times, serif;
+  font-family: Times, serif;
 }
 
 .hero-image h2 {
   font-size: 1.2em;
-  font-family: KievitSlabMedium, Times, serif;
+  font-family: Times, serif;
 }
 
 .hero-image h3, .hero-image h4, .hero-image h5, .hero-image h6 {
   font-size: 1em;
-  font-family: KievitSlabMedium, Times, serif;
+  font-family: Times, serif;
   margin-top: 0;
 }
 
@@ -1449,7 +1417,7 @@
   text-align: right;
   color: white;
   margin: 0 15px 10px 20px;
-  font-family: VaudMedium, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-size: 16px;
 }
 
@@ -1570,7 +1538,7 @@
 
 .image-panel-listing__body h4 {
   margin-top: 10px;
-  font-family: KievitSlabMedium, Times, serif;
+  font-family: Times, serif;
 }
 
 .image-panel-listing__image-details {
@@ -1617,9 +1585,6 @@
 }
 
 .block-ImagePanelBlock .hero {
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
   background-size: cover;
   display: table-cell;
   vertical-align: middle;
@@ -1632,20 +1597,20 @@
   margin: 0 auto;
 }
 
+@media (max-width: 499px) {
+  .block-ImagePanelBlock .hero-body {
+    width: 90%;
+  }
+}
+
 .block-ImagePanelBlock h1 {
-  font-family: VaudMedium, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-size: 4em;
 }
 
 .block-ImagePanelBlock h2 {
-  font-family: Vaud, sans-serif;
+  font-family: Helvetica, sans-serif;
   font-size: 1.5em;
-}
-
-@media (max-width: 500px) {
-  .block-ImagePanelBlock .hero-body {
-    width: 90%;
-  }
 }
 
 .image-panel-rollover {
@@ -1711,7 +1676,7 @@
   font-size: 1.4em;
   padding: 0 15px;
   margin-bottom: 0.5em;
-  font-family: KievitSlabMedium, Times, serif;
+  font-family: Times, serif;
   font-weight: normal;
 }
 
@@ -1997,7 +1962,7 @@
   padding-left: 10px;
   margin-top: 20px;
   font-size: 1.2em;
-  font-family: KievitSlabRegular, Times, serif;
+  font-family: Times, serif;
   color: #731936;
   background-color: #e9e7e4;
 }
@@ -2019,7 +1984,7 @@
 .block-header {
   color: #ff6e1e;
   font-size: 1.1em;
-  font-family: VaudMedium, sans-serif;
+  font-family: Helvetica, sans-serif;
   padding: 0 10px 10px;
   margin-top: 20px;
 }
@@ -2097,7 +2062,7 @@
 
 .callout {
   padding: 20px;
-  font-family: VaudMedium, sans-serif;
+  font-family: Helvetica, sans-serif;
 }
 
 .callout--fixed {
@@ -2174,7 +2139,7 @@
 
 .video-block__title {
   color: #ffffff;
-  font-family: KievitSlabRegular, Times, serif;
+  font-family: Times, serif;
   font-size: 18px;
   position: absolute;
   top: 50%;
@@ -2511,7 +2476,7 @@
 .menu-listing h2 {
   padding: 12px 25px 10px 25px;
   font-size: 1.3em;
-  font-family: KievitSlabRegular, Times, serif;
+  font-family: Times, serif;
   margin: 0;
   background-color: #e9e7e4;
   color: #731936;

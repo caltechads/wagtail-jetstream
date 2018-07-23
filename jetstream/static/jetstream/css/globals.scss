@@ -30,8 +30,6 @@ $responsive_grid_w: 1000px;
 // Fonts
 $font_size_base: 14px;
 $line_height_base: 24px;
-$font_kievit: KievitSlabMedium, Times, serif;
-$font_kievit_regular: KievitSlabRegular, Times, serif;
-$font_vaud: Vaud, sans-serif;
-// We call it Vaud Medium, but the style guide calls it Vaud Display Extra Bold. The style guide is right.
-$font_vaud_medium: VaudMedium, sans-serif;
+$font_serif: Times, serif;
+$font_sans_serif: Helvetica, sans-serif;
+$font_sans_serif_bold: Helvetica, sans-serif;

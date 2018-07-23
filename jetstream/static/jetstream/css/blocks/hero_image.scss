@@ -19,13 +19,13 @@
     background-color: rgba(255, 255, 255, 0.3);
   }
   &.bare-sans-serif, &.white-translucent-sans-serif {
-    font-family: $font_vaud;
+    font-family: $font_sans_serif;
 
     h1 {
-      font-family: $font_vaud_medium;
+      font-family: $font_sans_serif_bold;
     }
     h2, h3, h4, h5, h6 {
-      font-family: $font_vaud;
+      font-family: $font_sans_serif;
     }
   }
   &.position-top-left &__inner {
@@ -123,9 +123,9 @@
   .hero-image {
     width: 100%;
     height: auto !important;
-    margin:0;
-    left:0;
-    right:0;
+    margin: 0;
+    left: 0;
+    right: 0;
 
     &__background {
       height: 60vw !important;
@@ -168,19 +168,20 @@
   &__body {
     font-size: 0.8em;
   }
+
   h1 {
     font-size: 1.8em;
-    font-family: $font_kievit;
+    font-family: $font_serif;
   }
 
   h2 {
     font-size: 1.2em;
-    font-family: $font_kievit;
+    font-family: $font_serif;
   }
 
   h3, h4, h5, h6 {
     font-size: 1em;
-    font-family: $font_kievit;
+    font-family: $font_serif;
     margin-top: 0;  // .rich-text h3 has a margin top of 2em that we don't want here.
   }
 

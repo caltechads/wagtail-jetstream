@@ -19,6 +19,25 @@
   }
 
   &__title {
-    @include image_title;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: right;
+    color: white;
+    margin: 0 15px 10px 20px;
+    font-family: $font_sans_serif_bold;
+    font-size: 16px;
+
+    span {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .icon {
+      color: $orange;
+      font-size: 25px;
+      // display: table-cell; vertical-align: middle; doesn't completely work with this icon so nudge it up a little
+      padding-bottom: 3px;
+    }
   }
 }

@@ -137,34 +137,6 @@
   height: 100%;
 }
 
-// This CSS expects html of the form
-// <div class="caption">
-//   <span>Some text</span>
-//   <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-// </div>
-@mixin image_title {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  text-align: right;
-  color: white;
-  margin: 0 15px 10px 20px;
-  font-family: $font_vaud_medium;
-  font-size: 16px;
-
-  span {
-    display: table-cell;
-    vertical-align: middle;
-  }
-
-  .icon {
-    color: $orange;
-    font-size: 25px;
-    // display: table-cell; vertical-align: middle; doesn't completely work with this icon so nudge it up a little
-    padding-bottom: 3px;
-  }
-}
-
 // make this match the Bootstrap 3 styles
 @mixin carousel_indicators {
   left: auto;
