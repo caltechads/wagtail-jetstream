@@ -1,9 +1,9 @@
-{% load wagtailcore_tags jetstream_tags %}
+{% load wagtailcore_tags %}
 
 {% if self.actions %}
-<div class="action-button-bar" role="group" aria-label="Action Buttons">
-  {% for action in self.actions %}
-    {% include_block action %}
-  {% endfor %}
-</div>
+  <div class="action-button-bar" role="group" aria-label="Action Buttons">
+    {% for action in self.actions %}
+      {% include_block action %}
+    {% endfor %}
+  </div>
 {% endif %}

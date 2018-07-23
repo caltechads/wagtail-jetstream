@@ -1,47 +1,56 @@
-.action-button-bar{
+.action-button-bar {
   margin-top: 2em;
+}
 
-  a, a:visited {
-    color: white;
-  }
+.action-button {
+  font-size: 1.2em;
+  font-family: $font_vaud;
+  margin-right: 10px;
 
-  .btn {
-      font-size: 1.2em;
-      font-family: $font_vaud;
-      margin-right: 10px;
-  }
-
-  .btn-primary {
+  &--btn-primary {
     background-color: $orange;
     border: none;
     &:hover {
       background-color: lighten($orange, 10%);
     }
+    .content & {
+      @include link-always-color($white);
+    }
   }
 
-  a.btn-default {
+  // On phones, the buttons are placed below the image, instead of overlapping it, putting them on a white background.
+  // This requires the colors and borders on some buttons to be different on portrait phones than on other size devices.
+  &--btn-default {
     background-color: $white;
-    border: none;
+    border-color: $dkgray;
     &:hover {
       background-color: darken($white, 10%);
     }
-    color: $dkgray;
+    .content & {
+      @include link-always-color($dkgray);
+    }
+
+    @include landscape-phone {
+      border: none;
+    }
   }
 
-  a.btn-info {
+  &--btn-info {
+    text-decoration: underline;
     background-color: transparent;
     border: none;
     &:hover {
       text-decoration: underline;
     }
-  }
-}
+    .content & {
+      @include link-always-color($black-text);
+    }
 
-@media (max-width: $small_viewport) {
-  .action-button-bar {
-    a.btn-info, a.btn-info:visited {
-      color: $black;
-      text-decoration: underline;
+    @include landscape-phone {
+      .content & {
+        @include link-always-color($white);
+      }
+      text-decoration: none;
     }
   }
 }

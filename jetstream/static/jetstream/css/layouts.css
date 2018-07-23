@@ -1089,48 +1089,64 @@
   margin-top: 2em;
 }
 
-.action-button-bar a, .action-button-bar a:visited {
-  color: white;
-}
-
-.action-button-bar .btn {
+.action-button {
   font-size: 1.2em;
   font-family: Vaud, sans-serif;
   margin-right: 10px;
 }
 
-.action-button-bar .btn-primary {
+.action-button--btn-primary {
   background-color: #ff6e1e;
   border: none;
 }
 
-.action-button-bar .btn-primary:hover {
+.action-button--btn-primary:hover {
   background-color: #ff8f51;
 }
 
-.action-button-bar a.btn-default {
-  background-color: #ffffff;
-  border: none;
-  color: #616265;
+.content .action-button--btn-primary, .content .action-button--btn-primary:visited, .content .action-button--btn-primary:active, .content .action-button--btn-primary:hover, .content .action-button--btn-primary:focus {
+  color: #ffffff;
 }
 
-.action-button-bar a.btn-default:hover {
+.action-button--btn-default {
+  background-color: #ffffff;
+  border-color: #616265;
+}
+
+.action-button--btn-default:hover {
   background-color: #e6e6e6;
 }
 
-.action-button-bar a.btn-info {
+.content .action-button--btn-default, .content .action-button--btn-default:visited, .content .action-button--btn-default:active, .content .action-button--btn-default:hover, .content .action-button--btn-default:focus {
+  color: #616265;
+}
+
+@media (min-width: 500px) {
+  .action-button--btn-default {
+    border: none;
+  }
+}
+
+.action-button--btn-info {
+  text-decoration: underline;
   background-color: transparent;
   border: none;
 }
 
-.action-button-bar a.btn-info:hover {
+.action-button--btn-info:hover {
   text-decoration: underline;
 }
 
-@media (max-width: 500px) {
-  .action-button-bar a.btn-info, .action-button-bar a.btn-info:visited {
-    color: #000000;
-    text-decoration: underline;
+.content .action-button--btn-info, .content .action-button--btn-info:visited, .content .action-button--btn-info:active, .content .action-button--btn-info:hover, .content .action-button--btn-info:focus {
+  color: #333333;
+}
+
+@media (min-width: 500px) {
+  .action-button--btn-info {
+    text-decoration: none;
+  }
+  .content .action-button--btn-info, .content .action-button--btn-info:visited, .content .action-button--btn-info:active, .content .action-button--btn-info:hover, .content .action-button--btn-info:focus {
+    color: #ffffff;
   }
 }
 
