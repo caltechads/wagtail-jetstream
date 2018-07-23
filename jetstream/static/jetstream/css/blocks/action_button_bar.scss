@@ -6,10 +6,10 @@
   font-size: 1.2em;
   font-family: $font_vaud;
   margin-right: 10px;
+  border: none;
 
   &--btn-primary {
     background-color: $orange;
-    border: none;
     &:hover {
       background-color: lighten($orange, 10%);
     }
@@ -18,39 +18,25 @@
     }
   }
 
-  // On phones, the buttons are placed below the image, instead of overlapping it, putting them on a white background.
-  // This requires the colors and borders on some buttons to be different on portrait phones than on other size devices.
-  &--btn-default {
-    background-color: $white;
-    border-color: $dkgray;
+  &--btn-light {
     &:hover {
-      background-color: darken($white, 10%);
+      // #f8f9fa is the default color of Bootstrap's .btn-light.
+      background-color: darken(#f8f9fa, 10%);
     }
     .content & {
       @include link-always-color($dkgray);
     }
-
-    @include landscape-phone {
-      border: none;
-    }
   }
 
-  &--btn-info {
-    text-decoration: underline;
-    background-color: transparent;
-    border: none;
-    &:hover {
-      text-decoration: underline;
-    }
+  // On phones, the buttons are placed below the image, instead of overlapping it, putting them on a white background.
+  // This requires the color on "link" buttons to be different on portrait phones than on other size devices.
+  &--btn-link {
     .content & {
       @include link-always-color($black-text);
-    }
 
-    @include landscape-phone {
-      .content & {
+      @include landscape-phone {
         @include link-always-color($white);
       }
-      text-decoration: none;
     }
   }
 }

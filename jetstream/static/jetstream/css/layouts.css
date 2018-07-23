@@ -1093,11 +1093,11 @@
   font-size: 1.2em;
   font-family: Vaud, sans-serif;
   margin-right: 10px;
+  border: none;
 }
 
 .action-button--btn-primary {
   background-color: #ff6e1e;
-  border: none;
 }
 
 .action-button--btn-primary:hover {
@@ -1108,44 +1108,20 @@
   color: #ffffff;
 }
 
-.action-button--btn-default {
-  background-color: #ffffff;
-  border-color: #616265;
+.action-button--btn-light:hover {
+  background-color: #dae0e5;
 }
 
-.action-button--btn-default:hover {
-  background-color: #e6e6e6;
-}
-
-.content .action-button--btn-default, .content .action-button--btn-default:visited, .content .action-button--btn-default:active, .content .action-button--btn-default:hover, .content .action-button--btn-default:focus {
+.content .action-button--btn-light, .content .action-button--btn-light:visited, .content .action-button--btn-light:active, .content .action-button--btn-light:hover, .content .action-button--btn-light:focus {
   color: #616265;
 }
 
-@media (min-width: 500px) {
-  .action-button--btn-default {
-    border: none;
-  }
-}
-
-.action-button--btn-info {
-  text-decoration: underline;
-  background-color: transparent;
-  border: none;
-}
-
-.action-button--btn-info:hover {
-  text-decoration: underline;
-}
-
-.content .action-button--btn-info, .content .action-button--btn-info:visited, .content .action-button--btn-info:active, .content .action-button--btn-info:hover, .content .action-button--btn-info:focus {
+.content .action-button--btn-link, .content .action-button--btn-link:visited, .content .action-button--btn-link:active, .content .action-button--btn-link:hover, .content .action-button--btn-link:focus {
   color: #333333;
 }
 
 @media (min-width: 500px) {
-  .action-button--btn-info {
-    text-decoration: none;
-  }
-  .content .action-button--btn-info, .content .action-button--btn-info:visited, .content .action-button--btn-info:active, .content .action-button--btn-info:hover, .content .action-button--btn-info:focus {
+  .content .action-button--btn-link, .content .action-button--btn-link:visited, .content .action-button--btn-link:active, .content .action-button--btn-link:hover, .content .action-button--btn-link:focus {
     color: #ffffff;
   }
 }

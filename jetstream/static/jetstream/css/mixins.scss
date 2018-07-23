@@ -55,6 +55,13 @@
   }
 }
 
+@mixin link-never-underline {
+  // Mix this into a link's CSS to prevent that link from ever being underlined.
+  &, &:visited, &:active, &:hover, &:focus {
+    text-decoration: none;
+  }
+}
+
 @mixin link-always-color($color) {
   // Mix this into a link's CSS to make it stay the same color under all circumstances.
   &, &:visited, &:active, &:hover, &:focus {

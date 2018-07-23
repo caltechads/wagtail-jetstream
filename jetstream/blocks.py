@@ -212,8 +212,8 @@ class BackgroundOptionsBlock(blocks.StructBlock):
 class ActionButtonBlock(blocks.StructBlock):
     STYLES = (
         ('btn-primary', 'Primary'),
-        ('btn-default', 'Default'),
-        ('btn-info', 'Info'),
+        ('btn-light', 'Default'),
+        ('btn-link', 'Info'),
     )
 
     text = blocks.TextBlock()
