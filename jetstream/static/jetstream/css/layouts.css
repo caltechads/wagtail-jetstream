@@ -2202,6 +2202,21 @@
   }
 }
 
+.iframe-block {
+  padding: 0 10px;
+}
+
+@media (min-width: 1000px) {
+  .iframe-block {
+    padding: 0;
+  }
+}
+
+.iframe-block iframe {
+  max-width: 100%;
+  border: none;
+}
+
 /*************** Related Links Block ******************/
 .list-group-item {
   background-color: transparent;

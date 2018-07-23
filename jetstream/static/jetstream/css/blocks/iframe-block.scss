@@ -1,0 +1,12 @@
+.iframe-block {
+  padding: 0 10px;
+
+  @include desktop {
+    padding: 0;
+  }
+
+  iframe {
+    max-width: 100%;
+    border: none;
+  }
+}
