@@ -1,59 +1,38 @@
 .sidebar-layout {
   &__sidebar {
-    height: auto;
+    @include portrait-phone-only {
+      // The markup sets a max-width and a user-defined float value in the markup, so we need !important to negate
+      // them on portrait phones.
+      max-width: unset !important;
+      float: none !important;
+    }
+
+    & > section {
+      // Apply some spacing between blocks in the sidebar.
+      padding-bottom: 10px;
+      &:last-child {
+        padding-bottom: 40px;
+      }
+    }
   }
 
+  // Must use margin on these, rather than padding, to avoid the images widening to overlap with the padding.
   &.right &__sidebar {
-    margin-left: 25px;
+    @include landscape-phone {
+      margin-left: 25px;
+    }
   }
-
   &.left &__sidebar {
-    margin-right: 25px;
-  }
-
-  section {
-    // Give some spacing between blocks in the sidebar
-    margin-bottom: 10px;
-    &:last-child {
-      margin-bottom: 40px;
+    @include landscape-phone {
+      margin-right: 25px;
     }
   }
 
   &__rich-text {
-    margin: 0 10px;
-  }
-}
+    padding: 0 10px;
 
-// Turn off sidebar layouts on portrait phones
-@media (max-width: $screen-phone - 1) {
-  .sidebar-layout {
-    padding: 0;
-
-    &__sidebar {
-      width: 100% !important;
-      margin: 0;
-    }
-  }
-}
-
-@media (min-width: $screen-phone)
-        and (max-width: $desktop_viewport) {
-  // Keep the text off the edges on tablets
-  .sidebar-layout {
-    &__rich-text {
-      max-width: 800px;
-    }
-
-    &.left &__rich-text {
-      margin-left: 200px;
-    }
-  }
-}
-
-@media (min-width: $responsive_grid_w) {
-  .sidebar-layout {
-    &__rich-text {
-      margin-left: 0;
+    @include desktop {
+      padding: 0;
     }
   }
 }

@@ -204,7 +204,37 @@
   }
 }
 
+@mixin responsive-images-inside {
+  // This mixin makes all <img> tags inside the mixed-in class act responsively.
 
+  // Always size up imgs to fill their parent...
+  img {
+    width: 100%;
+    height: auto;
+  }
+  // ... unless it's a top-level image on a larger-than-phone device...
+  &.top-level {
+    @include landscape-phone {
+      img {
+        width: auto;
+      }
+    }
+  }
+  // or it's being displayed on a desktop device.
+  @include desktop {
+    img {
+      // We use "width: auto" here because of the ceil() call in the {% width_from_arbitrary_parent %} tag. If we didn't
+      // do this, the fact that the image is a partial pixel wider than it's supposed to be will cause "width: 100%" to
+      // shrink the height of the image by just a tiny bit, ruining the clean layout. With "width: auto" instead, the
+      // image stays its original size, and the "overflow: hidden" rule on the column elements hides the extra partial
+      // pixel.
+      width: auto;
+    }
+  }
+  // TODO: We have not yet solved the problem that the above CSS causes with different-size images on portait tablets.
+  // There's a trello card (https://trello.com/c/0ZPkDZfx) with a potential solution, but we will likely not be doing
+  // that until theme 7.0.
+}
 /*************** Image Caption ***************/
 @mixin image-details {
   line-height: 1.5;

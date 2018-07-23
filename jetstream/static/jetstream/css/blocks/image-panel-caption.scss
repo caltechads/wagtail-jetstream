@@ -1,6 +1,7 @@
 .image-panel-caption {
   overflow: hidden;
   margin-bottom: 2em;
+  @include responsive-images-inside;
 
   &__image-link {
     span {
