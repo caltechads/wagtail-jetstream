@@ -1,4 +1,4 @@
-// menu listing
+// menu listing colors
 @include linksbgdark(menu-listing, 'white', $white);
 .menu-listing.bg-color-white h2 {
   color: $black;
@@ -21,3 +21,5 @@
   color: $white;
 }
 @include linksbglight(menu-listing, 'darkteal', $darkteal);
+
+// menu listings are just related links blocks with different data, so the rest of the css is in related-links.scss

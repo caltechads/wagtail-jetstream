@@ -2473,8 +2473,17 @@
 .related-links,
 .menu-listing {
   border: 1px solid rgba(34, 36, 38, 0.1);
-  overflow: hidden;
   position: relative;
+  min-height: fit-content;
+  max-width: 100%;
+}
+
+@media (max-width: 499px) {
+  .related-links,
+  .menu-listing {
+    width: 100% !important;
+    height: fit-content !important;
+  }
 }
 
 .related-links .list-group .list-group-item,

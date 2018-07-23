@@ -12,7 +12,7 @@
   }
 }
 
-// related links
+// related link colors
 @include linksbgdark(related-links, 'white', $white);
 .related-links.bg-color-white h2 {
   color: $black;
@@ -36,8 +36,15 @@
 .related-links,
 .menu-listing {
   border: 1px solid rgba(34, 36, 38, .1);
-  overflow: hidden;
   position: relative;
+  min-height: fit-content;
+  max-width: 100%;
+  @include portrait-phone-only {
+    // On phones, we are going to just make these menu blocks fill screen width and be as tall as they need to be.
+    width: 100% !important;
+    height: fit-content !important;
+  }
+
   .list-group {
     .list-group-item {
       padding: 5px 25px;
