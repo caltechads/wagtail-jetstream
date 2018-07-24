@@ -1072,10 +1072,6 @@
   background-color: #ff8f51;
 }
 
-.content .action-button--btn-primary, .content .action-button--btn-primary:visited, .content .action-button--btn-primary:active, .content .action-button--btn-primary:hover, .content .action-button--btn-primary:focus {
-  color: #ffffff;
-}
-
 .action-button--btn-light:hover {
   background-color: #dae0e5;
 }

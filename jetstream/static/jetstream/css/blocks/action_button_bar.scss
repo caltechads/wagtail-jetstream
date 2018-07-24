@@ -12,9 +12,6 @@
     &:hover {
       background-color: lighten($orange, 10%);
     }
-    .content & {
-      @include link-always-color($white);
-    }
   }
 
   &--btn-light {
