@@ -1064,16 +1064,8 @@
   border: none;
 }
 
-.action-button--btn-primary {
-  background-color: #ff6e1e;
-}
-
-.action-button--btn-primary:hover {
-  background-color: #ff8f51;
-}
-
-.action-button--btn-light:hover {
-  background-color: #dae0e5;
+.content .action-button--btn-primary, .content .action-button--btn-primary:visited, .content .action-button--btn-primary:active, .content .action-button--btn-primary:hover, .content .action-button--btn-primary:focus {
+  color: #ffffff;
 }
 
 .content .action-button--btn-light, .content .action-button--btn-light:visited, .content .action-button--btn-light:active, .content .action-button--btn-light:hover, .content .action-button--btn-light:focus {

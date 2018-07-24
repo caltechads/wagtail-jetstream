@@ -7,18 +7,15 @@
   margin-right: 10px;
   border: none;
 
+  // To overcome the ".content a" rule that makes them all orange, we need to use these rules to colorize the links'
+  // text differently.
   &--btn-primary {
-    background-color: $orange;
-    &:hover {
-      background-color: lighten($orange, 10%);
+    .content & {
+      @include link-always-color($white);
     }
   }
 
   &--btn-light {
-    &:hover {
-      // #f8f9fa is the default color of Bootstrap's .btn-light.
-      background-color: darken(#f8f9fa, 10%);
-    }
     .content & {
       @include link-always-color($dkgray);
     }
