@@ -67,7 +67,7 @@
       position: relative;
       // margin: 0;
       height: 30%;
-      font-size: #{16px / $font_size_base}em;
+      font-size: #{16px / $font-size-base}em;
 
       &--vertically-centered {
         position: absolute;
@@ -79,6 +79,6 @@
 
   &__blurb, .read-more-link {
     padding: 0 15px;
-    font-size: #{14px / $font_size_base}em;
+    font-size: #{14px / $font-size-base}em;
   }
 }
