@@ -61,8 +61,8 @@
     color: $crimson;
   }
 
-  a.list-group-item,
-  span.list-group-item {
+  // Don't change the color and hover behavior of the active one, since it's not a link.
+  .list-group-item:not(.active) {
     color: $dkgray;
     &:hover {
       color: $dkgray;
@@ -70,16 +70,22 @@
     }
   }
 
-  &.text-color-white a, a:hover {
-    color: $white;
+  &.text-color-white {
+    a, a:hover {
+      color: $white;
+    }
   }
 
-  &.text-color-dkgray a, a:hover {
-    color: $dkgray;
+  &.text-color-dkgray {
+    a, a:hover {
+      color: $dkgray;
+    }
   }
 
-  &.text-color-black a, a:hover {
-    color: $black;
+  &.text-color-black {
+    a, a:hover {
+      color: $black;
+    }
   }
 
   &.text-color-dkgray.bgimage a:hover,

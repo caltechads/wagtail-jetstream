@@ -2470,36 +2470,32 @@
   color: #731936;
 }
 
-.related-links a.list-group-item,
-.related-links span.list-group-item,
-.menu-listing a.list-group-item,
-.menu-listing span.list-group-item {
+.related-links .list-group-item:not(.active),
+.menu-listing .list-group-item:not(.active) {
   color: #616265;
 }
 
-.related-links a.list-group-item:hover,
-.related-links span.list-group-item:hover,
-.menu-listing a.list-group-item:hover,
-.menu-listing span.list-group-item:hover {
+.related-links .list-group-item:not(.active):hover,
+.menu-listing .list-group-item:not(.active):hover {
   color: #616265;
   text-decoration: underline;
 }
 
-.related-links.text-color-white a, .related-links a:hover,
+.related-links.text-color-white a, .related-links.text-color-white a:hover,
 .menu-listing.text-color-white a,
-.menu-listing a:hover {
+.menu-listing.text-color-white a:hover {
   color: #ffffff;
 }
 
-.related-links.text-color-dkgray a, .related-links a:hover,
+.related-links.text-color-dkgray a, .related-links.text-color-dkgray a:hover,
 .menu-listing.text-color-dkgray a,
-.menu-listing a:hover {
+.menu-listing.text-color-dkgray a:hover {
   color: #616265;
 }
 
-.related-links.text-color-black a, .related-links a:hover,
+.related-links.text-color-black a, .related-links.text-color-black a:hover,
 .menu-listing.text-color-black a,
-.menu-listing a:hover {
+.menu-listing.text-color-black a:hover {
   color: #000000;
 }
 
