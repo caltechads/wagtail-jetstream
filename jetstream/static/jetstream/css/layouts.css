@@ -1299,6 +1299,7 @@
 .image-panel-caption {
   overflow: hidden;
   margin-bottom: 2em;
+  position: relative;
 }
 
 .image-panel-caption img {
