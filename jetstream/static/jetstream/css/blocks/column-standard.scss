@@ -59,7 +59,7 @@
 
     // On portrait phones, ignore column layout rules and just stretch everything to the full width.
     @media (max-width: 499px) {
-      flex: 0 0 100%;
+      @include IE-compatible-flex-width(100%);
       max-width: unset;
     }
 

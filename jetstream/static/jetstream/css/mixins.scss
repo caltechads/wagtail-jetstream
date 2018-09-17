@@ -40,6 +40,13 @@
   }
 }
 
+// There's a bug in IE11 that makes it ignore box-sizing: border-box when flex elements are sized via their flex-basis.
+// The workaround for this is to convert the use of "flex: $width" to "flex: 1 1 auto; width: $width".
+@mixin IE-compatible-flex-width($width) {
+  flex: 1 1 auto;
+  width: $width;
+}
+
 // ===================
 // Functions
 // ===================

@@ -11,10 +11,10 @@
     padding-left: 10px;
     padding-right: 10px;
     padding-bottom: 2em;
-    flex: 100%;
+    @include IE-compatible-flex-width(100%);
 
     @include portrait-tablet {
-      flex: 50%;
+      @include IE-compatible-flex-width(50%);
     }
 
     @include desktop {
@@ -41,7 +41,7 @@
   }
 
   &__image {
-    flex: 50%;
+    @include IE-compatible-flex-width(50%);
 
     img {
       width: 100%;
