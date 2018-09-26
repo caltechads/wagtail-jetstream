@@ -705,10 +705,10 @@ class IFrameBlock(blocks.CharBlock, BlockTupleMixin):
     class Meta:
         help_text = (
             "Paste the iFrame from your provider here. e.g.  "
-             '<iframe height="300px" frameborder="0" style="padding: 25px 10px;"'
-                ' src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'
-             '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
-             '</iframe>'
+            '<iframe height="300px" frameborder="0" style="padding: 25px 10px;"'
+            ' src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'
+            '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
+            '</iframe>'
         )
         label = 'iFrame'
         template = 'jetstream/blocks/iframe_block.html'
@@ -823,6 +823,13 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         form_classname = 'layout-two-column-sub struct-block'
         label = 'Two Columns'
 
+    @classmethod
+    def get_block_machine_name(cls):
+        """
+        Overrides this method from BlockTupleMixin so that we use the same machine name as BaseTwoColumnBlock.
+        """
+        return 'two_column_layout'
+
     def get_block_tuple(self):
         """
         Overrides this method from BlockTupleMixin so that we use the same machine name as BaseTwoColumnBlock.
@@ -873,6 +880,13 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
         template = 'jetstream/blocks/layout/two_column_block.html'
         form_classname = 'layout-two-column struct-block'
         label = 'Two Columns'
+
+    @classmethod
+    def get_block_machine_name(cls):
+        """
+        Overrides this method from BlockTupleMixin so that we use the same machine name as BaseTwoColumnSubBlock.
+        """
+        return 'two_column_layout'
 
     def get_block_tuple(self):
         """
@@ -925,6 +939,13 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
         template = 'jetstream/blocks/layout/three_column_block.html'
         form_classname = 'layout-three-column-sub struct-block'
         label = 'Three Columns'
+
+    @classmethod
+    def get_block_machine_name(cls):
+        """
+        Overrides this method from BlockTupleMixin so that we use the same machine name as BaseThreeColumnSubBlock.
+        """
+        return 'three_column_layout'
 
     def get_block_tuple(self):
         """
@@ -983,6 +1004,13 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
         form_classname = 'layout-three-column struct-block'
         label = 'Three Columns'
 
+    @classmethod
+    def get_block_machine_name(cls):
+        """
+        Overrides this method from BlockTupleMixin so that we use the same machine name as ThreeColumnSubBlock.
+        """
+        return 'three_column_layout'
+
     def get_block_tuple(self):
         """
         Overrides this method from BlockTupleMixin so that we use the same machine name as ThreeColumnSubBlock.
@@ -1040,6 +1068,13 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
         template = 'jetstream/blocks/layout/four_column_block.html'
         form_classname = 'layout-four-column struct-block'
         label = 'Four Columns'
+
+    @classmethod
+    def get_block_machine_name(cls):
+        """
+        Overrides this method from BlockTupleMixin so that we use the legacy machine name.
+        """
+        return 'four_column_layout'
 
     def get_block_tuple(self):
         """
