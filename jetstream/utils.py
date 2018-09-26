@@ -18,6 +18,11 @@ class BlockTupleMixin(object):
     Classes that need to use a custom string for their block tuple (e.g. TwoColumnBlock and BaseTwoColumnSubblock, which
     both need the same tuple) can override get_block_tuple().
     """
+
+    @classmethod
+    def get_block_machine_name(cls):
+        return cls.__name__
+
     def get_block_tuple(self):
         return (self.__class__.__name__, self)
 
