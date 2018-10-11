@@ -1,3 +1,8 @@
+@mixin IE-compatible-flex-width($width) {
+  flex: 1 1 auto;
+  width: $width;
+}
+
 @mixin gutter($width) {
   $classname: "gutter-#{$width}";
   $half: $width/2;
