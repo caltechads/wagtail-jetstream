@@ -31,7 +31,7 @@
       {% if p.pk == page.pk %}
         <span class="menu-listing__page-listing list-group-item active">{{ page.title }}</span>
       {% else %}
-        <a href="{{ p.full_url }}" class="menu-listing__page-listing list-group-item">{{ p.title }}</a>
+        <a href="{% relative_url p %}" class="menu-listing__page-listing list-group-item">{{ p.title }}</a>
       {% endif %}
     {% endfor %}
   </div>

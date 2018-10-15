@@ -242,6 +242,12 @@ def page_siblings(page, only_published=True):
     return queryset
 
 
+@register.simple_tag()
+def relative_url(page):
+    # Results don't include itself, so need to add a non-hyperlink dummy listing
+    site_id, root_url, page_path = page.get_url_parts()
+    return page_path
+
 @register.simple_tag(takes_context=True)
 def get_gallery_image_width(context):
     parent_width = context.get('parent_width', None)
@@ -357,3 +363,4 @@ def parse_image_tag(tag_name, parser, token, node_class):
         )
     else:
         raise error
+
