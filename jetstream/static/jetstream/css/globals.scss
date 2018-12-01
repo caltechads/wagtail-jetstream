@@ -17,19 +17,19 @@ $purple:     #95348d;
 $darkteal:   #005e5c;
 
 // Media Query Breakpoints
-$small_viewport: 500px;
-$medium_viewport: 768px;
-$desktop_viewport: 1000px;
+$small-viewport: 500px;
+$medium-viewport: 768px;
+$desktop-viewport: 1000px;
 
 $screen-phone: 480px;
 $screen-tablet: 768px;
 
-// To pixel-bitch the width for something, use width: <intended>px / $responsive_grid_w * 100%;
-$responsive_grid_w: 1000px;
+// To pixel-bitch the width for something, use width: <intended>px / $responsive-grid-w * 100%;
+$responsive-grid-w: 1000px;
 
 // Fonts
 $font-size-base: 14px;
 $line-height-base: 1.7;
-$font_serif: Times, serif;
-$font_sans_serif: Helvetica, sans-serif;
-$font_sans_serif_bold: Helvetica, sans-serif;
+$font-serif: Times, serif;
+$font-sans-serif: Helvetica, sans-serif;
+$font-sans-serif-bold: Helvetica, sans-serif;

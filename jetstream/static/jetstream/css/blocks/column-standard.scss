@@ -89,7 +89,7 @@
 
     @include desktop {
       .row {
-        width: $responsive_grid_w;
+        width: $responsive-grid-w;
         margin: 0 auto;
       }
     }

@@ -10,8 +10,8 @@
     @include desktop {
       .hero-image__body {
         left: 50%;
-        width: $responsive_grid_w;
-        margin-left: -$responsive_grid_w / 2;
+        width: $responsive-grid-w;
+        margin-left: -$responsive-grid-w / 2;
       }
     }
   }
@@ -19,13 +19,13 @@
     background-color: rgba(255, 255, 255, 0.3);
   }
   &.bare-sans-serif, &.white-translucent-sans-serif {
-    font-family: $font_sans_serif;
+    font-family: $font-sans-serif;
 
     h1 {
-      font-family: $font_sans_serif_bold;
+      font-family: $font-sans-serif-bold;
     }
     h2, h3, h4, h5, h6 {
-      font-family: $font_sans_serif;
+      font-family: $font-sans-serif;
     }
   }
   &.position-top-left &__inner {
@@ -119,7 +119,7 @@
   }
 }
 
-@media (max-width: $small_viewport) {
+@media (max-width: $small-viewport) {
   .hero-image {
     width: 100%;
     height: auto !important;
@@ -171,17 +171,17 @@
 
   h1 {
     font-size: 1.8em;
-    font-family: $font_serif;
+    font-family: $font-serif;
   }
 
   h2 {
     font-size: 1.2em;
-    font-family: $font_serif;
+    font-family: $font-serif;
   }
 
   h3, h4, h5, h6 {
     font-size: 1em;
-    font-family: $font_serif;
+    font-family: $font-serif;
     margin-top: 0;  // .rich-text h3 has a margin top of 2em that we don't want here.
   }
 

@@ -1,5 +1,5 @@
 
-$spacer_increment: 25px;
+$spacer-increment: 25px;
 .spacer {
   // Sometimes the block before us will end with a float, which makes the spacer block not appear to be its full height.
   clear: both;
@@ -8,17 +8,17 @@ $spacer_increment: 25px;
   @include landscape-phone {
     &--12  { height: 12px; }
     &--20  { height: 20px; }
-    &--25  { height: $spacer_increment; }
+    &--25  { height: $spacer-increment; }
     &--30  { height: 30px; }
     &--40  { height: 40px; }
-    &--50  { height: 2 * $spacer_increment; }
-    &--75  { height: 3 * $spacer_increment; }
-    &--100 { height: 4 * $spacer_increment; }
-    &--125 { height: 5 * $spacer_increment; }
-    &--150 { height: 6 * $spacer_increment; }
-    &--175 { height: 7 * $spacer_increment; }
-    &--200 { height: 8 * $spacer_increment; }
-    &--225 { height: 9 * $spacer_increment; }
-    &--250 { height: 10 * $spacer_increment; }
+    &--50  { height: 2 * $spacer-increment; }
+    &--75  { height: 3 * $spacer-increment; }
+    &--100 { height: 4 * $spacer-increment; }
+    &--125 { height: 5 * $spacer-increment; }
+    &--150 { height: 6 * $spacer-increment; }
+    &--175 { height: 7 * $spacer-increment; }
+    &--200 { height: 8 * $spacer-increment; }
+    &--225 { height: 9 * $spacer-increment; }
+    &--250 { height: 10 * $spacer-increment; }
   }
 }

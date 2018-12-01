@@ -56,13 +56,13 @@
 /**************** Video Block ***************/
 
 @import "blocks/video-block.scss";
-@import "blocks/iframe-block.scss"; 
+@import "blocks/iframe-block.scss";
 
 /*************** Related Links Block ******************/
 
 @import "blocks/related-links.scss";
 
-@media (max-width: $small_viewport) {
+@media (max-width: $small-viewport) {
   .richtext-image {
     &.Small {
       width:100%;

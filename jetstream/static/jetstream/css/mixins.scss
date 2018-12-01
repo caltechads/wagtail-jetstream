@@ -3,24 +3,24 @@
 // ===================
 
 // Breakpoints
-// $small_viewport: 500px; # aka landscape_phone_viewport
-// $medium_viewport: 768px; # aka portrait_tablet_viewport
-// $desktop_viewport: 1000px;
+// $small-viewport: 500px; # aka landscape_phone_viewport
+// $medium-viewport: 768px; # aka portrait_tablet_viewport
+// $desktop-viewport: 1000px;
 
 @mixin landscape-phone {
-  @media (min-width: $small_viewport) {
+  @media (min-width: $small-viewport) {
     @content;
   }
 }
 
 @mixin portrait-tablet {
-  @media (min-width: $medium_viewport) {
+  @media (min-width: $medium-viewport) {
     @content;
   }
 }
 
 @mixin desktop {
-  @media (min-width: $desktop_viewport) {
+  @media (min-width: $desktop-viewport) {
     @content;
   }
 }
@@ -35,7 +35,7 @@
 // For those times when you need to use a non-mobile-first media query to apply rules ONLY on portrait phones.
 // Only use when you ABSOLUTELY have to!
 @mixin portrait-phone-only {
-  @media (max-width: $small_viewport - 1) {
+  @media (max-width: $small-viewport - 1) {
     @content;
   }
 }
@@ -76,11 +76,11 @@
   }
 }
 
-@mixin linksbglight($wrapper_class, $color_name, $color) {
-  $classname: "bg-color-" + $color_name;
+@mixin linksbglight($wrapper-class, $color-name, $color) {
+  $classname: "bg-color-" + $color-name;
 
-  ".#{$wrapper_class}.#{$classname}" {
-    // We are adding a border to each $wrapper_class and then turning it off whenever we set a bg-color
+  ".#{$wrapper-class}.#{$classname}" {
+    // We are adding a border to each $wrapper-class and then turning it off whenever we set a bg-color
     box-shadow: none;
     border: none;
     background-color: $color;
@@ -101,11 +101,11 @@
   }
 }
 
-@mixin linksbgdark($wrapper_class, $color_name, $color) {
-  $classname: "bg-color-" + $color_name;
+@mixin linksbgdark($wrapper-class, $color-name, $color) {
+  $classname: "bg-color-" + $color-name;
 
-  ".#{$wrapper_class}.#{$classname}" {
-    // We are adding a border to each $wrapper_class and then turning it off whenever we set a bg-color
+  ".#{$wrapper-class}.#{$classname}" {
+    // We are adding a border to each $wrapper-class and then turning it off whenever we set a bg-color
     box-shadow: none;
     border: none;
     background-color: $color;
@@ -235,7 +235,7 @@
   display: block;
   color: #333;
 
-  @media (max-width: $medium_viewport) {
+  @media (max-width: $medium-viewport) {
     padding-left: 10px;
     padding-right: 10px;
   }
