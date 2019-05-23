@@ -988,6 +988,7 @@
   right: 3%;
   bottom: 3%;
   position: static;
+  margin-top: 1rem;
 }
 
 @media (min-width: 768px) {
@@ -1185,6 +1186,7 @@
 
 .hero-image__background {
   background-position: center;
+  background-size: cover;
 }
 
 .hero-image__body {
