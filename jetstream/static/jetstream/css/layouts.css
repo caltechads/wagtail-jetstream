@@ -1208,7 +1208,6 @@
   }
   .hero-image__background {
     height: 60vw !important;
-    background-size: auto;
   }
   .hero-image__body {
     height: 60vw !important;
@@ -1228,7 +1227,6 @@
   }
   .hero-image__background {
     height: 60vw !important;
-    background-size: auto;
   }
   .hero-image__body {
     position: static;
