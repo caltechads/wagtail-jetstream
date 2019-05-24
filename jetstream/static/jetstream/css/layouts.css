@@ -988,7 +988,7 @@
   right: 3%;
   bottom: 3%;
   position: static;
-  margin-top: 1rem;
+  margin: 1rem 0;
 }
 
 @media (min-width: 768px) {

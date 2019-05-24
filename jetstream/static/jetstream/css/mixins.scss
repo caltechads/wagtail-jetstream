@@ -150,7 +150,7 @@
   right: 3%;
   bottom: 3%;
   position: static;
-  margin-top: 1rem;
+  margin: 1rem 0;
 
   @include portrait-tablet {
     position: absolute;
