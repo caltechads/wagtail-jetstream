@@ -55,7 +55,7 @@
   }
 
   &__caption-text {
-    font-family: Vaud, sans-serif;
+    font-family: $font-vaud;
     color: $black-text;
 
     @include portrait-tablet {
