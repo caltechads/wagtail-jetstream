@@ -188,7 +188,7 @@
   // This provides a 100% x 100% link overlay so that the background image in the element has an overlay.
   // Mainly used to make links that overlay background images.
   // NOTE: When using this mixin, ensure that the direct parent of the mixed-in class has "position: relative".
-  span {
+  .wrapper-expander {
     position: absolute;
     width: 100%;
     height: 100%;

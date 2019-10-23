@@ -11,7 +11,10 @@
       <div class="carousel-item hero-image-carousel__carousel-item {% if forloop.counter == 1 %}active{% endif %}">
         {% link_url slide.link as link_url %}
         {% if link_url %}
-          <a class="hero-image-carousel__wrapper-link" href="{{ link_url }}"><span></span></a>
+          <a class="hero-image-carousel__wrapper-link" href="{{ link_url }}">
+            <span class="wrapper-expander"></span>
+            <span class="sr-only">{{ slide.title | bleach }}</span>
+          </a>
         {% endif %}
         {% responsive_image slide.image 'fill' 1000 self.height class="hero-image-carousel__image" %}
         {% if slide.title or slide.text %}
