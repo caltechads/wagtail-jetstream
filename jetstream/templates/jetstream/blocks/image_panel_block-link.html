@@ -3,7 +3,11 @@
 <div class="image-panel-link {% if not parent_width %}top-level{% endif %}">
   {% link_url self.link as url %}
   {% if url %}
-    <a class="image-panel-link__image-link" href="{{ url }}"><span></span></a>
+    {% firstof self.title self.image.alt as link_text %}
+    <a class="image-panel-link__image-link" href="{{ url }}">
+      <span class="wrapper-expander"></span>
+      <span class="sr-only">{{ link_text | custom_bleach:'br,i,em,sub,sup' }}</span>
+    </a>
   {% endif %}
   {% include 'jetstream/blocks/image_panel_block-image.html' with image=self.image %}
   {% if self.title %}

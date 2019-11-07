@@ -27,7 +27,7 @@
         {% if link_url %}
           <a class="image-carousel__item__wrapper-link" href="{{ link_url }}">
             <span class="wrapper-expander"></span>
-            <span class="sr-only">{{ image_block.title | custom_bleach:'br,i,em,sub,sup' }}</span>
+            <span class="sr-only">{{ slide.text | custom_bleach:'br,i,em,sub,sup' }}</span>
           </a>
         {% endif %}
 
