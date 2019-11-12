@@ -10,7 +10,7 @@
 .menu-listing.bg-color-black .list-group-item.active {
   color: $ltgray;
 }
-@include linksbglight(menu-listing, 'orange', $orange);
+@include linksbglight(menu-listing, 'orange', $orange-accessible);
 @include linksbgdark(menu-listing, 'ltgray', $ltgray);
 @include linksbgdark(menu-listing, 'midgray', $midgray);
 @include linksbglight(menu-listing, 'darkergray', $darkergray);

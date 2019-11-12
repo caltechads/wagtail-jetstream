@@ -21,7 +21,7 @@
 .related-links.bg-color-black h2 {
   color: $ltgray;
 }
-@include linksbglight(related-links, 'orange', $orange);
+@include linksbglight(related-links, 'orange', $orange-accessible);
 @include linksbgdark(related-links, 'ltgray', $ltgray);
 @include linksbgdark(related-links, 'midgray', $midgray);
 @include linksbglight(related-links, 'darkergray', $darkergray);
