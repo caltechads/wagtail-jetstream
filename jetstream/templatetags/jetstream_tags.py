@@ -5,7 +5,7 @@ import uuid
 import bleach
 from django import template
 from django.utils.safestring import mark_safe
-from django_bleach.templatetags.bleach_tags import bleach_args
+from django_bleach.utils import get_bleach_default_options
 from wagtail.embeds.exceptions import EmbedException
 from wagtail.core.models import Page
 from wagtail.embeds import embeds
@@ -275,6 +275,7 @@ def custom_bleach(value, allowed_tags):
     should be allowed through the filter. This list of tags *overrides* the list in the settings, so be thorough.
     """
     # Use the bleach_args built from the settings, but replace the 'tags' arg with the supplied comma-separated list.
+    bleach_args = get_bleach_default_options()
     kwargs = dict(**bleach_args)
     kwargs['tags'] = [tag.strip() for tag in allowed_tags.split(',')]
     bleached_value = bleach.clean(value, **kwargs)
@@ -363,4 +364,3 @@ def parse_image_tag(tag_name, parser, token, node_class):
         )
     else:
         raise error
-
