@@ -1,21 +1,26 @@
-/**** Fixed dimensions block ****/
+// DimensionsOptionsBlock - Force the three settings to display inline.
 div.dimensions-options {
+  ul.fields {
+    display: flex;
+  }
+
   li {
-    float: left;
-    width: 30%;
-    height: 100%;
-
-    &:before {
-      display: none;
+    width: 33.333%;
+    padding: 10px;
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
     }
 
+    // Prevent the labels from being line-broken for no reason.
     label {
-      width: auto;
+      width: 100%;
     }
 
+    // Make the checkbox div as tall as the text inputs, which balances the whole display better.
     .boolean_field div.input {
-      display: table-cell;
-      vertical-align: middle;
       height: 4em;
     }
   }
