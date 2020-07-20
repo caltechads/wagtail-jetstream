@@ -4,7 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
-from django.utils.translation import ugettext as _
+from django.utils.translation import gettext as _
 from djunk.middleware import get_current_request
 from wagtail.core import blocks
 from wagtail.core.blocks import BaseStreamBlock
@@ -73,7 +73,7 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
         # Protect against crashing of the site has no features (like the initial site built by Wagtail migration)
         # noinspection PyUnresolvedReferences
         try:
-            features = request.site.features
+            features = Site.find_for_request(request).features
             return OrderedDict([
                 item for item in self._child_blocks.items() if features.feature_is_enabled(item[0])
             ])
@@ -90,7 +90,7 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
         # Protect against crashing of the site has no features (like the initial site built by Wagtail migration)
         # noinspection PyUnresolvedReferences
         try:
-            features = request.site.features
+            features = Site.find_for_request(request).features
             return [block for block in self._dependencies if features.feature_is_enabled(block.name)]
         except Site.features.RelatedObjectDoesNotExist:
             return self._child_blocks
