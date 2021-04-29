@@ -3,11 +3,13 @@ from collections import OrderedDict
 from django import forms
 from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
+from django.utils.functional import cached_property
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from djunk.middleware import get_current_request
-from wagtail.core import blocks
+from wagtail.core import blocks, telepath
 from wagtail.core.blocks import BaseStreamBlock
+from wagtail.core.blocks.struct_block import StructBlockAdapter
 from wagtail.core.models import Site
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
@@ -51,7 +53,7 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
 
         # Note, this is calling BaseStreamBlock's super __init__, not FeatureCustomizedStreamBlock's. We don't want
         # BaseStreamBlock.__init__() to run, because it tries to assign to self.child_blocks, which it can't do because
-        # we've overriden it with an @property. But we DO want Block.__init__() to run.
+        # we've overridden it with an @property. But we DO want Block.__init__() to run.
         super(BaseStreamBlock, self).__init__(**kwargs)
 
         # create a local (shallow) copy of base_blocks so that it can be supplemented by local_blocks
@@ -101,7 +103,7 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
 # ====================
 class IntegerChoiceBlock(blocks.ChoiceBlock):
     """
-    A ChoiceBlock for intergers only. Using this instead of ChoiceBlock ensures that the value retrieved from the
+    A ChoiceBlock for integers only. Using this instead of ChoiceBlock ensures that the value retrieved from the
     field is an integer instead of a string.
     """
 
@@ -123,7 +125,7 @@ class LinkBlock(blocks.StructBlock):
     See the comment in the Meta class for why.
 
     NOTE: Within a template, checking for the existence of `self.link` will always return True because the LinkBlock
-    object is not falsey, even if it has no contents. To retrieve the value of a LinkBlock, use the {% link_url %}
+    object is not falsy, even if it has no contents. To retrieve the value of a LinkBlock, use the {% link_url %}
     template tag from jetstream_tags. ex:
         {% load jetstream_tags %}
         {% link_url self.link as url %}
@@ -174,19 +176,30 @@ class DimensionsOptionsBlock(blocks.StructBlock):
         help_text=wh_width_helptext
     )
 
-    @property
-    def media(self):
-        return forms.Media(
-            js=['jetstream/js/admin/dimensions-options.js']
-        )
-
-    def js_initializer(self):
-        return "fixed_dimensions"
-
     class Meta:
         form_classname = 'dimensions-options struct-block'
         # Don't display a label for this block. Our override of wagtailadmin/block_forms/struct.html obeys this flag.
         no_label = True
+
+
+class DimensionsOptionsBlockAdapter(StructBlockAdapter):
+    """
+    DimensionsOptionsBlock is a StructBlock with extra form-side functionality. So, we use StructBlockAdapter as the
+    base class, and override only the js_constructor and media. Alongside our custom javascript file, which subclasses
+    wagtailStreamField.blocks.StructBlockDefinition, this lets us add our custom javascript behavior.
+    """
+    js_constructor = 'jetstream.DimensionsOptionsBlock'
+
+    @cached_property
+    def media(self):
+        structblock_media = super().media
+        return forms.Media(
+            js=structblock_media._js + ['jetstream/js/admin/dimensions-options-telepath.js'],
+            css=structblock_media._css
+        )
+
+
+telepath.register(DimensionsOptionsBlockAdapter(), DimensionsOptionsBlock)
 
 
 class BackgroundOptionsBlock(blocks.StructBlock):
@@ -340,14 +353,25 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         new_context['extra_classes'] = " ".join(extra_classes)
         return mark_safe(render_to_string(template, new_context))
 
-    @property
+
+class ImagePanelBlockAdapter(StructBlockAdapter):
+    """
+    ImagePanelBlock is a StructBlock with extra form-side functionality. So, we use StructBlockAdapter as the base
+    class, and override only the js_constructor and media. Alongside our custom javascript file, which subclasses
+    wagtailStreamField.blocks.StructBlockDefinition, this lets us add our custom javascript behavior.
+    """
+    js_constructor = 'jetstream.ImagePanelBlock'
+
+    @cached_property
     def media(self):
+        structblock_media = super().media
         return forms.Media(
-            js=['jetstream/js/admin/image-panel.js']
+            js=structblock_media._js + ['jetstream/js/admin/image-panel-telepath.js'],
+            css=structblock_media._css
         )
 
-    def js_initializer(self):
-        return 'image_panel'
+
+telepath.register(ImagePanelBlockAdapter(), ImagePanelBlock)
 
 
 @register_feature(feature_type='default')
@@ -475,7 +499,7 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
     # Only factors of 12 are allowed, because we use a 12-column layout.
     COLUMN_CHOICES = [(1, 1), (2, 2), (3, 3), (4, 4), (6, 6)]
 
-    style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default='normal')
+    style = blocks.ChoiceBlock(choices=[(style[0], style[1]) for style in STYLES], default='gallery')
     columns = IntegerChoiceBlock(choices=COLUMN_CHOICES, default=3)
     height = blocks.IntegerBlock(
         default=300,
@@ -507,18 +531,25 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
         new_context['bootstrap_column_width'] = int(12 / value['columns'])
         return mark_safe(render_to_string(template, new_context))
 
-    @property
+
+class ImageGalleryBlockAdapter(StructBlockAdapter):
+    """
+    ImageGalleryBlock is a StructBlock with extra form-side functionality. So, we use StructBlockAdapter as the base
+    class, and override only the js_constructor and media. Alongside our custom javascript file, which subclasses
+    wagtailStreamField.blocks.StructBlockDefinition, this lets us add our custom javascript behavior.
+    """
+    js_constructor = 'jetstream.ImageGalleryBlock'
+
+    @cached_property
     def media(self):
-        # We need to pull in StructBlock's own js code, in addition to ours.
-        return super().media + forms.Media(
-            js=['jetstream/js/admin/image-gallery.js']
+        structblock_media = super().media
+        return forms.Media(
+            js=structblock_media._js + ['jetstream/js/admin/image-gallery-telepath.js'],
+            css=structblock_media._css
         )
 
-    def js_initializer(self):
-        # Until this gets documented properly, see the following link for an explanation of what's going on here:
-        # https://stackoverflow.com/a/47743729/464318
-        parent_initialiser = super().js_initializer()
-        return "ImageGallery(%s)" % parent_initialiser
+
+telepath.register(ImageGalleryBlockAdapter(), ImageGalleryBlock)
 
 
 @register_feature(feature_type='default')
@@ -699,7 +730,7 @@ class CalloutBlock(blocks.StructBlock, BlockTupleMixin):
 
 class IFrameBlock(blocks.CharBlock, BlockTupleMixin):
     """
-    We need a custom field as a place to add a validation. Orignally we just used a CharBlock directly,
+    We need a custom field as a place to add a validation. Originally we just used a CharBlock directly,
     but then you could put anything in here - including script tags.
     """
     class Meta:
