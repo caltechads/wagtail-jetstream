@@ -4,6 +4,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
 from django.utils.functional import cached_property
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from djunk.middleware import get_current_request
@@ -734,13 +735,6 @@ class IFrameBlock(blocks.CharBlock, BlockTupleMixin):
     but then you could put anything in here - including script tags.
     """
     class Meta:
-        help_text = (
-            "Paste the iFrame from your provider here. e.g.  "
-            '<iframe height="300px" frameborder="0" style="padding: 25px 10px;"'
-            ' src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'
-            '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
-            '</iframe>'
-        )
         label = 'iFrame'
         template = 'jetstream/blocks/iframe_block.html'
         form_classname = 'iframe-block struct-block'
@@ -778,7 +772,16 @@ class IFrameEmbedBlock(blocks.StructBlock, BlockTupleMixin):
     Offer users the ability to use iframes.
     BECAUSE this is a 'special feature' we can restrict which sites are allowed to use them.
     """
-    html = IFrameBlock()
+    html = IFrameBlock(
+        help_text = escape(
+            "Paste the iFrame from your provider here. e.g.  "
+            '<iframe height="300px" frameborder="0" style="padding: 25px 10px;"'
+            ' src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'
+            '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
+            '</iframe>'
+        )
+
+    )
 
     fixed_dimensions = DimensionsOptionsBlock()
 
