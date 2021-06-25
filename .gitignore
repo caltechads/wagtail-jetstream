@@ -103,5 +103,6 @@ ENV/
 # codekit
 *.codekit3
 
-# PyCharm
+# PyCharm & VSCode configs
 .idea
+.vscode

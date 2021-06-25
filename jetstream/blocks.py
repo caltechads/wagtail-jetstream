@@ -780,7 +780,6 @@ class IFrameEmbedBlock(blocks.StructBlock, BlockTupleMixin):
             '  <a href="https://user.wufoo.com/forms/z1qnwrlw1iefzsu/">Fill out my Wufoo form! </a>'
             '</iframe>'
         )
-
     )
 
     fixed_dimensions = DimensionsOptionsBlock()
