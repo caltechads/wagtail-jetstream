@@ -68,6 +68,84 @@ def arbitrary_image(parser, token):
     return parse_image_tag('arbitrary_image', parser, token, ArbitraryImageNode)
 
 
+def video_aspect_ratio(video):
+    """
+    Bootstrap 4 has responsive video classes keyed by aspect ratio. The math below is kind of rough and ready,
+    so anything with an odd aspect ratio is going to get a best guess. Defaults to most common 16:9
+    """
+    if video.height and video.width:
+        ratio = video.width / video.height
+        if ratio <= 1:
+            return '1by1'
+        elif ratio < 1.5:
+            return '4by3'
+        elif ratio > 2:
+            return '21x9'
+        else:
+            return '16by9'
+    else:
+        # Really should not be here but let's charge on
+        return '16by9'
+
+
+@register.simple_tag(name='responsive_video')
+def responsive_video(video_url, width, extra_classes=None):
+    """
+    Renders an embedded video appropriate bootstrap responsive video tags based on a spec ration. See
+    https://getbootstrap.com/docs/4.1/utilities/embed/
+
+    If passed in, 'extra_classes' must be a string of CSS class names.
+    """
+    try:
+        embed = embeds.get_embed(video_url, width)
+        html = embed.html
+        # Remove the calculated height and width values
+        html = re.sub(r' height="(\d+)"', '', html)
+        html = re.sub(r' width="(\d+)"', '', html)
+        # Add the provider name as a data attr, so that the javascript can determine how to interact with this iframe.
+        html = re.sub(r'<iframe', '<iframe data-provider="{}"'.format(embed.provider_name), html)
+        # Add any classes that may have been specified.
+        classes = 'embed-responsive-item ' + extra_classes if extra_classes else 'embed-responsive-item'
+        html = re.sub(r'<iframe', '<iframe class="{}"'.format(classes), html)
+
+        wrapper_classes = [
+            'embed-responsive',
+            'embed-responsive-{}'.format(video_aspect_ratio(embed))
+        ]
+
+        # Remove the video player chrome.
+        if embed.provider_name == 'YouTube':
+            html = re.sub(r'feature=oembed', 'feature=oembed&showinfo=0', html)
+        elif embed.provider_name == 'Vimeo':
+            # We can't get rid of all of the Vimeo chrome, but this does as much as we can.
+            html = re.sub(
+                r'player\.vimeo\.com/video/(\d+)',
+                r'player.vimeo.com/video/\1?title=0&byline=0&portrait=0',
+                html
+            )
+        elif embed.provider_name == 'Facebook':
+            # remove the embed-responsive-{} class because it adds huge top padding on facebook embeds
+            wrapper_classes.append("embed-responsive--facebook")
+
+        return mark_safe('<div class="{}">{}</div>'.format(
+            " ".join(wrapper_classes),
+            html)
+        )
+    except EmbedException:
+        # Silently ignore failed embeds, rather than letting them crash the page.
+        return ''
+
+
+@register.simple_tag(name='image_dimensions')
+def image_dimensions(fixed_dimensions, parent_width, parent_height, default_width=600, default_height=400):
+    if fixed_dimensions and fixed_dimensions['use']:
+        return {'width': fixed_dimensions.width, 'height': fixed_dimensions.height}
+    elif parent_height:
+        return {'width': parent_width, 'height': parent_height}
+    else:
+        return {'width': default_width, 'height': default_height}
+
+
 @register.tag(name='responsive_image')
 def responsive_image(parser, token):
     """

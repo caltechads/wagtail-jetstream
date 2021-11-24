@@ -78,8 +78,9 @@
 
 @mixin linksbglight($wrapper-class, $color-name, $color) {
   $classname: "bg-color-" + $color-name;
+  $selector: ".#{$wrapper-class}.#{$classname}";
 
-  ".#{$wrapper-class}.#{$classname}" {
+  #{$selector} {
     // We are adding a border to each $wrapper-class and then turning it off whenever we set a bg-color
     box-shadow: none;
     border: none;
@@ -103,8 +104,9 @@
 
 @mixin linksbgdark($wrapper-class, $color-name, $color) {
   $classname: "bg-color-" + $color-name;
+  $selector: ".#{$wrapper-class}.#{$classname}";
 
-  ".#{$wrapper-class}.#{$classname}" {
+  #{$selector} {
     // We are adding a border to each $wrapper-class and then turning it off whenever we set a bg-color
     box-shadow: none;
     border: none;

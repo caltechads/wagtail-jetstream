@@ -51,26 +51,3 @@
     text-align: center;
   }
 }
-
-// Since we need to use !important to override style'd width/height on phones, we have to violate mobile-first for this.
-@include portrait-phone-only {
-  // This crazy combination of CSS rules causes video iframes to be properly responsive. I don't fully understand how it
-  // works, but it does. I got these rules from https://www.ostraining.com/blog/coding/responsive-videos/
-  .video-block {
-    overflow: hidden;
-    padding-bottom: 56.25%;
-    position: relative;
-    // These two are different than the example I pulled this code from, because we also have to turn off the style'd
-    // width and height from fixed-dimensions.
-    width: 100% !important;
-    height: auto !important;
-
-    &__video {
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-    }
-  }
-}
