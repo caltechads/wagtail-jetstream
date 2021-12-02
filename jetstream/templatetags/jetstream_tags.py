@@ -139,7 +139,7 @@ def responsive_video(video_url, width, extra_classes=None):
 @register.simple_tag(name='image_dimensions')
 def image_dimensions(fixed_dimensions, parent_width, parent_height, default_width=600, default_height=400):
     if fixed_dimensions and fixed_dimensions['use']:
-        return {'width': fixed_dimensions.width, 'height': fixed_dimensions.height}
+        return {'width': fixed_dimensions['width'], 'height': fixed_dimensions['height']}
     elif parent_height:
         return {'width': parent_width, 'height': parent_height}
     else:
