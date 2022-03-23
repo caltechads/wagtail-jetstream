@@ -11,6 +11,8 @@
 
 <p><strong>DEBUG</strong> For now just install from the git repository and then add <code>jetstream</code> to your <code>INSTALLED_APPLICATIONS</code> in Django settings.</p>
 
+<p>As of version 1.4, we no longer pre-compile the scss to css. Users are expected to run some sort of automatic sass compiler, like django-sass-processor, in order to compile the scss files.</p>
+
 <h2 id="columnlayouts">Column Layouts</h2>
 
 <p>Use of the column layouts requires some boilerplate from the developer because Wagtail currently does not have a mechanism for determining a block&#8217;s contents dynamically at runtime.</p>

@@ -5,6 +5,8 @@ This is a collection of useful blocks and layouts for use within Wagtail's Strea
 
 **DEBUG** For now just install from the git repository and then add `jetstream` to your `INSTALLED_APPLICATIONS` in Django settings.
 
+As of version 1.4, we no longer pre-compile the scss to css. Users are expected to run some sort of automatic sass compiler, like django-sass-processor, in order to compile the scss files.
+
 ## Column Layouts
 
 Use of the column layouts requires some boilerplate from the developer because Wagtail currently does not have a mechanism for determining a block's contents dynamically at runtime.
