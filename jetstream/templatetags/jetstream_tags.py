@@ -7,7 +7,7 @@ from django import template
 from django.utils.safestring import mark_safe
 from django_bleach.utils import get_bleach_default_options
 from wagtail.embeds.exceptions import EmbedException
-from wagtail.core.models import Page
+from wagtail.models import Page
 from wagtail.embeds import embeds
 from wagtail.images.models import Filter
 from wagtail.images.shortcuts import get_rendition_or_not_found

@@ -8,10 +8,10 @@ from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
 from djunk.middleware import get_current_request
-from wagtail.core import blocks, telepath
-from wagtail.core.blocks import BaseStreamBlock
-from wagtail.core.blocks.struct_block import StructBlockAdapter
-from wagtail.core.models import Site
+from wagtail import blocks, telepath
+from wagtail.blocks import BaseStreamBlock
+from wagtail.blocks.struct_block import StructBlockAdapter
+from wagtail.models import Site
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
