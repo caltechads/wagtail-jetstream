@@ -4,7 +4,7 @@
   <div class="image-panel-rollover__entry">
     {% link_url self.link as link_url %}
     {% if link_url %}
-      <a class="image-panel-rollover__image-link" href="{{ link_url }}"><span></span></a>
+      <a class="image-panel-rollover__image-link" href="{{ link_url }}"><span class="sr-only">{{ self.title }}</span></a>
     {% endif %}
     {% include 'jetstream/blocks/image_panel_block-image_square.html' with image=self.image %}
     {% if self.title or self.desc or link_url %}
