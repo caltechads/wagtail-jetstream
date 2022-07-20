@@ -7,6 +7,8 @@ This is a collection of useful blocks and layouts for use within Wagtail's Strea
 
 As of version 1.4, we no longer pre-compile the scss to css. Users are expected to run some sort of automatic sass compiler, like django-sass-processor, in order to compile the scss files.
 
+As of version 2.0, the import paths only support Wagtail 3.0 or higher.
+
 ## Column Layouts
 
 Use of the column layouts requires some boilerplate from the developer because Wagtail currently does not have a mechanism for determining a block's contents dynamically at runtime.
