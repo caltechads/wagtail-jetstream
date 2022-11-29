@@ -43,11 +43,29 @@ wh_width_helptext = (
 )
 
 
+class UnknownBlockGroupError(Exception):
+    pass
+
+
 class FeatureCustomizedStreamBlock(blocks.StreamBlock):
     """
-    Identical to StreamBlock, except that we override the constructor to make it save self._base_blocks and
-    self._dependencies, instead of self.base_blocks and self.dependencies. This lets us replace them with @properties.
+    This is a copy of FeatureCustomizedStreamBlock from Airspace. It lets us override the list of blocks presented
+    to the user based on runtime information. We also sort the blocks differently.
     """
+
+    # Because Block groups are not, themselves, anything except a string specified in the Meta class, we need some
+    # method to tell the system what order to sort Groups in. This dictionary keys those Group strings to sort values.
+    GROUP_SORT_VALUES = {
+        # If a Block has no Group, its meta.group is ''. We want ungrouped blocks to appear first, so they get 0.
+        '': 0,
+        'Basic': 10,
+        'Multimedia': 20,
+        'Navigation': 30,
+        'News & Calendar': 40,
+        'Social Media': 50,
+        'Misc': 60,
+        'Special': 70,
+    }
 
     def __init__(self, local_blocks=None, **kwargs):
         self._constructor_kwargs = kwargs
@@ -97,6 +115,26 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
             return [block for block in self._dependencies if features.feature_is_enabled(block.name)]
         except Site.features.RelatedObjectDoesNotExist:
             return self._child_blocks
+
+    def sorted_child_blocks(self):
+        """
+        Child blocks, sorted by label, and then sorted again by group, in the order specified in GROUP_SORT_VALUES.
+        This puts them in alphabetical order within each group segment.
+        """
+        def sort_groups(child_block):
+            try:
+                return self.GROUP_SORT_VALUES[child_block.meta.group]
+            except KeyError:
+                # If a Block has an unknown Group, we can't sort it. So we throw a descriptive error, which makes it
+                # clear what needs to be done to fix it.
+                raise UnknownBlockGroupError(
+                    f'The group "{child_block.meta.group}" is not in FeatureCustomizedStreamBlock.GROUP_SORT_VALUES.'
+                    f' Please either rename the group to match that the ones in that dict, or add'
+                    f' "{child_block.meta.group}" to it.'
+                )
+
+        child_blocks = sorted(self.child_blocks.values(), key=lambda child_block: child_block.meta.label)
+        return sorted(child_blocks, key=sort_groups)
 
 
 # ====================
@@ -152,6 +190,7 @@ class LinkBlock(blocks.StructBlock):
     class Meta:
         label = 'Link'
         form_classname = 'link-block'
+        # Does not need a Group
 
 
 class DimensionsOptionsBlock(blocks.StructBlock):
@@ -265,6 +304,7 @@ class ActionButtonBarBlock(blocks.StructBlock):
         template = 'jetstream/blocks/action_button_bar_block.html'
         form_classname = 'action-button-bar struct-block'
         icon = 'form'
+        # Does not need a Group
 
 
 class ColorOptionsBlock(blocks.StructBlock):
@@ -338,6 +378,7 @@ class ImagePanelBlock(blocks.StructBlock, BlockTupleMixin):
         label = 'Image Panel'
         form_classname = 'image-panel struct-block'
         icon = 'image'
+        group = 'Multimedia'
 
     def render(self, value, context=None):
         """
@@ -433,6 +474,7 @@ class HeroImageBlock(blocks.StructBlock, BlockTupleMixin):
         template = 'jetstream/blocks/hero_image_block.html'
         form_classname = 'hero-image struct-block'
         icon = 'image'
+        group = 'Multimedia'
 
 
 @register_feature(feature_type='default')
@@ -464,6 +506,7 @@ class HeroImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
         form_classname = 'image-carousel struct-block'
         label = 'Hero Image Slider'
         icon = 'image'
+        group = 'Multimedia'
 
 
 @register_feature(feature_type='default')
@@ -486,6 +529,7 @@ class ImageCarouselBlock(blocks.StructBlock, BlockTupleMixin):
         template = 'jetstream/blocks/image_carousel_block.html'
         label = 'Image Carousel'
         icon = 'image'
+        group = 'Multimedia'
 
 
 @register_feature(feature_type='default')
@@ -515,6 +559,7 @@ class ImageGalleryBlock(blocks.StructBlock, BlockTupleMixin):
         label = 'Image Gallery'
         form_classname = 'image-gallery struct-block'
         icon = 'image'
+        group = 'Multimedia'
 
     def render(self, value, context=None):
         """
@@ -583,6 +628,7 @@ class SpacerBlock(blocks.StructBlock, BlockTupleMixin):
         template = 'jetstream/blocks/spacer_block.html'
         form_classname = 'spacer struct-block'
         icon = 'arrows-up-down'
+        group = 'Basic'
 
 
 @register_feature(feature_type='default')
@@ -603,6 +649,7 @@ class RelatedLinksBlock(blocks.StructBlock, BlockTupleMixin):
         template = 'jetstream/blocks/related_links_block.html'
         form_classname = 'related-links struct-block'
         icon = 'list-ul'
+        group = 'Navigation'
 
 
 @register_feature(feature_type='default')
@@ -622,6 +669,7 @@ class VideoBlock(blocks.StructBlock, BlockTupleMixin):
         template = 'jetstream/blocks/video_block.tpl'
         form_classname = 'video-block struct-block'
         icon = 'media'
+        group = 'Multimedia'
 
 
 @register_feature(feature_type='default')
@@ -659,6 +707,7 @@ class SectionTitleBlock(blocks.StructBlock, BlockTupleMixin):
         form_classname = 'section-title struct-block'
         label = 'Section Title'
         icon = 'form'
+        group = 'Basic'
 
 
 @register_feature(feature_type='default')
@@ -686,6 +735,7 @@ class MenuListingBlock(blocks.StructBlock, BlockTupleMixin):
         form_classname = 'menu-listing struct-block'
         label = 'Menu Section'
         icon = 'list-ul'
+        group = 'Navigation'
 
 
 @register_feature(feature_type='default')
@@ -703,6 +753,7 @@ class FancyRichTextBlock(blocks.StructBlock, BlockTupleMixin):
         form_classname = 'fancy-richtext struct-block'
         label = 'Rich Text'
         icon = 'doc-full'
+        group = 'Basic'
 
 
 @register_feature(feature_type='default')
@@ -727,6 +778,7 @@ class CalloutBlock(blocks.StructBlock, BlockTupleMixin):
         form_classname = 'callout struct-block'
         label = 'Callout'
         icon = 'doc-full'
+        group = 'Misc'
 
 
 class IFrameBlock(blocks.CharBlock, BlockTupleMixin):
@@ -739,6 +791,7 @@ class IFrameBlock(blocks.CharBlock, BlockTupleMixin):
         template = 'jetstream/blocks/iframe_block.html'
         form_classname = 'iframe-block struct-block'
         icon = 'media'
+        # Does not need a Group
 
     def clean(self, value):
         """
@@ -773,7 +826,7 @@ class IFrameEmbedBlock(blocks.StructBlock, BlockTupleMixin):
     BECAUSE this is a 'special feature' we can restrict which sites are allowed to use them.
     """
     html = IFrameBlock(
-        help_text = escape(
+        help_text=escape(
             "Paste the iFrame from your provider here. e.g.  "
             '<iframe height="300px" frameborder="0" style="padding: 25px 10px;"'
             ' src="https://user.wufoo.com/embed/z1qnwrlw1iefzsu/">'
@@ -789,6 +842,7 @@ class IFrameEmbedBlock(blocks.StructBlock, BlockTupleMixin):
         template = 'jetstream/blocks/iframe_block.html'
         form_classname = 'iframe-block struct-block'
         icon = 'media'
+        group = 'Special'
 
 
 ###############################################################################
@@ -852,9 +906,10 @@ class BaseTwoColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
+        label = 'Two Columns'
         template = 'jetstream/blocks/layout/two_column_block.html'
         form_classname = 'layout-two-column-sub struct-block'
-        label = 'Two Columns'
+        group = 'Basic'
 
     @classmethod
     def get_block_machine_name(cls):
@@ -910,9 +965,10 @@ class BaseTwoColumnBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
+        label = 'Two Columns'
         template = 'jetstream/blocks/layout/two_column_block.html'
         form_classname = 'layout-two-column struct-block'
-        label = 'Two Columns'
+        group = 'Basic'
 
     @classmethod
     def get_block_machine_name(cls):
@@ -969,9 +1025,10 @@ class BaseThreeColumnSubBlock(blocks.StructBlock, BlockTupleMixin):
     background = BackgroundOptionsBlock()
 
     class Meta:
+        label = 'Three Columns'
         template = 'jetstream/blocks/layout/three_column_block.html'
         form_classname = 'layout-three-column-sub struct-block'
-        label = 'Three Columns'
+        group = 'Basic'
 
     @classmethod
     def get_block_machine_name(cls):
@@ -1033,9 +1090,10 @@ class BaseThreeColumnBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
+        label = 'Three Columns'
         template = 'jetstream/blocks/layout/three_column_block.html'
         form_classname = 'layout-three-column struct-block'
-        label = 'Three Columns'
+        group = 'Basic'
 
     @classmethod
     def get_block_machine_name(cls):
@@ -1098,9 +1156,10 @@ class BaseFourColumnBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
+        label = 'Four Columns'
         template = 'jetstream/blocks/layout/four_column_block.html'
         form_classname = 'layout-four-column struct-block'
-        label = 'Four Columns'
+        group = 'Basic'
 
     @classmethod
     def get_block_machine_name(cls):
@@ -1136,6 +1195,7 @@ class BaseSidebarLayoutBlock(blocks.StructBlock, BlockTupleMixin):
     )
 
     class Meta:
+        label = 'Sidebar Layout'
         template = 'jetstream/blocks/layout/sidebar_layout_block.html'
         form_classname = 'layout-sidebar struct-block'
-        label = 'Sidebar Layout'
+        group = 'Basic'
