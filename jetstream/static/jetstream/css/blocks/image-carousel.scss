@@ -56,8 +56,11 @@
       color: white;
 
       &__link-icon {
-        font-size: 25px;
-        color: $orange-accessible;
+        height: 25px;
+        width: 25px;
+        margin-bottom: -6px;
+        margin-left: -5px;
+        fill: $orange-accessible;
       }
     }
   }
