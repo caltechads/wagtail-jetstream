@@ -28,16 +28,12 @@
     font-family: $font-sans-serif-bold;
     font-size: 16px;
 
-    span {
-      display: table-cell;
-      vertical-align: middle;
-    }
-
     .icon {
-      color: $orange-accessible;
-      font-size: 25px;
-      // display: table-cell; vertical-align: middle; doesn't completely work with this icon so nudge it up a little
-      padding-bottom: 3px;
+      height: 25px;
+      width: 25px;
+      margin-bottom: -6px;
+      margin-left: -5px;
+      fill: $orange-accessible;
     }
   }
 }

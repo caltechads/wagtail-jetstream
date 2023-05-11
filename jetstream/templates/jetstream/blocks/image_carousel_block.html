@@ -1,4 +1,4 @@
-{% load jetstream_tags wagtailimages_tags wagtailcore_tags bleach_tags %}
+{% load jetstream_tags wagtailimages_tags wagtailcore_tags wagtailadmin_tags bleach_tags %}
 
 {% generate_unique_id as backup_block_id %}
 <div id="{{ block.id | default:backup_block_id }}"
@@ -41,7 +41,7 @@
             <div class="image-carousel__item__text">
               {{ slide.text | bleach }}
               {% if link_url %}
-                <span class="image-carousel__item__text__link-icon icon icon-arrow-right" aria-hidden="true"></span>
+                {% icon name="arrow-right" classname="image-carousel__item__text__link-icon" %}
               {% endif %}
             </div>
           </div>

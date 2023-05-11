@@ -1,4 +1,4 @@
-{% load wagtailimages_tags jetstream_tags bleach_tags %}
+{% load wagtailimages_tags jetstream_tags bleach_tags wagtailadmin_tags %}
 
 <div class="image-panel-link {% if not parent_width %}top-level{% endif %}">
   {% link_url self.link as url %}
@@ -12,9 +12,9 @@
   {% if self.title %}
     <div class="image-panel-link__text-gradient">
       <div class="image-panel-link__title">
-        <span>{{ self.title | bleach }}</span>
+        {{ self.title | bleach }}
         {% if url %}
-          <span class="icon icon-arrow-right" aria-hidden="true"></span>
+          {% icon name="arrow-right" %}
         {% endif %}
       </div>
     </div>
