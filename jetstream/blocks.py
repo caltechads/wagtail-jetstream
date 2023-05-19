@@ -7,7 +7,6 @@ from django.utils.functional import cached_property
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext as _
-from djunk.middleware import get_current_request
 from wagtail import blocks, telepath
 from wagtail.blocks import BaseStreamBlock
 from wagtail.blocks.struct_block import StructBlockAdapter
@@ -86,6 +85,8 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
 
     @property
     def child_blocks(self):
+        from djunk.middleware import get_current_request
+
         request = get_current_request()
         # Protect against crashing in case this ever runs outside of a request cycle.
         if request is None:
@@ -103,6 +104,8 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
 
     @property
     def dependencies(self):
+        from djunk.middleware import get_current_request
+
         request = get_current_request()
         # Protect against crashing in case this ever runs outside of a request cycle.
         if request is None:
