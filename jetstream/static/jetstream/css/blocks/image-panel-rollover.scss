@@ -47,7 +47,7 @@
       height: 100%;
       position: absolute;
       background-color: rgba(0, 0, 0, 0.65);
-      color: $color-white;
+      color: $white;
       top: 70%;
       // Tells the browser to animate the "top" property whenever it changes, which happens when the .entry is hovered.
       transition: top 0.5s ease-in-out 0.5s;
