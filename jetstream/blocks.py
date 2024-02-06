@@ -67,8 +67,9 @@ class FeatureCustomizedStreamBlock(blocks.StreamBlock):
         'Special': 70,
     }
 
-    def __init__(self, local_blocks=None, **kwargs):
+    def __init__(self, local_blocks=None, search_index=True, **kwargs):
         self._constructor_kwargs = kwargs
+        self.search_index = search_index
 
         # Note, this is calling BaseStreamBlock's super __init__, not FeatureCustomizedStreamBlock's. We don't want
         # BaseStreamBlock.__init__() to run, because it tries to assign to self.child_blocks, which it can't do because
