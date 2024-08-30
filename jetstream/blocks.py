@@ -658,7 +658,7 @@ class VideoBlock(blocks.StructBlock, BlockTupleMixin):
 
     video = EmbedBlock(
         label="Video Embed URL",
-        help_text="Paste the video URL from YouTube or Vimeo. e.g. https://www.youtube.com/watch?v=l3Pz_xQZVDg "
+        help_text="Paste the video URL from YouTube or Vimeo. e.g. https://www.youtube.com/watch?v=ox6GYTnWVnM "
                   "or https://vimeo.com/207076450."
     )
     title = blocks.CharBlock(required=False)

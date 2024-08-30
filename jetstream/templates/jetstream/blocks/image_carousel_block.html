@@ -9,7 +9,7 @@
   The "image-carousel" BEM block classes are for our own styles.
   {% endcomment %}
   class="image-carousel carousel carousel-fade slide" {# 'carousel carousel-fade slide' are all needed for fade transitions. #}
-  data-ride="carousel" data-interval="{{ self.cycle_timeout }}"
+  data-interval="{{ self.cycle_timeout }}"
   {% if parent_height %}
     style="max-height: {{ parent_height }}px;"
   {% endif %}

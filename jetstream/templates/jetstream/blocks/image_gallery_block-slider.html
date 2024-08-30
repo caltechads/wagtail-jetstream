@@ -3,7 +3,7 @@
 {% generate_unique_id as backup_block_id %}
 <div id="{{ block.id | default:backup_block_id }}"
   class="carousel slide image-gallery-slider"
-  data-ride="carousel" data-interval="false"
+  data-interval="false"
 >
   <div class="image-gallery-slider__inner carousel-inner" role="listbox" data-featherlight-gallery data-featherlight-filter="a">
     {% for img in self.images %}

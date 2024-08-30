@@ -2,7 +2,7 @@
 
 {% generate_unique_id as backup_block_id %}
 <div id="{{ block.id | default:backup_block_id }}"
-  data-ride="carousel" data-interval="{{ self.cycle_timeout }}"
+  data-interval="{{ self.cycle_timeout }}"
   class="carousel slide hero-image-carousel"
   style="max-height: {{ self.height }}px;"
 >
