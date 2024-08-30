@@ -1,0 +1,321 @@
+// This file is a bunch of junk I copied out of the Wagtail 2.16 repo to restore the original wagtail font-based icons
+// that were removed in Wagtail 5... or 6. Or something. Hallo.js needs them, so we still need them.
+
+$icons: (
+    'arrow-down-big': '\e030',
+    'arrow-down': '\e01a',
+    'arrow-left': '\e022',
+    'arrow-right': '\e017',
+    'arrow-up-big': '\e02f',
+    'arrow-up': '\e010',
+    'arrows-up-down': '\e016',
+    'bin': '\e038',
+    'bold': '\e026',
+    'chain-broken': '\e047',
+    'code': '\e001',
+    'cog': '\e020',
+    'cogs': '\e00c',
+    'collapse-down': '\e03f',
+    'collapse-up': '\e03e',
+    'cross': '\e012',
+    'date': '\e045',
+    'doc-empty-inverse': '\e00d',
+    'doc-empty': '\e00e',
+    'doc-full-inverse': '\e01b',
+    'doc-full': '\e018',
+    'download': '\e044',
+    'duplicate': '\e902',
+    'edit': '\e00f',
+    'folder-inverse': '\e014',
+    'folder-open-1': '\e013',
+    'folder-open-inverse': '\e01f',
+    'folder': '\e01c',
+    'form': '\e00b',
+    'grip': '\e03b',
+    'group': '\e031',
+    'help': '\e041',
+    // help-inverse directly renders the corresponding character.
+    'help-inverse': '?',
+    'home': '\e035',
+    // horizontalrule is not rendered as an icon font – it uses a unicode dash character rendered with a fallback font.
+    'horizontalrule': '\2014',
+    'image': '\e019',
+    'italic': '\e027',
+    'link': '\e02c',
+    'list-ol': '\e029',
+    'list-ul': '\e028',
+    'locked': '\e009',
+    'logout': '\e049',
+    'mail': '\e015',
+    'media': '\e032',
+    'no-view': '\e006',
+    'openquote': '\e000',
+    'order-down': '\e036',
+    'order-up': '\e037',
+    'order': '\e034',
+    'password': '\e033',
+    'pick': '\e03d',
+    'pilcrow': '\e002',
+    'placeholder': '\e003',
+    'plus-inverse': '\e024',
+    'plus': '\e01d',
+    'radio-empty': '\e02e',
+    'radio-full': '\e02d',
+    'redirect': '\e03c',
+    'repeat': '\e02b',
+    'search': '\e011',
+    'site': '\e007',
+    'snippet': '\e025',
+    'spinner': '\e03a',
+    'strikethrough': '\e04a',
+    'subscript': '\e04c',
+    'success': '\e043',
+    'superscript': '\e04b',
+    'table': '\e048',
+    'tag': '\e01e',
+    'tick-inverse': '\e023',
+    'tick': '\e021',
+    'time': '\e008',
+    'title': '\e046',
+    'undo': '\e02a',
+    'unlocked': '\e00a',
+    'user': '\e004',
+    'view': '\e005',
+    'wagtail-inverse': '\e040',
+    'wagtail': '\e039',
+    'warning': '\e042',
+);
+
+$icons-after: (
+    'arrow-down-after': map-get($icons, 'arrow-down'),
+    'arrow-right-after': map-get($icons, 'arrow-right'),
+    'arrow-up-after': map-get($icons, 'arrow-up'),
+);
+
+$color-white: #fff;
+$color-black: #000;
+
+// darker to lighter
+$color-grey-1: darken($color-white, 80);
+$color-grey-2: darken($color-white, 70);
+$color-grey-3: darken($color-white, 15);
+$color-grey-4: darken($color-white, 10);
+$color-grey-5: darken($color-white, 2);
+$color-red: #cd3238;
+$system-color-link-text: LinkText;
+$media-forced-colours: active;
+
+@font-face {
+  font-family: wagtail;
+  src: url('../fonts/wagtail.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Turns on font-smoothing when used. Use sparingly.
+@mixin font-smoothing {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin icon () {
+    @include font-smoothing;
+    font-family: 'wagtail';
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    speak: none;
+    text-decoration: none;
+    width: 1.3em;
+    line-height: 1em;
+    text-align: left;
+    vertical-align: middle;
+    margin-right: 0.2em;
+}
+
+@mixin svg-icon ($size: 1.5em, $position: text-top) {
+    width: $size;
+    height: $size;
+    vertical-align: $position;
+}
+
+// Set SVG icons to use the current text color in the location they appear as
+// their default fill color. Can be overridden for a specific icon by either
+// the color or fill properties.
+.icon {
+    fill: currentColor;
+}
+
+//.icon.teal {
+//    color: $color-teal;
+//}
+
+.icon.white {
+    color: #fff;
+}
+
+.icon:before,
+.icon:after,
+.hallotoolbar [class^='icon-'],
+.hallotoolbar [class*=' icon-']:before,
+.hallotoolbar [class^='icon-']:before {
+    @include icon(); // from _mixins.scss
+}
+
+.icon:after,
+.hallotoolbar [class^='icon-']:after,
+.hallotoolbar [class^='icon-']:after {
+    text-align: right;
+}
+
+.hallotoolbar [class^='icon-'],
+.hallotoolbar [class*=' icon-']:before,
+.hallotoolbar [class*=' icon-']:before,
+.hallotoolbar [class^='icon-']:before {
+    vertical-align: -10%;
+    margin-right: 0;
+}
+
+
+// =============================================================================
+// Icon factory methods
+// =============================================================================
+
+@each $icon, $content in $icons {
+    .icon-#{$icon}:before {
+        content: quote(#{$content});
+    }
+}
+
+@each $icon, $content in $icons-after {
+    .icon-#{$icon}:after {
+        content: quote(#{$content});
+    }
+}
+
+
+// =============================================================================
+// Custom config for various icons
+// =============================================================================
+.icon-download {
+    // Credit: Icon made by Freepik from Flaticon.com
+}
+
+.icon-view:before,
+.icon-no-view:before {  // icon-font
+    vertical-align: -3.5px;
+    font-size: 1.1rem;
+}
+
+.icon-spinner:after,
+.icon-spinner:before {  // iconfont
+    width: 1em;
+    animation: spin-wag 0.5s infinite linear;
+    display: inline-block;
+}
+
+svg.icon-spinner { // TODO: leave only class when iconfont styles are removed
+    animation: spin-wag 0.5s infinite linear;
+}
+
+.icon-horizontalrule:before {
+    font-family: Open Sans, Arial, sans-serif;
+}
+
+
+.icon-larger:before {
+    font-size: 1.5em;
+}
+
+.icon.text-replace { // iconfont
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+
+    &:before {
+        margin-right: 0;
+        font-size: 1rem;
+        display: inline-block;
+        width: 100%;
+        line-height: 1.2em;
+        text-align: center;
+        vertical-align: middle;
+    }
+}
+
+.text-replace {
+    font-size: 0;
+    line-height: 0;
+    overflow: hidden;
+
+    .icon {
+        @include svg-icon(1rem, middle);
+    }
+}
+
+@keyframes spin-wag {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+.icon-spinner:after {
+    display: inline-block;
+    line-height: 1;
+}
+
+// CSS-only circled question mark.
+// <span class="icon-help-inverse" aria-hidden="true"></span>
+.icon-help-inverse {
+    $size: 15px;
+
+    &:before {
+        display: inline-block;
+        width: $size;
+        height: $size;
+        line-height: $size;
+        font-size: 1.1em;
+        text-align: center;
+        border-radius: 100%;
+        color: $color-grey-2;
+        border: 1px solid currentColor;
+    }
+}
+
+.icon {
+    &.initial {
+        @include svg-icon(1em);
+        vertical-align: initial;
+    }
+
+    &.default {
+        @include svg-icon(1.5em);
+    }
+
+    &--flipped {
+        transform: scaleX(-1);
+    }
+}
+
+.icon.locale-error {
+    vertical-align: text-top;
+    margin-right: 0.5em;
+    width: 1.5em;
+    height: 1.5em;
+    color: $color-red;
+}
+
+// Media for Windows High Contrast mode
+
+@media (forced-colors: $media-forced-colours) {
+    .icon {
+        fill: $system-color-link-text;
+    }
+}
