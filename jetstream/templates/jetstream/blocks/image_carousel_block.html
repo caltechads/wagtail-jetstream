@@ -1,7 +1,7 @@
 {% load jetstream_tags wagtailimages_tags wagtailcore_tags wagtailadmin_tags bleach_tags %}
 
 {% generate_unique_id as backup_block_id %}
-<div id="{{ block.id | default:backup_block_id }}"
+<div id="id-{{ block.id | default:backup_block_id }}"
   {% comment %}
   This block takes advantage of Bootstrap 4's Carousel feature: https://getbootstrap.com/docs/4.0/components/carousel/
   The following classes are part of Carousel:
@@ -53,13 +53,13 @@
   {% if self.slides|length > 1 %}
     {# These must be here for the carousel to cycle correctly. #}
     <a class="image-carousel__control image-carousel__control--prev carousel-control-prev"
-      href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="prev"
+      href="#id-{{ block.id | default:backup_block_id }}" role="button" data-slide="prev"
     >
       <span class="image-carousel__control__component carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="image-carousel__control__component sr-only">Previous</span>
     </a>
     <a class="image-carousel__control image-carousel__control--next carousel-control-next"
-      href="#{{ block.id | default:backup_block_id }}" role="button" data-slide="next"
+      href="#id-{{ block.id | default:backup_block_id }}" role="button" data-slide="next"
     >
       <span class="image-carousel__control__component carousel-control-next-icon" aria-hidden="true"></span>
       <span class="image-carousel__control__component sr-only">Next</span>
