@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='wagtail-jetstream',
-    version='2.2.1',
+    version='2.2.2',
     description='A set of complex layout blocks for use in Wagtail Streamfields.',
     url='https://github.com/caltechads/wagtail-jetstream',
     author='Caltech ADS',
