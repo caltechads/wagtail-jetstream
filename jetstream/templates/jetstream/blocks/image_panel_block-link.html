@@ -5,7 +5,7 @@
   {% if url %}
     <a class="image-panel-link__image-link" href="{{ url }}">
       <span class="wrapper-expander"></span>
-      <span class="sr-only">{{ self.title | default:self.image.alt | custom_bleach:'br,i,em,sub,sup' }}</span>
+      <span class="sr-only">{{ self.title | default:self.image.description | custom_bleach:'br,i,em,sub,sup' }}</span>
     </a>
   {% endif %}
   {% include 'jetstream/blocks/image_panel_block-image.html' with image=self.image %}

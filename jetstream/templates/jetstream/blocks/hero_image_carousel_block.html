@@ -13,7 +13,7 @@
         {% if link_url %}
           <a class="hero-image-carousel__wrapper-link" href="{{ link_url }}">
             <span class="wrapper-expander"></span>
-            <span class="sr-only">{{ slide.title | default:slide.image.alt | bleach }}</span>
+            <span class="sr-only">{{ slide.title | default:slide.image.description | bleach }}</span>
           </a>
         {% endif %}
         {% responsive_image slide.image 'fill' 1000 self.height class="hero-image-carousel__image" %}
