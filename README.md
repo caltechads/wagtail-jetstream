@@ -1,3 +1,6 @@
+THIS PROJECT IS DEPRECATED. PLEASE DO NOT USE IT.
+=================================================
+
 This is a collection of useful blocks and layouts for use within Wagtail's StreamField.
 
 
